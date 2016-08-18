@@ -1,0 +1,27 @@
+h2 Регистрация
+= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :email, label: I18n.t("shared.email")
+    br
+    = f.email_field :email, autofocus: true
+  .field
+    = f.label :password
+    - if @minimum_password_length
+      em= " (Минимум символов: #{@minimum_password_length})"
+    br
+    = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off"
+  .field
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off"
+  .actions
+    - if Hancock.config.registration_captcha
+      - if Hancock.config.recaptcha_support
+        = recaptcha_tags
+      - elsif Hancock.config.simple_captcha_support
+        = f.input :captcha, as: :simple_captcha, label: false
+        
+    = f.submit I18n.t("shared.registration")
+br
+= render "devise/shared/links"

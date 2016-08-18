@@ -1,0 +1,29 @@
+en:
+  hancock:
+    gallery: "Gallery"
+    cms: "CMS"
+    menu: "Menu"
+    settings: 'Settings'
+    news: 'News'
+    with_final_slash: "should begin with a slash"
+    page_url_regex: "Regular expression to check if page is current"
+    final_in_menu: "This link is also displayed in menu"
+    no_contact_info: "Please enter your phone or email so we could contact you."
+    map: 'Map'
+    sitemap: 'Sitemap'
+    sitemap_data: 'Sitemap data'
+    edit: Edit
+    send: Send
+    format_time: "%-m/%-d/%Y"
+    m:
+      enabled: 'added to menu "%{menu}"'
+      disabled: 'deleted from menu "%{menu}"'
+      error: "Error: %{err}"
+      no_id: "No ID"
+    errors:
+      title: "Error %{code}"
+      form_expired: "Token expired"
+      internal_error: "Internal error"
+      internal_error_full: "Internal error: %{klass} %{message}"
+      access_denied: "Access denied"
+      not_found: 'The requested page was not found on this server'

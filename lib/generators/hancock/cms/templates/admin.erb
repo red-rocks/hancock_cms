@@ -1,0 +1,74 @@
+require 'rails_admin/custom_show_in_app'
+
+<% if Hancock.mongoid? %>
+RailsAdminSettings.track_history!
+<% end %>
+
+RailsAdmin.config do |config|
+  ## == Devise ==
+  # this is required if not using cancan
+  #config.authenticate_with do
+    #warden.authenticate! scope: :user
+  #end
+
+  config.current_user_method(&:current_user)
+
+  ## == Cancan ==
+  config.authorize_with :cancan
+<% if Hancock.mongoid? %>
+  ## == MongoidAudit
+  config.audit_with :mongoid_audit, 'HistoryTracker'
+<% elsif Hancock.active_record? %>
+  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+<% end %>
+
+
+  config.actions do
+    dashboard # mandatory
+
+    # collection actions
+    index
+    new
+    export
+    bulk_delete
+
+    # member actions
+    show
+    edit
+    delete
+
+    history_index
+    history_show
+
+    toggle
+    # toggle_menu # for Hancock::Pages
+    # sitemap     # for Hancock::Seo
+
+    Hancock.rails_admin_config_for_actions(self)
+  end
+
+  config.main_app_name = ['<%= Rails.application.class.name.split('::')[0] %>', 'Админка']
+
+  config.excluded_models ||= []
+  config.excluded_models << [
+      'RailsAdmin::CustomShowInApp', 'HistoryTracker',
+      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'Hancock::EmbeddedElement'
+  ]
+  config.excluded_models.flatten!
+end
+
+# [required] fix for timezones to be displayed in local time instead of UTC
+module RailsAdmin
+  module Config
+    module Fields
+      module Types
+        class Datetime
+          def value
+            bindings[:object].send(name)
+          end
+        end
+      end
+    end
+  end
+end

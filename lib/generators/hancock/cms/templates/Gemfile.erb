@@ -1,0 +1,69 @@
+source 'https://rubygems.org'
+
+gem 'rails', '4.2.6' #'~> 5.0.0.beta3'
+#{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
+
+gem 'sass'
+gem 'sass-rails'
+gem 'compass-rails'
+gem 'compass'
+
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: '/home/ack/www/hancock_cms' #'~> 0.3.7'
+
+gem 'devise'
+
+gem 'slim-rails'
+gem 'rs_russian'
+gem 'cancancan'
+
+# gem 'cloner'
+gem 'unicorn'
+gem 'x-real-ip'
+
+#temp
+#gem 'sentry-raven'
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
+  gem 'spring'
+
+  gem 'capistrano', require: false
+
+  gem 'rvm1-capistrano3', require: false
+  gem 'glebtv-capistrano-unicorn', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+
+  gem 'hipchat'
+  # gem 'coffee-rails-source-maps'
+  # gem 'compass-rails-source-maps'
+
+  gem 'favicon_maker', '0.3'
+  gem 'favicon_maker_rails'
+
+  gem 'rails_email_preview', '~> 0.2.29'
+
+  gem 'image_optim_pack'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'email_spec'
+  #{if mongoid then "gem 'mongoid-rspec'" else "" end}
+  gem 'ffaker'
+  gem 'factory_girl_rails'
+end
+
+#{if mongoid then "gem 'mongo_session_store-rails4'" else "gem 'activerecord-session_store'" end}
+
+gem 'slim'
+gem 'sprockets'
+
+gem 'uglifier'
+
+group :production do
+  gem "god"
+end

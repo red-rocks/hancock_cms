@@ -1,0 +1,16 @@
+ruby:
+  js_data = {
+    jspath: field.location ? field.location : field.base_location + "ckeditor.js",
+    base_location: field.base_location,
+    options: {
+      customConfig: field.config_js ? field.config_js : field.base_location + "config.js"
+    }
+  }
+  _html_attributes = field.html_attributes.reverse_merge(data: { richtext: 'ckeditor', options: js_data.to_json, value: field.form_value[:html] })
+= form.text_area field.html_method, _html_attributes
+
+label{style='display: block;'}
+  - _hash = { value: field.form_value[:clear], checked: field.form_value[:clear].in?([true, '1']), required: false, class: "form-control"}
+  - _html_attributes = field.html_attributes.reverse_merge(_hash)
+  span{style='float: left'}= form.send field.boolean_view_helper, field.clear_method, _html_attributes
+  div{style='margin-left: 35px; line-height: 40px;'} Убирать теги

@@ -1,0 +1,27 @@
+- obj ||= nil
+- if obj
+  - content_for :meta do
+    - seo_page = @seo_page || @seo_parent_page
+    = render 'shared/meta', obj: obj
+
+    - og_title = (obj.get_og_title.blank? and seo_page ? seo_page.get_og_title  : obj.get_og_title)
+    - og_image = (obj.og_image.blank?     and seo_page ? seo_page.og_image      : obj.og_image)
+    = render 'shared/og', title: obj.get_og_title, image: obj.og_image
+  - if obj.title
+    - content_for :title do
+      title= obj.title
+
+- elsif @seo_page
+  - content_for :meta do
+    = render 'shared/meta', obj: @seo_page
+    = render 'shared/og', title: @seo_page.get_og_title, image: @seo_page.og_image
+
+- if obj and obj.title
+  - content_for :title do
+    title= obj.title
+- elsif @seo_page and @seo_page.title
+  - content_for :title do
+    title= @seo_page.title
+- elsif @seo_parent_page and @seo_parent_page.title
+  - content_for :title do
+    title= @seo_parent_page.title

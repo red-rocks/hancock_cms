@@ -1,0 +1,49 @@
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+    if !user.nil? and (user.admin? or user.manager?)
+      can :access, :rails_admin   # grant access to rails_admin
+      can :dashboard              # grant access to the dashboard
+
+      if user.admin?
+        admin_ui(user)
+      elsif user.manager?
+        manager_ui(user)
+      end
+
+      can :index, :all
+      can :read, :all
+      can :history, :all
+      can :export, :all
+      can :toggle, :all
+
+      can :comments, :all         #RailsAdminComments::Comments
+      can :model_comments, :all   #RailsAdminComments::ModelComments
+
+      user.ability.to_cancancan(self) if user.respond_to?(:ability) and user.ability
+
+      if defined?(RailsAdminUserAbilities)
+        cannot :manage, RailsAdminUserAbilities::UserAbility
+      end
+    end
+  end
+
+  def admin_ui(user)
+    can :manage, :all
+    can :manage, User
+    can :user_abilities, User
+
+    Hancock.cancancan_admin_rules self
+  end
+
+  def manager_ui(user)
+    can :read, :all
+    can :show, :all
+    cannot [:edit, :destroy, :new, :create], User
+    can :edit, User, _id: user._id
+    cannot :user_abilities, :all
+
+    Hancock.cancancan_manager_rules self
+  end
+end

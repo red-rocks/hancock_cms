@@ -1,0 +1,2 @@
+module Hancock::HomeHelper
+end

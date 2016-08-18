@@ -1,0 +1,53 @@
+ul.nav.nav-tabs
+  - uuid = "#{field.name}_#{field.object_id}_unique_id"
+  - I18n.available_locales.each do |locale|
+    li(class="#{'active' if locale == I18n.locale}")
+      a(href="##{locale}_#{uuid}" data-toggle="tab" class="#{uuid}")= locale
+.tab-content
+  / = form.fields_for field.translations_field do |localized_field|
+  - I18n.available_locales.each do |locale|
+        - _class = "#{[( 'active' if locale == I18n.locale ), uuid].join(" ")}"
+        .fields.tab-pane(style='padding:5px; margin: 0;' id="#{locale}_#{uuid}" class="#{_class}")
+          = form.fields_for field.html_translations_field do |html_localized_field|
+            ruby:
+              js_data = {
+                jspath: field.location ? field.location : field.base_location + "ckeditor.js",
+                base_location: field.base_location,
+                options: {
+                  customConfig: field.config_js ? field.config_js : field.base_location + "config.js"
+                }
+              }
+              _html_attributes = field.html_attributes.reverse_merge(data: { 
+                richtext: 'ckeditor', 
+                options: js_data.to_json
+              })
+              _html_attributes[:value] = field.form_value[:html] ? field.form_value[:html][locale] : ""
+            = html_localized_field.send :text_area, locale , _html_attributes
+            
+          = form.fields_for field.clear_translations_field do |clear_localized_field|
+            label{style='display: block;'}
+              ruby:
+                _value = field.form_value[:clear] ? field.form_value[:clear][locale] : true
+                _hash = { 
+                  value: _value, 
+                  checked: _value.in?([true, '1']),
+                  required: false, 
+                  class: "form-control"
+                }
+                _html_attributes = field.html_attributes.reverse_merge(_hash)
+              span{style='float: left'}= clear_localized_field.send field.boolean_view_helper, locale , _html_attributes
+              div{style='margin-left: 35px; line-height: 40px;'} Убирать теги
+          
+          
+          
+
+javascript:
+  var #{field.name}#{field.object_id} = (new Date().getTime()) + Math.floor(Math.random()*100000);
+  $("ul.nav.nav-tabs a.#{uuid}").each(function(e){
+    this.href = $(this).attr('href').replace('_unique_id', #{field.name}#{field.object_id});
+    $(this).removeClass('#{uuid}');
+  });
+  $(".tab-content .#{uuid}").each(function(e){
+    this.id = this.id.replace('_unique_id', #{field.name}#{field.object_id});
+    $(this).removeClass('#{uuid}');
+  });

@@ -1,0 +1,32 @@
+ru:
+  hancock:
+    gallery: "Галерея"
+    cms: "CMS"
+    menu: "Меню"
+    settings: 'Настройки'
+    with_final_slash: "c начальным слешем"
+    page_url_regex: "Регулярное выражение, по которому определяется является ли этот пункт активным"
+    final_in_menu: "В меню сразу отдается конечная ссылка"
+    map: 'Карта'
+    sitemap: 'Карта сайта'
+    sitemap_data: 'Данные для карты сайта'
+    edit: Редактировать
+    send: Отправить
+    format_time: "%d.%m.%Y"
+    errors:
+      title: "Ошибка %{code}"
+      form_expired: "Истекло время на заполение формы"
+      internal_error: "Внутренняя ошибка"
+      internal_error_full: "Внутренняя ошибка: %{klass} %{message}"
+      access_denied: "Доступ запрещен"
+      not_found: 'Запрашиваемая страница была удалена, или введён некорректный адрес'
+
+
+  shared:
+    enter_site: Войти на сайт
+    email: E-mail
+    password: Пароль
+    remember_me: Запомнить меня
+    enter: Войти
+    registration: Зарегистрироваться
+    forget_password: Забыли пароль?

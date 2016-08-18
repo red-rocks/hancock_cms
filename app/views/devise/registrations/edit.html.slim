@@ -1,0 +1,21 @@
+h2 Редактирование профиля
+= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
+  /= devise_error_messages!
+  .field
+    = f.label :email, I18n.t("shared.email")
+    br
+    = f.email_field :email, autofocus: true
+  .field
+    = f.label :password
+    - if @minimum_password_length
+      em
+        (Минимум символов: #{@minimum_password_length})
+    br
+    = f.password_field :password, I18n.t("shared.password"), autocomplete: "off"
+  .field
+    = f.label :password_confirmation
+    br
+    = f.password_field :password_confirmation, I18n.t("shared.password_confirmation"), autocomplete: "off"
+  .actions
+    = f.submit "Зарегистрироваться"
+= render "devise/shared/links"

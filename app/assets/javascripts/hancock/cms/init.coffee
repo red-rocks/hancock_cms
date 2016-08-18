@@ -1,0 +1,1 @@
+window.hancock_cms ||= {}

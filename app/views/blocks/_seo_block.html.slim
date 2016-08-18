@@ -1,0 +1,18 @@
+- if @seo_page
+  - content_for :meta do
+    = render 'shared/meta', obj: @seo_page, alt_obj: @seo_parent_page
+
+    - og_title = (@seo_page.get_og_title.blank? and @seo_parent_page ? @seo_parent_page.get_og_title  : @seo_page.get_og_title)
+    - og_image = (@seo_page.og_image.blank?     and @seo_parent_page ? @seo_parent_page.og_image      : @seo_page.og_image)
+    = render 'shared/og', title: @seo_page.get_og_title, image: @seo_page.og_image
+- elsif @seo_parent_page
+  - content_for :meta do
+    = render 'shared/meta', obj: @seo_parent_page
+    = render 'shared/og', title: @seo_parent_page.get_og_title, image: @seo_parent_page.og_image
+
+- if @seo_page and @seo_page.title
+  - content_for :title do
+    title= @seo_page.title
+- elsif @seo_parent_page and @seo_parent_page.title
+  - content_for :title do
+    title= @seo_parent_page.title
