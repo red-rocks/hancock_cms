@@ -23,13 +23,14 @@ gem 'compass'
 gem 'compass-rails'
 
 ##{if mongoid then "gem 'mongoid-paperclip'" else "gem 'paperclip'" end}
-#gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"#, path: '/home/ack/www/paperclip-meta'
+#gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 gem 'rails_admin_multiple_file_upload'
-#gem 'rails_admin_comments', github: "red-rocks/rails_admin_comments" #path: '/home/ack/www/rails_admin/rails_admin_comments'
+#gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+#gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: '/home/ack/www/red_rocks/hancock_cms'#'~> 0.4.0'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms'
 
 gem 'devise'
 
