@@ -1,7 +1,7 @@
 if defined?(RailsAdmin)
   RailsAdmin.config do |config|
     config.excluded_models ||= []
-    if Hancock::Pages.mongoid?
+    if Hancock.mongoid?
       config.excluded_models << [
         'Hancock::EmbeddedElement'
       ]

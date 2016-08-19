@@ -14,7 +14,6 @@ module Hancock::ModelLocalizeable
     self.localized_fields.keys.each do |f|
       if self[f].is_a?(Hash) and f !~ /_translations$/
         self[f + '_translations'] = self.remove_attribute(f)
-        puts self.inspect
       else
         arr[f] = self.remove_attribute(f)
         self[f] = {}

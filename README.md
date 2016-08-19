@@ -75,15 +75,6 @@ scope "(:locale)", locale: /en|ru/ do
 end
 ``` -->
 
-Add to application_controller.rb:
-
-```ruby
-class ApplicationController < ActionController::Base
-  include Hancock::Controller
-  include Hancock::Localizeable
-end
-```
-
 Enable localization in HancockCMS:
 
 ```ruby
