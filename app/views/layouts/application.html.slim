@@ -18,7 +18,7 @@ html lang="ru"
     javascript:
       #{Settings.custom_js(default: '', kind: :js, label: "Дополнительный JS")}
       
-  body
+  body{class="#{controller_name}_#{action_name} #{controller_name} #{action_name}"}
     #root
       = render 'shared/messages'
       #sidebar

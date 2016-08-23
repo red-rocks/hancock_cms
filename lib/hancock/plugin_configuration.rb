@@ -24,7 +24,6 @@ module Hancock::PluginConfiguration
   end
 
   def self.included(base)
-    Hancock::register_plugin(base) unless base == Hancock
     base.extend(ClassMethods)
   end
 

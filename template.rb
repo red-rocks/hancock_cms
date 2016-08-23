@@ -22,7 +22,7 @@ gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
-##{if mongoid then "gem 'mongoid-paperclip'" else "gem 'paperclip'" end}
+##{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 #gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 gem 'rails_admin_multiple_file_upload'

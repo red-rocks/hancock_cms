@@ -4,6 +4,7 @@ unless defined?(Hancock) && Hancock.respond_to?(:orm) && [:active_record, :mongo
 end
 
 require 'hancock/version'
+require 'hancock/plugin'
 require 'hancock/plugin_configuration'
 require 'hancock/configuration'
 require 'devise'
@@ -55,19 +56,9 @@ module Hancock
   MODELS = []
   PLUGINS = []
 
+  include Hancock::Plugin
+
   class << self
-    def mongoid?
-      Hancock.orm == :mongoid
-    end
-    def active_record?
-      Hancock.orm == :active_record
-    end
-    def model_namespace
-      "Hancock::Models::#{Hancock.orm.to_s.camelize}"
-    end
-    def orm_specific(name)
-      "#{model_namespace}::#{name}".constantize
-    end
 
     def register_model(model)
       Hancock::MODELS << model unless Hancock::MODELS.include?(model)
