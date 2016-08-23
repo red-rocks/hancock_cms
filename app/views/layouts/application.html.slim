@@ -7,24 +7,27 @@ html lang="ru"
     = yield :meta
     = csrf_meta_tags
     = render partial: 'blocks/favicon'
-    
+
     - async = false #Rails.env.production?
     = stylesheet_link_tag "application", media: "all", async: async
     = javascript_include_tag "application", async: async
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async
     css:
-      #{Settings.custom_css(default: '', kind: :css, label: "Дополнительный CSS")}    
+      #{Settings.custom_css(default: '', kind: :css, label: "Дополнительный CSS")}
     javascript:
       #{Settings.custom_js(default: '', kind: :js, label: "Дополнительный JS")}
+
+  body
+    #root role="main"
+    
+      header#header
+        = render partial: 'blocks/header'
       
-  body{class="#{controller_name}_#{action_name} #{controller_name} #{action_name}"}
-    #root
-      = render 'shared/messages'
-      #sidebar
-        / = render_navigation &navigation(:main)
+      = render "shared/messages"
+      
       #content
         = yield
-      #root_footer
-    #footer
+
+    footer#footer
       = render partial: 'blocks/footer'

@@ -15,13 +15,8 @@ html lang="ru"
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async
       
   body
-    h1 = "SESSIONS"
+    #preloader
     #root
       = render 'shared/messages'
-      / #sidebar
-      /   / = render_navigation &navigation(:main)
-      #content
+      #content.devises
         = yield
-      #root_footer
-    #footer
-      = render partial: 'blocks/footer'

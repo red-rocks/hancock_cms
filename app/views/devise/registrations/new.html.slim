@@ -1,27 +1,33 @@
-h2 Регистрация
-= simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email, label: I18n.t("shared.email")
-    br
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em= " (Минимум символов: #{@minimum_password_length})"
-    br
-    = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off"
-  .actions
-    - if Hancock.config.registration_captcha
-      - if Hancock.config.recaptcha_support
-        = recaptcha_tags
-      - elsif Hancock.config.simple_captcha_support
-        = f.input :captcha, as: :simple_captcha, label: false
+/h2 Регистрация
+.devise-box
+  .white-box
+    = simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
+      = devise_error_messages!
+      h2.title Регистрация
+      .form-group
+        / = f.label :email, label: I18n.t("shared.email")
+        .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
+      
+      .form-group
+        / = f.label :password
+        - if @minimum_password_length
+          em= " (Минимум символов: #{@minimum_password_length})"
+        .form-control = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
+      
+      .form-group
+        / = f.label :password_confirmation
+        / br
+        .form-control = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
+      
+      .form-group.links
+        .link-to-recover.center
+          = render "devise/shared/links"
         
-    = f.submit I18n.t("shared.registration")
-br
-= render "devise/shared/links"
+      .actions
+        / - if Hancock.config.registration_captcha
+        /   - if Hancock.config.recaptcha_support
+        /     = recaptcha_tags
+        /   - elsif Hancock.config.simple_captcha_support
+        /     = f.input :captcha, as: :simple_captcha, label: false
+            
+        = f.submit I18n.t("shared.registration")

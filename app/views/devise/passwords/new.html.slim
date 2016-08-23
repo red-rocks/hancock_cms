@@ -1,0 +1,17 @@
+/ h2 Forgot your password?
+.devise-box
+  .white-box
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      h2.title Forgot your password?
+      .form-group
+        / = f.label :email
+        / br/
+        .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
+      
+      .form-group.links
+        .link-to-recover.center
+          = render "devise/shared/links"
+      
+      .actions
+        = f.submit "Send me reset password instructions"

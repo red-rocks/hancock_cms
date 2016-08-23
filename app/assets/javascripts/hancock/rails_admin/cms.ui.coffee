@@ -24,3 +24,27 @@ $(document).on 'pjax:complete ready', ()->
     _parent = active_nav_element.prevAll(".dropdown-header:first")
     if _parent.length > 0 and !_parent.hasClass('opened')
       _parent.click()
+
+
+
+# ripple-effect before click on buttons
+ripple_selector = "ul.nav-pills li, .root_links li, .top-nav-project"
+$(document).delegate ripple_selector, "click", (event)->
+  # event.preventDefault()
+  $div = $('<div/>')
+  btnOffset = $(this).offset()
+  xPos = event.pageX - (btnOffset.left)
+  yPos = event.pageY - (btnOffset.top)
+  $div.addClass 'ripple-effect'
+  $ripple = $('.ripple-effect')
+  $ripple.css 'height', $(this).height()
+  $ripple.css 'width', $(this).height()
+  $div.css(
+    top: yPos - ($ripple.height() / 2)
+    left: xPos - ($ripple.width() / 2)
+    background: $(this).data('ripple-color')).appendTo $(this)
+  window.setTimeout (->
+    $div.remove()
+    return
+  ), 1000
+  return

@@ -1,28 +1,31 @@
-h2= I18n.t("shared.enter_site")
-= form_for(resource, as: resource_name, url: user_session_path) do |f|
-  .field
-    = f.label :email, I18n.t("shared.email")
-    br
-    = f.email_field :email, autofocus: true, title: I18n.t("shared.email")
-  br
-  .field
-    = f.label :password, title: I18n.t("shared.password")
-    br
-    = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password")
-  br
-    - if devise_mapping.rememberable?
-      .field
-        = f.check_box :remember_me, title: I18n.t("shared.remember_me")
-        = f.label :remember_me, I18n.t("shared.remember_me")
+/ h2= I18n.t("shared.enter_site")
+.devise-box
+  .white-box
+    = form_for(resource, as: resource_name, url: user_session_path) do |f|
+      h2.title = I18n.t("shared.enter_site")
+      .form-group
+        / label.form-label = f.label :email, I18n.t("shared.email")
+        .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
+      
+      .form-group
+        / label.form-label = f.label :password, title: I18n.t("shared.password")
+        .form-control = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password"), placeholder: I18n.t("shared.password")
+      
+      .form-group.links
+        - if devise_mapping.rememberable?
+          .checkbox-primary
+            = f.check_box :remember_me, title: I18n.t("shared.remember_me")
+            = f.label :remember_me, I18n.t("shared.remember_me")
+        .link-to-recover
+          = render "devise/shared/links"
+      
+      .actions
+        / - if Hancock.config.admin_enter_captcha
+        /   - if Hancock.config.recaptcha_support
+        /     = recaptcha_tags
+        /   - elsif Hancock.config.simple_captcha_support
+        /     = f.input :captcha, as: :simple_captcha, label: false
+            
+        = f.submit I18n.t("shared.enter")
 
-  .actions
-    - if Hancock.config.admin_enter_captcha
-      - if Hancock.config.recaptcha_support
-        = recaptcha_tags
-      - elsif Hancock.config.simple_captcha_support
-        = f.input :captcha, as: :simple_captcha, label: false
-        
-    = f.submit I18n.t("shared.enter")
-br
-
-= render "devise/shared/links"
+    
