@@ -1,7 +1,7 @@
 # HancockCMS
 
 #### Inspired by [RocketCMS](https://github.com/rs-pro/rocket_cms)
-### Remaded from [EnjoyCMS](https://github.com/red-rocks/enjoy_cms)
+### Remaded from [EnjoyCMS](https://github.com/enjoycreative/enjoy_cms)
 
 # DEVELOPMENT VERSION
 
@@ -67,11 +67,9 @@ All models included in the gem support localization via either [hstore_translate
 You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
 
 <!-- Wrap your routes with locale scope:
-
 ```ruby
 scope "(:locale)", locale: /en|ru/ do
-  get 'contacts' => 'contacts#new', as: :contacts
-  post 'contacts' => 'contacts#create', as: :create_contacts
+  hancock_cms_routes
 end
 ``` -->
 
