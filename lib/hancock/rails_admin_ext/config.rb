@@ -85,15 +85,17 @@ module Hancock
         if rails_admin_actions.respond_to?(action)
           rails_admin_actions.send(action) do
             visible do
+              ret = false
               if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
+                ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
               else
                 if Hancock.rails_admin_config.actions_visibility[action].is_a?(Proc)
-                  Hancock.rails_admin_config.actions_visibility[action]
+                  ret = Hancock.rails_admin_config.actions_visibility[action]
                 else
-                  Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
+                  ret = Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
                 end
               end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
+              ret
             end # visible do
           end # rails_admin_actions.send(action) do
         end # if rails_admin_actions.respond_to?(action)
