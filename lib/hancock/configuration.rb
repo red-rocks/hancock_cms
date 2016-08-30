@@ -14,7 +14,6 @@ module Hancock
   class Configuration
     attr_accessor :main_index_layout
     attr_accessor :error_layout
-    attr_accessor :menu_max_depth
 
     attr_accessor :localize
 
@@ -29,7 +28,6 @@ module Hancock
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
-      @menu_max_depth = 2
 
       @localize = false
 

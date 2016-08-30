@@ -42,12 +42,12 @@ module Hancock
     end
 
     def add_action(action_name)
-      @actions_list << action_name
+      @actions_list << action_name.to_sym
       @actions_list.uniq
     end
 
     def remove_action(action_name)
-      @remove_action.delete remove_action
+      @remove_action.delete remove_action.to_sym
       @actions_list.uniq
     end
 
@@ -80,20 +80,24 @@ module Hancock
     end
 
     def actions_config(rails_admin_actions)
-      
+
       @actions_list.each do |action|
         if rails_admin_actions.respond_to?(action)
           rails_admin_actions.send(action) do
             visible do
-              if Hancock.rails_admin_config.actions_visibility[action].is_a?(Proc)
-                Hancock.rails_admin_config.actions_visibility[action]
+              if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
+                bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
               else
-                Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
-              end
-            end
-          end
-        end
-      end
+                if Hancock.rails_admin_config.actions_visibility[action].is_a?(Proc)
+                  Hancock.rails_admin_config.actions_visibility[action]
+                else
+                  Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
+                end
+              end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
+            end # visible do
+          end # rails_admin_actions.send(action) do
+        end # if rails_admin_actions.respond_to?(action)
+      end # @actions_list.each do |action|
 
     end
 
@@ -103,12 +107,18 @@ module Hancock
         _model = _model.constantize if _model.is_a?(String)
         ability_object.send(config[:method], config[:actions], _model)
       end
+      Hancock::MODELS.each do |_model|
+        ability_object.can _model.admin_can_actions, _model
+      end
     end
     def cancancan_manager_rules(ability_object)
       Hancock.config.ability_manager_config.each do |config|
         _model = config[:model]
         _model = _model.constantize if _model.is_a?(String)
         ability_object.send(config[:method], config[:actions], _model)
+      end
+      Hancock::MODELS.each do |_model|
+        ability_object.can _model.manager_can_actions, _model
       end
     end
 

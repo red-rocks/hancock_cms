@@ -43,14 +43,6 @@ module Hancock
       end
 
       include Hancock::RailsAdminPatch
-
-      def self.admin_default_actions
-        [:manage]
-      end
-
-      def self.manager_default_actions
-        [:show, :read, :new, :create, :edit, :update]
-      end
     end
 
   end
