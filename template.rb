@@ -14,7 +14,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'

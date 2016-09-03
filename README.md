@@ -13,11 +13,11 @@ Very opinionated and tuned for my needs.
 
 Add this line to your application's Gemfile:
 
-    gem 'hancock_cms_mongoid'
+    gem 'hancock_cms_mongoid', '~> 0.1.0'
 
 or:
 
-    gem 'hancock_cms_activerecord'
+    gem 'hancock_cms_activerecord', '~> 0.1.0'
 
 *Only PostgreSQL is tested or supported for AR(from root repo). Others will probably work, but untested.*
 
@@ -27,7 +27,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hancock_cms
+    $ gem install hancock_cms -v 0.1.0
 
 For activerecord, generate migrations and run them
 
