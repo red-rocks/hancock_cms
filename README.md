@@ -9,8 +9,6 @@ Rails + RailsAdmin + Mongoid/PostgreSQL CMS
 
 Very opinionated and tuned for my needs.
 
-**Before 1.0 API and class names should be considered unstable and can change at any time!**
-
 ## Installation
 
 Add this line to your application's Gemfile:
