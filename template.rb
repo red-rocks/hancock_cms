@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 
-if Gem::Version.new(version) < Gem::Version.new('5.0.0.1')
+if Gem::Version.new(version) < Gem::Version.new('5.0.0')
   puts "You are using an old version of Rails (#{version})"
   puts "Please update"
   puts "Stopping"
@@ -14,7 +14,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '5.0.0.1'
+gem 'rails', '~>5.0.0'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
@@ -30,7 +30,7 @@ gem 'rails_admin_multiple_file_upload'
 #gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
 
 gem 'devise'
 
