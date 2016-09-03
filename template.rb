@@ -22,15 +22,17 @@ gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
-##{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
-#gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
+# #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
+# gem "image_optim"
+# gem "paperclip-optimizer"
+# gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 gem 'rails_admin_multiple_file_upload'
-#gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-#gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails4'
 
 gem 'devise'
 
@@ -77,7 +79,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-#{if mongoid then "#gem 'mongo_session_store-rails4'" else "#gem 'activerecord-session_store'" end}
+# #{if mongoid then "gem 'mongo_session_store-rails4'" else "gem 'activerecord-session_store'" end}
 
 gem 'slim'
 gem 'sprockets'
@@ -275,9 +277,9 @@ generate "simple_form:install"
 # TEXT
 # end
 
-unless mongoid
-  generate 'simple_captcha'
-end
+# unless mongoid
+#   generate 'simple_captcha'
+# end
 
 generate "devise:install"
 inject_into_file 'config/initializers/devise.rb', before: /^end/ do <<-TEXT
