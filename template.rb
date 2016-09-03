@@ -275,9 +275,9 @@ generate "simple_form:install"
 # TEXT
 # end
 
-unless mongoid
-  generate 'simple_captcha'
-end
+# unless mongoid
+#   generate 'simple_captcha'
+# end
 
 generate "devise:install"
 inject_into_file 'config/initializers/devise.rb', before: /^end/ do <<-TEXT
