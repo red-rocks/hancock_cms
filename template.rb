@@ -22,6 +22,10 @@ gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
+
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
 # gem "paperclip-optimizer"
@@ -30,9 +34,6 @@ gem 'compass-rails'
 gem 'rails_admin_multiple_file_upload'
 #gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
 #gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
-
-
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
 
 gem 'devise'
 
