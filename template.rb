@@ -14,7 +14,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '~>5.0.0'
+gem 'rails', '~> 5.0.0'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
@@ -22,8 +22,10 @@ gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
-##{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
-#gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
+# #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
+# gem "image_optim"
+# gem "paperclip-optimizer"
+# gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 gem 'rails_admin_multiple_file_upload'
 #gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
@@ -63,7 +65,7 @@ group :development do
 
   gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
-  #gem 'rails_email_preview', '~> 1.0.3'
+  # gem 'rails_email_preview', '~> 1.0.3'
 
   gem 'image_optim_pack'
 end
@@ -77,7 +79,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-#{if mongoid then "#gem 'mongo_session_store-rails4'" else "#gem 'activerecord-session_store'" end}
+# #{if mongoid then "gem 'mongo_session_store-rails4'" else "gem 'activerecord-session_store'" end}
 
 gem 'slim'
 gem 'sprockets'
