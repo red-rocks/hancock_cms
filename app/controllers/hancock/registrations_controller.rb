@@ -9,6 +9,7 @@ class Hancock::RegistrationsController < Devise::RegistrationsController
       else
         self.resource = resource_class.new sign_up_params
         self.resource.valid?
+        @recaptcha_error = "Вы робот?"
         respond_with_navigational(resource) { render :new }
       end
 
