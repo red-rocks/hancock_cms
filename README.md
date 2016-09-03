@@ -12,14 +12,15 @@ Very opinionated and tuned for my needs.
 **Before 1.0 API and class names should be considered unstable and can change at any time!**
 
 ## Installation
+### RAILS 4
 
 Add this line to your application's Gemfile:
 
-    gem 'hancock_cms_mongoid'
+    gem 'hancock_cms_mongoid', '~> 0.1.0'
 
 or:
 
-    gem 'hancock_cms_activerecord'
+    gem 'hancock_cms_activerecord', '~> 0.1.0'
 
 *Only PostgreSQL is tested or supported for AR(from root repo). Others will probably work, but untested.*
 
@@ -29,7 +30,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hancock_cms
+    $ gem install hancock_cms -v 0.1.0
 
 For activerecord, generate migrations and run them
 
@@ -37,9 +38,37 @@ For activerecord, generate migrations and run them
     rails g hancock_cms:migration
     rake db:migrate
 
+
+### RAILS 5
+
+Add this line to your application's Gemfile:
+
+    gem 'hancock_cms_mongoid', '~> 1.0.0'
+
+or:
+
+    gem 'hancock_cms_activerecord', '~> 1.0.0'
+
+*Only PostgreSQL is tested or supported for AR(from root repo). Others will probably work, but untested.*
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install hancock_cms -v 1.0.0
+
+For activerecord, generate migrations and run them
+
+    rails g rails_admin_settings:migration
+    rails g hancock_cms:migration
+    rake db:migrate
+
+
 ## Usage
 
-### Using app generator
+### RAILS 4: Using app generator
 
 Make sure you have rails 4.2 installed
 
@@ -48,15 +77,36 @@ Make sure you have rails 4.2 installed
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install hancock_cms
+    gem install rails -v 4.2
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/master/template.rb
+    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/master/template.rb
+    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+
+generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+
+### RAILS 5:  Using app generator
+
+Make sure you have rails 5.0 installed
+
+    rails -v
+
+If not, uninstall rails and install again
+
+    gem uninstall rails
+    gem install rails -v 5.0.0
+
+Then, for mongoid:
+
+    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
+
+for ActiveRecord:
+
+    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
 
 generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 
