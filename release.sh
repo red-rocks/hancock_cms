@@ -2,7 +2,7 @@
 bundle update
 git add --all .
 git commit -am "${*:1}"
-git push -u origin rails
+git push -u origin rails4
 rake release
 cd mongoid
 bundle update && rake release
