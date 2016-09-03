@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
 
-  spec.add_dependency 'rails', '4.2.7' #'~> 5.0.0'
+  spec.add_dependency 'rails', '~>5.0.0' #'~> 4.2.7'
 
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'simple_form'
@@ -32,7 +32,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ckeditor'
   spec.add_dependency 'geocoder'
 
-  spec.add_dependency 'rails_admin', '~> 0.8.1'
+  spec.add_dependency 'remotipart', github: 'mshibuya/remotipart'
+  spec.add_dependency 'rails_admin', '>= 1.0.0.rc'
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
 

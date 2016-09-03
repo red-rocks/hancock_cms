@@ -9,8 +9,6 @@ Rails + RailsAdmin + Mongoid/PostgreSQL CMS
 
 Very opinionated and tuned for my needs.
 
-**Before 1.0 API and class names should be considered unstable and can change at any time!**
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -41,7 +39,7 @@ For activerecord, generate migrations and run them
 
 ### Using app generator
 
-Make sure you have rails 4.2 installed
+Make sure you have rails 5.0 installed
 
     rails -v
 
