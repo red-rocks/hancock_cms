@@ -1,30 +1,38 @@
 / h2= I18n.t("shared.enter_site")
 .devise-box
+  / = resource.errors.inspect if resource
   .white-box
-    = form_for(resource, as: resource_name, url: user_session_path) do |f|
+    = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
+      / = devise_error_messages!
       h2.title = I18n.t("shared.enter_site")
       .form-group
         / label.form-label = f.label :email, I18n.t("shared.email")
-        .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
+        / .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
+        = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
       
       .form-group
         / label.form-label = f.label :password, title: I18n.t("shared.password")
-        .form-control = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password"), placeholder: I18n.t("shared.password")
-      
+        / .form-control = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password"), placeholder: I18n.t("shared.password")
+        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
+            
       .form-group.links
         - if devise_mapping.rememberable?
-          .checkbox-primary
+          / .checkbox-primary
             = f.check_box :remember_me, title: I18n.t("shared.remember_me")
             = f.label :remember_me, I18n.t("shared.remember_me")
+          = f.input :remember_me, as: :boolean, title: I18n.t("shared.remember_me"), label: I18n.t("shared.remember_me"), wrapper_html: {class: "checkbox-primary"}
         .link-to-recover
           = render "devise/shared/links"
       
+      
       .actions
-        / - if Hancock.config.admin_enter_captcha
-        /   - if Hancock.config.recaptcha_support
-        /     = recaptcha_tags
-        /   - elsif Hancock.config.simple_captcha_support
-        /     = f.input :captcha, as: :simple_captcha, label: false
+        - if Hancock.config.admin_enter_captcha
+          - if Hancock.config.recaptcha_support
+            - unless @recaptcha_error.blank?
+              h4.error= @recaptcha_error
+            = recaptcha_tags
+          - elsif Hancock.config.simple_captcha_support
+            = f.input :captcha, as: :simple_captcha, label: false
             
         = f.submit I18n.t("shared.enter")
 

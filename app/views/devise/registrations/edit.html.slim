@@ -2,25 +2,27 @@
 .devise-box
   .white-box
     = simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
-      = devise_error_messages!
+      / = devise_error_messages!
       h2.title Редактирование профиля
       .form-group
-        / = f.label :email, I18n.t("shared.email")
-        / br
-        .form-control =  f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
-      
+        / = f.label :email, label: I18n.t("shared.email")
+        / .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
+        = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
+            
       .form-group
         / = f.label :password
         - if @minimum_password_length
-          em
-            (Минимум символов: #{@minimum_password_length})
-        .form-control = f.password_field :password, I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
+          em= " (Минимум символов: #{@minimum_password_length})"
+        / .form-control = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
+        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
       
       .form-group
         / = f.label :password_confirmation
         / br
-        .form-control= f.password_field :password_confirmation, I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
+        / .form-control = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
+        = f.input :password_confirmation, as: :password, autocomplete: 'off', title: I18n.t("shared.password_confirmation"), placeholder: I18n.t("shared.password_confirmation"), label: false, wrapper_html: {class: "form-control"}
       
+          
       .form-group.links
         .link-to-recover.center
           = render "devise/shared/links"
