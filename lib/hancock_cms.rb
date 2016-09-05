@@ -37,7 +37,7 @@ require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 
 require 'rails_admin_settings'
-require 'hancock/rails_admin_settings_patch'
+# require 'hancock/rails_admin_settings_patch'
 
 # require 'x-real-ip'
 
