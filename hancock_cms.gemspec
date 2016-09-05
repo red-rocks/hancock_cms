@@ -39,4 +39,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_settings'
 
   spec.add_dependency 'kaminari'
+
+  spec.add_dependency 'codemirror-rails'
 end

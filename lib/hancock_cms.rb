@@ -19,6 +19,8 @@ require 'geocoder'
 # require 'validates_email_format_of'
 require 'filename_to_slug'
 
+require 'codemirror-rails'
+
 
 require 'rails_admin'
 require 'hancock/rails_admin_ext/config'
@@ -36,8 +38,7 @@ require 'hancock/rails_admin_ext/patches/hancock_cms_group'
 require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 
-require 'rails_admin_settings'
-# require 'hancock/rails_admin_settings_patch'
+require 'ack_rails_admin_settings'
 
 # require 'x-real-ip'
 
