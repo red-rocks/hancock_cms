@@ -303,7 +303,18 @@ generate "devise", "User"
 remove_file "config/locales/devise.en.yml"
 remove_file "config/locales/en.yml"
 
-gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable', '# :confirmable, :registerable, :timeoutable and :omniauthable'
+gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
+# :confirmable, :registerable, :timeoutable and :omniauthable'
+  include Hancock::RailsAdminPatch
+  def self.manager_can_default_actions
+    [:show, :read]
+  end
+  def manager_cannot_actions
+    [:new, :create, :delete, :destroy]
+  end
+TEXT
+end
+
 gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
 if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
