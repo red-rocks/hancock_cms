@@ -1,8 +1,8 @@
 .app-header.fixed
   .app-header-inner
     .brand-title
-      h2 = link_to "/admin", title: "Hancock CMS", class: "admin-title"
-        span = image_tag "/assets/rails-admin/hancock_logo.svg", title: "Hancock CMS", alt: "Hancock CMS"
+      h2 = link_to dashboard_path, title: "Hancock CMS", class: "admin-title"
+        span = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS", alt: "Hancock CMS"
     
     .top-nav-left
       .top-nav-project = link_to dashboard_path, title: "Административная панель"
