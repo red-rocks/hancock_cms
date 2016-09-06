@@ -64,12 +64,6 @@ module Hancock
     def register_model(model)
       Hancock::MODELS << model unless Hancock::MODELS.include?(model)
     end
-    def models_goto_hancock
-      MODELS.map { |m|
-        puts m.name
-        m.goto_hancock
-      }
-    end
     def register_plugin(plugin)
       Hancock::PLUGINS << plugin unless Hancock::MODELS.include?(plugin)
     end

@@ -39,7 +39,7 @@ module Hancock::RailsAdminPatch
       []
     end
     def manager_can_actions
-      manager_can_default_actions + manager_can_actions
+      manager_can_default_actions + manager_can_add_actions
     end
     def manager_cannot_actions
       []
