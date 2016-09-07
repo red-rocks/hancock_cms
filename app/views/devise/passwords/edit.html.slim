@@ -9,7 +9,7 @@
       .form-group
         / = f.label :password
         - if @minimum_password_length
-          em= " (Минимум символов: #{@minimum_password_length})"
+          em= " (Минимум символов: #{@minimum_password_length})".freeze
         / .form-control = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
         = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
       
@@ -25,5 +25,5 @@
           = render "devise/shared/links"
       
       .actions
-        = f.submit "Сменить пароль"
+        = f.submit "Сменить пароль".freeze
  
