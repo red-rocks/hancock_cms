@@ -33,7 +33,7 @@ module Hancock::RailsAdminPatch
     end
 
     def manager_can_default_actions
-      [:show, :read, :new, :create, :edit, :update]
+      [:show, :read, :new, :create, :edit, :update, :model_settings]
     end
     def manager_can_add_actions
       []
