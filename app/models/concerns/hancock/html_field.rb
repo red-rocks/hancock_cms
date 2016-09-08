@@ -7,7 +7,7 @@ if Hancock.mongoid?
         clear_by_default = opts.delete(:clear_by_default)
         clear_by_default = false unless clear_by_default == true
 
-        _html_field_name = "#{name}_html"
+        _html_field_name = "#{name}_html".freeze
 
         field _html_field_name, opts
         field "#{name}_clear", type: Boolean, default: clear_by_default, localize: opts[:localize]

@@ -8,9 +8,9 @@ if Hancock.mongoid?
         field "#{name}_hash", opts
 
         meth = name
-        meth_str = "#{name}_str"
-        meth_hsh = "#{name}_hash"
-        meth_json = "#{name}_json"
+        meth_str = "#{name}_str".freeze
+        meth_hsh = "#{name}_hash".freeze
+        meth_json = "#{name}_json".freeze
         if opts[:localize]
           meth_str_t = "#{meth_str}_translations"
           meth_hsh_t = "#{meth_hsh}_translations"

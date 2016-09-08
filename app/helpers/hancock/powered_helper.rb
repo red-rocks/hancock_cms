@@ -24,7 +24,7 @@ module Hancock::PoweredHelper
     content_tag :div, class: 'hancock-created-by' do
       ret = []
       ret << content_tag(:span, class: 'created-by') do
-        "Сайт разработан"
+        "Сайт разработан".freeze
       end
       _attrs = {
         class: "created_by",
@@ -33,8 +33,8 @@ module Hancock::PoweredHelper
         data: {
           "hancock-goto-disabled": true
         }
-      }
-      ret << link_to("Hancock Creative studio", "http://hancockcreate.ru", _attrs)
+      }.freeze
+      ret << link_to("Hancock Creative studio".freeze, "http://hancockcreate.ru".freeze, _attrs)
       ret.join.html_safe
     end
   end

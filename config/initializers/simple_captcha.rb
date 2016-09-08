@@ -9,6 +9,7 @@ if defined?(SimpleCaptcha)
         defaults = {
             :image            => simple_captcha_image(key, options),
             :label            => options[:label] || I18n.t('simple_captcha.label'),
+            :placeholder      => options[:placeholder] || I18n.t('simple_captcha.placeholder'),
             :field            => simple_captcha_field(options),
             :error_messages   => options[:error_messages]
         }
@@ -34,5 +35,5 @@ if defined?(SimpleCaptcha)
 
     sc.tmp_path = "tmp/sc"
   end
-  
+
 end
