@@ -46,7 +46,7 @@ module Hancock::RailsAdminPatch
     end
 
     def rails_admin_default_visible_actions
-      [:comments, :model_comments]
+      [:comments, :model_comments, :model_settings]
     end
     def rails_admin_add_visible_actions
       []
