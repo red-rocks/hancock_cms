@@ -11,7 +11,7 @@ module Hancock::Plugin
       self.orm == :active_record
     end
     def model_namespace
-      "#{self}::Models::#{self.orm.to_s.camelize}"
+      "#{self}::Models::#{self.orm.to_s.camelize}".freeze
     end
     def orm_specific(name)
       "#{model_namespace}::#{name}".constantize

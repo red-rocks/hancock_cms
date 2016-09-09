@@ -32,9 +32,9 @@ gem 'rails_admin', '>= 1.0.0.rc'
 # gem "paperclip-optimizer"
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-gem 'rails_admin_multiple_file_upload'
-#gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-#gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# gem 'rails_admin_multiple_file_upload'
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 gem 'devise'
 

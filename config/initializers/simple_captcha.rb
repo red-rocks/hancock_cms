@@ -29,9 +29,9 @@ if defined?(SimpleCaptcha)
       "-fill 'orange'",
       "-background 'transparent'",
       "-size 200x50", "xc:transparent"
-    ])
+    ].freeze)
 
-    sc.image_style = 'hancock_cms_style'
+    sc.image_style = 'hancock_cms_style'.freeze
 
     sc.tmp_path = "tmp/sc"
   end
