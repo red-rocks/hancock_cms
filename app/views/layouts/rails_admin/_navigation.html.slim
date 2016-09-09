@@ -6,7 +6,7 @@
     
     .top-nav-left
       .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
-        -plugin_name = _get_plugin_name[0] || 'Rails'
+        - plugin_name = _get_plugin_name[0] || 'Rails'
         span = "Административная панель: #{plugin_name}".freeze
     
     .top-nav-right
