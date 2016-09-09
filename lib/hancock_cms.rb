@@ -61,6 +61,14 @@ module Hancock
 
   class << self
 
+    def rails4?
+      true
+    end
+
+    def rails5?
+      false
+    end
+
     def register_model(model)
       Hancock::MODELS << model unless Hancock::MODELS.include?(model)
     end
