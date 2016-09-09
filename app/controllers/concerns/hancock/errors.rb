@@ -18,10 +18,10 @@ module Hancock::Errors
 
     if defined?(CanCan)
       rescue_from CanCan::AccessDenied do |exception|
-        Rails.logger.error "__________________________"
-        Rails.logger.error "Error 403"
-        Rails.logger.error (params ? params.inspect : "no params data")
-        Rails.logger.error (current_user ? current_user.inspect : "no current_user")
+        Rails.logger.error "__________________________".freeze
+        Rails.logger.error "Error 403".freeze
+        Rails.logger.error (params ? params.inspect : "no params data".freeze)
+        Rails.logger.error (current_user ? current_user.inspect : "no current_user".freeze)
         unless exception.nil?
           Rails.logger.error exception.message
           Rails.logger.error exception.backtrace.join("\n")
@@ -45,37 +45,37 @@ module Hancock::Errors
 
   private
   def render_404(exception = nil)
-    Rails.logger.error "__________________________"
-    Rails.logger.error "Error 404"
-    Rails.logger.error (params ? params.inspect : "no params data")
-    Rails.logger.error (current_user ? current_user.inspect : "no current_user")
+    Rails.logger.error "__________________________".freeze
+    Rails.logger.error "Error 404".freeze
+    Rails.logger.error (params ? params.inspect : "no params data".freeze)
+    Rails.logger.error (current_user ? current_user.inspect : "no current_user".freeze)
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
       capture_exception(exception) if defined?(Raven)
     end
-    Rails.logger.error "__________________________"
+    Rails.logger.error "__________________________".freeze
     render_error(404)
   end
 
   def render_500(exception = nil)
-    Rails.logger.error "__________________________"
-    Rails.logger.error "Error 500"
-    Rails.logger.error (params ? params.inspect : "no params data")
-    Rails.logger.error (current_user ? current_user.inspect : "no current_user")
+    Rails.logger.error "__________________________".freeze
+    Rails.logger.error "Error 500".freeze
+    Rails.logger.error (params ? params.inspect : "no params data".freeze)
+    Rails.logger.error (current_user ? current_user.inspect : "no current_user".freeze)
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
       capture_exception(exception) if defined?(Raven)
     end
-    Rails.logger.error "__________________________"
+    Rails.logger.error "__________________________".freeze
     begin
       if rails_admin?
         render text: t('hancock.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
         return
       end
     rescue Exception => e
-      puts "error while rendering rails admin exception"
+      puts "error while rendering rails admin exception".freeze
       puts e.class.name
       puts e.message
       puts e.backtrace.join("\n")

@@ -1,4 +1,4 @@
 - if defined?(title) && !title.blank?
-  meta{property='og:title' content="#{title}"}
+  meta{property='og:title'.freeze content=title.freeze}
 - if defined?(image) && !image.blank?
-  meta{property='og:image' content="http://#{request.host_with_port}#{image}"}
+  meta{property='og:image'.freeze content="http://#{request.host_with_port}#{image}".freeze}

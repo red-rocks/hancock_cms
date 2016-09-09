@@ -27,7 +27,7 @@ gem 'compass-rails'
 # gem "paperclip-optimizer"
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-gem 'rails_admin_multiple_file_upload'
+# gem 'rails_admin_multiple_file_upload'
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
@@ -65,7 +65,7 @@ group :development do
 
   gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
-  #gem 'rails_email_preview', '~> 1.0.3'
+  # gem 'rails_email_preview', '~> 1.0.3'
 
   gem 'image_optim_pack'
 end

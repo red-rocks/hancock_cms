@@ -2,6 +2,6 @@
   .flash
     - flash.each do |type, message|
       - next if message.blank?
-      div{class="message #{type}"}
+      div{class="message #{type}".freeze}
         a.close_flash &times;
         = simple_format(message.strip) if message.is_a?(String)
