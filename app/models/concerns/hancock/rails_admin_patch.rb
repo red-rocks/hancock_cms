@@ -20,39 +20,39 @@ module Hancock::RailsAdminPatch
 
 
     def admin_can_default_actions
-      [:manage]
+      [:manage].frozen
     end
     def admin_can_add_actions
-      []
+      [].frozen
     end
     def admin_can_actions
-      admin_can_default_actions + admin_can_add_actions
+      (admin_can_default_actions + admin_can_add_actions)
     end
     def admin_cannot_actions
-      []
+      [].frozen
     end
 
     def manager_can_default_actions
-      [:show, :read, :new, :create, :edit, :update, :model_settings]
+      [:show, :read, :new, :create, :edit, :update].frozen
     end
     def manager_can_add_actions
-      []
+      [].frozen
     end
     def manager_can_actions
-      manager_can_default_actions + manager_can_add_actions
+      (manager_can_default_actions + manager_can_add_actions).uniq.frozen
     end
     def manager_cannot_actions
-      []
+      [].frozen
     end
 
     def rails_admin_default_visible_actions
-      [:comments, :model_comments, :model_settings]
+      [:comments, :model_comments].frozen
     end
     def rails_admin_add_visible_actions
-      []
+      [].frozen
     end
     def rails_admin_visible_actions
-      rails_admin_default_visible_actions + rails_admin_add_visible_actions
+    (  rails_admin_default_visible_actions + rails_admin_add_visible_actions).uniq.frozen
     end
 
   end

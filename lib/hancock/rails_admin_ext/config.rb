@@ -39,6 +39,7 @@ module Hancock
       @actions_visibility ||= {}
 
       action_unvisible_for(:custom_show_in_app, Proc.new { false })
+      action_visible_for(:model_settings, Proc.new { false })
     end
 
     def add_action(action_name)
@@ -53,7 +54,6 @@ module Hancock
 
     def action_visible_for(action_name, model_name)
       action_name = action_name.to_sym
-      model_name = model_name.to_s
       add_action(action_name) unless @actions_list.include?(action_name)
 
       if model_name.is_a?(Proc)
@@ -67,7 +67,6 @@ module Hancock
 
     def action_unvisible_for(action_name, model_name)
       action_name = action_name.to_sym
-      model_name = model_name.to_s
       add_action(action_name) unless @actions_list.include?(action_name)
 
       if model_name.is_a?(Proc)
@@ -90,7 +89,7 @@ module Hancock
                 ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
               else
                 if Hancock.rails_admin_config.actions_visibility[action].is_a?(Proc)
-                  ret = Hancock.rails_admin_config.actions_visibility[action]
+                  ret = Hancock.rails_admin_config.actions_visibility[action].call(self)
                 else
                   ret = Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
                 end
