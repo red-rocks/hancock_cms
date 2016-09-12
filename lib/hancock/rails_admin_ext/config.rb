@@ -39,7 +39,7 @@ module Hancock
       @actions_visibility ||= {}
 
       action_unvisible_for(:custom_show_in_app, Proc.new { false })
-      # action_visible_for(:model_settings, Proc.new { false })
+      action_visible_for(:model_settings, Proc.new { false })
     end
 
     def add_action(action_name)
