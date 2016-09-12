@@ -1,19 +1,19 @@
 - alt_obj ||= nil
 
 - if obj.respond_to?(:keywords) and !obj.keywords.blank?
-  meta{name="keywords".freeze content=obj.keywords.freeze}/
+  meta{name="keywords".freeze content=obj.keywords}/
 - else
   - if alt_obj and alt_obj.respond_to?(:keywords) and !alt_obj.keywords.blank?
-    meta{name="keywords".freeze content=alt_obj.keywords.freeze}/
+    meta{name="keywords".freeze content=alt_obj.keywords}/
 
 - if obj.respond_to?(:description) and !obj.description.blank?
-  meta{name="description".freeze content=obj.description.freeze}/
+  meta{name="description".freeze content=obj.description}/
 - else
   - if alt_obj and alt_obj.respond_to?(:description) and !alt_obj.description.blank?
-    meta{name="description".freeze content=alt_obj.description.freeze}/
+    meta{name="description".freeze content=alt_obj.description}/
 
 - if obj.respond_to?(:robots) and !obj.robots.blank?
-  meta{name="robots".freeze content=obj.robots.freeze}/
+  meta{name="robots".freeze content=obj.robots}/
 - else
   - if alt_obj and alt_obj.respond_to?(:robots) and !alt_obj.robots.blank?
-    meta{name="robots".freeze content=alt_obj.robots.freeze}/
+    meta{name="robots".freeze content=alt_obj.robots}/
