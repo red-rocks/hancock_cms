@@ -62,11 +62,11 @@ module Hancock
   class << self
 
     def rails4?
-      true
+      false
     end
 
     def rails5?
-      false
+      true
     end
 
 
