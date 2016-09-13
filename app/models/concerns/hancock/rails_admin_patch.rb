@@ -46,7 +46,7 @@ module Hancock::RailsAdminPatch
     end
 
     def rails_admin_default_visible_actions
-      [:comments, :model_comments].freeze
+      [].freeze
     end
     def rails_admin_add_visible_actions
       [].freeze

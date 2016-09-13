@@ -34,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'mongoid-audit', '~> 1.2.2'
   spec.add_dependency 'mongoid-slug'
 
-  spec.add_dependency 'mongo_session_store-rails4'
+  spec.add_dependency 'mongo_session_store-rails4' #gem 'mongo_session_store-rails4', github: 'drgcms/mongo_session_store'
 
   spec.add_dependency "rails_admin_mongoid_localize_field"
 
