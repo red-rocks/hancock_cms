@@ -1,0 +1,33 @@
+ul.nav.navbar-nav.root_links
+  - actions(:root).each do |action|
+    - next if action.action_name.to_s == "dashboard"
+    - data_method = nil       if action.http_methods.include?(:get)
+    - data_method = "post"    if action.http_methods.include?(:post)
+    - data_method = "put"     if action.http_methods.include?(:put)
+    - data_method = "delete"  if action.http_methods.include?(:delete)
+
+    li{class="#{action.action_name}_root_link top-nav-control-panel"}
+      = link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: (action.pjax? ? "pjax" : ""), data: data_method ? {method: data_method, confirm: t("admin.actions.#{action.action_name}.confirm")} : nil
+      
+      
+  - if main_app_root_path = (main_app.root_path rescue false)
+    li.top-nav-goto-home = link_to main_app_root_path, title: "На главную".freeze
+      span
+        i.fa.fa-home
+  - if _current_user
+    - if user_link = edit_user_link
+     li.top-nav-user_root_link = edit_user_link
+    - if logout_path.present?
+      li.top-nav-logout = link_to logout_path, title: "Выйти".freeze, method: logout_method
+        span
+          i.fa.fa-sign-out
+
+  / - if main_app_root_path = (main_app.root_path rescue false)
+  /   li= link_to t('admin.home.name').capitalize, main_app_root_path
+  / - if _current_user
+  /   - if user_link = edit_user_link
+  /     li= user_link
+  /   - if logout_path.present?
+  /     li= link_to content_tag('span', t('admin.misc.log_out'), class: 'label label-important'), logout_path, method: logout_method
+  /   - if _current_user.respond_to?(:email) && _current_user.email.present?
+  /     li= image_tag "#{(request.ssl? ? 'https://secure' : 'http://www')}.gravatar.com/avatar/#{Digest::MD5.hexdigest _current_user.email}?s=30", style: 'padding-top:5px'
