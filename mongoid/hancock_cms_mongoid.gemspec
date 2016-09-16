@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_sort_embedded'
 
   spec.add_dependency 'mongoid-audit', '~> 1.1.0'
-  spec.add_dependency 'mongoid-slug'
+  spec.add_dependency 'mongoid-slug', '~> 5.2.0'
 
   spec.add_dependency 'mongo_session_store-rails4'
 
