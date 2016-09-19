@@ -8,9 +8,10 @@
       .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
         - plugin_name = _get_plugin_name[0] || 'Rails'
         span = "Административная панель: #{plugin_name}".freeze
-    
+    / 
     .top-nav-right
-      ul.nav.navbar-nav.root_links
+      = render partial: "layouts/rails_admin/secondary_navigation"
+      / ul.nav.navbar-nav.root_links
         / - actions(:root).each do |action|
         /   / li.top-nav-control-panel = link_to "", { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : ""
         /   li.top-nav-control-panel = link_to "/admin", title: "Контрольная панель"
