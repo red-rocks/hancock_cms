@@ -242,6 +242,58 @@ body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwav
 .top-nav-project
   overflow: hidden
 
+.sitemap_root_link
+  box-sizing: border-box
+  width: 50px
+  overflow: inherit !important
+  a
+    color: #fff
+    text-decoration: none
+    height: 50px
+    display: block
+    width: 50px
+    font-size: 0
+    &::before
+      display: inline-block
+      font-family: FontAwesome
+      font-size: 24px
+      text-rendering: auto
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+      content: "\f277"
+      box-sizing: border-box
+      line-height: 50px
+      color: #fff
+    span
+      display: inline-block
+      height: 50px
+      margin: 0
+      padding: 0
+      position: relative
+      top: -4px
+      color: #fff
+      font-size: 14px
+      font-weight: bold
+
+.sitemap_root_link
+  &::after
+    content: "Перегенерировать карту сайта"
+    opacity: 0
+    font-size: 11px
+    height: 20px
+    line-height: 20px
+    position: absolute
+    left: 0
+    width: 170px
+    color: #000
+    border: 1px solid #000
+    background: #fff
+
+.sitemap_root_link
+  &:hover
+    &::after
+      opacity: 1
+
 .top-nav-project
   width: auto
   box-sizing: border-box
@@ -476,4 +528,4 @@ body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwav
     opacity: 0
 
 // ripple-effect style end
-// ----------------------------------          
+// ----------------------------------
