@@ -4,24 +4,24 @@ rails_env = ENV['RAILS_ENV'] || 'production'
 rails_root = ENV['RAILS_ROOT'] || File.dirname(File.dirname(__FILE__))
 
 God.watch do |w|
-  w.name = "unicorn_#{app_name.downcase}"
+  w.name = "unicorn_<%= app_name.downcase %>"
   w.interval = 30.seconds # default
 
   # unicorn needs to be run from the rails root
-  w.start = "cd \#{rails_root} && unicorn -c \#{rails_root}/config/unicorn.rb -E \#{rails_env} -D"
+  w.start = "cd #{rails_root} && unicorn -c #{rails_root}/config/unicorn.rb -E #{rails_env} -D"
 
   # QUIT gracefully shuts down workers
-  w.stop = "kill -KILL `cat \#{rails_root}/tmp/pids/unicorn.pid`"
+  w.stop = "kill -KILL `cat #{rails_root}/tmp/pids/unicorn.pid`"
 
   # USR2 causes the master to re-create itself and spawn a new worker pool
-  w.restart = "kill -USR2 `cat \#{rails_root}/tmp/pids/unicorn.pid`"# && cd \#{rails_root} && unicorn -c \#{rails_root}/config/unicorn.rb -E \#{rails_env} -D"
+  w.restart = "kill -USR2 `cat #{rails_root}/tmp/pids/unicorn.pid`"# && cd #{rails_root} && unicorn -c #{rails_root}/config/unicorn.rb -E #{rails_env} -D"
 
   w.start_grace = 10.seconds
   w.restart_grace = 10.seconds
-  w.pid_file = "\#{rails_root}/tmp/pids/unicorn.pid"
+  w.pid_file = "#{rails_root}/tmp/pids/unicorn.pid"
 
-  w.uid = '#{app_name.downcase}'
-  w.gid = '#{app_name.downcase}'
+  w.uid = '<%= app_name.downcase %>'
+  w.gid = '<%= app_name.downcase %>'
 
   w.behavior(:clean_pid_file)
 
