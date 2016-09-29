@@ -11,6 +11,8 @@ RailsAdmin.config do |config|
     #warden.authenticate! scope: :user
   #end
 
+  config.parent_controller = '::ApplicationController'
+
   config.current_user_method(&:current_user)
 
   ## == Cancan ==
