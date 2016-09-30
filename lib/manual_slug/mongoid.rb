@@ -3,9 +3,10 @@ module ManualSlug::Mongoid
   include ::Mongoid::Slug
 
   def text_slug
-    self._slugs.empty? ? '' : self._slugs.last
+    ((self._slugs.nil? or self._slugs.empty?) ? '' : self._slugs.last)
   end
   def text_slug=(slug)
+    self._slugs ||= []
     if slug.blank?
       self._slugs = []
     else
@@ -15,9 +16,12 @@ module ManualSlug::Mongoid
   end
 
   module ClassMethods
-    def manual_slug(field, options = {}, callback = true)
+    def manual_slug(_field, options = {}, callback = true)
       options.merge!(permanent: true, history: true)
-      slug field, options
+      slug _field, options
+      #overwrite for default value
+      field :_slugs, type: Array, localize: options[:localize], default: [], overwrite: true
+
 
       # we will create slugs manually when needed
       skip_callback :create, :before, :build_slug
