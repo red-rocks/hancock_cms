@@ -26,6 +26,7 @@ ru:
     enter_site: Войти на сайт
     email: E-mail
     password: Пароль
+    password_confirmation: Подтвердите пароль
     remember_me: Запомнить меня
     enter: Войти
     registration: Зарегистрироваться

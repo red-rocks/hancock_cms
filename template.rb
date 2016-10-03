@@ -14,7 +14,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.7.1'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
@@ -22,15 +22,17 @@ gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
-##{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
-#gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
+# #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
+# gem "image_optim"
+# gem "paperclip-optimizer"
+# gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-gem 'rails_admin_multiple_file_upload'
-#gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-#gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# gem 'rails_admin_multiple_file_upload'
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails4'
 
 gem 'devise'
 
@@ -63,7 +65,7 @@ group :development do
 
   gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
-  #gem 'rails_email_preview', '~> 1.0.3'
+  # gem 'rails_email_preview', '~> 1.0.3'
 
   gem 'image_optim_pack'
 end
@@ -77,7 +79,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-#{if mongoid then "#gem 'mongo_session_store-rails4'" else "#gem 'activerecord-session_store'" end}
+# #{if mongoid then "gem 'mongo_session_store-rails4'" else "gem 'activerecord-session_store'" end}
 
 gem 'slim'
 gem 'sprockets'
@@ -275,9 +277,9 @@ generate "simple_form:install"
 # TEXT
 # end
 
-unless mongoid
-  generate 'simple_captcha'
-end
+# unless mongoid
+#   generate 'simple_captcha'
+# end
 
 generate "devise:install"
 inject_into_file 'config/initializers/devise.rb', before: /^end/ do <<-TEXT
@@ -297,7 +299,18 @@ generate "devise", "User"
 remove_file "config/locales/devise.en.yml"
 remove_file "config/locales/en.yml"
 
-gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable', '# :confirmable, :registerable, :timeoutable and :omniauthable'
+gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
+# :confirmable, :registerable, :timeoutable and :omniauthable'
+  include Hancock::RailsAdminPatch
+  def self.manager_can_default_actions
+    [:show, :read]
+  end
+  def manager_cannot_actions
+    [:new, :create, :delete, :destroy]
+  end
+TEXT
+end
+
 gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
 if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
@@ -495,7 +508,7 @@ remove_file 'app/assets/javascripts/application.js'
 generate "hancock:cms:assets", app_name
 
 remove_file 'public/robots.txt'
-generate "hancock:cms:robots"
+generate "hancock:cms:robots", app_name
 
 #god+unicorn
 generate "hancock:cms:unicorn_god", app_name

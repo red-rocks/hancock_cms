@@ -5,6 +5,8 @@ require 'mongoid-audit'
 require 'mongoid_slug'
 require 'mongo_session_store-rails4'
 
+require 'kaminari'
+
 module Hancock
   def self.orm
     :mongoid

@@ -1,29 +1,29 @@
 / h2 Change your password
 .devise-box
   .white-box
-    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+    = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
       = devise_error_messages!
-      h2.title Change your password
+      h2.title Сменить пароль
       = f.hidden_field :reset_password_token
       
       .form-group
-        / = f.label :password, "New password"
-        / br/
+        / = f.label :password
         - if @minimum_password_length
-          em
-            (Минимум символов: #{@minimum_password_length})
-            
-        .form-control = f.password_field :password, autofocus: true, autocomplete: "off", placeholder: I18n.t("shared.password")
+          em= " (Минимум символов: #{@minimum_password_length})".freeze
+        / .form-control = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
+        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
       
       .form-group
-        / = f.label :password_confirmation, "Confirm new password"
-        / br/
-        .form-control = f.password_field :password_confirmation, autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
-      
+        / = f.label :password_confirmation
+        / br
+        / .form-control = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
+        = f.input :password_confirmation, as: :password, autocomplete: 'off', title: I18n.t("shared.password_confirmation"), placeholder: I18n.t("shared.password_confirmation"), label: false, wrapper_html: {class: "form-control"}
+    
+        
       .form-group.links
         .link-to-recover.center
           = render "devise/shared/links"
       
       .actions
-        = f.submit "Change my password"
+        = f.submit "Сменить пароль".freeze
  

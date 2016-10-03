@@ -32,17 +32,7 @@ module Hancock
       @localize = false
 
       @ability_manager_config = []
-      @ability_manager_config << {
-        method: :can,
-        model: RailsAdminSettings::Setting,
-        actions: [:edit, :update]
-      }
       @ability_admin_config = []
-      @ability_admin_config << {
-        method: :can,
-        model: RailsAdminSettings::Setting,
-        actions: :manage
-      }
 
       @recaptcha_support = defined?(Recaptcha)
       @simple_captcha_support = defined?(SimpleCaptcha)

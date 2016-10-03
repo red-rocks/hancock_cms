@@ -38,7 +38,7 @@ module Hancock
         include RailsAdminComments::ModelCommentable
       end
 
-      if false #temp Hancock.mongoid? && defined?(Trackable)
+      if Hancock.mongoid? && defined?(Trackable)
         include Trackable
       end
 

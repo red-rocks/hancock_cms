@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
 
-  spec.add_dependency 'rails', ['>= 4.2', '< 5.0']
+  spec.add_dependency 'rails', ['>= 4.2', "< 5.0"]
 
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'simple_form'
@@ -36,7 +36,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
 
-  spec.add_dependency 'rails_admin_settings'
+  spec.add_dependency 'ack_rails_admin_settings'
 
   spec.add_dependency 'kaminari'
+
+  spec.add_dependency 'codemirror-rails'
 end

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'hancock_cms_activerecord'
   spec.version       = Hancock::VERSION
   spec.authors       = ['Alexander Kiseliev']
-  spec.email         = "dev@redrpcks.pro"
+  spec.email         = ["dev@redrocks.pro"]
   spec.description   = %q{HancockCMS - ActiveRecord metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/red-rocks/hancock_cms'

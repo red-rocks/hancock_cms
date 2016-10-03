@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'hancock_cms_mongoid'
   spec.version       = Hancock::VERSION
   spec.authors       = ['Alexander Kiseliev']
-  spec.email         = "dev@redrocks.pro"
+  spec.email         = ["dev@redrocks.pro"]
   spec.description   = %q{HancockCMS - Mongoid metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/red-rocks/hancock_cms'
@@ -31,11 +31,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_sort_embedded'
 
   spec.add_dependency 'mongoid-audit', '~> 1.1.0'
-  spec.add_dependency 'mongoid-slug'
+  spec.add_dependency 'mongoid-slug', '~> 5.2.0'
 
   spec.add_dependency 'mongo_session_store-rails4'
 
   spec.add_dependency "rails_admin_mongoid_localize_field"
 
-  # spec.add_dependency 'kaminari-mongoid'
+  spec.add_dependency 'kaminari-mongoid'
 end

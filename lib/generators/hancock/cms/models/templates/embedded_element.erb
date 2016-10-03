@@ -1,0 +1,30 @@
+class <%= camelcased_class_name %> < Hancock::EmbeddedElement
+  embedded_in :<%= underscored_parent_class_name %>, class_name: "<%= camelcased_parent_class_name %>"
+
+  def self.find(id)
+    find_through(<%= camelcased_parent_class_name %>, '<%= underscored_pluralized_class_name %>', id)
+  end
+
+  # def image_styles
+  #   super
+  # end
+
+  # def image_jcrop_options
+  #   super
+  # end
+
+  ############# rails_admin ##############
+  def self.rails_admin_add_fields
+    super
+  end
+
+  def self.rails_admin_add_config(config)
+    super(config)
+  end
+
+  # rails_admin(&Hancock::Admin::EmbeddedElement.config(%NAV_LABEL%, rails_admin_add_fields) { |config|
+  rails_admin(&Hancock::Admin::EmbeddedElement.config(rails_admin_add_fields) { |config|
+    rails_admin_add_config(config)
+  })
+
+end

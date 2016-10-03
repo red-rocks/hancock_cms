@@ -54,7 +54,7 @@ ru:
   errors:
     messages:
       already_confirmed: уже подтверждена. Пожалуйста, попробуйте войти в систему
-      confirmation_period_expired: 
+      confirmation_period_expired:
       expired: устарела. Пожалуйста, запросите новую
       not_found: не найдена
       not_locked: не заблокирована

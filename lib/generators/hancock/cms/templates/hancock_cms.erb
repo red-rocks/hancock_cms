@@ -1,28 +1,28 @@
 Hancock.configure do |config|
   ##### defaults #####
   # config.main_index_layout = 'application'
-  # config.menu_max_depth = 2
   # config.error_layout = 'application'
   #
   # config.localize = false
+  #
+  # config.ability_manager_config = []
+  ### example ###
+  # config.ability_manager_config << {
+  #   method: :can,
+  #   model: RailsAdminSettings::Setting,
+  #   actions: [:edit, :update]
+  # }
+  ### example ###
+  # config.ability_admin_config = []
+  # config.ability_admin_config << {
+  #   method: :can,
+  #   model: RailsAdminSettings::Setting,
+  #   actions: :manage
+  # }
   #
   # config.recaptcha_support = defined?(Recaptcha)
   # config.simple_captcha_support = defined?(SimpleCaptcha)
   #
   # config.admin_enter_captcha = config.recaptcha_support or config.simple_captcha_support
   # config.registration_captcha = config.admin_enter_captcha
-  #
-  #
-  #
-  #
-  # config.ability_manager_config << {
-  #   method: :can,
-  #   model: MODEL,
-  #   actions: ACTIONS_ARRAY
-  # }
-  # config.ability_admin_config << {
-  #   method: :can,
-  #   model: MODEL,
-  #   actions: ACTIONS_ARRAY
-  # }
 end

@@ -29,8 +29,8 @@ module RailsAdmin
         parent.groups.collect { |f|
           f.section = self
           f.with(bindings)
-        }.select(&:visible?).select { |g|
-          g.visible_fields.present?
+        }.select { |g|
+          g.visible? and g.visible_fields.present?
         }.sort do |a, b|
           a.weight <=> b.weight
         end

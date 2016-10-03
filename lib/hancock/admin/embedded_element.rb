@@ -1,9 +1,12 @@
 module Hancock
   module Admin
     module EmbeddedElement
-      def self.config(_navigation_label = I18n.t('hancock.cms'), fields = {})
+      def self.config(nav_label = nil, fields = {})
+        if nav_label.is_a?(Hash)
+          fields, nav_label = nav_label, nil
+        end
         Proc.new {
-          # navigation_label(_navigation_label) unless _navigation_label.nil?
+          navigation_label(nav_label || I18n.t('hancock.cms'))
           field :enabled, :toggle do
             searchable false
           end

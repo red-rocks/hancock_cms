@@ -11,7 +11,7 @@ module Hancock::RailsAdminPatch
     end
 
     def rails_admin_add_fields
-      {}
+      []
     end
 
     def rails_admin_add_config(config)
@@ -20,39 +20,66 @@ module Hancock::RailsAdminPatch
 
 
     def admin_can_default_actions
-      [:manage]
+      [:manage].freeze
     end
     def admin_can_add_actions
-      []
+      [].freeze
+    end
+    def admin_can_user_defined_actions
+      [].freeze
     end
     def admin_can_actions
-      admin_can_default_actions + admin_can_add_actions
+      (admin_can_default_actions + admin_can_add_actions + admin_can_user_defined_actions).uniq.freeze
+    end
+    def admin_cannot_default_actions
+      [].freeze
+    end
+    def admin_cannot_add_actions
+      [].freeze
+    end
+    def admin_cannot_user_defined_actions
+      [].freeze
     end
     def admin_cannot_actions
-      []
+      (admin_cannot_default_actions + admin_cannot_add_actions + admin_cannot_user_defined_actions).uniq.freeze
     end
 
     def manager_can_default_actions
-      [:show, :read, :new, :create, :edit, :update]
+      [:show, :read, :new, :create, :edit, :update].freeze
     end
     def manager_can_add_actions
-      []
+      [].freeze
+    end
+    def manager_can_user_defined_actions
+      [].freeze
     end
     def manager_can_actions
-      manager_can_default_actions + manager_can_actions
+      (manager_can_default_actions + manager_can_add_actions + manager_can_user_defined_actions).uniq.freeze
+    end
+    def manager_cannot_default_actions
+      [].freeze
+    end
+    def manager_cannot_add_actions
+      [].freeze
+    end
+    def manager_cannot_user_defined_actions
+      [].freeze
     end
     def manager_cannot_actions
-      []
+      (manager_cannot_default_actions + manager_cannot_add_actions + manager_cannot_user_defined_actions).uniq.freeze
     end
 
     def rails_admin_default_visible_actions
-      [:comments, :model_comments]
+      [].freeze
     end
     def rails_admin_add_visible_actions
-      []
+      [].freeze
+    end
+    def rails_admin_user_defuned_visible_actions
+      [].freeze
     end
     def rails_admin_visible_actions
-      rails_admin_default_visible_actions + rails_admin_add_visible_actions
+      (rails_admin_default_visible_actions + rails_admin_add_visible_actions).uniq.freeze
     end
 
   end
