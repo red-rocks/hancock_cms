@@ -46,7 +46,7 @@ Make sure you have rails 4.2 installed
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install hancock_cms
+    gem install rails -v 4.2
 
 Then, for mongoid:
 
