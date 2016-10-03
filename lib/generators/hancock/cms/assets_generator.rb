@@ -13,7 +13,7 @@ module Hancock::Cms
 
 
     def rails_admin_theming_sass_path
-      "stylesheets/hancock/rails_admin/custom/ui.sass"
+      "stylesheets/hancock/rails_admin/custom/theming.sass"
     end
 
     def application_sass_path

@@ -11,7 +11,7 @@ module Hancock::RailsAdminPatch
     end
 
     def rails_admin_add_fields
-      {}
+      []
     end
 
     def rails_admin_add_config(config)
@@ -25,11 +25,23 @@ module Hancock::RailsAdminPatch
     def admin_can_add_actions
       [].freeze
     end
+    def admin_can_user_defined_actions
+      [].freeze
+    end
     def admin_can_actions
-      (admin_can_default_actions + admin_can_add_actions).uniq.freeze
+      (admin_can_default_actions + admin_can_add_actions + admin_can_user_defined_actions).uniq.freeze
+    end
+    def admin_cannot_default_actions
+      [].freeze
+    end
+    def admin_cannot_add_actions
+      [].freeze
+    end
+    def admin_cannot_user_defined_actions
+      [].freeze
     end
     def admin_cannot_actions
-      [].freeze
+      (admin_cannot_default_actions + admin_cannot_add_actions + admin_cannot_user_defined_actions).uniq.freeze
     end
 
     def manager_can_default_actions
@@ -38,17 +50,32 @@ module Hancock::RailsAdminPatch
     def manager_can_add_actions
       [].freeze
     end
+    def manager_can_user_defined_actions
+      [].freeze
+    end
     def manager_can_actions
-      (manager_can_default_actions + manager_can_add_actions).uniq.freeze
+      (manager_can_default_actions + manager_can_add_actions + manager_can_user_defined_actions).uniq.freeze
+    end
+    def manager_cannot_default_actions
+      [].freeze
+    end
+    def manager_cannot_add_actions
+      [].freeze
+    end
+    def manager_cannot_user_defined_actions
+      [].freeze
     end
     def manager_cannot_actions
-      [].freeze
+      (manager_cannot_default_actions + manager_cannot_add_actions + manager_cannot_user_defined_actions).uniq.freeze
     end
 
     def rails_admin_default_visible_actions
       [].freeze
     end
     def rails_admin_add_visible_actions
+      [].freeze
+    end
+    def rails_admin_user_defuned_visible_actions
       [].freeze
     end
     def rails_admin_visible_actions

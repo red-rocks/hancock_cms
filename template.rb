@@ -512,7 +512,7 @@ remove_file 'app/assets/javascripts/application.js'
 generate "hancock:cms:assets", app_name
 
 remove_file 'public/robots.txt'
-generate "hancock:cms:robots"
+generate "hancock:cms:robots", app_name
 
 #god+unicorn
 generate "hancock:cms:unicorn_god", app_name
