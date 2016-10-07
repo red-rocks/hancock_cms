@@ -3,7 +3,7 @@ class Hancock::SessionsController < Devise::SessionsController
 
   private
   def check_recaptcha
-    if Hancock.config.recaptcha_support
+    if Hancock.config.recaptcha_support and (!Rails.env.development? or Hancock.config.captcha_on_development)
       if verify_recaptcha
         true
       else

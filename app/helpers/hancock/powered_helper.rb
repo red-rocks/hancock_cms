@@ -1,21 +1,21 @@
 module Hancock::PoweredHelper
 
   # TODO CMS site block
-  # def render_hancock_powered_by_block
-  #   content_tag :div, class: 'hancock-powered' do
+  # def render_hancock_powered_on_block
+  #   content_tag :div, class: 'hancock-powered-on' do
   #     ret = []
-  #     ret << content_tag(:span, class: 'powered') do
+  #     ret << content_tag(:span, class: 'powered-on') do
   #       "Сайт работает на "
   #     end
   #     _attrs = {
-  #       class: "powered_by",
+  #       class: "powered_on",
   #       target: "_blank",
   #       title: "Hancock CMS",
   #       data: {
   #         "hancock-goto-disabled": true
   #       }
   #     }
-  #     ret << link_to("Hancock CMS", "http://cms.hancockcreate.ru", _attrs)
+  #     ret << link_to("Hancock CMS", "http://hancock.redrocks.pro/", _attrs)
   #     ret.join.html_safe
   #   end
   # end
@@ -34,7 +34,7 @@ module Hancock::PoweredHelper
           "hancock-goto-disabled": true
         }
       }.freeze
-      ret << link_to("Hancock Creative studio".freeze, "http://hancockcreate.ru".freeze, _attrs)
+      ret << link_to("Redrocks studio".freeze, "http://redrocks.pro/".freeze, _attrs)
       ret.join.html_safe
     end
   end
