@@ -34,7 +34,7 @@ module Hancock::Errors
           authenticate_user!
         else
           if rails_admin? and can?(:access, :rails_admin)
-            redirect_to rails_admin_path
+            redirect_to dashboard_path
           else
             redirect_to main_app.root_path, alert: t('hancock.errors.access_denied')
           end
