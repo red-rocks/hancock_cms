@@ -88,10 +88,12 @@ module Hancock
               if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
                 ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
               else
-                if Hancock.rails_admin_config.actions_visibility[action].is_a?(Proc)
-                  ret = Hancock.rails_admin_config.actions_visibility[action].call(self)
-                else
-                  ret = Hancock.rails_admin_config.actions_visibility[action].include? bindings[:abstract_model].model_name
+                if visibility = Hancock.rails_admin_config.actions_visibility[action]
+                  if visibility.is_a?(Proc)
+                    ret = visibility.call(self)
+                  else
+                    ret = visibility.include? bindings[:abstract_model].model_name
+                  end
                 end
               end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
               ret

@@ -18,4 +18,6 @@ class Hancock::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  include Hancock::Decorators::Registrations
+
 end
