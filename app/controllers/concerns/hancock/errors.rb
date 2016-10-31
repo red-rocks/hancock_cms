@@ -86,8 +86,5 @@ module Hancock::Errors
   def render_error(code = 500)
     render template: "hancock/errors/error_#{code}", formats: [:html], handlers: [:slim], layout: Hancock.config.error_layout, status: code
   end
-
-  def rails_admin?
-    self.is_a?(RailsAdmin::ApplicationController) || self.is_a?(RailsAdmin::MainController)
-  end
+  
 end

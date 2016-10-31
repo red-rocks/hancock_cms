@@ -3,7 +3,7 @@ module Hancock
     module EmbeddedElement
       def self.config(nav_label = nil, fields = {})
         if nav_label.is_a?(Hash)
-          fields, nav_label = nav_label, nil
+          nav_label, fields = nil, nav_label
         end
         Proc.new {
           navigation_label(nav_label || I18n.t('hancock.cms'))

@@ -1,5 +1,6 @@
 ru:
   hancock:
+    cache: Кеширование
     gallery: "Галерея"
     cms: "CMS"
     menu: "Меню"

@@ -1,4 +1,4 @@
-module Hancock::Cache
+module Hancock::NoCache
   extend ActiveSupport::Concern
   included do
     before_filter :set_cache_buster

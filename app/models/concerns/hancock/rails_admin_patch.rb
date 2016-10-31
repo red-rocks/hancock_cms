@@ -45,7 +45,7 @@ module Hancock::RailsAdminPatch
     end
 
     def manager_can_default_actions
-      [:show, :read, :new, :create, :edit, :update].freeze
+      [:index, :show, :read, :new, :create, :edit, :update].freeze
     end
     def manager_can_add_actions
       [].freeze

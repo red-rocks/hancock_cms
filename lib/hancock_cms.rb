@@ -54,6 +54,7 @@ require 'hancock/controller'
 
 
 module Hancock
+
   MODELS = []
   PLUGINS = []
 

@@ -35,12 +35,16 @@ ru:
     robots: Robots
     title: Title
     version: Version
+
     sitemap_data_field: Родительский элемент/страница
     seoable: Родительский элемент/страница
     sitemap_show: Отображать в карте сайта
     sitemap_lastmod: lastmod
     sitemap_changefreq: changefreq
     sitemap_priority: priority
+
+    cache_keys_str: Ключи кэша
+    perform_caching: Кэшировать?
 
   mongoid: &mongoid
     models:
