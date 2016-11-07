@@ -16,11 +16,7 @@ module Hancock::Controller
   protected
 
   def page_title
-    if @seo_page.nil?
-      Settings ? Settings.default_title : "" #temp
-    else
-      @seo_page.page_title
-    end
+    Settings ? Settings.default_title : "" #temp
   end
 
   def ckeditor_authenticate

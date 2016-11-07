@@ -19,4 +19,6 @@ class Hancock::SessionsController < Devise::SessionsController
     end
   end
 
+  include Hancock::Decorators::Sessions
+
 end

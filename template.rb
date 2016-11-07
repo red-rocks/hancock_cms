@@ -93,6 +93,8 @@ gem 'uglifier'
 group :production do
   gem "god"
 end
+
+gem 'glebtv_mongoid_userstamp', '0.6.0'
 TEXT
 end
 
@@ -304,7 +306,8 @@ remove_file "config/locales/devise.en.yml"
 remove_file "config/locales/en.yml"
 
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
-# :confirmable, :registerable, :timeoutable and :omniauthable'
+  include Hancock::Model
+  include Hancock::Enableable
   include Hancock::RailsAdminPatch
   def self.manager_can_default_actions
     [:show, :read]
@@ -312,6 +315,11 @@ gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :om
   def manager_cannot_actions
     [:new, :create, :delete, :destroy]
   end
+
+  cattr_accessor :current_user
+
+  # Include default devise modules. Others available are:
+  # :confirmable,  :lockable, :timeoutable and :omniauthable
 TEXT
 end
 

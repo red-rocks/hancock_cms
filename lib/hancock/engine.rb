@@ -36,11 +36,13 @@ module Hancock
       # Hancock.config.search_models.map(&:constantize)
 
       # Write default email settings to DB so they can be changed.
-      # if Settings and Settings.table_exists?
-      #   Settings.default_email_from(default: 'noreply@site.domain')
-      #   Settings.form_email(default: 'admin@site.domain')
-      #   Settings.email_topic(default: 'с сайта')
-      # end
+      if Settings and Settings.table_exists?
+        # Settings.default_email_from(default: 'noreply@site.domain')
+        # Settings.form_email(default: 'admin@site.domain')
+        # Settings.email_topic(default: 'с сайта')
+        #
+        Settings.logo_image(kind: :image)
+      end
     end
   end
 end
