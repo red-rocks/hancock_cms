@@ -302,7 +302,7 @@ remove_file "config/locales/devise.en.yml"
 remove_file "config/locales/en.yml"
 
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
-  include Hancock::Model
+include Hancock::Model
   include Hancock::Enableable
   include Hancock::RailsAdminPatch
   def self.manager_can_default_actions
@@ -349,9 +349,9 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
   end
 
   def self.generate_first_admin_user
-    if User.admins.all.count == 0
+    if ::User.admins.all.count == 0
       _email_pass = 'admin@#{app_name.dasherize.downcase}.ru'
-      if User.new(roles: ["admin"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass).save
+      if ::User.new(roles: ["admin"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass).save
         puts "AdminUser with email and password '\#{_email_pass}' was created!"
       else
         puts 'Creating AdminUser error'
@@ -362,9 +362,9 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
   end
 
   def self.generate_first_manager_user
-    if User.managers.all.count == 0
+    if ::User.managers.all.count == 0
       _email_pass = 'manager@#{app_name.dasherize.downcase}.ru'
-      if User.create(roles: ["manager"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass)
+      if ::User.create(roles: ["manager"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass)
         puts "ManagerUser with email and password '\#{_email_pass}' was created!"
       else
         puts 'Creating ManagerUser error'
