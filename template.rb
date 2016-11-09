@@ -149,6 +149,15 @@ TEXT
 end
 end
 
+
+inject_into_file 'config/initializers/assets.rb', before: /^end/ do <<-TEXT
+Rails.application.config.assets.precompile += %w( *.svg )
+
+Rails.application.config.assets.precompile += %w( ckeditor/* )
+
+Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css codemirror/**/* )
+TEXT
+
 remove_file 'app/controllers/application_controller.rb'
 create_file 'app/controllers/application_controller.rb' do <<-TEXT
 class ApplicationController < ActionController::Base
