@@ -1,5 +1,6 @@
 ru:
   hancock:
+    url: URL
     content: "Контент"
     cache: Кеширование
     gallery: "Галерея"
