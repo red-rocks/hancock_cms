@@ -6,6 +6,8 @@ window.hancock_cms.multiselect_dblclick = (selector)->
   $(document).delegate selector + ' .ra-multiselect-right select option', 'dblclick', (e)->
     $(e.currentTarget).closest('.ra-multiselect').find('.ra-multiselect-center .ra-multiselect-item-remove').click()
 
+window.hancock_cms.multiselect_dblclick("select.hancock_multiselect + .ra-multiselect")
+
 
 
 
@@ -45,6 +47,4 @@ $(document).delegate ripple_selector, "click", (event)->
     background: $(this).data('ripple-color')).appendTo $(this)
   window.setTimeout (->
     $div.remove()
-    return
   ), 1000
-  return

@@ -4,6 +4,8 @@ class <%= camelcased_class_name %>
   # include Hancock::Cacheable
   # include ManualSlug
 
+  # acts_as_nested_set
+  # scope :sorted, -> { order_by([:lft, :asc]) }
 
   field :name
   # manual_slug :name
