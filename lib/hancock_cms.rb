@@ -31,7 +31,7 @@ require 'hancock/rails_admin_ext/hancock_slugs'
 require 'hancock/rails_admin_ext/hancock_multiselect'
 
 require 'hancock/rails_admin_ext/patches/field_patch'
-require 'hancock/rails_admin_ext/patches/field_patch'
+require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
 require 'hancock/rails_admin_ext/patches/hancock_cms_group'
 

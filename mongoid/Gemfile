@@ -5,3 +5,5 @@ gemspec
 
 # gem 'mongo_session_store-rails4', github: 'drgcms/mongo_session_store', branch: 'rails5'
 gem 'mongo_session_store-rails5', github: 'ack43/mongo_session_store'#, branch: 'rails5'
+
+gem 'glebtv-mongoid_nested_set', github: 'Tyralion/mongoid_nested_set' # Rails5 belongs_to fix
