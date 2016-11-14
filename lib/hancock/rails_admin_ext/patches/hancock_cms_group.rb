@@ -7,9 +7,7 @@ module Hancock::RailsAdminGroupPatch
       if fields.is_a?(Array)
         fields.reject { |f| f.empty? }.each do |_group|
           _name_default = :default
-          _label_default = _name_default
           _name = _group.delete(:name) || _name_default
-          _label = _group.delete(:label) || _label_default
           _active_default = _name == :default
           _group[:active] ||= _active_default
           _fields_default = {}

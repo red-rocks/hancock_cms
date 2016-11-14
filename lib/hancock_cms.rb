@@ -28,6 +28,7 @@ require 'hancock/rails_admin_ext/config'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
+require 'hancock/rails_admin_ext/hancock_multiselect'
 
 require 'hancock/rails_admin_ext/patches/field_patch'
 require 'hancock/rails_admin_ext/patches/field_patch'

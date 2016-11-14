@@ -1,0 +1,42 @@
+class <%= camelcased_class_name %>
+  include Hancock::Model
+  # include Hancock::Enableable
+  # include Hancock::Cacheable
+  # include ManualSlug
+
+  # acts_as_nested_set
+  # scope :sorted, -> { order_by([:lft, :asc]) }
+
+  field :name
+  # manual_slug :name
+
+  # def self.default_cache_keys
+  #   []
+  # end
+
+  ############# rails_admin ##############
+  #
+  # def self.admin_can_user_defined_actions
+  #   [].freeze
+  # end
+  # def self.admin_cannot_user_defined_actions
+  #   [].freeze
+  # end
+  # def self.manager_can_user_defined_actions
+  #   [].freeze
+  # end
+  # def self.manager_cannot_user_defined_actions
+  #   [].freeze
+  # end
+  # def self.rails_admin_user_defined_visible_actions
+  #   [].freeze
+  # end
+
+  rails_admin do
+    # field :enabled, :toggle
+    field :name
+    # group :url, &Hancock::Admin.url_block
+    # group :cache, &Hancock::Admin.caching_block
+  end
+
+end
