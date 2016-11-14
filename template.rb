@@ -91,7 +91,7 @@ gem 'sprockets'
 gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'
 
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -272,7 +272,9 @@ Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css c
 TEXT
 end
 
-gsub_file 'config/initializers/backtrace_silencers.rb', "# Rails.backtrace_cleaner.add_silencer { |line| line =~ /my_noisy_library/ }", "Rails.backtrace_cleaner.add_silencer { |line| line =~ /lib\\/(haml|slim|sass|scss|coffee|compass)/ }"
+gsub_file 'config/initializers/backtrace_silencers.rb',
+          "# Rails.backtrace_cleaner.add_silencer { |line| line =~ /my_noisy_library/ }",
+          "Rails.backtrace_cleaner.add_silencer { |line| line =~ /lib\\/(haml|slim|sass|scss|coffee|compass)/ }"
 
 if mongoid
   generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
