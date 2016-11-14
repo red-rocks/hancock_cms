@@ -1,0 +1,98 @@
+=transition($transition...)
+  -moz-transition:    $transition
+  -o-transition:      $transition
+  -webkit-transition: $transition
+  transition:         $transition
+
+=transition-property($property...)
+  -moz-transition-property:    $property
+  -o-transition-property:      $property
+  -webkit-transition-property: $property
+  transition-property:         $property
+
+=transition-duration($duration...)
+  -moz-transition-property:    $duration
+  -o-transition-property:      $duration
+  -webkit-transition-property: $duration
+  transition-property:         $duration
+
+=transition-timing-function($timing...)
+  -moz-transition-timing-function:    $timing
+  -o-transition-timing-function:      $timing
+  -webkit-transition-timing-function: $timing
+  transition-timing-function:         $timing
+
+=transition-delay($delay...)
+  -moz-transition-delay:    $delay
+  -o-transition-delay:      $delay
+  -webkit-transition-delay: $delay
+  transition-delay:         $delay
+
+=box-shadow($shadow...)
+  -webkit-box-shadow: $shadow
+  box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  -o-box-shadow: $shadow
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -ms-border-radius:     $radius
+  border-radius:         $radius
+
+=display-flex()
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+
+=flex-wrap($value)
+  -webkit-flex-wrap: $value
+  flex-wrap: $value
+
+=flex-grow($value)
+  -webkit-flex-grow: $value
+  flex-grow: $value
+
+=flex-shrink($value)
+  -webkit-flex-shrink: $value
+  flex-shrink: $value
+
+=flex-basis($value)
+  -webkit-flex-basis: $value
+  flex-basis: $value
+
+=flex($value)
+  -webkit-flex: $value
+  flex: $value
+
+=justify-content($value)
+  -webkit-justify-content: $value
+  justify-content: $value
+
+=align-items($value)
+  -webkit-align-content: $value
+  align-content: $value
+
+=display-flex-center()
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-flexbox
+  display: -webkit-flex
+  display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
+  -webkit-justify-content: center
+  justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
+  -webkit-align-items: center
+  align-items: center
+
+=transform($transforms)
+  -moz-transform: $transforms
+  -o-transform: $transforms
+  -ms-transform: $transforms
+  -webkit-transform: $transforms
+  transform: $transforms
