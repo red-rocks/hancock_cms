@@ -14,9 +14,8 @@ ul.nav.navbar-nav.root_links
     li.top-nav-goto-home = link_to main_app_root_path, title: "На главную".freeze
       span
         i.fa.fa-home
+
   - if _current_user
-    - if user_link = edit_user_link
-     li.top-nav-user_root_link = edit_user_link
     - if logout_path.present?
       li.top-nav-logout = link_to logout_path, title: "Выйти".freeze, method: logout_method
         span

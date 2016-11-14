@@ -1,29 +1,317 @@
-.navbar-brand
-  margin-left: 0 !important
+@import 'jquery.mCustomScrollbar'
 
-.input-small
-  width: 150px
+a
+  outline: none
+  &:focus
+    outline: none
 
-.container-fluid
-  input[type=text]
-    width: 380px !important
-  input.ra-filtering-select-input[type=text]
-    width: 180px !important
-  input.hasDatepicker
-    width: 180px !important
+html, body.rails_admin
+  padding: 0
+  height: 100%
+  background: #fcfcfc
 
-.sidebar-nav
+body.rails_admin
+  padding-top: 0px
+
+.hancock-main-logo
+  max-height: 30px
+
+.admin-navbar
+  position: relative
+  height: 60px
+  width: 100%
+  +box-shadow( 0px 5px 10px -5px rgba(0,0,0,0.5))
+
+.admin-navbar-fixed
+  position: fixed
+  top: 0px
+  left: 0px
+  z-index: 1500
+
+.bg-red
+  background-color: #e53935 !important
+
+.navbar-header-brand
+  width: 230px
+  height: 100%
+  +display-flex-center()
+  float: left
+
+.navbar-container
+  margin-left: 230px
+  height: 100%
+  position: relative
+  display: block
+  background: #fff
+
+.navbar-container.container-fluid
+  padding-right: 0px
+
+.user_root_link
+  margin-right: 25px
+  img
+    display: none
   a
-    padding: 6px 10px !important
-    &.nav-level-1
-      padding-left: 30px !important
-    &.nav-level-2
-      padding-left: 60px !important
-    &.nav-level-3
-      padding-left: 90px !important
+    text-decoration: none
+    text-transform: lowercase
+    color: #1f1f1f
+    +transition(all 0.3s)
+    &:hover
+      color: #ff2b58
+    &:before
+      display: inline-block
+      font-family: FontAwesome
+      text-rendering: auto
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+      content: "\f007"
+      box-sizing: border-box
+      margin-right: 10px
 
-  .dropdown-header
-    padding: 10px 0px 3px 9px
+.admin-menubar
+  width: 230px
+  padding: 60px 0px
+
+.admin-menubar-fixed
+  position: fixed
+  height: 100%
+  top: 0
+  left: 0
+
+.admin-menubar-dark
+  background: #212121
+
+.admin-content
+  padding: 60px 0px 0px 230px
+  background: #f3f4f5
+  margin: 0px auto -30px
+  min-height: 100%
+  &:after
+    content: ""
+    display: block
+    height: 30px
+
+.admin-content > .admin-wrapper
+  padding: 15px
+  width: 100%
+  .content
+    padding: 25px
+    background: #fff
+    border: 1px solid transparent
+    border-radius: 4px
+    +box-shadow(0 1px 1px rgba(0,0,0,.05))
+
+.toolbar
+  max-height: 100%
+  display: block
+  width: 100%
+  overflow: auto
+  i
+    margin-right: 5px
+  .nav
+    li
+      display: block
+      margin: 0
+      overflow: hidden
+      transform-origin: top center
+      +transition(all 0.3s)
+      +transform(scaleY(1))
+      height: 0
+      &.dropdown-header
+        cursor: pointer
+        display: block
+        text-align: right
+    li.visible.active
+      background: #4b4b4b
+      a
+        color: #fff
+        font-weight: bold
+        &:before
+          color: #fff
+      &:after
+        content: "\f0d9"
+        position: absolute
+        right: -2px
+        line-height: 30px
+        color: #f3f4f5
+        top: 50%
+        margin-top: -15px
+        font-size: 26px
+        font-family: "FontAwesome"
+      &:hover
+        background: #646464
+        a
+          color: #fff
+          &:before
+            color: #fff
+    li.visible
+      +transform(scaleY(1))
+      height: auto
+      background: rgba(0,0,0,0.32)
+      +transition(all 0.3s)
+      a
+        text-decoration: none
+        background-color: transparent
+        color: #c1c1c1
+        outline: none
+        font-size: 11px
+        text-transform: uppercase
+        font-weight: 100
+        &:focus
+          outline: none
+        &:before
+          display: inline-block
+          font-family: FontAwesome
+          font-size: 12px
+          text-rendering: auto
+          -webkit-font-smoothing: antialiased
+          -moz-osx-font-smoothing: grayscale
+          content: "\f0da"
+          box-sizing: border-box
+          margin-left: 10px
+          margin-right: 10px
+          color: #c1c1c1
+      .nav-level-1
+        font-size: 11px
+        text-transform: uppercase
+        font-weight: 100
+        &:before
+          content: "\f0da"
+      .nav-level-2
+        font-size: 11px
+        text-transform: uppercase
+        font-weight: 100
+        &:before
+          content: "\f0da"
+      .nav-level-3
+        font-size: 11px
+        text-transform: uppercase
+        font-weight: 100
+        &:before
+          content: "\f0da"
+      &:hover
+        //background: rgba(0,0,0,0.32)
+        background: #4b4b4b
+        a
+          color: #fff
+    .dropdown-header
+      padding: 15px 20px
+      border: 0px
+      border-top: 2px solid transparent
+      text-transform: uppercase
+      color: #c1c1c1
+      +transform(scaleY(1))
+      height: auto
+      &:after
+        display: inline-block
+        font-family: FontAwesome
+        font-size: 12px
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        content: "\f078"
+        box-sizing: border-box
+        margin-left: 12px
+      &:hover
+        //background: rgba(0,0,0,0.32)
+        background: #4b4b4b
+        color: #fff
+      &.opened
+        background: rgba(0,0,0,0.32)
+        background: linear-gradient(to top, rgba(0,0,0,0.32), rgba(0,0,0,0.48))
+        border-top: 2px solid rgba(255,255,255,0.25)
+        &::after
+          content: "\f077"
+        &:hover
+          //background: rgba(0,0,0,0.32)
+          background: #4b4b4b
+
+.plugin-name-panel
+  +display-flex-center
+  padding: 0px 25px
+  float: left
+  height: 100%
+  text-transform: uppercase
+  a
+    text-transform: none
+    text-decoration: none
+    font-weight: bold
+    color: #1f1f1f
+    +transition(all 0.3s)
+    &:hover
+      color: #ff2b58
+
+.user-panel
+  +display-flex-center
+  float: right
+  height: 100%
+  text-transform: uppercase
+
+.plugin-name-class
+  margin-left: 8px
+
+.admin-menubar-footer
+  position: fixed
+  bottom: 0
+  display: block
+  z-index: 1400
+  width: 230px
+  height: 60px
+  background: #21292e
+  text-align: right
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+    height: 100%
+
+.footer-nav-link
+  width: 25%
+  height: 100%
+  display: inline-block
+  vertical-align: top
+  a
+    text-decoration: none
+    color: #ccc
+    height: 100%
+    width: 100%
+    font-size: 18px
+    +display-flex-center
+    +transition(all 0.3s)
+    &:hover
+      background: rgba(0,0,0,0.15)
+      color: #fff
+    &:active
+      background: rgba(0,0,0,0.3)
+
+.footer-nav-link.sitemap
+  a
+    font-size: 0
+    &:before
+      display: inline-block
+      font-family: FontAwesome
+      font-size: 18px
+      text-rendering: auto
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+      content: "\f0e8"
+      box-sizing: border-box
+
+.admin-footer
+  height: 30px
+  width: 100%
+  color: #ccc
+  text-align: center
+  padding: 0px 25px 0px 255px
+  line-height: 30px
+  font-size: 12px
+  background: #1f1f1f
+  a
+    color: #ff2b58
+    text-decoration: none
+    +transition(color 0.3s)
+    &:hover
+      color: #cd2649
 
 .label-important
   background-color: #d9534f
@@ -32,8 +320,9 @@
 
 .page-header
   display: none
+
 .breadcrumb
-  margin-top: 20px
+  margin-top: 0px
 
 .control-group
   clear: both
@@ -61,16 +350,8 @@ input[type=checkbox]
   width: 30px !important
 
 .nav.root_links
-
   > li
     display: inline-block
-
-.dropdown-header
-  border-top: 2px solid #777777
-  text-align: right
-
-  &:first-child
-    border-top: none
 
 .bank_row .logo_field, #edit_bank img
   background: #ccc !important
@@ -86,451 +367,337 @@ input[type=checkbox]
 .badge-success
   background: green
 
-.sidebar-nav
-  // margin-top: 51px
-  i
-    margin-right: 5px
-
-  .nav
-    li
-      display: none
-      &.dropdown-header
-        cursor: pointer
-        display: block
-        &.opened
-      &.visible
-        display: block
-
-
 body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwave_type, body.rails_admin .table td.jcrop_type
   img
     max-width: 150px
     max-height: 100p
-
-
-#list
-  .input-group
-    .input-group-btn
-      .btn-info
-        height: 33px
 
 .table-condensed
   > tbody, > thead
     > tr
       > td
         padding: 6px 4px 0px 5px
-
         &.toggle_type
           padding-top: 14px
 
-@mixin transition($transition...)
-  -moz-transition:    $transition
-  -o-transition:      $transition
-  -webkit-transition: $transition
-  transition:         $transition
-
-@mixin transition-property($property...)
-  -moz-transition-property:    $property
-  -o-transition-property:      $property
-  -webkit-transition-property: $property
-  transition-property:         $property
-
-@mixin transition-duration($duration...)
-  -moz-transition-property:    $duration
-  -o-transition-property:      $duration
-  -webkit-transition-property: $duration
-  transition-property:         $duration
-
-@mixin transition-timing-function($timing...)
-  -moz-transition-timing-function:    $timing
-  -o-transition-timing-function:      $timing
-  -webkit-transition-timing-function: $timing
-  transition-timing-function:         $timing
-
-@mixin transition-delay($delay...)
-  -moz-transition-delay:    $delay
-  -o-transition-delay:      $delay
-  -webkit-transition-delay: $delay
-  transition-delay:         $delay
-
-
-
-.app-header
-  display: block
-  position: relative
-  z-index: 1000
-  height: 50px
-  width: 100%
-
-.app-header.fixed
-  position: fixed
-  left: 0
-  top: 0
-  right: 0
-
-.app-header-inner
-  background-color: #EF5350
-  color: #fff
-  height: 50px
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)
-
-.brand-title
-  display: inline-block
-  text-align: center
-  float: left
-  width: 250px
-  padding: 0
-  box-sizing: border-box
-  box-shadow: 0px -2px 5px rgba(0,0,0,0.32)
-  h2
-    font-weight: bold
-    font-size: 20px
-    line-height: 28px
-    margin: 10px 0px 10px 0px
-    cursor: pointer
-    a
-      text-decoration: none
-      color: #fff
-      span
-        img
-          max-height: 30px
-
-#hancock_logo
-  fill: #fff
-
-.top-nav-left
-  display: inline-block
-  font-size: 16px
-  line-height: 50px
-  float: left
-
-.top-nav-right
-  display: inline-block
-  font-size: 16px
-  line-height: 50px
+.current_user
   float: right
-
-.top-nav-logout, .top-nav-user_root_link, .top-nav-goto-home, .top-nav-control-panel, .top-nav-project
-  width: 50px
-  height: 50px
-  position: relative
-  text-align: center
-  line-height: 50px
-  font-size: 24px
-  cursor: pointer
-  @include transition(background-color .5s, color 2s)
-  &:hover
-    background-color: rgba(0,0,0,0.1)
-    color: #f1f1f1
-  a
-    text-decoration: none
-    display: block !important
-    padding: 0 !important
-    margin: 0 !important
-    heigth: 50px !important
-    span
-      height: 50px
-      line-height: 50px
-      display: inline-block
-      i
-        color: #fff
-
-.root_links
-  li
-    overflow: hidden
-
-.top-nav-project
-  overflow: hidden
-
-.sitemap_root_link
-  box-sizing: border-box
-  width: 50px
-  overflow: inherit !important
-  a
-    color: #fff
-    text-decoration: none
-    height: 50px
-    display: block
-    width: 50px
-    font-size: 0
-    &::before
-      display: inline-block
-      font-family: FontAwesome
-      font-size: 24px
-      text-rendering: auto
-      -webkit-font-smoothing: antialiased
-      -moz-osx-font-smoothing: grayscale
-      content: "\f277"
-      box-sizing: border-box
-      line-height: 50px
-      color: #fff
-    span
-      display: inline-block
-      height: 50px
-      margin: 0
-      padding: 0
-      position: relative
-      top: -4px
-      color: #fff
-      font-size: 14px
-      font-weight: bold
-
-.sitemap_root_link
-  &::after
-    content: "Перегенерировать карту сайта"
-    opacity: 0
-    font-size: 11px
-    height: 20px
-    line-height: 20px
-    position: absolute
-    left: 0
-    width: 170px
-    color: #000
-    border: 1px solid #000
-    background: #fff
-
-.sitemap_root_link
-  &:hover
-    &::after
-      opacity: 1
-
-.top-nav-project
-  width: auto
-  box-sizing: border-box
-  padding-left: 15px
-  padding-right: 15px
-  a
-    color: #fff
-    text-decoration: none
-    height: 50px
-    display: block
-    &::before
-      display: inline-block
-      font-family: FontAwesome
-      font-size: 24px
-      text-rendering: auto
-      -webkit-font-smoothing: antialiased
-      -moz-osx-font-smoothing: grayscale
-      content: "\f108"
-      box-sizing: border-box
-      margin-right: 10px
-      color: #fff
-    span
-      display: inline-block
-      height: 50px
-      margin: 0
-      padding: 0
-      position: relative
-      top: -4px
-      color: #fff
-      font-size: 14px
-      font-weight: bold
-
-.top-nav-user_root_link
-  width: auto
-  a
-    color: #fff
-    box-sizing: border-box
-    padding-left: 15px !important
-    padding-right: 15px !important
-    &::before
-      display: inline-block
-      font-family: FontAwesome
-      font-size: 24px
-      text-rendering: auto
-      -webkit-font-smoothing: antialiased
-      -moz-osx-font-smoothing: grayscale
-      content: "\f007"
-      box-sizing: border-box
-      margin-right: 10px
-      color: #fff
-      height: 50px
-      line-height: 50px
-    img
-      display: none
-    span
-      display: inline-block
-      height: 50px
-      margin: 0
-      padding: 0
-      position: relative
-      top: -4px
-      color: #fff
-      font-size: 14px
-      font-weight: bold
-
-// ----------------------------------
-// rails-admin sidebar navifation begin
-
-.sidebar-nav.hancock-nav
-  width: 250px
-  background-color: #333C44 !important
-  color: #fff
-  box-shadow: 1px 0 2px rgba(0,0,0,0.15)
   display: block
-  z-index: 99
-  position: fixed
-  left: 0
-  bottom: 0
-  top: 0 !important
-  height: 100vh
-  width: 250px
-  overflow: auto
-  box-sizing: border-box
-  padding-top: 50px !important
-  padding-bottom: 25px
-  position: relative
-  ul.nav-pills
-    li.dropdown-header
-      padding: 10px 15px 10px
-    li
-      overflow: hidden
-      border: 0px
-      color: #c1c1c1 !important
-      margin-top: 0px !important
-      @include transition(color 0.5s)
-      a
-        color: #c1c1c1
-        line-height: 24px
-        @include transition(color 0.5s)
-        background: rgba(0,0,0,0.16)
-        &::before
-          display: inline-block
-          font-family: FontAwesome
-          font-size: 12px
-          text-rendering: auto
-          -webkit-font-smoothing: antialiased
-          -moz-osx-font-smoothing: grayscale
-          content: "\f0da"
-          box-sizing: border-box
-          margin-left: 10px
-          margin-right: 10px
-          color: #c1c1c1
-        &::after
-          position: absolute
-          width: 100%
-          opacity: 0
-          height: 100%
-          top: 0
-          left: 0
-          content: ""
-          background: rgba(0,0,0,0.16)
-          @include transition(opacity 0.5s cubic-bezier(0,0.1,0.3,1.0))
-      &:hover
-        color: #fff !important
-        a
-          color: #fff !important
-          &::before
-            color: #fff
-          //   opacity: 1
-          //   z-index: -1
-    .dropdown-header
-      &::after
-        display: inline-block
-        font-family: FontAwesome
-        font-size: 12px
-        text-rendering: auto
-        -webkit-font-smoothing: antialiased
-        -moz-osx-font-smoothing: grayscale
-        // content: "\f077"
-        content: "\f078"
-        box-sizing: border-box
-        margin-left: 12px
-        color: #c1c1c1
-      &::before
-        position: absolute
-        width: 100%
-        opacity: 0
-        height: 100%
-        top: 0
-        right: 0
-        content: ""
-        background: rgba(0,0,0,0.16)
-        @include transition(opacity 0.5s cubic-bezier(0,0.1,0.3,1.0))
-      &:hover
-        background: transparent
-        &::before
-          opacity: 1
-          z-index: -1
-        &::after
-          color: #fff
-    .dropdown-header.opened
-      background: rgba(0,0,0,0.16)
-      &::after
-        display: inline-block
-        font-family: FontAwesome
-        font-size: 12px
-        text-rendering: auto
-        -webkit-font-smoothing: antialiased
-        -moz-osx-font-smoothing: grayscale
-        content: "\f077"
-        // content: "\f078"
-        box-sizing: border-box
-        margin-left: 12px
-        color: #c1c1c1
-      &::before
-        position: absolute
-        width: 100%
-        height: 100%
-        opacity: 0
-        top: 0
-        left: 0
-        content: ""
-        background: rgba(0,0,0,0.16)
-        @include transition(opacity 0.5s cubic-bezier(0,0.1,0.3,1.0))
-      &:hover
-        &::before
-          opacity: 1.0
-          z-index: -1
-        &::after
-          color: #fff
-    .visible.active
-      background: rgba(0,0,0,0.16)
-    .visible
+  width: 60px
+  height: 60px
+  &:hover
+    .user_info
+      +transform(scale(1))
+      +box-shadow(0 10px 10px -10px rgba(0,0,0,0.5))
+    .user_icon
+      background: #eee
 
+.user_icon
+  width: 60px
+  height: 60px
+  +display-flex-center
+  +transition(all 0.3s)
+  i
+    cursor: default
+    font-size: 26px
 
-// rails-admin sidebar navifation end
-// ----------------------------------
-
-
-.container-fluid
-  padding-right: 0px !important
-  .row
-    margin: 0 !important
-
-.sidebar-content
-  margin: 0 !important
-  width: 100%
-  box-sizing: border-box
-  padding: 10px 10px 10px 260px !important
-
-// ----------------------------------
-// ripple-effect style begin
-
-.ripple
-  overflow: hidden
-
-.ripple-effect
+.user_info
+  +transition(all 0.3s)
+  +transform(scale(0))
+  +box-shadow(0 0 0 0 rgba(0,0,0,0.5))
   position: absolute
-  border-radius: 50%
-  width: 50px
-  height: 50px
-  background: white
-  animation: ripple-animation 2s
+  display: block
+  transform-origin: top right
+  right: 0
+  background: #eee
+  list-style: none
+  margin: 0px
+  padding: 7px 10px
+  overflow: hidden
+  li
+    padding: 7px 15px
+    font-size: 14px
+    a
+      text-transform: none
+      text-decoration: none
+      +transition(all 0.3s)
+      &:before
+        display: inline-block
+        font-family: FontAwesome
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        box-sizing: border-box
+        margin-right: 7px
+      &:hover
+        color: #ff2b58
+  .user-logout-action
+    border-top: 1px solid rgba(170,170,170,0.5)
+    a
+      &:before
+        content: "\f011"
+  .user-edit-action
+    a
+      &:before
+        content: "\f040"
+  .user_email
+    text-transform: lowercase
+    text-align: center
+    margin-bottom: 7px
 
-@keyframes ripple-animation
-  from
-    transform: scale(1)
-    opacity: 0.4
 
-  to
-    transform: scale(100)
-    opacity: 0
-
-// ripple-effect style end
-// ----------------------------------
+//.sitemap_root_link
+//  box-sizing: border-box
+//  width: 50px
+//  overflow: inherit !important
+//  a
+//    color: #fff
+//    text-decoration: none
+//    height: 50px
+//    display: block
+//    width: 50px
+//    font-size: 0
+//    &::before
+//      display: inline-block
+//      font-family: FontAwesome
+//      font-size: 24px
+//      text-rendering: auto
+//      -webkit-font-smoothing: antialiased
+//      -moz-osx-font-smoothing: grayscale
+//      content: "\f277"
+//      box-sizing: border-box
+//      line-height: 50px
+//      color: #fff
+//    span
+//      display: inline-block
+//      height: 50px
+//      margin: 0
+//      padding: 0
+//      position: relative
+//      top: -4px
+//      color: #fff
+//      font-size: 14px
+//      font-weight: bold
+//
+//.sitemap_root_link
+//  &::after
+//    content: "Перегенерировать карту сайта"
+//    opacity: 0
+//    font-size: 11px
+//    height: 20px
+//    line-height: 20px
+//    position: absolute
+//    left: 0
+//    width: 170px
+//    color: #000
+//    border: 1px solid #000
+//    background: #fff
+//
+//.sitemap_root_link
+//  &:hover
+//    &::after
+//      opacity: 1
+//
 
 tr.rails_admin_settings_setting_row
   td.raw_field
     img
       max-width: 300px
+
+.nav-tabs > li
+  border-bottom: 1px solid #e4eaec
+
+.nav-tabs > li.dropdown
+  border-bottom: 1px solid #e4eaec
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:active, .nav-tabs > li.active > a:focus
+  color: #fff
+  background-color: #e53935
+  border: 0px solid #e4eaec
+  border-bottom: 0px solid #e4eaec
+  border-bottom-color: #e53935
+  cursor: default
+
+.nav-tabs > li.icon.active > a
+  color: #fff !important
+
+.nav-tabs > li > a, .nav-tabs > li.dropdown > a
+  border: 0px solid #e4eaec
+  &:hover, &:focus
+    background: #f3f7f9
+    border-bottom: 0px solid #e4eaec
+    color: #1f1f1f
+
+.nav-tabs > li.dropdown
+  &:before, &:after
+    content: ""
+    display: table
+  &:after
+    clear: both
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus
+  background-color: #e53935
+  border-color: #e53935
+
+li[rel="tooltip"] > a:hover, li[rel="tooltip"] > a:focus
+  color: #c73800
+  text-decoration: underline
+
+li[rel="tooltip"] > a
+  color: #e53935
+  text-decoration: none
+
+a
+  color: #1f1f1f
+  text-decoration: none
+  +transform(all 0.3s)
+  &:hover
+    text-decoration: none
+    color: #e53935
+
+.pagination > li > a
+  color: #1f1f1f
+  +transform(all 0.3s)
+
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus
+  color: #1f1f1f
+
+.btn-primary, .btn-info
+  color: #fff
+  background-color: #e53935
+  border-color: #db3a35
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle
+  color: #fff
+  background-color: #c73800
+  border-color: #bd3700
+
+.btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open > .btn-info.dropdown-toggle
+  color: #fff
+  background-color: #c73800
+  border-color: #bd3700
+
+#bulk_form
+  min-height: 20px
+  //background-color: #f5f5f5
+  border: 1px solid #e3e3e3
+  +border-radius(4px)
+  //+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.05))
+
+  thead
+    tr:first-child
+      padding: 6px 2px 6px 2px
+    tr
+      th
+        position: relative
+        vertical-align: middle
+        padding: 6px 30px 6px 4px
+        &:after
+          margin-left: 10px
+          margin-right: 10px
+          position: absolute
+          right: 0
+          top: 50%
+          margin-top: -2px
+      th:first-child
+        max-width: 40px
+  tbody
+    tr
+      td:first-child
+        padding: 6px 2px 6px 2px
+      td
+        position: relative
+        vertical-align: middle
+        text-align: center
+        padding: 3px 4px 3px 4px
+      td.other.right, td.last.links
+        padding: 6px 10px 6px 0px
+        max-width: 140px
+      .last.links
+        a
+          font-size: 16px
+      td.state_type
+        .label
+          margin-top: 10px
+          padding: 1px 5px
+          font-size: 12px
+          line-height: 1.5
+          border-radius: 3px
+          display: inline-block
+        .btn.btn-mini
+          margin-bottom: 10px !important
+        .btn.btn-mini.label-default
+          color: #fff
+      td:first-child
+        max-width: 40px
+
+.pagination
+  margin: 10px 0px 20px 20px
+
+.total-count
+  margin: 0px 20px 20px
+
+input, a
+  outline: none
+  &:focus
+    outline: none
+
+.show-all.btn
+  margin: 0px 20px 20px
+  outline: none
+  &:focus
+    outline: none
+
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group > .btn, .input-group-btn:first-child > .dropdown-toggle, .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child > .btn-group:not(:last-child) > .btn
+  height: auto
+  border-right: 0px
+
+.form-group
+  margin-bottom: 10px
+
+body.rails_admin .form-horizontal.denser legend
+  margin-bottom: 15px
+  +transform(all 0.3s)
+  &:hover
+    color: #e53935
+
+.btn-info.disabled, .btn-info.disabled:hover, .btn-info.disabled:focus, .btn-info.disabled:active, .btn-info.disabled.active, .btn-info[disabled], .btn-info[disabled]:hover, .btn-info[disabled]:focus, .btn-info[disabled]:active, .btn-info[disabled].active, fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active
+  background-color: #ef3b36
+  border-color: #e53a36
+
+body.rails_admin .form-horizontal .tab-content .tab-pane
+  border-left: 5px solid #e53935
+  position: relative
+  legend
+    display: none
+
+.label-info
+  background-color: #e53935
+
+.label-info[href]:hover, .label-info[href]:focus
+  background-color: #db3a35
+
+.dd-item img
+  margin: 10px
+
+#list .input-group .input-group-btn .btn.btn-info
+  height: auto
+
+.form-group.control-group.color_type.color_field
+  input
+    display: block
+    width: auto
+    height: 34px
+    padding: 6px 12px
+    font-size: 14px
+    line-height: 1.42857
+    color: #555555
+    background-color: #fff
+    background-image: none
+    border: 1px solid #ccc
+    +border-radius(4px)
+    +box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075))
+    +transform(border-color ease-in-out 0.15s box-shadow ease-in-out 0.15s)
+
+body.rails_admin .table td
+  max-width: 120px
