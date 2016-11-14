@@ -41,4 +41,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'kaminari'
 
   spec.add_dependency 'codemirror-rails'
+
+  spec.add_dependency 'scrollbar-rails'
 end

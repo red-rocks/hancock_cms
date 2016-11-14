@@ -125,3 +125,5 @@ module Hancock
 end
 
 require 'manual_slug'
+
+require 'scrollbar-rails'
