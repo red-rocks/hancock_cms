@@ -38,8 +38,12 @@ module Hancock
         include RailsAdminComments::ModelCommentable
       end
 
-      if Hancock.mongoid? && defined?(Trackable)
-        include Trackable
+      if Hancock.mongoid?
+        if defined?(TrackablePatch)
+          include TrackablePatch
+        elsif defined?(Trackable)
+          include Trackable
+        end
       end
 
       include Hancock::RailsAdminPatch
