@@ -4,7 +4,7 @@ module RailsAdmin
   module Config
     module Fields
       module Types
-        class HancockMultisect < RailsAdmin::Config::Fields::Types::HasManyAssociation
+        class HancockMultiselect < RailsAdmin::Config::Fields::Types::HasManyAssociation
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types.register(self)
 
@@ -29,9 +29,9 @@ module RailsAdmin
             false
           end
 
-          def method_name
-            "#{super.to_s.singularize}_ids".to_sym
-          end
+          # def method_name
+          #   "#{super.to_s.singularize}_ids".to_sym
+          # end
 
           # Reader for validation errors of the bound object
           def errors
