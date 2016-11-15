@@ -232,7 +232,8 @@ end
 TEXT
 end
 
-####### DEVISE ####
+
+####### DEVISE #######
 
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
@@ -264,6 +265,7 @@ Rails.application.routes.draw do
 end
 TEXT
 end
+
 
 ####### INITIALIZERS #######
 
@@ -507,6 +509,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 TEXT
 end
 end
+
 
 ###### HANCOCK OTHERS ######
 
