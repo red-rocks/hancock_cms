@@ -28,7 +28,7 @@
           = render "devise/shared/links"
         
       .actions
-        - if Hancock.config.registration_captcha
+        - if Hancock.config.registration_captcha and (!Rails.env.development? or Hancock.config.captcha_on_development)
           - if Hancock.config.recaptcha_support
             - unless @recaptcha_error.blank?
               h4.error= @recaptcha_error

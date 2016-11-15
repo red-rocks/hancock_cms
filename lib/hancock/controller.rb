@@ -2,7 +2,7 @@ module Hancock::Controller
   extend ActiveSupport::Concern
   included do
     include Hancock::Errors
-    include Hancock::Fancybox
+    # include Hancock::Fancybox
     if defined?(Hancock::Pages)
       include Hancock::Pages::SeoPages
       include Hancock::Pages::NavMenu

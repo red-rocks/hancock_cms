@@ -11,22 +11,6 @@ module Hancock
         if Hancock.config.localize
           include Hancock::ModelLocalizeable
         end
-
-        _collection_name = collection_name.to_s
-        if _collection_name =~ /^hancock_/
-          enjoy_collection_name = _collection_name.sub(/^hancock_/, 'enjoy_')
-          if Mongoid.client('default').collections.map(&:name).include?(enjoy_collection_name)
-            modules = []
-            self.name.sub("Hancock", "Enjoy").split("::").each do |mod|
-              modules << mod
-              eval("::#{modules.join("::")} ||= #{modules.join("::").sub("Enjoy", "Hancock")}")
-            end
-            store_in collection: enjoy_collection_name
-          end
-        end
-
-        def self.goto_hancock
-        end
       end
 
       include ActiveModel::ForbiddenAttributesProtection
@@ -38,8 +22,12 @@ module Hancock
         include RailsAdminComments::ModelCommentable
       end
 
-      if Hancock.mongoid? && defined?(Trackable)
-        include Trackable
+      if Hancock.mongoid?
+        if defined?(TrackablePatch)
+          include TrackablePatch
+        elsif defined?(Trackable)
+          include Trackable
+        end
       end
 
       include Hancock::RailsAdminPatch

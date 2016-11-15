@@ -28,9 +28,10 @@ require 'hancock/rails_admin_ext/config'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
+require 'hancock/rails_admin_ext/hancock_multiselect'
 
 require 'hancock/rails_admin_ext/patches/field_patch'
-require 'hancock/rails_admin_ext/patches/field_patch'
+require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
 require 'hancock/rails_admin_ext/patches/hancock_cms_group'
 
@@ -63,21 +64,16 @@ module Hancock
   class << self
 
     def rails4?
-      true
-    end
-
-    def rails5?
       false
     end
 
+    def rails5?
+      true
+    end
+
+
     def register_model(model)
       Hancock::MODELS << model unless Hancock::MODELS.include?(model)
-    end
-    def models_goto_hancock
-      MODELS.map { |m|
-        puts m.name
-        m.goto_hancock
-      }
     end
     def register_plugin(plugin)
       Hancock::PLUGINS << plugin unless Hancock::MODELS.include?(plugin)
@@ -125,3 +121,5 @@ module Hancock
 end
 
 require 'manual_slug'
+
+require 'scrollbar-rails'

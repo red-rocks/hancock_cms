@@ -13,8 +13,8 @@ module Hancock::Cms
 
     def install
       #namespace = ask_for('Where do you want to mount rails_admin?', 'admin', _namespace)
-      namespace = 'admin'
-      route("mount RailsAdmin::Engine => '/#{namespace}', as: 'rails_admin'")
+      # namespace = 'admin'
+      # route("mount RailsAdmin::Engine => '/#{namespace}', as: 'rails_admin'")
       template 'admin.erb', 'config/initializers/rails_admin.rb'
     end
   end

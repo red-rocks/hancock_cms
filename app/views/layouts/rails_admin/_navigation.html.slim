@@ -1,16 +1,59 @@
-.app-header.fixed
-  .app-header-inner
-    .brand-title
-      h2 = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
-        span = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze
-    
-    .top-nav-left
-      .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
-        - plugin_name = _get_plugin_name[0] || 'Rails'
-        span = "Административная панель: #{plugin_name}".freeze
-    / 
-    .top-nav-right
-      = render partial: "layouts/rails_admin/secondary_navigation"
+/.logo-block
+/  = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
+/    = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
+/
+/.top-nav
+/  .left-nav
+/    .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
+/      - plugin_name = _get_plugin_name[0] || 'Rails'
+/      span = "Административная панель: #{plugin_name}".freeze
+/  .right-nav
+/    = render partial: "layouts/rails_admin/secondary_navigation"
+
+
+.navbar-header-brand
+  = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
+    = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
+
+.navbar-container.container-fluid
+  .plugin-name-panel
+    - plugin_name = _get_plugin_name[0] || 'Rails'
+    = "Административная панель:"
+    span = link_to "#{plugin_name}".freeze, dashboard_path, title: "#{plugin_name}".freeze, class: "plugin-name-class"
+
+  .user-panel
+    - if _current_user
+      - if user_link = edit_user_link
+        .current_user
+          .user_icon
+            i.fa.fa-user-circle-o
+          ul.user_info
+            li.user_email = _current_user.email
+            li.user-edit-action
+              - abstract_model = RailsAdmin.config(_current_user.class).abstract_model
+              - edit_action = RailsAdmin::Config::Actions.find(:edit, controller: controller, abstract_model: abstract_model, object: _current_user).try(:authorized?)
+              = link_to rails_admin.url_for(action: :edit, model_name: abstract_model.to_param, id: _current_user.id, controller: 'rails_admin/main')
+                span Редактировать профиль
+            li.user-logout-action
+              = link_to logout_path, title: "Выйти".freeze, method: logout_method
+                span Выйти
+
+        /.user_root_link = edit_user_link
+
+
+/.app-header.fixed
+/  .app-header-inner
+/    .brand-title
+/      h2 = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
+/        span = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze
+/
+/    .top-nav-left
+/      .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
+/        - plugin_name = _get_plugin_name[0] || 'Rails'
+/        span = "Административная панель: #{plugin_name}".freeze
+/    /
+/    .top-nav-right
+/      = render partial: "layouts/rails_admin/secondary_navigation"
       / ul.nav.navbar-nav.root_links
         / - actions(:root).each do |action|
         /   / li.top-nav-control-panel = link_to "", { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : ""

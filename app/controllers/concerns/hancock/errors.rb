@@ -33,7 +33,11 @@ module Hancock::Errors
           #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
           authenticate_user!
         else
-          redirect_to '/', alert: t('hancock.errors.access_denied')
+          if rails_admin? and can?(:access, :rails_admin)
+            redirect_to dashboard_path
+          else
+            redirect_to main_app.root_path, alert: t('hancock.errors.access_denied')
+          end
         end
       end
     end

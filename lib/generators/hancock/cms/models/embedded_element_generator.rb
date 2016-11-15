@@ -2,6 +2,7 @@ require 'rails/generators'
 
 module Hancock::Cms
   module Models
+
     class EmbeddedElementGenerator < Rails::Generators::Base
       source_root File.expand_path('../templates', __FILE__)
       argument :class_name_arg, type: :string, default: ""
@@ -49,7 +50,7 @@ module Hancock::Cms
       def parent_class_name
         parent_class_name_arg.blank? ? "SetParentClassForEmbeddedElement" : parent_class_name_arg
       end
-
     end
+    
   end
 end

@@ -25,6 +25,8 @@ module Hancock
     attr_accessor :recaptcha_support
     attr_accessor :simple_captcha_support
 
+    attr_accessor :captcha_on_development
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -40,6 +42,7 @@ module Hancock
       @admin_enter_captcha = @recaptcha_support or @simple_captcha_support
       @registration_captcha = @admin_enter_captcha
 
+      @captcha_on_development = false
     end
   end
 end

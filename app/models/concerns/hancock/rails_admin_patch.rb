@@ -75,11 +75,11 @@ module Hancock::RailsAdminPatch
     def rails_admin_add_visible_actions
       [].freeze
     end
-    def rails_admin_user_defuned_visible_actions
+    def rails_admin_user_defined_visible_actions
       [].freeze
     end
     def rails_admin_visible_actions
-      (rails_admin_default_visible_actions + rails_admin_add_visible_actions).uniq.freeze
+      (rails_admin_default_visible_actions + rails_admin_add_visible_actions + rails_admin_user_defined_visible_actions).uniq.freeze
     end
 
   end
