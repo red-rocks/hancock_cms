@@ -30,17 +30,45 @@ gem 'compass-rails'
 
 gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'rails_admin', '>= 1.0.0.rc'
-# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/ack/www/redrocks/hancock"
+
+# # gem 'rails_admin_multiple_file_upload'
+# gem 'rails_admin_multiple_file_upload', github: "red-rocks/rails_admin_multiple_file_upload"
+# # gem 'rails_admin_multiple_file_upload', path: "/home/ack/www/rails_admin/rails_admin_multiple_file_upload"
+#
+# # gem 'rails_admin_user_abilities'
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# # gem 'rails_admin_user_abilities', path: "/home/ack/www/rails_admin/rails_admin_user_abilities"
+#
+# # gem 'rails_admin_model_settings'
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# # gem 'rails_admin_model_settings', path: "/home/ack/www/rails_admin/rails_admin_model_settings"
+#
+# # gem 'ack_rails_admin_settings'
+# gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
+# # gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_settings"
+#
+# # gem 'rails_admin_comments'
+# gem 'rails_admin_comments', github: "red-rocks/rails_admin_comments"
+# # gem 'rails_admin_comments', path: "/home/ack/www/rails_admin/rails_admin_comments"
+#
+# # gem 'ack_rails_admin_jcrop'
+# gem 'ack_rails_admin_jcrop', github: "red-rocks/rails_admin_jcrop"
+# # gem 'ack_rails_admin_jcrop', path: "/home/ack/www/rails_admin/rails_admin_jcrop"
 
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
 # gem "paperclip-optimizer"
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-# gem 'rails_admin_multiple_file_upload'
-# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/ack/www/redrocks/hancock"
+
+# gem "sitemap_generator"
+# gem 'rails_admin_sitemap'
+
+# gem 'recaptcha', require: 'recaptcha/rails' #temp
+# gem 'glebtv-simple_captcha'
 
 gem 'devise'
 
