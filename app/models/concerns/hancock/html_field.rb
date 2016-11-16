@@ -29,5 +29,6 @@ if Hancock.mongoid?
         EVAL
       end
     end
+    
   end
 end
