@@ -3,8 +3,11 @@ module Hancock
     module EmbeddedElement
       def self.config(nav_label = nil, fields = {})
         if nav_label.is_a?(Hash)
+          nav_label, fields = nav_label[:nav_label], nav_label
+        elsif nav_label.is_a?(Array)
           nav_label, fields = nil, nav_label
         end
+
         Proc.new {
           navigation_label(nav_label || I18n.t('hancock.cms'))
           field :enabled, :toggle do

@@ -4,7 +4,7 @@ module Hancock
       module EmbeddedElement
         extend ActiveSupport::Concern
 
-        include Mongoid::EmbeddedFindable
+        include Hancock::EmbeddedFindable
 
         included do
           field :name, type: String, localize: Hancock.configuration.localize, default: ""
