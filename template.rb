@@ -34,13 +34,15 @@ gem 'compass-rails'
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 # gem 'rails_admin_multiple_file_upload'
+gem 'rails_admin_user_abilities', '~> 0.1.0'
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+gem 'rails_admin_model_settings', '~> 0.2.1'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
-
 
 #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails4'
 
-gem 'devise'
+# gem 'recaptcha', require: 'recaptcha/rails'
+# gem 'glebtv-simple_captcha'
 
 gem 'slim-rails'
 gem 'rs_russian'
@@ -69,7 +71,8 @@ group :development do
   # gem 'coffee-rails-source-maps'
   # gem 'compass-rails-source-maps'
 
-  gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
+  gem 'ack_favicon_maker_rails', '~> 1.0.1'
+  # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
   # gem 'rails_email_preview', '~> 1.0.3'
 

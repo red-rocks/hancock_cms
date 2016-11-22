@@ -1,5 +1,6 @@
 module Hancock::Errors
   extend ActiveSupport::Concern
+
   included do
     if Rails.env.production? || Rails.env.staging? || (respond_to?(:hancock_check_errors) and hancock_check_errors)
       rescue_from Exception, with: :render_500
@@ -90,5 +91,5 @@ module Hancock::Errors
   def render_error(code = 500)
     render template: "hancock/errors/error_#{code}", formats: [:html], handlers: [:slim], layout: Hancock.config.error_layout, status: code
   end
-  
+
 end
