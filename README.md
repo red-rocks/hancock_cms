@@ -71,7 +71,10 @@ Then, for mongoid:
 for ActiveRecord:
 
     rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/template.rb
+
 Generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+
+
 ### RAILS 4: Using app generator
 Make sure you have rails 4.2 installed
 
@@ -89,6 +92,7 @@ Then, for mongoid:
 for ActiveRecord:
 
     rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+
 Generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
 
 ### Localization

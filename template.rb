@@ -49,8 +49,6 @@ gem 'rails_admin_model_settings', '~> 0.3.0'
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'devise'
-
 gem 'slim-rails'
 gem 'rs_russian'
 gem 'cancancan'
@@ -73,7 +71,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
+  gem 'ack_favicon_maker_rails', '~> 1.0.1'
+  # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
   # gem 'rails_email_preview', '~> 1.0.3'
 
@@ -117,9 +116,11 @@ end
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.4.0-preview1"
+
+RVM_RUBY_VERSION = "2.3.1"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
+
 # run "rvm use #{RVM_RUBY_VERSION} && rvm gemset create #{app_name}"
 # run "rvm use #{RVM_RUBY_VERSION}@#{app_name} && gem install bundler"
 # run "rvm gemset list"
