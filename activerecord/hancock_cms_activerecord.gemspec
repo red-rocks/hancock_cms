@@ -35,5 +35,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'activerecord-session_store'
 
-  spec.add_dependency 'kaminari'
+  spec.add_dependency 'kaminari-activerecord'
 end

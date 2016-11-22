@@ -1,10 +1,10 @@
 if defined?(Mongoid)
 
-  module Mongoid
+  module Hancock
 
     # Helps to override find method in an embedded document.
     # Usage :
-    #   - add to your model "include Mongoid::EmbeddedFindable"
+    #   - add to your model "include Hancock::EmbeddedFindable"
     #   - override find method with:
     #     def self.find(id)
     #       find_through(Book, 'chapter', id)
