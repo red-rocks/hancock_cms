@@ -49,8 +49,6 @@ gem 'rails_admin_model_settings', '~> 0.3.0'
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'devise'
-
 gem 'slim-rails'
 gem 'rs_russian'
 gem 'cancancan'
@@ -73,7 +71,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
+  gem 'ack_favicon_maker_rails', '~> 1.0.1'
+  # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
   # gem 'rails_email_preview', '~> 1.0.3'
 
