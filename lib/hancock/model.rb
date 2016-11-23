@@ -22,11 +22,13 @@ module Hancock
         include RailsAdminComments::ModelCommentable
       end
 
-      if Hancock.mongoid?
-        if defined?(TrackablePatch)
-          include TrackablePatch
-        elsif defined?(Trackable)
-          include Trackable
+      if Hancock.config.history_tracking
+        if Hancock.mongoid?
+          if defined?(TrackablePatch)
+            include TrackablePatch
+          elsif defined?(Trackable)
+            include Trackable
+          end
         end
       end
 
