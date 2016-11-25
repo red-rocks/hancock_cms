@@ -1,4 +1,4 @@
-module Hancock::Errors
+module Hancock::CurrentUser
   extend ActiveSupport::Concern
 
   included do
