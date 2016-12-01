@@ -8,7 +8,8 @@
   overflow: auto
   white-space: nowrap
   text-align: center
-
+  font-family: "Verdana", SansSerif
+  font-weight: normal
   &:before
     height: 100%
     display: inline-block
@@ -21,9 +22,7 @@
   vertical-align: middle
   text-align: left
   background: #fff
-  webkit-box-shadow:  0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
-  -moz-box-shadow:  0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
-  box-shadow:  0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)
+  +box-shadow(0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19))
   min-width: 400px
 
   .white-box
@@ -62,36 +61,30 @@
         .form-control
           background-image: linear-gradient(#9675ce, #9675ce), linear-gradient(rgba(120, 130, 140, 0.13), rgba(120, 130, 140, 0.13))
           border: 0 none
-          border-radius: 0
-          box-shadow: none
+          +border-radius(0)
+          +box-shadow(none)
           background-color: rgba(0, 0, 0, 0)
           background-position: center bottom, center calc(99%)
           background-repeat: no-repeat
           background-size: 0 2px, 100% 1px
           background-color: #ffffff
-          box-shadow: none
           color: #565656
           height: 38px
           width: 100%
           padding: 7px 12px
-          transition: all 300ms linear 0s
+          +transition(all 300ms linear 0s)
           display: block
           font-size: 14px
           line-height: 1.42857143
-          -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s
-          -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
-          transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+          +transition(border-color ease-in-out .15s,box-shadow ease-in-out .15s)
           input
             width: 100%
-            height: 100%
 
         .link-to-recover
           float: right
           padding-right: 10px
           a
-            -webkit-transition: color ease-in-out .15s
-            -o-transition: color ease-in-out .15s
-            transition: color ease-in-out .15s
+            +transition(color ease-in-out .15s)
             color: #333C44
             &:hover
               color: #EF5350
@@ -123,9 +116,7 @@
             cursor: pointer
             max-width: 100%
             color: #333C44
-            -webkit-transition: color ease-in-out .15s
-            -o-transition: color ease-in-out .15s
-            transition: color ease-in-out .15s
+            +transition(color ease-in-out .15s)
           &:hover
             label
               color: #EF5350
@@ -145,9 +136,7 @@
           padding: 10px 16px
           font-size: 18px
           line-height: 1.3333333
-          -webkit-transition: all ease-in-out .15s
-          -o-transition: all ease-in-out .15s
-          transition: all ease-in-out .15s
+          +transition(all ease-in-out .15s)
           &:hover
             background: rgba(#ee5350, 0.8)
             border: 1px solid rgba(#ee5350, 0.8)
@@ -157,7 +146,6 @@
         margin-top: 25px
 
 .devise-box .white-box form .form-group .form-control
-  height: auto
   padding: 0
   input
     position: relative
