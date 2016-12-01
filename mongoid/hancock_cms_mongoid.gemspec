@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.version       = Hancock::VERSION
   spec.authors       = ['Alexander Kiseliev']
   spec.email         = ["dev@redrocks.pro"]
-  
+
   spec.description   = %q{HancockCMS - Mongoid metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/red-rocks/hancock_cms'
@@ -40,5 +40,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'kaminari-mongoid'
 
-  spec.add_dependency 'glebtv_mongoid_userstamp', '0.6.0'
+  spec.add_dependency 'glebtv_mongoid_userstamp', '~> 0.6'
 end
