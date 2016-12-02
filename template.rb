@@ -233,6 +233,7 @@ end
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
+
 Rails.application.config.to_prepare do
   Devise::SessionsController.layout       "hancock/devise/sessions"
   Devise::RegistrationsController.layout  "hancock/devise/registrations"
@@ -254,7 +255,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'hancock/sessions'}
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  mount Ckeditor::Engine => '/ckeditor'
 
   hancock_cms_routes
 end
