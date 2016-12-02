@@ -28,8 +28,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'compass'
 gem 'compass-rails'
 
-gem 'remotipart', github: 'mshibuya/remotipart'
-gem 'rails_admin', '>= 1.0.0.rc'
+gem 'rails_admin', '~> 1.1'
 
 
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
@@ -104,8 +103,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
-
-gem 'glebtv_mongoid_userstamp', '0.7.0'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -247,6 +244,7 @@ end
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
+
 Rails.application.config.to_prepare do
   Devise::SessionsController.layout       "hancock/devise/sessions"
   Devise::RegistrationsController.layout  "hancock/devise/registrations"
