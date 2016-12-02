@@ -100,8 +100,6 @@ gem 'uglifier'
 group :production do
   gem "god"
 end
-
-gem 'glebtv_mongoid_userstamp', '0.6.0'
 TEXT
 end
 
