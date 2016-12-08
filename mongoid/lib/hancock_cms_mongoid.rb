@@ -6,7 +6,7 @@ require 'mongoid-audit'
 # require 'trackable_patch'
 
 require 'mongoid_slug'
-require 'mongo_session_store-rails4'
+require 'mongo_session_store-rails5'
 
 require 'kaminari'
 
