@@ -11,7 +11,7 @@ module Mongoid
 
           field options[:version_field].to_sym, type: Integer
 
-          belongs_to_modifier_options = { class_name: Mongoid::History.modifier_class_name, required: false }
+          belongs_to_modifier_options = { class_name: Mongoid::History.modifier_class_name, required: false, optional: true, autosave: false }
           belongs_to_modifier_options[:inverse_of] = options[:modifier_field_inverse_of] if options.key?(:modifier_field_inverse_of)
           belongs_to options[:modifier_field].to_sym, belongs_to_modifier_options
 
@@ -36,11 +36,13 @@ end
 module HistoryTrackerPatch
   extend ActiveSupport::Concern
   included do
-    _validators[:modifier].select! do |v|
-      !v.is_a?( Mongoid::Validatable::PresenceValidator)
+    [:modifier, :modifier_id].each do |f|
+      _validators[f].select! do |v|
+        !v.is_a?( Mongoid::Validatable::PresenceValidator)
+      end
+      _validators.delete(f) if _validators[f].blank?
     end
-    _validators.delete(:modifier) if _validators[:modifier].blank?
-    belongs_to :modifier, class_name: Mongoid::History.modifier_class_name, required: false, optional: true, autosave: false
+    belongs_to :modifier, class_name: Mongoid::History.modifier_class_name, required: false, optional: true, autosave: false, overwrite: true
   end
 end
 

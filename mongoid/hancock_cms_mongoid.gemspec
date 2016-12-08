@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.version       = Hancock::VERSION
   spec.authors       = ['Alexander Kiseliev']
   spec.email         = ["dev@redrocks.pro"]
+
   spec.description   = %q{HancockCMS - Mongoid metapackage}
   spec.summary       = %q{}
   spec.homepage      = 'https://github.com/red-rocks/hancock_cms'

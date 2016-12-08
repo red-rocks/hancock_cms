@@ -27,6 +27,8 @@ module Hancock
 
     attr_accessor :captcha_on_development
 
+    attr_accessor :history_tracking
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -43,6 +45,8 @@ module Hancock
       @registration_captcha = @admin_enter_captcha
 
       @captcha_on_development = false
+
+      @history_tracking = false 
     end
   end
 end

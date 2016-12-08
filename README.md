@@ -66,13 +66,17 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
-Generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+generator creates a new RVM gemset, runs `bundle install` and setup some files (assets, config/initializers/*, routes, etc).
 
 
 ### RAILS 4: Using app generator
@@ -87,42 +91,66 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
-Generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+generator creates a new RVM gemset, runs `bundle install` and setup some files (assets, config/initializers/*, routes, etc).
 
 ### Localization
+
 All models included in the gem support localization via either [hstore_translate](https://github.com/Leadformance/hstore_translate) or built-in Mongoid localize: true option.
+
 You can get a nice admin UI for editing locales by adding [rails_admin_hstore_translate](https://github.com/glebtv/rails_admin_hstore_translate) or [rails_admin_mongoid_localize_field](https://github.com/sudosu/rails_admin_mongoid_localize_field)
+
+<!-- Wrap your routes with locale scope:
+```ruby
+scope "(:locale)", locale: /en|ru/ do
+  hancock_cms_routes
+end
+``` -->
+
 Enable localization in HancockCMS:
+
 ```ruby
 Hancock.configure do |hancock|
   hancock.localize = true
   ...
 end
 ```
+
 Add ```rails_admin_hstore_translate``` or ```hstore_translate``` gem if using PostgreSQL:
+
 ```ruby
 gem 'rails_admin_hstore_translate'
 ```
+
 or
+
 ```ruby
 gem 'hstore_translate'
 ```
+
 Add ```rails_admin_mongoid_localize_field``` gem if using MongoDB:
+
 ```ruby
 gem 'rails_admin_mongoid_localize_field'
 ```
 
 ### Documentation
+
 It's basically Mongoid + Rails Admin + some of my common models and controllers, etc.
+
 See their documentation for more info
 
 ## Contributing
+
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
