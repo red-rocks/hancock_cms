@@ -52,13 +52,17 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails5/template.rb
+    cd my_app
+    rails g hancock:cms:setup
 
-generator creates a new RVM gemset, so after cd'ing to app dir, you should run `bundle install` again if you use rvm.
+generator creates a new RVM gemset, runs `bundle install` and setup some files (assets, config/initializers/*, routes, etc).
 
 ### Localization
 

@@ -46,7 +46,7 @@ module Hancock
 
       @captcha_on_development = false
 
-      @history_tracking = true
+      @history_tracking = false 
     end
   end
 end
