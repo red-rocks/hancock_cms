@@ -81,7 +81,7 @@ module Hancock
       }
     end
     def register_plugin(plugin)
-      Hancock::PLUGINS << plugin unless Hancock::MODELS.include?(plugin)
+      Hancock::PLUGINS << plugin unless Hancock::PLUGINS.include?(plugin)
     end
 
     def clear_history_from_empty_objects
