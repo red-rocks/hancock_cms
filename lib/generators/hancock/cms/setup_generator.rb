@@ -100,6 +100,7 @@ remove_file 'config/initializers/session_store.rb'
 if mongoid
 create_file 'config/initializers/session_store.rb' do  <<-TEXT
 # Be sure to restart your server when you modify this file.
+
 #Rails.application.config.session_store :cookie_store, key: '_#{app_name.tableize.singularize}_session'
 Rails.application.config.session_store :mongoid_store
 TEXT
@@ -108,6 +109,7 @@ else
 generate 'active_record_store:session_migration'
 create_file 'config/initializers/session_store.rb' do  <<-TEXT
 # Be sure to restart your server when you modify this file.
+
 #Rails.application.config.session_store :cookie_store, key: '_#{app_name.tableize.singularize}_session'
 Rails.application.config.session_store :active_record_store
 TEXT
@@ -146,7 +148,9 @@ include Hancock::Model
   def manager_cannot_actions
     [:new, :create, :delete, :destroy]
   end
+
   cattr_accessor :current_user
+
   # Include default devise modules. Others available are:
   # :confirmable,  :lockable, :timeoutable and :omniauthable
 TEXT
@@ -159,22 +163,28 @@ gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
 gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
 
 inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
+
   field :name,    type: String
   field :login,   type: String
   field :roles,   type: Array, default: []
+
   before_save do
     self.roles ||= []
     self.roles.reject! { |r| r.blank? }
   end
+
   AVAILABLE_ROLES = ["admin", "manager", "client"]
+
   AVAILABLE_ROLES.each do |r|
     class_eval <<-EVAL
       def \#{r}?
         self.roles and self.roles.include?("\#{r}")
       end
+
       scope :\#{r.pluralize}, -> { any_in(roles: "\#{r}") }
     EVAL
   end
+
   def self.generate_first_admin_user
     if ::User.admins.all.count == 0
       _email_pass = 'admin@#{app_name.dasherize.downcase}.ru'
@@ -187,6 +197,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
       puts 'AdminUsers are here already'
     end
   end
+
   def self.generate_first_manager_user
     if ::User.managers.all.count == 0
       _email_pass = 'manager@#{app_name.dasherize.downcase}.ru'
@@ -199,6 +210,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
       puts 'ManagerUsers are here already'
     end
   end
+
   rails_admin do
     list do
       field :email
@@ -211,6 +223,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
         end
       end
     end
+
     edit do
       group :login do
         active false
@@ -228,21 +241,25 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
           end
         end
       end
+
       group :roles do
         active false
         field :roles, :enum do
           enum do
             AVAILABLE_ROLES
           end
+
           multiple do
             true
           end
+
           visible do
             render_object = (bindings[:controller] || bindings[:view])
             render_object and render_object.current_user.admin?
           end
         end
       end
+
       group :password do
         active false
         field :password do
@@ -259,6 +276,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
         end
       end
     end
+
   end
 TEXT
 end
@@ -315,6 +333,7 @@ create_file '.gitignore' do <<-TEXT
 #   git config --global core.excludesfile '~/.gitignore_global'
 .idea
 .idea/*
+
 /.bundle
 /log/*.log
 /tmp/*
