@@ -106,7 +106,7 @@ gem 'glebtv_mongoid_userstamp', '0.6.2'
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.3.1"
+RVM_RUBY_VERSION = "2.3.3"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
 
