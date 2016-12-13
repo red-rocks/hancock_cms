@@ -42,8 +42,7 @@ gem 'rails_admin_user_abilities', '~> 0.2.0'
 gem 'rails_admin_model_settings', '~> 0.3.0'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
-# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/ack/www/redrocks/hancock"
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms'
 
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
