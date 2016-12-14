@@ -6,19 +6,26 @@ html lang="ru"
     title= yield(:title) || page_title
     = yield :meta
     = csrf_meta_tags
-    = render partial: 'blocks/favicon'
+    - cache 'favicons', skip_digest: true do
+      = render partial: 'blocks/favicon'
 
     - async = false #Rails.env.production?
     = stylesheet_link_tag "application", media: "all", async: async
     = javascript_include_tag "application", async: async
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async
-    css:
-      #{Settings.custom_css(default: '', kind: :css, label: "Дополнительный CSS")}
-    javascript:
-      #{Settings.custom_js(default: '', kind: :js, label: "Дополнительный JS")}
+    - cache 'layouts/application/custom_head', skip_digest: true do
+      - _cache_key = ['views/layouts/application/custom_head']
+      css:
+        #{Settings.ns('application_layout').custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_key)}
+      javascript:
+        #{Settings.ns('application_layout').custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_key)}
 
-  body{class="#{controller_name} #{action_name} #{controller_name}_#{action_name}"}
+  body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
+
+    - cache 'preloader', skip_digest: true do
+      = render partial: 'blocks/preloader'
+      
     #root role="main"
     
       header#header
