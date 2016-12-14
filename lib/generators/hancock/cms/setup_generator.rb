@@ -24,15 +24,15 @@ TEXT
 end
 
 generate "devise", "User"
+
+
 ####### ROUTES #######
 
 remove_file 'config/routes.rb'
 create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'hancock/sessions'}
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
   hancock_cms_routes
 end
 TEXT
