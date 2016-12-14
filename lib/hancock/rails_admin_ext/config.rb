@@ -40,6 +40,16 @@ module Hancock
 
       action_unvisible_for(:custom_show_in_app, Proc.new { false })
       action_visible_for(:model_settings, Proc.new { false })
+
+      if defined?(RailsAdminNestedSet)
+        action_visible_for(:nested_set, Proc.new { false })
+      end
+
+      if defined?(RailsAdminMultipleFileUpload)
+        action_visible_for(:multiple_file_upload, Proc.new { false })
+        action_visible_for(:multiple_file_upload_collection, Proc.new { false })
+      end
+
     end
 
     def add_action(action_name)
@@ -81,7 +91,7 @@ module Hancock
     def actions_config(rails_admin_actions)
 
       @actions_list.each do |action|
-        if rails_admin_actions.respond_to?(action)
+        if rails_admin_actions.respond_to?(action) and !RailsAdmin::Config::Actions.all.map { |a| a.class.name.demodulize.underscore }.include?(action.to_s)
           rails_admin_actions.send(action) do
             visible do
               if !bindings or bindings[:abstract_model].blank?

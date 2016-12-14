@@ -145,9 +145,17 @@ include Hancock::Model
   def self.manager_can_default_actions
     [:show, :read]
   end
-  def manager_cannot_actions
+  def self.manager_cannot_actions
     [:new, :create, :delete, :destroy]
   end
+
+  ######################### RailsAdminUserAbilities #########################
+  # def self.rails_admin_user_defined_visible_actions
+  #   [:user_abilities]
+  # end
+  # has_one :ability, class_name: "RailsAdminUserAbilities::UserAbility", as: :rails_admin_user_abilitable
+  # scope :for_rails_admin, -> { where(:roles.in => ['admin', 'manager']) } # could be any you want, just need to
+  ###########################################################################
 
   cattr_accessor :current_user
 
