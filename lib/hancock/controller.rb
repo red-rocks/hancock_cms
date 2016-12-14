@@ -3,7 +3,7 @@ module Hancock::Controller
   included do
     include Hancock::Errors
     include Hancock::Fancybox
-    if !!defined?(Hancock::Pages)
+    if defined?(Hancock::Pages)
       include Hancock::Pages::SeoPages
       include Hancock::Pages::NavMenu
       include Hancock::Pages::Blocksetable
