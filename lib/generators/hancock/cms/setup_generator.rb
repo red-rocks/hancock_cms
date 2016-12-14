@@ -352,7 +352,7 @@ git commit: %Q{ -m 'Initial commit' }
     end
 
     def mongoid
-      defined? Mongoid
+      !!defined? Mongoid
     end
 
     def app_name
