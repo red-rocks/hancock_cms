@@ -6,8 +6,9 @@ html lang="ru"
     title= yield(:title) || page_title
     = yield :meta
     = csrf_meta_tags
-    - cache 'favicons', skip_digest: true do
-      = render partial: 'blocks/favicon'
+    
+    / - cache 'favicons', skip_digest: true do
+    /   = render partial: 'blocks/favicon'
 
     - async = false #Rails.env.production?
     = stylesheet_link_tag "application", media: "all", async: async
