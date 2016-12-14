@@ -33,7 +33,7 @@ module Hancock
       include Hancock::BooleanField
       include Hancock::SortField
 
-      if Hancock.mongoid? and defined?(RailsAdminComments)
+      if Hancock.mongoid? and !!defined?(RailsAdminComments)
         include RailsAdminComments::Commentable
         include RailsAdminComments::ModelCommentable
       end
