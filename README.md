@@ -1,5 +1,7 @@
 # HancockCMS
 
+#### Rails 4 support
+
 #### Inspired by [RocketCMS](https://github.com/rs-pro/rocket_cms)
 ### Remaded from [EnjoyCMS](https://github.com/enjoycreative/enjoy_cms)
 
