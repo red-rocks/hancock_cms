@@ -185,7 +185,11 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
     if ::User.admins.all.count == 0
       _email_pass = 'admin@#{app_name.dasherize.downcase}.ru'
       if ::User.new(roles: ["admin"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass).save
+        puts "#################################################################################"
+        puts "#################################################################################"
         puts "AdminUser with email and password '\#{_email_pass}' was created!"
+        puts "#################################################################################"
+        puts "#################################################################################"
       else
         puts 'Creating AdminUser error'
       end

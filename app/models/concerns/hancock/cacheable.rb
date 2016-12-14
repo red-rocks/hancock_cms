@@ -28,6 +28,7 @@ if Hancock.mongoid?
         self.set_default_cache_keys(strategy) and self.save
       end
 
+
       def cache_keys
         cache_keys_str.split(/\s+/).map { |k| k.strip }.reject { |k| k.blank? }
       end
