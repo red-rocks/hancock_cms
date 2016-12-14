@@ -29,7 +29,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hancock_cms -v 2.0.0
+    $ gem install hancock_cms -v 2.0
 
 For activerecord, generate migrations and run them
 
@@ -48,7 +48,7 @@ Make sure you have rails 5.0 installed
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install rails -v 5.0.0
+    gem install rails -v 5.0
 
 Then, for mongoid:
 
