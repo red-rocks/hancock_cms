@@ -11,6 +11,22 @@ if Hancock.mongoid?
       def default_cache_keys
         self.class.default_cache_keys
       end
+      def set_default_cache_keys(strategy = :append)
+        _old_keys = cache_keys
+
+        _keys = case strategy.to_sym
+        when :append
+          (_old_keys + default_cache_keys).uniq
+        when :overwrite, :replace
+          default_cache_keys
+        else
+          _old_keys
+        end
+        self
+      end
+      def set_default_cache_keys!(strategy = :append)
+        self.set_default_cache_keys(strategy) and self.save
+      end
 
       def cache_keys
         cache_keys_str.split(/\s+/).map { |k| k.strip }.reject { |k| k.blank? }
