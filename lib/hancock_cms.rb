@@ -25,6 +25,7 @@ require 'codemirror-rails'
 require 'rails_admin'
 require 'hancock/rails_admin_ext/config'
 
+require 'hancock/rails_admin_ext/hancock_enum'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
@@ -40,6 +41,7 @@ require 'rails_admin_nested_set'
 require 'rails_admin_toggleable'
 
 require 'ack_rails_admin_settings'
+require 'hancock/rails_admin_settings_patch'
 
 # require 'x-real-ip'
 

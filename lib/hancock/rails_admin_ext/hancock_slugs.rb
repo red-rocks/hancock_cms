@@ -1,10 +1,10 @@
-require 'rails_admin/config/fields/types/enum'
+require 'hancock/rails_admin_ext/hancock_enum'
 
 module RailsAdmin
   module Config
     module Fields
       module Types
-        class HancockSlugs < RailsAdmin::Config::Fields::Types::Enum
+        class HancockSlugs < RailsAdmin::Config::Fields::Types::HancockEnum
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types::register(self)
 
