@@ -177,7 +177,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
     self.roles.reject! { |r| r.blank? }
   end
 
-  AVAILABLE_ROLES = ["admin", "manager", "client"]
+  AVAILABLE_ROLES = ["admin", "manager", "client"].freeze
 
   AVAILABLE_ROLES.each do |r|
     class_eval <<-EVAL
@@ -252,9 +252,9 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 
       group :roles do
         active false
-        field :roles, :enum do
+        field :roles, :hancock_enum do
           enum do
-            AVAILABLE_ROLES
+            ::User::AVAILABLE_ROLES
           end
 
           multiple do
