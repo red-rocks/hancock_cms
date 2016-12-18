@@ -6,6 +6,10 @@ module Hancock
     #   require File.expand_path('../tasks', __FILE__)
     # end
 
+    initializer "RailsAdminSettingsPatch (CMS)" do
+      ::RailsAdminSettings::Setting.send(:include, Hancock::RailsAdminSettingsPatch)
+    end
+
     initializer "hancock_cms.email_defaults" do
       # Write default email settings to DB so they can be changed.
 

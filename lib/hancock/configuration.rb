@@ -38,8 +38,8 @@ module Hancock
       @ability_manager_config = []
       @ability_admin_config = []
 
-      @recaptcha_support = defined?(Recaptcha)
-      @simple_captcha_support = defined?(SimpleCaptcha)
+      @recaptcha_support = !!defined?(Recaptcha)
+      @simple_captcha_support = !!defined?(SimpleCaptcha)
 
       @admin_enter_captcha = @recaptcha_support or @simple_captcha_support
       @registration_captcha = @admin_enter_captcha
