@@ -13,6 +13,13 @@ module RailsAdmin
             "#{name}_html".to_sym
           end
 
+          register_instance_option :searchable do
+            html_method.to_s
+          end
+          register_instance_option :queryable do
+            true
+          end
+
           register_instance_option :clear_method do
             "#{name}_clear".to_sym
           end

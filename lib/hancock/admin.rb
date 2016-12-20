@@ -4,15 +4,26 @@ module Hancock
       Proc.new {
         active is_active
         label I18n.t('hancock.map')
-        field :address, :string
-        field :map_address, :string
-        field :map_hint, :string
+        field :address, :string do
+          searchable true
+        end
+        field :map_address, :string do
+          searchable true
+        end
+        field :map_hint, :string do
+          searchable true
+        end
         field :coordinates, :string do
+          searchable true
           read_only true
           formatted_value{ bindings[:object].coordinates.to_json }
         end
-        field :lat
-        field :lon
+        field :lat do
+          searchable true
+        end
+        field :lon do
+          searchable true
+        end
 
         if block_given?
           yield self
@@ -38,8 +49,15 @@ module Hancock
       Proc.new {
         active is_active
         label I18n.t('hancock.content')
-        field :excerpt, :hancock_html unless _excluded_fields.include?(:excerpt)
-        field :content, :hancock_html unless _excluded_fields.include?(:content)
+        ([:excerpt, :content] - _excluded_fields).each do |f|
+          field f, :hancock_html
+        end
+        # unless _excluded_fields.include?(:excerpt)
+        #   field :excerpt, :hancock_html
+        # end
+        # unless _excluded_fields.include?(:content)
+        #   field :content, :hancock_html
+        # end
       }
     end
 

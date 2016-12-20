@@ -8,10 +8,6 @@ module RailsAdmin
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types::register(self)
 
-          register_instance_option :searchable do
-            true
-          end
-
           register_instance_option :enum_method do
             :slugs
           end
