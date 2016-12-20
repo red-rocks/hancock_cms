@@ -26,6 +26,13 @@ module RailsAdmin
             true
           end
 
+          register_instance_option :searchable do
+            string_method.to_s
+          end
+          register_instance_option :queryable do
+            true
+          end
+
 
           ############ localize ######################
           register_instance_option :translations_field do

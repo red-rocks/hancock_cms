@@ -35,9 +35,7 @@ module Hancock
       Proc.new {
         active is_active
         label I18n.t('hancock.url')
-        field :slugs, :hancock_slugs do
-          searchable :_slugs
-        end
+        field :slugs, :hancock_slugs
         field :text_slug
       }
     end
@@ -51,16 +49,15 @@ module Hancock
       Proc.new {
         active is_active
         label I18n.t('hancock.content')
-        unless _excluded_fields.include?(:excerpt)
-          field :excerpt, :hancock_html do
-            searchable :excerpt_html
-          end
+        ([:excerpt, :content] - _excluded_fields).each do |f|
+          field f, :hancock_html
         end
-        unless _excluded_fields.include?(:content)
-          field :content, :hancock_html do
-            searchable :content_html
-          end
-        end
+        # unless _excluded_fields.include?(:excerpt)
+        #   field :excerpt, :hancock_html
+        # end
+        # unless _excluded_fields.include?(:content)
+        #   field :content, :hancock_html
+        # end
       }
     end
 
