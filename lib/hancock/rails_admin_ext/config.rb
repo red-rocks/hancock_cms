@@ -50,6 +50,8 @@ module Hancock
         action_visible_for(:multiple_file_upload_collection, Proc.new { false })
       end
 
+      action_visible_for(:sort_embedded, Proc.new { false })
+
     end
 
     def add_action(action_name)
