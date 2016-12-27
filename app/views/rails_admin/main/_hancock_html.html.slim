@@ -1,9 +1,9 @@
 ruby:
   js_data = {
-    jspath: field.location ? field.location : field.base_location + "ckeditor.js",
+    jspath: asset_path(field.location ? field.location : field.base_location + "ckeditor.js"),
     base_location: field.base_location,
     options: {
-      customConfig: field.config_js ? field.config_js : field.base_location + "config.js"
+      customConfig: asset_path(field.config_js ? field.config_js : field.base_location + "config.js")
     }
   }
   _html_attributes = field.html_attributes.reverse_merge(data: { richtext: 'ckeditor', options: js_data.to_json, value: field.form_value[:html] })

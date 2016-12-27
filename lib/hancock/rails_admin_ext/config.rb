@@ -50,6 +50,10 @@ module Hancock
         action_visible_for(:multiple_file_upload_collection, Proc.new { false })
       end
 
+      if defined?(RailsAdminUserAbilities)
+        action_visible_for(:sort_embedded, Proc.new { false })
+      end
+
       action_visible_for(:sort_embedded, Proc.new { false })
 
     end
@@ -101,7 +105,7 @@ module Hancock
               else
                 ret = false
                 if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                  ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action)
+                  ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action.to_sym)
                 else
                   if visibility = Hancock.rails_admin_config.actions_visibility[action]
                     if visibility.is_a?(Proc)
@@ -111,7 +115,7 @@ module Hancock
                     end
                   end
                 end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                ret
+                ret && bindings[:controller].can?(action, bindings[:abstract_model].model)
               end # !bindings or bindings[:abstract_model].blank?
             end # visible do
           end # rails_admin_actions.send(action) do
@@ -127,7 +131,8 @@ module Hancock
         ability_object.send(config[:method], config[:actions], _model)
       end
       Hancock::MODELS.each do |_model|
-        ability_object.can _model.admin_can_actions, _model
+        ability_object.can    _model.admin_can_actions,     _model
+        ability_object.cannot _model.admin_cannot_actions,  _model
       end
     end
     def cancancan_manager_rules(ability_object)
@@ -137,7 +142,8 @@ module Hancock
         ability_object.send(config[:method], config[:actions], _model)
       end
       Hancock::MODELS.each do |_model|
-        ability_object.can _model.manager_can_actions, _model
+        ability_object.can    _model.manager_can_actions,     _model
+        ability_object.cannot _model.manager_cannot_actions,  _model
       end
     end
 
