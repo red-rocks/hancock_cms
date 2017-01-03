@@ -54,7 +54,7 @@ else
   generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
 gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
-gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
+# gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
 gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
 
 if mongoid
