@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ack_rails_admin_settings', '~> 1.2.1'
 
   spec.add_dependency 'kaminari'
+  spec.add_dependency 'kaminari-actionview'
 
   spec.add_dependency 'codemirror-rails'
 

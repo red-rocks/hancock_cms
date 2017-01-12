@@ -31,6 +31,7 @@ require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
 require 'hancock/rails_admin_ext/hancock_multiselect'
 
+require 'hancock/rails_admin_ext/patches/navigation_patch'
 require 'hancock/rails_admin_ext/patches/field_patch'
 require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
@@ -48,6 +49,8 @@ require 'hancock/rails_admin_settings_patch'
 require 'ckeditor'
 
 # require 'kaminari'
+require 'kaminari/actionview'
+
 # require 'addressable/uri'
 # require 'turbolinks'
 

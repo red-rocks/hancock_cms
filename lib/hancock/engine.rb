@@ -10,6 +10,10 @@ module Hancock
       ::RailsAdminSettings::Setting.send(:include, Hancock::RailsAdminSettingsPatch)
     end
 
+    initializer "RailsAdminPatch (Navigation)" do
+      ::RailsAdmin::ApplicationHelper.send :include, Hancock::RailsAdminApplicationHelperNavigationPatch
+    end
+
     initializer "hancock_cms.email_defaults" do
       # Write default email settings to DB so they can be changed.
 
