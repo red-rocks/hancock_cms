@@ -48,6 +48,14 @@ $(document).delegate '.clear_navigation_filter_field', 'click', (e)->
   $("#navigation_filter").val("").trigger("keyup")
   return false
 
+$(document).delegate '#navigation_filter', 'keypress', (e)->
+  _code = e.which || e.keyCode
+  if _code == 13
+    e.preventDefault()
+    if (_selected = $(e.currentTarget).siblings('.toolbar').find('.nav li.visible[data-model]')).length == 1
+      _selected.find('a').click()
+    return fasle
+
 $(document).delegate '#navigation_filter', 'keyup', (e)->
   filter = e.currentTarget.value
   navigation_block = $(e.currentTarget).siblings('.toolbar').find('.nav')
