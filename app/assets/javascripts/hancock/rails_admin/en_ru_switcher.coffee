@@ -1,4 +1,4 @@
-window.hancock_cms = {} if window.hancock_cms is undefined
+window.hancock_cms ||= {}
 window.hancock_cms.en_ru_keytable = {
   "q": "й", "Q": "Й",
   "w": "ц", "W": "Ц",
