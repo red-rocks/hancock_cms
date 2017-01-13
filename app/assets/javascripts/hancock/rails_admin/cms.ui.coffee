@@ -1,5 +1,9 @@
 #= require jquery.mCustomScrollbar.concat.min
 
+#= require ./en_ru_switcher
+
+
+
 window.hancock_cms ||= {}
 window.hancock_cms.multiselect_dblclick = (selector)->
   $(document).delegate selector + ' .ra-multiselect-left select option', 'dblclick', (e)->
@@ -62,17 +66,24 @@ $(document).delegate '#navigation_filter', 'keyup', (e)->
   nav_first_lvl = navigation_block.find("li.dropdown-header").removeClass('hidden').removeClass('opened')
   nav_sec_lvl = navigation_block.find("li[data-model]").removeClass('hidden').removeClass('visible')
 
-  if filter.length > 0
-    filter = new RegExp(filter, "i")
+  select_menu_items = (filter, nav_first_lvl, nav_sec_lvl)->
+    if filter.length > 0
+      filter = new RegExp(filter, "i")
 
-    nav_first_lvl.each ->
-      me = $(this)
-      if !filter.test(me.innerHTML)
-        me.addClass("hidden")
+      nav_first_lvl.each ->
+        me = $(this)
+        if !filter.test(me.innerHTML)
+          me.addClass("hidden")
 
-    nav_sec_lvl.each ->
-      me = $(this)
-      if !filter.test(me.find('a').text()) and !filter.test(me.data('model')) and !filter.test(me.data('name-synonyms') || "")
-        me.addClass("hidden")
-      else
-        me.addClass('visible').prevAll(".dropdown-header").first().removeClass('hidden').addClass('opened')
+      nav_sec_lvl.each ->
+        me = $(this)
+        if !filter.test(me.find('a').text()) and !filter.test(me.data('model')) and !filter.test(me.data('name-synonyms') || "")
+          me.addClass("hidden")
+        else
+          me.addClass('visible').prevAll(".dropdown-header").first().removeClass('hidden').addClass('opened')
+
+  select_menu_items(filter, nav_first_lvl, nav_sec_lvl)
+  if navigation_block.find("li:visible").length == 0
+    nav_first_lvl.removeClass('hidden').removeClass('opened')
+    nav_sec_lvl.removeClass('hidden').removeClass('visible')
+    select_menu_items(window.hancock_cms.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
