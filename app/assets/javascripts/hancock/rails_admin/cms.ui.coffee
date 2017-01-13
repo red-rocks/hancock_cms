@@ -58,7 +58,7 @@ $(document).delegate '#navigation_filter', 'keypress', (e)->
     e.preventDefault()
     if (_selected = $(e.currentTarget).siblings('.toolbar').find('.nav li.visible[data-model]')).length == 1
       _selected.find('a').click()
-    return fasle
+    return false
 
 $(document).delegate '#navigation_filter', 'keyup', (e)->
   filter = e.currentTarget.value
