@@ -1,4 +1,6 @@
-#= require jquery.mCustomScrollbar.concat.min
+#= require ./navigation_dropdown
+#= require ./navigation_scroll
+#= require ./navigation_filter
 
 window.hancock_cms ||= {}
 window.hancock_cms.multiselect_dblclick = (selector)->
@@ -9,35 +11,3 @@ window.hancock_cms.multiselect_dblclick = (selector)->
     $(e.currentTarget).closest('.ra-multiselect').find('.ra-multiselect-center .ra-multiselect-item-remove').click()
 
 window.hancock_cms.multiselect_dblclick("select.hancock_multiselect + .ra-multiselect, select.hancock_enum + .ra-multiselect")
-
-
-$(document).delegate '.toolbar .nav .dropdown-header', 'click', (e)->
-  e.preventDefault()
-  _target = $(e.currentTarget).toggleClass('opened')
-  li = _target.next()
-  loop
-    li.toggleClass('visible')
-    li = li.next()
-    break if li.length == 0 or li.hasClass('dropdown-header')
-
-$(document).on 'pjax:complete ready', ()->
-  active_nav_element = $(".toolbar .nav .active")
-  if active_nav_element.length > 0
-    _parent = active_nav_element.prevAll(".dropdown-header:first")
-    if _parent.length > 0 and !_parent.hasClass('opened')
-      _parent.click()
-
-mscroll = () ->
-  $('.toolbar').mCustomScrollbar(
-    scrollInertia: 60
-    mouseWheelPixels: 60
-    theme: 'minimal'
-    mouseWheel:
-      scrollAmount: 0
-  )
-
-$(window).on 'load', ->
-  mscroll()
-
-$(document).bind "page:load", ->
-  mscroll()

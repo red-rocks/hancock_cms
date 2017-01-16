@@ -32,13 +32,14 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ckeditor'
   spec.add_dependency 'geocoder'
 
-  spec.add_dependency 'rails_admin', '>= 1.0.0'
+  spec.add_dependency 'rails_admin', '1.1.1'
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
 
   spec.add_dependency 'ack_rails_admin_settings', '~> 1.2.1'
 
   spec.add_dependency 'kaminari'
+  spec.add_dependency 'kaminari-actionview'
 
   spec.add_dependency 'codemirror-rails'
 
