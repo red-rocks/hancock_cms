@@ -220,6 +220,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
   end
 
   rails_admin do
+    navigation_icon 'icon-user'
     list do
       field :email
       field :name
