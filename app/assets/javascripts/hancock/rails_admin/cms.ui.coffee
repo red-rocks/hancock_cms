@@ -1,3 +1,4 @@
+#= require_self
 #= require ./navigation_dropdown
 #= require ./navigation_scroll
 #= require ./navigation_filter

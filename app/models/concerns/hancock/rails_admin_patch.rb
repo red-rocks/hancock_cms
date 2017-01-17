@@ -30,6 +30,10 @@ module Hancock::RailsAdminPatch
     def rails_admin_add_config(config)
     end
 
+    def rails_admin_name_synonyms
+      ''.freeze
+    end
+
 
 
     def admin_can_default_actions
