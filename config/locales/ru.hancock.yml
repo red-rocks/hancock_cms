@@ -2,6 +2,7 @@ ru:
   hancock:
     url: URL
     content: "Контент"
+    categories: "Разделы"
     cms: "CMS"
     # menu: "Меню"
     settings: 'Настройки'

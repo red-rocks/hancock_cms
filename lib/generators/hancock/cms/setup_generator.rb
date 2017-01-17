@@ -48,17 +48,13 @@ Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css c
 TEXT
 end
 
-gsub_file 'config/initializers/backtrace_silencers.rb',
-        "# Rails.backtrace_cleaner.add_silencer { |line| line =~ /my_noisy_library/ }",
-        "Rails.backtrace_cleaner.add_silencer { |line| line =~ /lib\\/(haml|slim|sass|scss|coffee|compass)/ }"
-
 if mongoid
-generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+  generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
 else
-generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
+  generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
 gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
-gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
+# gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
 gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
 
 if mongoid
@@ -224,6 +220,7 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
   end
 
   rails_admin do
+    navigation_icon 'icon-user'
     list do
       field :email
       field :name
@@ -298,15 +295,15 @@ end
 ###### HANCOCK OTHERS ######
 
 unless mongoid
-generate "hancock:cms:migration"
-generate "rails_admin_settings:migration"
+  generate "hancock:cms:migration"
+  generate "rails_admin_settings:migration"
 end
 
 remove_file 'app/views/layouts/application.html.erb'
 generate "hancock:cms:layout"
 
 unless mongoid
-rake "db:migrate"
+  rake "db:migrate"
 end
 
 run 'rails r "User.generate_first_admin_user"'
@@ -326,9 +323,9 @@ generate "hancock:cms:scripts", app_name
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
-generate "paper_trail:install"
-generate "friendly_id"
-rake "db:migrate"
+  generate "paper_trail:install"
+  generate "friendly_id"
+  rake "db:migrate"
 end
 
 generate "rspec:install"

@@ -18,6 +18,7 @@
       = render "layouts/rails_admin/navigation"
 
     .admin-menubar.admin-menubar-fixed.admin-menubar-dark
+      = render "layouts/rails_admin/sidebar_navigation_filter"
       .toolbar
         = render "layouts/rails_admin/sidebar_navigation"
       .admin-menubar-footer
@@ -29,40 +30,3 @@
 
     %footer.admin-footer
       = render "layouts/rails_admin/footer"
-
-    -#%nav.navbar-hancock.navbar-fixed
-    -#  = render "layouts/rails_admin/navigation"
-    -#
-    -#%main.root
-    -#  .sidebar.fixed-sidebar
-    -#    .sidebar-backdrop
-    -#    .toolbar
-    -#      = render "layouts/rails_admin/sidebar_navigation"
-    -#
-    -#  .content-wrapper
-    -#    .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'
-    -#
-    -#%footer.footer
-    -#  = render "layouts/rails_admin/footer"
-
-  -#%body.rails_admin
-  -#  #loading.label.label-warning{style: 'display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}= t('admin.loading')
-  -#  %nav.navbar.navbar-default.navbar-fixed-top
-  -#    = render "layouts/rails_admin/navigation"
-  -#
-  -#  .menu-bar
-  -#    = render "layouts/rails_admin/sidebar_navigation"
-  -#
-  -#  .page-content
-  -#    .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'
-  -#
-  -#
-  -#
-  -#  #status-bar
-
-    -#.container-fluid
-    -#  .row
-    -#    .col-sm-3.col-md-2.sidebar-nav.hancock-nav
-    -#      = render "layouts/rails_admin/sidebar_navigation"
-    -#    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.sidebar-content
-    -#      .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'

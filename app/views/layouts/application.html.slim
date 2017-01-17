@@ -18,9 +18,9 @@ html lang="ru"
     - cache 'layouts/application/custom_head', skip_digest: true do
       - _cache_key = ['views/layouts/application/custom_head']
       css:
-        #{Settings.ns('application_layout').custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_key)}
+        #{{Settings.ns('application_layout').custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_key)}}
       javascript:
-        #{Settings.ns('application_layout').custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_key)}
+        #{{Settings.ns('application_layout').custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_key)}}
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
 
