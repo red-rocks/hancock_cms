@@ -26,6 +26,7 @@ require 'rails_admin'
 require 'hancock/rails_admin_ext/config'
 
 require 'hancock/rails_admin_ext/hancock_enum'
+require 'hancock/rails_admin_ext/hancock_enum_with_custom'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'

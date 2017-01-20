@@ -1,5 +1,10 @@
 require 'rails_admin/custom_show_in_app'
 
+require_relative 'hancock_cms'
+# Add `require_relative '%hancock_plugin_name%'` here for configure it.
+# `require_relative 'hancock_cms'` reconfigure it by default.
+# So u need do it again. If u have some changes.
+
 <% if Hancock.mongoid? %>
 RailsAdminSettings.track_history!
 <% end %>

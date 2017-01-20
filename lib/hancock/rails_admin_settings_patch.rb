@@ -6,6 +6,11 @@ module Hancock
       Hancock.register_model(self)
 
       include Hancock::RailsAdminPatch
+      ::RailsAdminSettings::Setting.pluck(:ns).uniq.each do |c|
+         s = "ns_#{c.gsub('-', '_')}".to_sym
+         scope s, -> { where(ns: c) }
+         # t[s] = c
+       end
 
       field :for_admin, type: Boolean, default: -> {
         !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
@@ -49,23 +54,34 @@ module Hancock
           field :label do
             visible false
             searchable true
+            weight 1
           end
           if Object.const_defined?('RailsAdminToggleable')
-            field :enabled, :toggle
+            field :enabled, :toggle do
+              weight 2
+            end
           else
-            field :enabled
+            field :enabled do
+              weight 2
+            end
           end
           field :ns do
             searchable true
+            weight 3
           end
           field :key do
             searchable true
+            weight 4
           end
-          field :name
+          field :name do
+            weight 5
+          end
           field :kind do
             searchable true
+            weight 6
           end
           field :raw do
+            weight 7
             searchable true
             pretty_value do
               if bindings[:object].file_kind?
@@ -78,6 +94,7 @@ module Hancock
             end
           end
           field :cache_keys_str, :text do
+            weight 6
             searchable true
           end
           if ::Settings.table_exists?
