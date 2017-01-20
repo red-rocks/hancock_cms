@@ -20,7 +20,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '~> 5.0.1', '>= 5.0.1'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
@@ -37,9 +37,9 @@ gem 'rails_admin', '~> 1.1'
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 # gem 'rails_admin_multiple_file_upload'
-gem 'rails_admin_user_abilities', '~> 0.2.0'
+gem 'rails_admin_user_abilities', '~> 0.2'
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-gem 'rails_admin_model_settings', '~> 0.3.0'
+gem 'rails_admin_model_settings', '~> 0.3'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
@@ -115,7 +115,7 @@ gem 'glebtv_mongoid_userstamp', '0.7.0'
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.3.3"#"2.4.0-preview1"
+RVM_RUBY_VERSION = "2.3.3"#"2.4.0"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
 

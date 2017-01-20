@@ -1,5 +1,5 @@
 window.hancock_cms.set_enum_with_custom = () ->
-  $('.hancock_enum_with_custom .ra-filtering-select-input').autocomplete(
+  $('.hancock_enum_with_custom_type .ra-filtering-select-input').autocomplete(
     search: (e, ui)->
       if e.currentTarget
         $(e.currentTarget).closest(".controls").find("select.hancock_enum option:first").val(e.currentTarget.value).text(e.currentTarget.value)
