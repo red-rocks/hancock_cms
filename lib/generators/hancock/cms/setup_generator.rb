@@ -48,14 +48,67 @@ Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css c
 TEXT
 end
 
+
 if mongoid
-  generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+
+inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
+  include Hancock::Model
+TEXT
+end
+
+remove_file 'app/models/ckeditor/picture.rb'
+create_file 'app/models/ckeditor/picture.rb' do <<-TEXT
+class Ckeditor::Picture < Ckeditor::Asset
+  # has_mongoid_attached_file :data,
+  #                           url: '/ckeditor_assets/pictures/:id/:style_:basename.:extension',
+  #                           path: ':rails_root/public/ckeditor_assets/pictures/:id/:style_:basename.:extension',
+  #                           styles: { content: '800>', thumb: '118x100#' }
+
+  include Hancock::Gallery::Paperclipable
+  hancock_cms_attached_file :data,
+                            url: '/ckeditor_assets/pictures/:id/:style/:basename.:extension',
+                            path: ':rails_root/public/ckeditor_assets/pictures/:id/:style/:basename.:extension'
+  def data_styles
+    if data_svg?
+      {}
+    else
+      { content: '800>', thumb: '118x100#' }
+    end
+  end
+
+  validates_attachment_size :data, less_than: 2.megabytes
+  validates_attachment_presence :data
+  validates_attachment_content_type :data, content_type: /\Aimage/
+
+  def url_content
+    # url(:content)
+    if data_svg?
+      url
+    else
+      url(:content)
+    end
+  end
+
+  def url_thumb
+    # url(:thumb)
+    if data_svg?
+      url
+    else
+      url(:thumb)
+    end
+  end
+end
+TEXT
+end
+
 else
   generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
 gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
-# gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
+gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "# config.authorize_with :cancancan"
 gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
+
 
 if mongoid
 remove_file 'config/initializers/cookies_serializer.rb'
@@ -301,10 +354,6 @@ end
 
 remove_file 'app/views/layouts/application.html.erb'
 generate "hancock:cms:layout"
-
-unless mongoid
-  rake "db:migrate"
-end
 
 run 'rails r "User.generate_first_admin_user"'
 

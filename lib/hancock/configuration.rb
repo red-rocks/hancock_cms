@@ -29,6 +29,8 @@ module Hancock
 
     attr_accessor :history_tracking
 
+    attr_accessor :mongoid_single_collection
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -46,7 +48,9 @@ module Hancock
 
       @captcha_on_development = false
 
-      @history_tracking = false 
+      @history_tracking = false
+
+      @mongoid_single_collection = nil
     end
   end
 end

@@ -17,7 +17,12 @@ module ManualSlug::Mongoid
 
   module ClassMethods
     def manual_slug(_field, options = {}, callback = true)
-      options.merge!(permanent: true, history: true)
+      options.merge!({
+        permanent: true,
+        history: true,
+        scope: (Hancock.config.mongoid_single_collection ? :_type : nil)
+      })
+      
       slug _field, options
       #overwrite for default value
       field :_slugs, type: Array, localize: options[:localize], default: [], overwrite: true

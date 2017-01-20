@@ -8,6 +8,10 @@ module Hancock
 
         included do
           field :name, type: String, localize: Hancock.configuration.localize, default: ""
+
+          before_save do
+            puts self.inspect
+          end
         end
 
       end
