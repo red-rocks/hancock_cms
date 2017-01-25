@@ -1,11 +1,11 @@
 module Hancock::BooleanField
   extend ActiveSupport::Concern
-  module ClassMethods
+  class_methods do
     def boolean_field(name, default = true)
       if default.is_a?(Hash)
         default = default[:default]
       end
-      
+
       if Hancock.mongoid?
         field name, type: Mongoid::Boolean, default: default
       end
