@@ -2,33 +2,50 @@ module Hancock::Insertions
   extend ActiveSupport::Concern
 
   included do
-    class_attribute :added_insertions, :removed_insertions
+    class_attribute :added_insertions, :removed_insertions, :insertions_fields
     self.removed_insertions ||= []
     self.added_insertions ||= []
+    self.insertions_fields ||= []
     def possible_insertions
       self.class.possible_insertions
     end
+
+    private
     def process_with_insertions(_data)
       if _data.nil?
         ''
       else
+        if _data.is_a?(Symbol)
+          if insertions_fields.include?(_data)
+            _data = self.send(_data)
+          else
+            return ''
+          end
+        end
         # {{self.%insertion%}}
         _ret = _data.gsub(/\{\{self\.(.*?)\}\}/) do
-          begin
-            self.send($1) if possible_insertions.include?($1)
-          rescue
-            ""
-          end
+          get_insertion($1)
         end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
           (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
         end
         _ret
       end
     end
+    def get_insertion(name)
+      begin
+        self.send(name) if possible_insertions.include?(name)
+      rescue
+        ""
+      end
+    end
   end
 
   class_methods do
     def insertions_for(name, opts = {})
+      return if name.blank?
+      name = name.to_sym
+      return if insertions_fields.include?(name)
+      insertions_fields << name
       (opts.delete(:add_insertions) || []).each do |_ins|
         add_insertion _ins
       end
@@ -43,6 +60,7 @@ module Hancock::Insertions
           end
         EVAL
       end
+      name
     end
 
     def insertion(name, opts = {})

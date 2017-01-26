@@ -20,7 +20,10 @@ module Hancock::RailsAdminPatch
 
   module ClassMethods
     def rails_admin_model
-      to_param.gsub("::", "~").underscore
+      name.split('::').collect(&:underscore).join('~')
+    end
+    def rails_admin_param_key
+      name.split('::').collect(&:underscore).join('_')
     end
 
     def rails_admin_add_fields
