@@ -725,6 +725,7 @@ body.rails_admin
     cursor: pointer
     background-image: none
     border: 1px solid transparent
+
     white-space: nowrap
     padding: 6px 12px
     font-size: 14px
@@ -743,6 +744,9 @@ body.rails_admin
       border-color: #bd3700
 
 
+
+
+
 #form_controls_fixed
   position: fixed
   top: 55%
@@ -751,3 +755,47 @@ body.rails_admin
 
   a
     display: block
+
+
+fieldset
+  position: relative
+  .leftside_hider
+    overflow: hidden
+    position: absolute
+    width: 80px
+    height: calc(100% - 45px)
+    float: left
+    background-color: #ddd
+    opacity: 0.5
+    cursor: pointer
+    z-index: 9
+    &:hover
+      opacity: 0.8
+      .scroll_fieldset_block
+        display: block
+      .scroll_fieldset_top, .scroll_fieldset_bottom
+        opacity: 0.5
+    &:active
+      opacity: 1
+
+    .scroll_fieldset_block
+      position: absolute
+      left: 15px
+      z-index: 10
+      display: none
+      background-color: #e11
+      margin-top: -50px
+      &:hover
+        display: block
+
+      .scroll_fieldset_top, .scroll_fieldset_bottom
+        // position: relative
+        height: 50px
+        width: 50px
+        z-index: 11
+        &:hover
+          background-color: #b01
+          opacity: 0.8
+        &:active
+          background-color: red
+          opacity: 1

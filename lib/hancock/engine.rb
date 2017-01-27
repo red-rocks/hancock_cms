@@ -14,6 +14,10 @@ module Hancock
       ::RailsAdmin::ApplicationHelper.send :include, Hancock::RailsAdminApplicationHelperNavigationPatch
     end
 
+    initializer "RailsAdminPatch (Fieldset)" do
+      ::RailsAdmin::FormBuilder.send :include, Hancock::RailsAdminFormBuilderFieldsetPatch
+    end
+
     initializer "hancock_cms.email_defaults" do
       # Write default email settings to DB so they can be changed.
 
