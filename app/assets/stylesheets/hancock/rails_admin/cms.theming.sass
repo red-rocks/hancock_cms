@@ -28,6 +28,47 @@ body.rails_admin
   left: 0px
   z-index: 1500
 
+.navigation_filter_field
+  margin-left: 0px
+  height: 30px
+  width: 200px
+  padding: 0px 10px
+  border: 0px solid
+  background: #414141
+  color: #e1e1e1
+  &:focus
+    background: #616161
+
+.clear_navigation_filter_field
+  height: 30px
+  width: 30px
+  display: block
+  float: right
+  text-align: center
+  line-height: 30px
+  cursor: pointer
+  color: #c1c1c1
+  background: #21292e
+  +transition(background, 0.3s)
+  i
+    +transition(all, 0.3s)
+    color: #c1c1c1
+    transform-origin: center center
+    -webkit-transform-origin: center center
+    -o-transform-origin: center center
+    -moz-transform-origin: center center
+    +transform(rotate(0deg))
+  &:hover
+    background: darken(#e53935, 15%)
+    i
+      color: #e1e1e1
+      +transform(rotate(-360deg))
+      transform-origin: center center
+      -webkit-transform-origin: center center
+      -o-transform-origin: center center
+      -moz-transform-origin: center center
+
+
 .bg-red
   background-color: #e53935 !important
 
@@ -70,7 +111,7 @@ body.rails_admin
 
 .admin-menubar
   width: 230px
-  padding: 60px 0px
+  padding: 60px 0px 90px
 
 .admin-menubar-fixed
   position: fixed
