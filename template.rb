@@ -2,10 +2,11 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
+actual_rails_version = "4.2.7.1"
 
-if Gem::Version.new(version) < Gem::Version.new('4.2.7') or Gem::Version.new(version) >= Gem::Version.new('5.0.0')
+if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new('5.0.0')
   puts "You are using an incorrect version of Rails (#{version})"
-  puts "Please update for 4.2.7"
+  puts "Please update for #{actual_rails_version}"
   puts "Stopping"
   exit 1
 end
@@ -20,7 +21,7 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.7.1'
+gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'

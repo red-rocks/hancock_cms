@@ -27,7 +27,7 @@ module Hancock
       #     Settings.default_email_from(default: 'noreply@site.domain')
       #     Settings.form_email(default: 'admin@site.domain')
       #     Settings.email_topic(default: 'с сайта')
-          Settings.logo_image(kind: :image)
+          Settings.logo_image(kind: :image) if Settings.file_uploads_supported
         end
       rescue
       end
@@ -44,21 +44,21 @@ module Hancock
     #   # end
     # end
 
-    # config.after_initialize do
-    #   # trigger autoload so models are registered in Mongoid::Elasticearch
-    #   # Hancock.config.search_models.map(&:constantize)
-    #
-    #   # Write default email settings to DB so they can be changed.
-    #   begin
-    #     if Settings and Settings.table_exists?
-    #       # Settings.default_email_from(default: 'noreply@site.domain')
-    #       # Settings.form_email(default: 'admin@site.domain')
-    #       # Settings.email_topic(default: 'с сайта')
-    #       Settings.logo_image(kind: :image)
-    #     end
-    #   rescue
-    #   end
-    # end
+    config.after_initialize do
+      # trigger autoload so models are registered in Mongoid::Elasticearch
+      # Hancock.config.search_models.map(&:constantize)
+
+      # Write default email settings to DB so they can be changed.
+      begin
+        if Settings and Settings.table_exists?
+          # Settings.default_email_from(default: 'noreply@site.domain')
+          # Settings.form_email(default: 'admin@site.domain')
+          # Settings.email_topic(default: 'с сайта')
+          Settings.logo_image(kind: :image) if Settings.file_uploads_supported
+        end
+      rescue
+      end
+    end
 
   end
 end

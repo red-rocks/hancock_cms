@@ -41,6 +41,54 @@ $(document).delegate "fieldset .leftside_hider .scroll_fieldset_bottom", "click"
   $("html, body").animate({scrollTop: finish_position}, duration);
   return false
 
+$(document).delegate "fieldset .leftside_hider .select_fieldset", "click", (e)->
+  e.preventDefault()
+  me = $(e.currentTarget)
+  fieldset = me.closest('fieldset')
+  fieldsets = fieldset.siblings('fieldset')
+  fieldset_links = []
+  fieldsets.each ->
+    f = $(this)
+    l = $(this).find("legend")
+    fieldset_link = $("<a title='" + l.text() + "' href='#'>" + l.text() + "</a>")
+    fieldset_link.data('target', f)
+    fieldset_links.push(fieldset_link)
+  me.html("").append(fieldset_links).css(width: fieldset_links.length * 60 + "px")
+  return false
+
+
+
+$(document).delegate ".form-horizontal legend", "click", (e)->
+  if $(this).has('i.icon-chevron-down').length
+    $(this).closest("fieldset").addClass('opened')
+  else
+    if $(this).has('i.icon-chevron-right').length
+      $(this).closest("fieldset").removeClass('opened')
+
+$(document).delegate "fieldset .leftside_hider .select_fieldset a", "click", (e)->
+  e.preventDefault()
+  e.stopImmediatePropagation()
+  me = $(e.currentTarget)
+  fieldset = $(me.closest('fieldset'))
+  fieldsets = fieldset.siblings('fieldset').andSelf()
+  target = $(me.data('target'))
+  me.closest('select_fieldset').html("SF").css(width: "")
+  target_position = $(fieldsets[0]).offset().top
+  for i in [0..fieldsets.length]
+    fs = $(fieldsets[i])
+    if fs[0] == target[0]
+      break
+    if fieldset[0] == fs[0]
+      target_position += 45
+    else
+      target_position += fs.height()
+  target_position -= 60
+
+  fieldset.find("legend:visible").click() if fieldset.hasClass('opened')
+  target.find("legend:visible").click() unless target.hasClass('opened')
+  $("html, body").animate({scrollTop: target_position}, 300);
+  return false
+
 
 $(window).scroll (e)->
   window_center = window.scrollY + $(window).height()/2
@@ -70,6 +118,7 @@ $(document).delegate "#form_controls_fixed a", "click", (e)->
 
 
 $(document).bind 'rails_admin.dom_ready', ->
+  return if $("#form_controls_fixed").length > 0
   $editors = $('[data-richtext=ckeditor]').not('.ckeditored')
   if $editors.length
     if not window.CKEDITOR

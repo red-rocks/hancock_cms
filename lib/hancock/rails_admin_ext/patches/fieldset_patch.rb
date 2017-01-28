@@ -31,11 +31,12 @@ module Hancock
 
         @template.content_tag :fieldset do
           if fieldset.leftside_hider
-            leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', style: fieldset.active? ? 'display:none' : '') do
+            leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', style: fieldset.active? ? 'display:none' : '', title: "Свернуть блок") do
               @template.content_tag(:div, class: 'scroll_fieldset_block', style: 'top: 50%') do
                  ret = []
-                ret << @template.content_tag(:div, 'В', class: 'scroll_fieldset_top')
-                ret << @template.content_tag(:div, 'Н', class: 'scroll_fieldset_bottom')
+                ret << @template.content_tag(:div, 'В', class: 'scroll_fieldset_top', title: "Вверх блока")
+                ret << @template.content_tag(:div, 'SF', class: 'select_fieldset', title: "Выбрать другой блок")
+                ret << @template.content_tag(:div, 'Н', class: 'scroll_fieldset_bottom', title: "Вниз блока")
                 ret.join.html_safe
               end
             end

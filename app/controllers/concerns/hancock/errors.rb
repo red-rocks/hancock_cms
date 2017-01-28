@@ -44,7 +44,7 @@ module Hancock::Errors
     end
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
-      redirect_to :back, alert: t('hancock.errors.form_expired')
+      redirect_back(fallback_location: root_path, alert: t('hancock.errors.form_expired'))
     end
   end
 
