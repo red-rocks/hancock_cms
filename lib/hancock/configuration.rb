@@ -1,6 +1,30 @@
 module Hancock
   include Hancock::PluginConfiguration
 
+  def self.configuration(plugin_name = nil)
+    return @configuration ||= config_class.new if config_class if plugin_name.blank?
+
+    _plugin = nil
+    _plugin = plugin_name if Hancock::PLUGINS.include?(plugin_name)
+    if _plugin.nil?
+      plugin_name = plugin_name.to_s.camelize
+      if Object.const_defined?(plugin_name)
+        _plugin_name_const = plugin_name.constantize
+        _plugin = _plugin_name_const if Hancock::PLUGINS.include?(_plugin_name_const) or _plugin_name_const == Hancock
+      end
+    end
+    if _plugin.nil?
+      if Object.const_defined?("Hancock::#{plugin_name}")
+        _plugin_name_const = "Hancock::#{plugin_name}".constantize
+        _plugin = _plugin_name_const if Hancock::PLUGINS.include?(_plugin_name_const)
+      end
+    end
+    _plugin ? _plugin.config : nil
+  end
+  def self.config(plugin_name = nil)
+    configuration(plugin_name)
+  end
+
   def self.config_class
     Configuration
   end
@@ -16,6 +40,7 @@ module Hancock
     attr_accessor :error_layout
 
     attr_accessor :localize
+    attr_accessor :raven_support
 
     attr_accessor :ability_manager_config
     attr_accessor :ability_admin_config
@@ -35,7 +60,8 @@ module Hancock
       @main_index_layout = 'application'
       @error_layout = 'application'
 
-      @localize = false
+      @localize = !!defined?(RailsAdminMongoidLocalizeField) #false
+      @raven_support = !!defined?(Raven)
 
       @ability_manager_config = []
       @ability_admin_config = []

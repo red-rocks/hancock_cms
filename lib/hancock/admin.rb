@@ -106,5 +106,32 @@ module Hancock
       }
     end
 
+
+    def self.insertions_block(is_active = false, options = {})
+      if is_active.is_a?(Hash)
+        is_active, options = (is_active[:active] || false), is_active
+      end
+
+      Proc.new {
+        active is_active
+        label options[:label] || I18n.t('hancock.insertions')
+        field :possible_insertions do
+          read_only true
+          pretty_value do
+            ("<dl class='possible_insertions_list'>" + bindings[:object].possible_insertions.map do |_ins|
+              "<dt>#{_ins}</dt><dd>#{bindings[:object].send(_ins)}</dd>"
+            end.join + "</dl>").html_safe
+          end
+        end
+
+        Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
+
+        if block_given?
+          yield self
+        end
+      }
+    end
+
+
   end
 end

@@ -12,6 +12,8 @@ if Hancock.mongoid?
         field _html_field_name, opts
         field "#{name}_clear", type: Boolean, default: clear_by_default, localize: opts[:localize]
 
+        insertions_for(name) if respond_to?(:insertions_for)
+
         class_eval <<-EVAL
           def #{name}
             self.#{_html_field_name} ||= ""

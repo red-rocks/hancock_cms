@@ -15,7 +15,7 @@ $(document).delegate '#navigation_filter', 'keypress', (e)->
 
 $(document).delegate '#navigation_filter', 'keyup', (e)->
   filter = e.currentTarget.value
-  navigation_block = $(e.currentTarget).siblings('.toolbar').find('.nav')
+  navigation_block = $(e.currentTarget).parent().siblings('.toolbar').find('.nav')
   nav_first_lvl = navigation_block.find("li.dropdown-header").removeClass('hidden').removeClass('opened').removeClass('opened-filtered')
   nav_sec_lvl = navigation_block.find("li[data-model]").removeClass('hidden').removeClass('visible')
 

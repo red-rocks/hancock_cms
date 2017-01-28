@@ -5,7 +5,7 @@ module Hancock::PluginConfiguration
       @configuration ||= config_class.new if config_class
     end
     def config
-      @configuration ||= config_class.new if config_class
+      configuration
     end
 
     def configure

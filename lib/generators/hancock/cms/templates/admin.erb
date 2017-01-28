@@ -59,7 +59,7 @@ RailsAdmin.config do |config|
   config.excluded_models ||= []
   config.excluded_models << [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
-      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture', 'Ckeditor::Folder',
       'Hancock::EmbeddedElement'
   ]
   config.excluded_models.flatten!

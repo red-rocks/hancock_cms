@@ -2,10 +2,11 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
+actual_rails_version = "5.0.1"
 
-if Gem::Version.new(version) < Gem::Version.new('5.0.0.1') or Gem::Version.new(version) >= Gem::Version.new('6.0.0')
+if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new('6.0.0')
   puts "You are using an incorrect version of Rails (#{version})"
-  puts "Please update for 5.0.0.1"
+  puts "Please update for #{actual_rails_version}"
   puts "Stopping"
   exit 1
 end
@@ -20,16 +21,17 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
-gem 'rails', '~> 5.0.1', '>= 5.0.1'
+gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'#, '~> 5.0'
 gem 'compass'
 gem 'compass-rails'
 
 gem 'rails_admin', '~> 1.1'
 
+# gem 'sentry-raven'
 
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
@@ -37,9 +39,9 @@ gem 'rails_admin', '~> 1.1'
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 # gem 'rails_admin_multiple_file_upload'
-gem 'rails_admin_user_abilities', '~> 0.2'
+gem 'rails_admin_user_abilities'#, '~> 0.2'
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-gem 'rails_admin_model_settings', '~> 0.3'
+gem 'rails_admin_model_settings'#, '~> 0.3'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
 
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
@@ -56,8 +58,6 @@ gem 'cancancan'
 gem 'unicorn'
 gem 'x-real-ip'
 
-gem 'sentry-raven'
-
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -65,19 +65,19 @@ group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  gem 'listen', '~> 3.0.5'
+  gem 'listen'#, '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-watcher-listen'#, '~> 2.0.0'
 
-  gem 'ack_favicon_maker_rails', '~> 1.0.1'
+  gem 'ack_favicon_maker_rails'#, '~> 1.0.1'
   # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
-  # gem 'rails_email_preview', '~> 1.0.3'
+  # gem 'rails_email_preview'#, '~> 1.0.3'
 
   gem 'image_optim_pack'
 
-  gem 'puma', '~> 3.0'
+  gem 'puma'#, '~> 3.0'
 end
 
 group :test do
@@ -94,8 +94,8 @@ end
 gem 'slim'
 gem 'sprockets'
 
-gem 'coffee-rails', '~> 4.2'
-gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails'#, '~> 4.2'
+gem 'uglifier'#, '>= 1.3.0'
 
 # gem 'jbuilder', '~> 2.5'
 
@@ -111,11 +111,11 @@ group :production do
   gem "god"
 end
 
-gem 'glebtv_mongoid_userstamp', '0.7.0'
+gem 'glebtv_mongoid_userstamp', '~> 0.7'
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.3.3"#"2.4.0"
+RVM_RUBY_VERSION = "2.4.0"#"2.3.3"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
 

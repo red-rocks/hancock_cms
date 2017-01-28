@@ -14,15 +14,14 @@ gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initiali
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
 
 Rails.application.config.to_prepare do
-  Devise::SessionsController.layout       "hancock/devise/sessions"
-  Devise::RegistrationsController.layout  "hancock/devise/registrations"
-  Devise::ConfirmationsController.layout  "hancock/devise/confirmations"
-  Devise::UnlocksController.layout        "hancock/devise/unlocks"
-  Devise::PasswordsController.layout      "hancock/devise/passwords"
+  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      if Devise::SessionsController._layout       != "hancock/devise/sessions"}
+  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' if Devise::RegistrationsController._layout  != "hancock/devise/registrations"}
+  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' if Devise::ConfirmationsController._layout  != "hancock/devise/confirmations"}
+  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       if Devise::UnlocksController._layout        != "hancock/devise/unlocks"}
+  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     if Devise::PasswordsController._layout      != "hancock/devise/passwords"}
 end
 TEXT
 end
-
 generate "devise", "User"
 
 
@@ -41,22 +40,24 @@ end
 
 ####### INITIALIZERS #######
 
+add_assets_precompiled = ["*.svg", 'ckeditor/*', 'codemirror.js', 'codemirror.css', 'codemirror/**/*']
+if (Rails.application.config.assets.precompile & add_assets_precompiled).length < add_assets_precompiled.length
 inject_into_file 'config/initializers/assets.rb', before: /\z/ do <<-TEXT
 Rails.application.config.assets.precompile += %w( *.svg )
 Rails.application.config.assets.precompile += %w( ckeditor/* )
 Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css codemirror/**/* )
 TEXT
 end
+end
 
 
 if mongoid
+if defined?(Paperclip)
 generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
-
 inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
-  include Hancock::Model
+    include Hancock::Model
 TEXT
 end
-
 remove_file 'app/models/ckeditor/picture.rb'
 create_file 'app/models/ckeditor/picture.rb' do <<-TEXT
 class Ckeditor::Picture < Ckeditor::Asset
@@ -101,14 +102,18 @@ class Ckeditor::Picture < Ckeditor::Asset
 end
 TEXT
 end
+end
 
 else
+if defined?(Paperclip)
   generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
-gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
-gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "# config.authorize_with :cancancan"
-gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
-
+end
+if File.exists?(Rails.root.join 'config/initializers/ckeditor.rb')
+  gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
+  gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "# config.authorize_with :cancancan"
+  gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
+end
 
 if mongoid
 remove_file 'config/initializers/cookies_serializer.rb'
@@ -126,7 +131,7 @@ gsub_file 'config/initializers/filter_parameter_logging.rb', "[:password]", "[:p
 
 # generate 'paperclip_optimizer:install'
 # remove_file 'config/initializers/paperclip_optimizer.rb'
-# generate "hancock:cms:paperclip_optimizer"
+generate "hancock:cms:paperclip_optimizer"
 
 # generate 'rails_email_preview:install'
 # remove_file 'app/mailer_previews/contact_mailer_preview.rb'
@@ -174,6 +179,7 @@ generate "simple_form:install"
 
 ####### CONTROLLERS #######
 
+unless ApplicationController < Hancock::Controller
 remove_file 'app/controllers/application_controller.rb'
 create_file 'app/controllers/application_controller.rb' do <<-TEXT
 class ApplicationController < ActionController::Base
@@ -181,12 +187,14 @@ class ApplicationController < ActionController::Base
 end
 TEXT
 end
+end
 
 
 ####### MODELS #######
 
 generate "hancock:cms:ability"
 
+unless User < Hancock::Model
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
 include Hancock::Model
   include Hancock::Enableable
@@ -343,13 +351,14 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 TEXT
 end
 end
+end
 
 
 ###### HANCOCK OTHERS ######
 
 unless mongoid
-  generate "hancock:cms:migration"
-  generate "rails_admin_settings:migration"
+generate "hancock:cms:migration"
+generate "rails_admin_settings:migration"
 end
 
 remove_file 'app/views/layouts/application.html.erb'
@@ -372,9 +381,9 @@ generate "hancock:cms:scripts", app_name
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
-  generate "paper_trail:install"
-  generate "friendly_id"
-  rake "db:migrate"
+generate "paper_trail:install"
+generate "friendly_id"
+rake "db:migrate"
 end
 
 generate "rspec:install"
@@ -396,16 +405,19 @@ create_file '.gitignore' do <<-TEXT
 /log/*.log
 /tmp/*
 /public/assets
-/public/ckeditor_assets
+# /public/ckeditor_assets
 Gemfile.lock
 TEXT
 end
 
 create_file 'extra/.gitkeep', ''
 
+
+if ["yes", "y"].include?(ask("Do u want init git? (y or yes)").downcase.strip)
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
+end
 
     end
 

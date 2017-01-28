@@ -3,7 +3,8 @@ Hancock.configure do |config|
   # config.main_index_layout = 'application'
   # config.error_layout = 'application'
   #
-  # config.localize = false
+  # config.localize = !!defined?(RailsAdminMongoidLocalizeField) #false
+  # config.raven_support = !!defined?(Raven)
   #
   # config.ability_manager_config = []
   ### example ###

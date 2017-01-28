@@ -28,6 +28,47 @@ body.rails_admin
   left: 0px
   z-index: 1500
 
+.navigation_filter_field
+  margin-left: 0px
+  height: 30px
+  width: 200px
+  padding: 0px 10px
+  border: 0px solid
+  background: #414141
+  color: #e1e1e1
+  &:focus
+    background: #616161
+
+.clear_navigation_filter_field
+  height: 30px
+  width: 30px
+  display: block
+  float: right
+  text-align: center
+  line-height: 30px
+  cursor: pointer
+  color: #c1c1c1
+  background: #21292e
+  +transition(background, 0.3s)
+  i
+    +transition(all, 0.3s)
+    color: #c1c1c1
+    transform-origin: center center
+    -webkit-transform-origin: center center
+    -o-transform-origin: center center
+    -moz-transform-origin: center center
+    +transform(rotate(0deg))
+  &:hover
+    background: darken(#e53935, 15%)
+    i
+      color: #e1e1e1
+      +transform(rotate(-360deg))
+      transform-origin: center center
+      -webkit-transform-origin: center center
+      -o-transform-origin: center center
+      -moz-transform-origin: center center
+
+
 .bg-red
   background-color: #e53935 !important
 
@@ -70,7 +111,7 @@ body.rails_admin
 
 .admin-menubar
   width: 230px
-  padding: 60px 0px
+  padding: 60px 0px 90px
 
 .admin-menubar-fixed
   position: fixed
@@ -725,6 +766,7 @@ body.rails_admin
     cursor: pointer
     background-image: none
     border: 1px solid transparent
+
     white-space: nowrap
     padding: 6px 12px
     font-size: 14px
@@ -741,3 +783,74 @@ body.rails_admin
     &:hover
       background-color: #c73800
       border-color: #bd3700
+
+
+
+
+
+#form_controls_fixed
+  position: fixed
+  top: 55%
+  right: 5px
+  text-align: right
+
+  a
+    display: block
+
+
+fieldset
+  position: relative
+  .leftside_hider
+    overflow: visible
+    position: absolute
+    width: 80px
+    height: calc(100% - 45px)
+    float: left
+    background-color: #ddd
+    opacity: 0.5
+    cursor: pointer
+    z-index: 9
+    &:hover
+      opacity: 0.8
+      .scroll_fieldset_block
+        display: block
+        > *
+          opacity: 0.5
+    &:active
+      opacity: 1
+
+    .scroll_fieldset_block
+      overflow: visible
+      position: absolute
+      width: 50px
+      left: 15px
+      z-index: 10
+      display: none
+      background-color: #e11
+      margin-top: -50px
+      &:hover
+        display: block
+
+      > *
+        opacity: 0.5
+        // position: relative
+        height: 50px
+        width: 50px
+        z-index: 11
+        &:hover
+          background-color: #b01
+          opacity: 0.8
+        &:active
+          background-color: red
+          opacity: 1
+
+      .select_fieldset
+        overflow: visible
+        display: inline-flex
+        a
+          background-color: blue
+          display: inline-block
+          width: 50px
+          height: 50px
+          margin-right: 10px
+          overflow: hidden

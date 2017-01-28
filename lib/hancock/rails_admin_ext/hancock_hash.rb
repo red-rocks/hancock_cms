@@ -40,7 +40,7 @@ module RailsAdmin
           end
 
           register_instance_option :localized? do
-            @abstract_model.model_name.constantize.public_instance_methods.include?(translations_field)
+            @abstract_model.model.public_instance_methods.include?(translations_field)
           end
 
           register_instance_option :pretty_value do
