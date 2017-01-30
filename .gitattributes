@@ -1,0 +1,4 @@
+.ruby-gemset merge=ours
+.ruby-version merge=ours
+.README.md merge=ours
+release.sh merge=ours

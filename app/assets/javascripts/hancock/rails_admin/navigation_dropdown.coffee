@@ -1,4 +1,5 @@
-$(document).delegate '.toolbar .nav .dropdown-header', 'click', (e)->
+# $(document).delegate '.toolbar .nav .dropdown-header', 'click', (e)->
+$(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   e.preventDefault()
   _target = $(e.currentTarget).toggleClass('opened')
   li = _target.next()

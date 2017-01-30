@@ -3,8 +3,9 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 actual_rails_version = "4.2.7.1"
+notsupported_rails_version = "5.0.0"
 
-if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new('5.0.0')
+if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
   puts "You are using an incorrect version of Rails (#{version})"
   puts "Please update for #{actual_rails_version}"
   puts "Stopping"
