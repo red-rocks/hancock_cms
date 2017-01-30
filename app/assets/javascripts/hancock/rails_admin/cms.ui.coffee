@@ -19,6 +19,9 @@ $(document).delegate "fieldset .leftside_hider", "click", (e)->
   fieldset.find('legend').click()
   return false
 
+$(document).delegate "fieldset .leftside_hider", "mouseenter", (e)->
+  $(window).scroll()
+
 $(document).delegate "fieldset .leftside_hider .scroll_fieldset_top", "click", (e)->
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
@@ -68,6 +71,7 @@ $(document).delegate ".form-horizontal legend", "click", (e)->
 $(document).delegate "fieldset .leftside_hider .select_fieldset a", "click", (e)->
   e.preventDefault()
   e.stopImmediatePropagation()
+  hide_previous = true
   me = $(e.currentTarget)
   fieldset = $(me.closest('fieldset'))
   fieldsets = fieldset.siblings('fieldset').andSelf()
@@ -78,13 +82,13 @@ $(document).delegate "fieldset .leftside_hider .select_fieldset a", "click", (e)
     fs = $(fieldsets[i])
     if fs[0] == target[0]
       break
-    if fieldset[0] == fs[0]
+    if hide_previous and fieldset[0] == fs[0]
       target_position += 45
     else
       target_position += fs.height()
   target_position -= 60
 
-  fieldset.find("legend:visible").click() if fieldset.hasClass('opened')
+  fieldset.find("legend:visible").click() if fieldset.hasClass('opened') if hide_previous
   target.find("legend:visible").click() unless target.hasClass('opened')
   $("html, body").animate({scrollTop: target_position}, 300);
   return false
