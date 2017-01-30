@@ -4,10 +4,12 @@ module Hancock
   def self.configuration(plugin_name = nil)
     return @configuration ||= config_class.new if config_class if plugin_name.blank?
 
+    @plugins_cache ||= {}
     _plugin = nil
     _plugin = plugin_name if Hancock::PLUGINS.include?(plugin_name)
     if _plugin.nil?
       plugin_name = plugin_name.to_s.camelize
+      return _plugin.config unless (_plugin = @plugins_cache[plugin_name]).nil?
       if Object.const_defined?(plugin_name)
         _plugin_name_const = plugin_name.constantize
         _plugin = _plugin_name_const if Hancock::PLUGINS.include?(_plugin_name_const) or _plugin_name_const == Hancock
@@ -19,7 +21,11 @@ module Hancock
         _plugin = _plugin_name_const if Hancock::PLUGINS.include?(_plugin_name_const)
       end
     end
-    _plugin ? _plugin.config : nil
+    if _plugin
+      @plugins_cache[plugin_name] = _plugin
+      return _plugin.config
+    end
+    return nil
   end
   def self.config(plugin_name = nil)
     configuration(plugin_name)
