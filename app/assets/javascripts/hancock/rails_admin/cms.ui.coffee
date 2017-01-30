@@ -13,16 +13,16 @@ window.hancock_cms ||= {}
 
 
 
-$(document).delegate "fieldset .leftside_hider", "click", (e)->
+$(document).on "click", "fieldset .leftside_hider", (e)->
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
   fieldset.find('legend').click()
   return false
 
-$(document).delegate "fieldset .leftside_hider", "mouseenter", (e)->
+$(document).on "mouseenter", "fieldset .leftside_hider", (e)->
   $(window).scroll()
 
-$(document).delegate "fieldset .leftside_hider .scroll_fieldset_top", "click", (e)->
+$(document).on "click", "fieldset .leftside_hider .scroll_fieldset_top", (e)->
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
   start_position = window.scrollY
@@ -33,7 +33,7 @@ $(document).delegate "fieldset .leftside_hider .scroll_fieldset_top", "click", (
   $("html, body").animate({scrollTop: finish_position}, duration);
   return false
 
-$(document).delegate "fieldset .leftside_hider .scroll_fieldset_bottom", "click", (e)->
+$(document).on "click", "fieldset .leftside_hider .scroll_fieldset_bottom", (e)->
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
   start_position = window.scrollY
@@ -44,7 +44,7 @@ $(document).delegate "fieldset .leftside_hider .scroll_fieldset_bottom", "click"
   $("html, body").animate({scrollTop: finish_position}, duration);
   return false
 
-$(document).delegate "fieldset .leftside_hider .select_fieldset", "click", (e)->
+$(document).on "click", "fieldset .leftside_hider .select_fieldset", (e)->
   e.preventDefault()
   me = $(e.currentTarget)
   fieldset = me.closest('fieldset')
@@ -61,14 +61,14 @@ $(document).delegate "fieldset .leftside_hider .select_fieldset", "click", (e)->
 
 
 
-$(document).delegate ".form-horizontal legend", "click", (e)->
+$(document).on "click", ".form-horizontal legend", (e)->
   if $(this).has('i.icon-chevron-down').length
     $(this).closest("fieldset").addClass('opened')
   else
     if $(this).has('i.icon-chevron-right').length
       $(this).closest("fieldset").removeClass('opened')
 
-$(document).delegate "fieldset .leftside_hider .select_fieldset a", "click", (e)->
+$(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
   e.preventDefault()
   e.stopImmediatePropagation()
   hide_previous = true
@@ -115,7 +115,7 @@ $(window).scroll (e)->
 
 
 
-$(document).delegate "#form_controls_fixed a", "click", (e)->
+$(document).on "click", "#form_controls_fixed a", (e)->
   e.preventDefault()
   $(e.currentTarget).data('target').click()
   return false

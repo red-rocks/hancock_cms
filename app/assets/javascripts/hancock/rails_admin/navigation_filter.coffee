@@ -1,11 +1,13 @@
 #= require ./en_ru_switcher
 
-$(document).delegate '.clear_navigation_filter_field', 'click', (e)->
+# $(document).delegate '.clear_navigation_filter_field', 'click', (e)->
+$(document).on 'click', '.clear_navigation_filter_field', (e)->
   e.preventDefault()
   $("#navigation_filter").val("").trigger("keyup")
   return false
 
-$(document).delegate '#navigation_filter', 'keypress', (e)->
+# $(document).delegate '#navigation_filter', 'keypress', (e)->
+$(document).on 'keypress', '#navigation_filter', (e)->
   _code = e.which || e.keyCode
   if _code == 13
     e.preventDefault()
@@ -13,7 +15,8 @@ $(document).delegate '#navigation_filter', 'keypress', (e)->
       _selected.find('a').click()
     return false
 
-$(document).delegate '#navigation_filter', 'keyup', (e)->
+# $(document).delegate '#navigation_filter', 'keyup', (e)->
+$(document).on 'keyup', '#navigation_filter', (e)->
   filter = e.currentTarget.value
   navigation_block = $(e.currentTarget).parent().siblings('.toolbar').find('.nav')
   nav_first_lvl = navigation_block.find("li.dropdown-header").removeClass('hidden').removeClass('opened').removeClass('opened-filtered')
