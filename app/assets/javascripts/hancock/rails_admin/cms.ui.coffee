@@ -11,12 +11,8 @@
 
 window.hancock_cms ||= {}
 
-$(window).on 'load', ->
-  $('.leftside_hider').stick_in_parent(
-    offset_top: 60
-  )
-
-$(document).on "page:load", ->
+$(document).on "rails_admin.dom_ready", ->
+  console.log(1)
   $('.leftside_hider').stick_in_parent(
     offset_top: 60
   )
@@ -129,7 +125,7 @@ $(document).on "click", "#form_controls_fixed a", (e)->
   $(e.currentTarget).data('target').click()
   return false
 
-$(document).bind 'rails_admin.dom_ready', ->
+$(document).on 'rails_admin.dom_ready', ->
   return if $("#form_controls_fixed").length > 0
   $editors = $('[data-richtext=ckeditor]').not('.ckeditored')
   if $editors.length

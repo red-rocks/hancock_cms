@@ -29,14 +29,21 @@ module Hancock
         ).visible_fields
         return if fields.empty?
 
-        @template.content_tag :fieldset do
+        @template.content_tag :fieldset, class: fieldset.name == :default ? 'default_fieldset' : '' do
           if fieldset.leftside_hider
             leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', style: fieldset.active? ? 'display:none' : '', title: "Свернуть блок") do
-              @template.content_tag(:div, class: 'scroll_fieldset_block', style: 'top: 50%') do
-                 ret = []
-                ret << @template.content_tag(:div, 'В', class: 'scroll_fieldset_top', title: "Вверх блока")
-                ret << @template.content_tag(:div, 'SF', class: 'select_fieldset', title: "Выбрать другой блок")
-                ret << @template.content_tag(:div, 'Н', class: 'scroll_fieldset_bottom', title: "Вниз блока")
+              # @template.content_tag(:div, class: 'scroll_fieldset_block', style: 'top: 50%') do
+              @template.content_tag(:div, class: 'scroll_fieldset_block') do
+                ret = []
+                ret << @template.content_tag(:div, class: 'scroll_fieldset_top', title: "Вверх блока") do
+                  @template.content_tag(:i, "", class: 'fa fa-arrow-up')
+                end
+                ret << @template.content_tag(:div, class: 'select_fieldset', title: "Выбрать другой блок") do
+                  @template.content_tag(:i, "", class: 'fa fa-indent')
+                end
+                ret << @template.content_tag(:div, class: 'scroll_fieldset_bottom', title: "Вниз блока") do
+                  @template.content_tag(:i, "", class: 'fa fa-arrow-down')
+                end
                 ret.join.html_safe
               end
             end
@@ -54,3 +61,4 @@ module Hancock
     end
   end
 end
+0
