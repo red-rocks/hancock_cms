@@ -56,6 +56,8 @@ require 'kaminari/actionview'
 # require 'addressable/uri'
 # require 'turbolinks'
 
+require 'stickykit/rails'
+
 require 'hancock/model'
 require 'hancock/engine'
 require 'hancock/controller'

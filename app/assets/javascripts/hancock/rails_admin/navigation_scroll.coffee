@@ -1,7 +1,7 @@
 #= require jquery.mCustomScrollbar.concat.min
 
 window.hancock_cms.navigation_mscroll = () ->
-  $('.toolbar').mCustomScrollbar(
+  $('.custom_scroll').mCustomScrollbar(
     scrollInertia: 60
     mouseWheelPixels: 60
     theme: 'minimal'
