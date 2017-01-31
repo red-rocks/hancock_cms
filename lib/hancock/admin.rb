@@ -132,6 +132,28 @@ module Hancock
       }
     end
 
+    def self.user_defined_field_block(field_name, is_active = false, options = {})
+      if field_name.is_a?(Hash)
+        field_name, is_active, options = (field_name[:field_name] || field_name[:field]), (field_name[:active] || false), field_name
+      elsif is_active.is_a?(Hash)
+        is_active, options = (is_active[:active] || false), is_active
+      end
+      field_name = field_name.to_sym
+
+      Proc.new {
+        active is_active
+        label options[:label]# || I18n.t('hancock.user_defined_field')
+        field @abstract_model.model.user_defined_fields[field_name][:render_method], :toggle
+        field field_name, :ck_editor
+
+        Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
+
+        if block_given?
+          yield self
+        end
+      }
+    end
+
 
   end
 end

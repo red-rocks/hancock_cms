@@ -5,7 +5,7 @@ module Hancock::Insertions
     class_attribute :added_insertions, :removed_insertions, :insertions_fields
     self.removed_insertions ||= []
     self.added_insertions ||= []
-    self.insertions_fields ||= []
+    self.insertions_fields ||= {}
     def possible_insertions
       self.class.possible_insertions
     end
@@ -41,11 +41,14 @@ module Hancock::Insertions
   end
 
   class_methods do
+    def insertions_field(name, opts = {type: String, default: ''})
+      field name, opts
+      insertions_for name, opts
+    end
     def insertions_for(name, opts = {})
       return if name.blank?
       name = name.to_sym
-      return if insertions_fields.include?(name)
-      insertions_fields << name
+      return if insertions_fields.keys.include?(name)
       (opts.delete(:add_insertions) || []).each do |_ins|
         add_insertion _ins
       end
@@ -53,6 +56,10 @@ module Hancock::Insertions
         remove_insertion _ins
       end
       _method_name = opts[:as].present? ? opts[:as] : "page_#{name}"
+      insertions_fields[name] = {
+        method: _method_name,
+        options: opts
+      }
       if _method_name
         class_eval <<-EVAL
           def #{_method_name}

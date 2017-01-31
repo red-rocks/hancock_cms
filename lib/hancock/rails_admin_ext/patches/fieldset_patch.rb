@@ -50,7 +50,5 @@ module Hancock
           contents.join.html_safe
         end
       end
-
-    end
   end
 end
