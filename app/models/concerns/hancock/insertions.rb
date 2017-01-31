@@ -86,7 +86,13 @@ module Hancock::Insertions
     end
 
     def default_insertions
-      self.fields.keys
+      # self.fields.keys # we was here but inheritance and we need check
+      
+      # return @default_insertions unless @default_insertions.nil?
+      # @default_insertions =
+      self.fields.select { |_name, _field|
+        _field.options[:klass] and self.is_a?(self._field.options[:klass])
+      }.keys
     end
     def possible_insertions
       @possible_insertions ||= (default_insertions + added_insertions).map(&:to_s).uniq - removed_insertions.map(&:to_s)
