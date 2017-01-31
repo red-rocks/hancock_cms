@@ -1,9 +1,11 @@
 @import 'jquery.mCustomScrollbar'
 
-a
+.btn
+  +transition(all 0.3s)
+
+a, a:focus, button, .btn:focus, .btn:active:focus, .btn.active:focus
   outline: none
-  &:focus
-    outline: none
+  outline: 0px
 
 html, body.rails_admin
   padding: 0
@@ -18,7 +20,7 @@ body.rails_admin
 
 .admin-navbar
   position: relative
-  height: 60px
+  height: 50px
   width: 100%
   +box-shadow( 0px 5px 10px -5px rgba(0,0,0,0.5))
 
@@ -111,7 +113,8 @@ body.rails_admin
 
 .admin-menubar
   width: 230px
-  padding: 60px 0px 90px
+  padding: 50px 0px 80px
+  z-index: 2
 
 .admin-menubar-fixed
   position: fixed
@@ -123,10 +126,11 @@ body.rails_admin
   background: #212121
 
 .admin-content
-  padding: 60px 0px 0px 230px
+  padding: 50px 0px 0px 230px
   background: #f3f4f5
   margin: 0px auto -30px
   min-height: 100%
+  position: relative
   &:after
     content: ""
     display: block
@@ -136,7 +140,7 @@ body.rails_admin
   padding: 15px
   width: 100%
   .content
-    padding: 25px
+    padding: 15px
     background: #fff
     border: 1px solid transparent
     border-radius: 4px
@@ -297,7 +301,7 @@ body.rails_admin
   display: block
   z-index: 1400
   width: 230px
-  height: 60px
+  height: 50px
   background: #21292e
   text-align: right
   ul
@@ -307,7 +311,7 @@ body.rails_admin
     height: 100%
 
 .footer-nav-link
-  width: 25%
+  width: 20%
   height: 100%
   display: inline-block
   vertical-align: top
@@ -347,6 +351,7 @@ body.rails_admin
   line-height: 30px
   font-size: 12px
   background: #1f1f1f
+  position: relative
   a
     color: #ff2b58
     text-decoration: none
@@ -364,6 +369,7 @@ body.rails_admin
 
 .breadcrumb
   margin-top: 0px
+  font-size: 13px
 
 .control-group
   clear: both
@@ -424,8 +430,8 @@ body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwav
 .current_user
   float: right
   display: block
-  width: 60px
-  height: 60px
+  width: 50px
+  height: 50px
   &:hover
     .user_info
       +transform(scale(1))
@@ -434,8 +440,8 @@ body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwav
       background: #eee
 
 .user_icon
-  width: 60px
-  height: 60px
+  width: 50px
+  height: 50px
   +display-flex-center
   +transition(all 0.3s)
   i
@@ -485,60 +491,6 @@ body.rails_admin .table td.paperclip_type, body.rails_admin .table td.carrierwav
     text-transform: lowercase
     text-align: center
     margin-bottom: 7px
-
-
-//.sitemap_root_link
-//  box-sizing: border-box
-//  width: 50px
-//  overflow: inherit !important
-//  a
-//    color: #fff
-//    text-decoration: none
-//    height: 50px
-//    display: block
-//    width: 50px
-//    font-size: 0
-//    &::before
-//      display: inline-block
-//      font-family: FontAwesome
-//      font-size: 24px
-//      text-rendering: auto
-//      -webkit-font-smoothing: antialiased
-//      -moz-osx-font-smoothing: grayscale
-//      content: "\f277"
-//      box-sizing: border-box
-//      line-height: 50px
-//      color: #fff
-//    span
-//      display: inline-block
-//      height: 50px
-//      margin: 0
-//      padding: 0
-//      position: relative
-//      top: -4px
-//      color: #fff
-//      font-size: 14px
-//      font-weight: bold
-//
-//.sitemap_root_link
-//  &::after
-//    content: "Перегенерировать карту сайта"
-//    opacity: 0
-//    font-size: 11px
-//    height: 20px
-//    line-height: 20px
-//    position: absolute
-//    left: 0
-//    width: 170px
-//    color: #000
-//    border: 1px solid #000
-//    background: #fff
-//
-//.sitemap_root_link
-//  &:hover
-//    &::after
-//      opacity: 1
-//
 
 tr.rails_admin_settings_setting_row
   td.raw_field
@@ -618,60 +570,6 @@ a
   background-color: #c73800
   border-color: #bd3700
 
-#bulk_form
-  min-height: 20px
-  //background-color: #f5f5f5
-  border: 1px solid #e3e3e3
-  +border-radius(4px)
-  //+box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.05))
-
-  thead
-    tr:first-child
-      padding: 6px 2px 6px 2px
-    tr
-      th
-        position: relative
-        vertical-align: middle
-        padding: 6px 30px 6px 4px
-        &:after
-          margin-left: 10px
-          margin-right: 10px
-          position: absolute
-          right: 0
-          top: 50%
-          margin-top: -2px
-      th:first-child
-        max-width: 40px
-  tbody
-    tr
-      td:first-child
-        padding: 6px 2px 6px 2px
-      td
-        position: relative
-        vertical-align: middle
-        text-align: left
-        padding: 3px 4px 3px 4px
-      td.other.right, td.last.links
-        padding: 6px 10px 6px 0px
-        max-width: 140px
-      .last.links
-        a
-          font-size: 16px
-      td.state_type
-        .label
-          margin-top: 10px
-          padding: 1px 5px
-          font-size: 12px
-          line-height: 1.5
-          border-radius: 3px
-          display: inline-block
-        .btn.btn-mini
-          margin-bottom: 10px !important
-        .btn.btn-mini.label-default
-          color: #fff
-      td:first-child
-        max-width: 40px
-
 .pagination
   margin: 10px 0px 20px 20px
 
@@ -709,8 +607,11 @@ body.rails_admin .form-horizontal.denser legend
 body.rails_admin .form-horizontal .tab-content .tab-pane
   border-left: 5px solid #e53935
   position: relative
-  legend
-    display: none
+  //legend
+  //  display: none
+  fieldset
+    margin-left: 50px
+    margin-right: 25px
 
 .label-info
   background-color: #e53935
@@ -784,73 +685,404 @@ body.rails_admin
       background-color: #c73800
       border-color: #bd3700
 
-
-
-
-
 #form_controls_fixed
   position: fixed
-  top: 55%
+  top: 55px
   right: 5px
   text-align: right
-
+  display: block
+  background: #fff
+  border: 1px solid #e3e3e3
+  +border-radius(4px)
+  padding: 5px
+  z-index: 999
+  +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
   a
-    display: block
+    display: inline-block
+    color: #fff
+    background-color: #e53935
+    border-color: #db3a35
+    margin-bottom: 0
+    font-weight: normal
+    text-align: center
+    vertical-align: middle
+    cursor: pointer
+    background-image: none
+    border: 1px solid
+    white-space: nowrap
+    padding: 6px 12px
+    font-size: 14px
+    line-height: 1.42857
+    +border-radius(4px)
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    +transition(all 0.3s)
+    margin-right: 3px
+  a:last-child
+    margin-right: 0px
+  a:hover
+    background-color: #c73800
+    border-color: #bd3700
 
+  .clone_save, .clone_add_another, .clone_add_edit, .clone_continue
+    &:before, &:after
+      font-family: FontAwesome
+      display: inline-block
+
+  .clone_save
+    &:before
+      content: "\f0c7"
+
+  .clone_add_another
+    &:before
+      content: "\f0c7"
+    &:after
+      content: "\f067"
+      font-size: 10px
+      margin-left: -5px
+      margin-right: -5px
+      text-shadow: 0px 0px 2px #e53935, 0px 0px 2px #e53935, 0px 0px 2px #e53935, 0px 0px 2px #e53935
+  .clone_add_another:hover
+    &:after
+      text-shadow: 0px 0px 2px #c73800, 0px 0px 2px #c73800, 0px 0px 2px #c73800, 0px 0px 2px #c73800
+
+  .clone_add_edit
+    &:before
+      content: "\f0c7"
+    &:after
+      content: "\f040"
+      font-size: 10px
+      margin-left: -5px
+      margin-right: -5px
+      text-shadow: 0px 0px 2px #e53935, 0px 0px 2px #e53935, 0px 0px 2px #e53935, 0px 0px 2px #e53935
+  .clone_add_edit:hover
+    &:after
+      text-shadow: 0px 0px 2px #c73800, 0px 0px 2px #c73800, 0px 0px 2px #c73800, 0px 0px 2px #c73800
+
+  .clone_continue
+    &:before
+      content: "\f0e2"
+
+.cke_screen_reader_only
+  position: fixed
+  top: 0
 
 fieldset
+  +transition(all 0.3s)
   position: relative
   .leftside_hider
     overflow: visible
     position: absolute
-    width: 80px
-    height: calc(100% - 45px)
-    float: left
-    background-color: #ddd
-    opacity: 0.5
+    width: 45px
+    top: 40px
+    margin-left: 10px
+    height: 126px
+    opacity: 0.75
     cursor: pointer
     z-index: 9
+    background: #fff
+    border: 1px solid #e3e3e3
+    +border-radius(4px)
+    +transition(all 0.3s)
+    +transform(scale(0))
+    transform-origin: top center
+    -webkit-transform-origin: top left
+    -o-transform-origin: top left
+    -moz-transform-origin: top left
+    padding: 5px
+    +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
     &:hover
-      opacity: 0.8
+      opacity: 1.0
       .scroll_fieldset_block
         display: block
         > *
-          opacity: 0.5
+          opacity: 1.0
     &:active
       opacity: 1
 
     .scroll_fieldset_block
       overflow: visible
       position: absolute
-      width: 50px
-      left: 15px
+      width: 35px
+      left: 5px
       z-index: 10
-      display: none
-      background-color: #e11
-      margin-top: -50px
+      //display: none
+
+      //margin-top: -50px
       &:hover
         display: block
 
       > *
-        opacity: 0.5
+        opacity: 0.25
         // position: relative
-        height: 50px
-        width: 50px
+        height: 35px
+        width: 35px
+        margin-bottom: 5px
+        border-radius: 4px
         z-index: 11
+        display: flex
+        align-items: center
+        justify-content: center
+        background-color: #e53935
+        +transition(all 0.3s)
+        color: #fff
         &:hover
-          background-color: #b01
-          opacity: 0.8
+          background-color: #c73800
+          opacity: 1
         &:active
-          background-color: red
+          background-color: #e53935
           opacity: 1
 
-      .select_fieldset
-        overflow: visible
+      .links-list
+        width: auto
         display: inline-flex
+        background: #fff
+        border: 1px solid #e3e3e3
+        +border-radius(4px)
+        +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
+        padding: 3px
+
+      .select_fieldset
+        +transition(all 0.3s)
+        overflow: visible
         a
-          background-color: blue
+          background-color: #e53935
           display: inline-block
+          text-align: center
           width: 50px
-          height: 50px
-          margin-right: 10px
+          height: 29px
+          margin-right: 3px
           overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
+          color: #ffffff
+          padding: 0px 3px
+          font-size: 10px
+          line-height: 29px
+          text-decoration: none
+          +transition(all 0.3s)
+          +border-radius(4px)
+          &:hover
+            background-color: #c73800
+            opacity: 1
+        a:last-child
+          margin-right: 0px
+
+fieldset.opened
+  .leftside_hider
+    +transform(scale(1))
+
+table.table
+  border-collapse: separate
+  border: 1px solid #e3e3e3
+  +border-radius(4px)
+
+  td, th
+    border-left: solid black 1px
+    border-top: solid black 1px
+    border: 0px
+
+  th
+    border-top: none
+
+  td:first-child, th:first-child
+    border-left: none
+
+  thead
+    tr:first-child
+      padding: 6px 2px 6px 2px
+    tr
+      th
+        position: relative
+        vertical-align: middle
+        padding: 6px 30px 6px 4px
+        &:after
+          margin-left: 10px
+          margin-right: 10px
+          position: absolute
+          right: 0
+          top: 50%
+          margin-top: -2px
+      th:first-child
+        //max-width: 40px
+        padding-left: 10px
+      th:last-child
+        padding-right: 10px
+  tbody
+    tr
+      td:first-child
+        padding: 6px 2px 6px 2px
+      td
+        position: relative
+        vertical-align: middle
+        text-align: left
+        padding: 3px 4px 3px 4px
+      td.other.right, td.last.links
+        padding: 6px 10px 6px 0px
+        max-width: 140px
+      .last.links
+        a
+          font-size: 16px
+      td.state_type
+        .label
+          margin-top: 10px
+          padding: 1px 5px
+          font-size: 12px
+          line-height: 1.5
+          border-radius: 3px
+          display: inline-block
+        .btn.btn-mini
+          margin-bottom: 10px !important
+        .btn.btn-mini.label-default
+          color: #fff
+      td:first-child
+        //max-width: 40px
+        padding-left: 10px
+      td:last-child
+        padding-right: 10px
+
+#bulk_form
+  thead
+    tr
+      th:first-child
+        max-width: 40px
+        padding-left: 2px
+  tbody
+    tr
+      td:first-child
+        max-width: 40px
+        padding-left: 2px
+
+.mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+  background-color: rgba(25, 25, 25, 0.2)
+
+.mCS-minimal.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-minimal.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar
+  background-color: rgba(25, 25, 25, 0.5)
+
+.toolbar
+  .mCS-minimal.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar
+    background-color: rgba(255, 255, 255, 0.2)
+  .mCS-minimal.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-minimal.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar
+    background-color: rgba(255, 255, 255, 0.5)
+
+body.rails_admin .form-horizontal.denser
+  margin-top: 15px
+  fieldset > legend
+    margin-bottom: 0px
+  legend i
+    font-size: 14px
+
+body.rails_admin .nav.nav-tabs
+  margin-bottom: -1px
+  border-bottom: 0px
+  padding: 0px 5px
+
+.form-horizontal.denser
+  fieldset.opened
+    min-height: 180px
+    padding-bottom: 10px
+  fieldset.default_fieldset
+    padding-top: 0px
+    border: 0px
+  fieldset
+    +border-radius(4px)
+    border: 1px solid #e3e3e3
+    background: #fff
+    margin-bottom: 5px
+    padding: 0px
+    min-height: 30px
+    overflow: visible
+    padding-top: 29px
+    &:first-child
+      margin-top: 5px
+    &:last-child
+      margin-bottom: 0px
+    legend
+      height: 30px
+      padding: 5px 10px
+      font-size: 18px
+      line-height: 20px
+      top: 0px
+      position: absolute
+    .form-group
+      margin-left: 25px
+      margin-right: 0px
+      margin-top: 15px
+      margin-bottom: 15px
+    .input-group
+      float: none !important
+    input[type=checkbox]
+      width: 25px !important
+      height: 25px !important
+    label
+      font-size: 13px
+    label.dropdown-toggle
+      width: auto
+    .help-block
+      margin-bottom: 0px
+      color: #aaaaaa
+      font-size: 12px
+      line-height: 12px
+    .ra-multiselect .ra-multiselect-column
+      float: left
+      margin-bottom: 5px
+
+body.rails_admin .nav.nav-tabs
+  font-size: 0px
+  li
+    font-size: 14px
+    display: inline-block
+    float: none
+    margin: 0px
+
+.form-group.form-actions
+  margin-left: 0px
+  margin-right: 0px
+  margin-top: 25px
+
+#rails_admin_model_accesses
+  padding: 15px
+  .controls
+    input, label
+      display: inline-block
+      vertical-align: top
+      float: none
+    label
+      font-size: 14px
+      font-weight: normal
+    input
+      margin: 0px 10px
+
+.rails_admin_multiple_file_upload_block
+  margin-top: 15px
+
+@media all and (max-width: 1366px)
+  body.rails_admin .nav.nav-tabs
+    li
+      font-size: 13px
+    li > a
+      padding: 6px 8px
+  body.rails_admin
+    table.table.table-condensed
+      font-size: 13px
+  #bulk_form thead tr th:first-child, body.rails_admin table.table thead tr th:first-child
+    max-width: 35px
+  body.rails_admin table.table thead tr th.user
+    max-width: none
+
+//ck-editor file upload
+
+#fileupload
+  font-size: 0
+
+.gal-holder .gal-item, .gal-holder .folder-item
+  display: inline-block
+  font-size: 16px
+  vertical-align: top
+  width: 80px
+  height: 80px
+
+.gal-holder .gal-item:first-child, .gal-holder .folder-item:first-child
+  float: none
