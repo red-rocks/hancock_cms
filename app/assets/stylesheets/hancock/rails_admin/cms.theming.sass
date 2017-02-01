@@ -385,8 +385,11 @@ body.rails_admin
     padding: 3px
     font-size: 20px
 
-.remove_nested_fields
-  opacity: 1 !important
+body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields, body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_one_fields
+  opacity: 1
+  z-index: 10
+  left: 50px
+  top: 10px
 
 body.rails_admin .modal
   margin: 0 auto !important
@@ -605,7 +608,7 @@ body.rails_admin .form-horizontal.denser legend
   border-color: #e53a36
 
 body.rails_admin .form-horizontal .tab-content .tab-pane
-  border-left: 5px solid #e53935
+  border-left: 0px solid #e53935
   position: relative
   //legend
   //  display: none
@@ -773,19 +776,34 @@ fieldset
   +transition(all 0.3s)
   position: relative
   .leftside_hider
+    width: 65px
+    position: absolute
+    top: 30px
+    bottom: 0px
+    background: rgba(100,100,100,0.05)
+    cursor: pointer
+    padding: 10px 0px
+    z-index: 9
+    +transition(background 0.3s)
+    &:hover
+      background: rgba(100,100,100,0.1)
+    &:active
+      background: rgba(100,100,100,0.075)
+
+  .scroll_fieldset_block
     overflow: visible
     position: absolute
     width: 45px
-    top: 40px
+    top: 10px
     margin-left: 10px
     height: 126px
     opacity: 0.75
     cursor: pointer
-    z-index: 9
+    z-index: 10
     background: #fff
     border: 1px solid #e3e3e3
     +border-radius(4px)
-    +transition(all 0.3s)
+    +transition(scale 0.3s, opacity 0.3s)
     +transform(scale(0))
     transform-origin: top center
     -webkit-transform-origin: top left
@@ -795,83 +813,63 @@ fieldset
     +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
     &:hover
       opacity: 1.0
-      .scroll_fieldset_block
-        display: block
-        > *
-          opacity: 1.0
-    &:active
-      opacity: 1
-
-    .scroll_fieldset_block
-      overflow: visible
-      position: absolute
+    > *
+      height: 35px
       width: 35px
-      left: 5px
-      z-index: 10
-      //display: none
-
-      //margin-top: -50px
+      +border-radius(4px)
+      margin-bottom: 5px
+      z-index: 11
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: #e53935
+      +transition(all 0.3s)
+      color: #fff
       &:hover
-        display: block
-
-      > *
-        opacity: 0.25
-        // position: relative
-        height: 35px
-        width: 35px
-        margin-bottom: 5px
-        border-radius: 4px
-        z-index: 11
-        display: flex
-        align-items: center
-        justify-content: center
+        background-color: #c73800
+        opacity: 1
+      &:active
         background-color: #e53935
+        opacity: 1
+
+    .links-list
+      width: auto
+      display: inline-flex
+      background: #fff
+      border: 1px solid #e3e3e3
+      +border-radius(4px)
+      +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
+      padding: 3px
+
+    .select_fieldset
+      +transition(all 0.3s)
+      overflow: visible
+      a
+        background-color: #e53935
+        display: inline-block
+        text-align: center
+        width: 50px
+        height: 29px
+        margin-right: 3px
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        color: #ffffff
+        padding: 0px 3px
+        font-size: 10px
+        line-height: 29px
+        text-decoration: none
         +transition(all 0.3s)
-        color: #fff
+        +border-radius(4px)
         &:hover
           background-color: #c73800
           opacity: 1
-        &:active
-          background-color: #e53935
-          opacity: 1
-
-      .links-list
-        width: auto
-        display: inline-flex
-        background: #fff
-        border: 1px solid #e3e3e3
-        +border-radius(4px)
-        +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
-        padding: 3px
-
-      .select_fieldset
-        +transition(all 0.3s)
-        overflow: visible
-        a
-          background-color: #e53935
-          display: inline-block
-          text-align: center
-          width: 50px
-          height: 29px
-          margin-right: 3px
-          overflow: hidden
-          white-space: nowrap
-          text-overflow: ellipsis
-          color: #ffffff
-          padding: 0px 3px
-          font-size: 10px
-          line-height: 29px
-          text-decoration: none
-          +transition(all 0.3s)
-          +border-radius(4px)
-          &:hover
-            background-color: #c73800
-            opacity: 1
-        a:last-child
-          margin-right: 0px
+      a:last-child
+        margin-right: 0px
 
 fieldset.opened
-  .leftside_hider
+  //.leftside_hider
+  .scroll_fieldset_block
     +transform(scale(1))
 
 table.table
@@ -983,6 +981,11 @@ body.rails_admin .nav.nav-tabs
   fieldset.opened
     min-height: 180px
     padding-bottom: 10px
+    fieldset
+      .form-group
+        margin-left: 25px !important
+        margin-top: 15px
+        margin-bottom: 15px
   fieldset.default_fieldset
     padding-top: 0px
     border: 0px

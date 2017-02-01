@@ -12,16 +12,16 @@
 window.hancock_cms ||= {}
 
 $(document).on "rails_admin.dom_ready", ->
-  console.log(1)
-  $('.leftside_hider').stick_in_parent(
-    offset_top: 60
+  _offsettop = $('.scroll_fieldset_block').closest('fieldset').height() / 2
+  $('.scroll_fieldset_block').stick_in_parent(
+    offset_top: _offsettop
   )
 
-# $(document).on "click", "fieldset .leftside_hider", (e)->
-#   e.preventDefault()
-#   fieldset = $(e.currentTarget).closest('fieldset')
-#   fieldset.find('legend').click()
-#   return false
+$(document).on "click", "fieldset .leftside_hider", (e)->
+  e.preventDefault()
+  fieldset = $(e.currentTarget).closest('fieldset')
+  fieldset.find('legend').click()
+  return false
 #
 # $(document).on "mouseenter", "fieldset .leftside_hider", (e)->
 #   $(window).scroll()
@@ -65,8 +65,8 @@ $(document).on "click", "fieldset .leftside_hider .select_fieldset", (e)->
 #  me.html("").append(fieldset_links).css(width: fieldset_links.length * 60 + "px")
   return false
 
-$(document).delegate ".select_fieldset", "mouseleave", (e)->
-  me = $(e.currentTarget)
+$(document).delegate ".scroll_fieldset_block", "mouseleave", (e)->
+  me = $(e.currentTarget).find('.select_fieldset')
   me.html("<i class='fa fa-indent'></i>").removeClass('links-list')
   return false
 
@@ -74,7 +74,8 @@ $(document).on "click", ".form-horizontal legend", (e)->
   fieldset = $(this).closest("fieldset")
   if $(this).has('i.icon-chevron-down').length
     fieldset.addClass('opened')
-    fieldset.find('.leftside_hider').css(position: '', top: '')
+    fieldset.find('.scroll_fieldset_block').css(position: '', top: '')
+    $("#sticky_item").trigger("sticky_kit:recalc")
   else
     if $(this).has('i.icon-chevron-right').length
       fieldset.removeClass('opened')
