@@ -12,10 +12,18 @@
 window.hancock_cms ||= {}
 
 $(document).on "rails_admin.dom_ready", ->
-  _offsettop = $('.scroll_fieldset_block').closest('fieldset').height() / 2
-  $('.scroll_fieldset_block').stick_in_parent(
-    offset_top: _offsettop
-  )
+  _offsettop = $(window).height() / 2 - 63
+  $('.scroll_fieldset_block').each () ->
+    me = $(this)
+    me.stick_in_parent(
+      offset_top: _offsettop
+    )
+
+$(document).on "mouseenter", "fieldset", (e)->
+  $(e.currentTarget).addClass("hover")
+
+$(document).on "mouseleave", "fieldset", (e)->
+  $(e.currentTarget).removeClass("hover")
 
 $(document).on "click", "fieldset .leftside_hider", (e)->
   e.preventDefault()
@@ -75,7 +83,6 @@ $(document).on "click", ".form-horizontal legend", (e)->
   if $(this).has('i.icon-chevron-down').length
     fieldset.addClass('opened')
     fieldset.find('.scroll_fieldset_block').css(position: '', top: '')
-    $("#sticky_item").trigger("sticky_kit:recalc")
   else
     if $(this).has('i.icon-chevron-right').length
       fieldset.removeClass('opened')
