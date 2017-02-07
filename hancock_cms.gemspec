@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'
 
-  spec.add_dependency 'ack_rails_admin_settings', '~> 1.2.1'
+  spec.add_dependency 'ack_rails_admin_settings', '~> 1.2.2'
   spec.add_dependency 'safe_yaml'
 
   spec.add_dependency 'kaminari'
@@ -45,4 +45,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'codemirror-rails'
 
   spec.add_dependency 'scrollbar-rails'
+  spec.add_dependency 'stickykit-rails'
 end

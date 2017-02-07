@@ -1,5 +1,7 @@
 #= require_self
 
+#= require jquery.sticky-kit.js
+
 #= require ./navigation_dropdown
 #= require ./navigation_scroll
 #= require ./navigation_filter
@@ -9,18 +11,24 @@
 
 window.hancock_cms ||= {}
 
+$(window).bind 'load', ->
+  $('.leftside_hider').stick_in_parent(
+    offset_top: 60
+  )
 
+$(document).bind "page:load", ->
+  $('.leftside_hider').stick_in_parent(
+    offset_top: 60
+  )
 
+#$(document).delegate "fieldset .leftside_hider", "click", (e)->
+#  e.preventDefault()
+#  fieldset = $(e.currentTarget).closest('fieldset')
+#  fieldset.find('legend').click()
+#  return false
 
-
-$(document).on "click", "fieldset .leftside_hider", (e)->
-  e.preventDefault()
-  fieldset = $(e.currentTarget).closest('fieldset')
-  fieldset.find('legend').click()
-  return false
-
-$(document).on "mouseenter", "fieldset .leftside_hider", (e)->
-  $(window).scroll()
+#$(document).delegate "fieldset .leftside_hider", "mouseenter", (e)->
+#  $(window).scroll()
 
 $(document).on "click", "fieldset .leftside_hider .scroll_fieldset_top", (e)->
   e.preventDefault()
@@ -37,7 +45,7 @@ $(document).on "click", "fieldset .leftside_hider .scroll_fieldset_bottom", (e)-
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
   start_position = window.scrollY
-  finish_position = fieldset.next().offset().top - $(window).height()
+  finish_position = fieldset.next().offset().top - $(window).height() + 35   # 35px - offset-bottom
   return false if start_position > finish_position
   speed = 1.7 # px/msec
   duration = Math.abs((finish_position - start_position) / speed)
@@ -52,21 +60,33 @@ $(document).on "click", "fieldset .leftside_hider .select_fieldset", (e)->
   fieldset_links = []
   fieldsets.each ->
     f = $(this)
-    l = $(this).find("legend")
+    l = $(this).find("legend:first")
     fieldset_link = $("<a title='" + l.text() + "' href='#'>" + l.text() + "</a>")
     fieldset_link.data('target', f)
     fieldset_links.push(fieldset_link)
-  me.html("").append(fieldset_links).css(width: fieldset_links.length * 60 + "px")
+  me.html("").append(fieldset_links).addClass('links-list')
+#  css(width: "auto", display: 'inline-flex')
+#  me.html("").append(fieldset_links).css(width: fieldset_links.length * 60 + "px")
   return false
 
+$(document).delegate ".select_fieldset", "mouseleave", (e)->
+  me = $(e.currentTarget)
+  me.html("<i class='fa fa-indent'></i>").removeClass('links-list')
+  return false
 
-
+<<<<<<< HEAD
 $(document).on "click", ".form-horizontal legend", (e)->
+=======
+$(document).delegate ".form-horizontal legend", "click", (e)->
+  fieldset = $(this).closest("fieldset")
+
+>>>>>>> 1780b57e56e86155e62e2e27cab2c3b1f919b224
   if $(this).has('i.icon-chevron-down').length
-    $(this).closest("fieldset").addClass('opened')
+    fieldset.addClass('opened')
+    fieldset.find('.leftside_hider').css(position: '', top: '')
   else
     if $(this).has('i.icon-chevron-right').length
-      $(this).closest("fieldset").removeClass('opened')
+      fieldset.removeClass('opened')
 
 $(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
   e.preventDefault()
@@ -83,7 +103,7 @@ $(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
     if fs[0] == target[0]
       break
     if hide_previous and fieldset[0] == fs[0]
-      target_position += 45
+      target_position += 30
     else
       target_position += fs.height()
   target_position -= 60
@@ -93,33 +113,26 @@ $(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
   $("html, body").animate({scrollTop: target_position}, 300);
   return false
 
-
-$(window).scroll (e)->
-  window_center = window.scrollY + $(window).height()/2
-  offset = 50
-  $("fieldset .leftside_hider:visible").each ->
-    me = $(this)
-    min_position = me.offset().top + offset
-    max_position = me.offset().top + me.height() - offset
-    scroll_block = me.find(".scroll_fieldset_block")
-    if window_center <= min_position
-      scroll_block.css(top: offset, bottom: "")
-    else
-      if window_center >= max_position
-        scroll_block.css(top: "", bottom: 0)
-      else
-        scroll_block.css(top: window_center - min_position + offset, bottom: "")
-
-
-
-
-
+#$(window).scroll (e)->
+#  window_center = window.scrollY + $(window).height()/2
+#  offset = 50
+#  $("fieldset .leftside_hider:visible").each ->
+#    me = $(this)
+#    min_position = me.offset().top + offset
+#    max_position = me.offset().top + me.height() - offset
+#    scroll_block = me.find(".scroll_fieldset_block")
+#    if window_center <= min_position
+#      scroll_block.css(top: offset, bottom: "")
+#    else
+#      if window_center >= max_position
+#        scroll_block.css(top: "", bottom: 0)
+#      else
+#        scroll_block.css(top: window_center - min_position + offset, bottom: "")
 
 $(document).on "click", "#form_controls_fixed a", (e)->
   e.preventDefault()
   $(e.currentTarget).data('target').click()
   return false
-
 
 $(document).bind 'rails_admin.dom_ready', ->
   return if $("#form_controls_fixed").length > 0
@@ -139,6 +152,6 @@ $(document).bind 'rails_admin.dom_ready', ->
     form.append("<div id='form_controls_fixed'></div>")
     form_controls_fixed = form.find("#form_controls_fixed")
     buttons.each ->
-      clone_link = $("<a href='#' title='" + this.title + "'>" + $(this).text() + "</a>")
+      clone_link = $("<a href='#' class='clone" + $(this).attr( 'name' ) + "' title='" + $(this).text() + "'></a>")
       clone_link.data('target', $(this))
       form_controls_fixed.append(clone_link)
