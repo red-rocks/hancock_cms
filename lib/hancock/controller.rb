@@ -27,4 +27,13 @@ module Hancock::Controller
   def hide_ym_ga
     false
   end
+
+  # HARD Rails5 compatibility
+  def redirect_back(fallback_location:, **args)
+    if referer = request.headers["Referer"]
+      redirect_to referer, **args
+    else
+      redirect_to fallback_location, **args
+    end
+  end
 end

@@ -47,6 +47,7 @@ module Hancock
         ret.freeze
       end
 
+
       rails_admin do
         navigation_label I18n.t('admin.settings.label')
 
@@ -56,32 +57,29 @@ module Hancock
             searchable true
             weight 1
           end
-          if Object.const_defined?('RailsAdminToggleable')
-            field :enabled, :toggle do
-              weight 2
-            end
-          else
-            field :enabled do
-              weight 2
-            end
+          field :enabled, :toggle do
+            weight 2
+          end
+          field :loadable, :toggle do
+            weight 3
           end
           field :ns do
             searchable true
-            weight 3
+            weight 4
           end
           field :key do
             searchable true
-            weight 4
+            weight 5
           end
           field :name do
-            weight 5
+            weight 6
           end
           field :kind do
             searchable true
-            weight 6
+            weight 7
           end
           field :raw do
-            weight 7
+            weight 8
             searchable true
             pretty_value do
               if bindings[:object].file_kind?
@@ -94,7 +92,7 @@ module Hancock
             end
           end
           field :cache_keys_str, :text do
-            weight 6
+            weight 10
             searchable true
           end
           if ::Settings.table_exists?
@@ -105,6 +103,7 @@ module Hancock
 
         edit do
           field :enabled, :toggle do
+            weight 1
             visible do
               if bindings[:object].for_admin?
                 render_object = (bindings[:controller] || bindings[:view])
@@ -114,13 +113,22 @@ module Hancock
               end
             end
           end
+          field :loadable, :toggle do
+            weight 2
+            visible do
+              render_object = (bindings[:controller] || bindings[:view])
+              render_object and (render_object.current_user.admin?)
+            end
+          end
           field :for_admin, :toggle do
+            weight 3
             visible do
               render_object = (bindings[:controller] || bindings[:view])
               render_object and (render_object.current_user.admin?)
             end
           end
           field :ns  do
+            weight 4
             read_only true
             help false
             visible do
@@ -129,6 +137,7 @@ module Hancock
             end
           end
           field :key  do
+            weight 5
             read_only true
             help false
             visible do
@@ -137,14 +146,17 @@ module Hancock
             end
           end
           field :label do
+            weight 6
             read_only true
             help false
           end
           field :kind do
+            weight 7
             read_only true
             help false
           end
           field :raw do
+            weight 8
             partial "setting_value".freeze
             visible do
               !bindings[:object].upload_kind?
@@ -160,6 +172,7 @@ module Hancock
           end
           if Settings.file_uploads_supported
             field :file, Settings.file_uploads_engine do
+              weight 9
               visible do
                 bindings[:object].upload_kind?
               end
@@ -175,6 +188,7 @@ module Hancock
           end
 
           field :cache_keys_str, :text do
+            weight 10
             visible do
               render_object = (bindings[:controller] || bindings[:view])
               render_object and render_object.current_user.admin?
@@ -183,6 +197,7 @@ module Hancock
 
         end
       end
+
     end
 
   end
