@@ -61,4 +61,3 @@ module Hancock
     end
   end
 end
-0
