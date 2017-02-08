@@ -772,6 +772,14 @@ body.rails_admin
   position: fixed
   top: 0
 
+fieldset.default.hover
+  .leftside_hider
+    opacity: 0
+
+fieldset.hover
+  .leftside_hider
+    opacity: 1.0
+
 fieldset
   +transition(all 0.3s)
   position: relative
@@ -784,7 +792,8 @@ fieldset
     cursor: pointer
     padding: 10px 0px
     z-index: 9
-    +transition(background 0.3s)
+    opacity: 0
+    +transition(background 0.3s, opacity 0.2s)
     &:hover
       background: rgba(100,100,100,0.1)
     &:active
@@ -868,7 +877,6 @@ fieldset
         margin-right: 0px
 
 fieldset.opened
-  //.leftside_hider
   .scroll_fieldset_block
     +transform(scale(1))
 
@@ -989,6 +997,7 @@ body.rails_admin .nav.nav-tabs
   fieldset.default_fieldset
     padding-top: 0px
     border: 0px
+
   fieldset
     +border-radius(4px)
     border: 1px solid #e3e3e3
@@ -1039,6 +1048,11 @@ body.rails_admin .nav.nav-tabs
     display: inline-block
     float: none
     margin: 0px
+    max-width: 130px
+    a
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
 
 .form-group.form-actions
   margin-left: 0px
