@@ -1,0 +1,190 @@
+body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields, body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_one_fields
+  opacity: 1
+  z-index: 10
+  left: 50px
+  top: 10px
+
+body.rails_admin .form-horizontal.denser
+  margin-top: 15px
+  fieldset > legend
+    margin-bottom: 0px
+  legend i
+    font-size: 14px
+
+body.rails_admin .nav.nav-tabs
+  margin-bottom: -1px
+  border-bottom: 0px
+  padding: 0px 5px
+
+body.rails_admin .form-horizontal .tab-content .tab-pane
+  fieldset
+    margin-left: 50px
+    margin-right: 25px
+
+.form-horizontal.denser
+  fieldset.opened
+    min-height: 180px
+    padding-bottom: 10px
+    fieldset
+      .form-group
+        margin-left: 25px !important
+        margin-top: 15px
+        margin-bottom: 15px
+  fieldset.default_fieldset
+    padding-top: 0px
+    border: 0px
+
+  fieldset
+    +border-radius(4px)
+    border: 1px solid #e3e3e3
+    background: #fff
+    margin-bottom: 5px
+    padding: 0px
+    min-height: 30px
+    overflow: visible
+    padding-top: 29px
+    &:first-child
+      margin-top: 5px
+    &:last-child
+      margin-bottom: 0px
+    legend
+      height: 30px
+      padding: 5px 10px
+      font-size: 18px
+      line-height: 20px
+      top: 0px
+      position: absolute
+    .form-group
+      margin-left: 25px
+      margin-right: 0px
+      margin-top: 15px
+      margin-bottom: 15px
+    .input-group
+      float: none !important
+    input[type=checkbox]
+      width: 25px !important
+      height: 25px !important
+    label
+      font-size: 13px
+    label.dropdown-toggle
+      width: auto
+    .help-block
+      margin-bottom: 0px
+      color: #aaaaaa
+      font-size: 12px
+      line-height: 12px
+    .ra-multiselect .ra-multiselect-column
+      float: left
+      margin-bottom: 5px
+
+fieldset.default.hover
+  .leftside_hider
+    opacity: 0
+
+fieldset.hover
+  .leftside_hider
+    opacity: 1.0
+
+fieldset
+  +transition(all 0.3s)
+  position: relative
+  .leftside_hider
+    width: 65px
+    position: absolute
+    top: 30px
+    bottom: 0px
+    background: rgba(100,100,100,0.05)
+    cursor: pointer
+    padding: 10px 0px
+    z-index: 9
+    opacity: 0
+    +transition(background 0.3s, opacity 0.2s)
+    &:hover
+      background: rgba(100,100,100,0.1)
+    &:active
+      background: rgba(100,100,100,0.075)
+
+  .scroll_fieldset_block
+    overflow: visible
+    position: absolute
+    width: 45px
+    top: 10px
+    margin-left: 10px
+    height: 126px
+    opacity: 0.75
+    cursor: pointer
+    z-index: 10
+    background: #fff
+    border: 1px solid #e3e3e3
+    +border-radius(4px)
+    +transition(scale 0.3s, opacity 0.3s)
+    +transform(scale(0))
+    transform-origin: top center
+    -webkit-transform-origin: top left
+    -o-transform-origin: top left
+    -moz-transform-origin: top left
+    padding: 5px
+    +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
+    &:hover
+      opacity: 1.0
+    > *
+      height: 35px
+      width: 35px
+      +border-radius(4px)
+      margin-bottom: 5px
+      z-index: 11
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: #e53935
+      +transition(all 0.3s)
+      color: #fff
+      &:hover
+        background-color: #c73800
+        opacity: 1
+      &:active
+        background-color: #e53935
+        opacity: 1
+
+    .links-list
+      width: auto
+      display: inline-flex
+      background: #fff
+      border: 1px solid #e3e3e3
+      +border-radius(4px)
+      +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
+      padding: 3px
+
+    .select_fieldset
+      +transition(all 0.3s)
+      overflow: visible
+      a
+        background-color: #e53935
+        display: inline-block
+        text-align: center
+        width: 50px
+        height: 29px
+        margin-right: 3px
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        color: #ffffff
+        padding: 0px 3px
+        font-size: 10px
+        line-height: 29px
+        text-decoration: none
+        +transition(all 0.3s)
+        +border-radius(4px)
+        &:hover
+          background-color: #c73800
+          opacity: 1
+      a:last-child
+        margin-right: 0px
+
+fieldset.opened
+  .scroll_fieldset_block
+    +transform(scale(1))
+
+fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active
+  background-color: #ef3b36
+  border-color: #e53a36
