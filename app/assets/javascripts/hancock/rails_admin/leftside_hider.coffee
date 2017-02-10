@@ -1,10 +1,16 @@
 $(document).on "rails_admin.dom_ready", ->
+  _offsettop = $(window).height() / 2 - 63
   $('.scroll_fieldset_block').each ->
     me = $(this)
-    _offsettop = me.closest('fieldset').height() / 2
     me.stick_in_parent(
       offset_top: _offsettop
     )
+
+$(document).on "mouseenter", "fieldset", (e)->
+  $(e.currentTarget).addClass("hover")
+
+$(document).on "mouseleave", "fieldset", (e)->
+  $(e.currentTarget).removeClass("hover")
 
 
 $(document).on "click", "fieldset .leftside_hider", (e)->
