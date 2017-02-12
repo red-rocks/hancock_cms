@@ -69,13 +69,16 @@ $(document).on "click", "fieldset .leftside_hider .select_fieldset", (e)->
   e.preventDefault()
   me = $(e.currentTarget)
   fieldset = me.closest('fieldset')
-  fieldsets = fieldset.siblings('fieldset')
+  fieldsets = fieldset.siblings('fieldset').andSelf()
   fieldset_links = []
   fieldsets.each ->
     f = $(this)
     l = $(this).find("legend:first")
-    fieldset_link = $("<a title='" + l.text() + "' href='#'>" + l.text() + "</a>")
-    fieldset_link.data('target', f)
+    if f[0] == fieldset[0]
+      fieldset_link = $("<span></span>").attr("title", l.text()).text(l.text())
+    else
+      fieldset_link = $("<a></a>").attr("title", l.text()).attr("href", '#').text(l.text()).data('target', f)
+
     fieldset_links.push(fieldset_link)
   me.html("").append(fieldset_links).addClass('links-list')
   #  css(width: "auto", display: 'inline-flex')
@@ -96,7 +99,7 @@ $(document).on "click", ".form-horizontal legend", (e)->
   else
     if $(this).has('i.icon-chevron-right').length
       fieldset.removeClass('opened')
-      
+
 
 $(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
   e.preventDefault()

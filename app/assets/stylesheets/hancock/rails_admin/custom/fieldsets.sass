@@ -158,7 +158,7 @@ fieldset
     .select_fieldset
       +transition(all 0.3s)
       overflow: visible
-      a
+      a, span
         background-color: #e53935
         display: inline-block
         text-align: center
@@ -178,8 +178,15 @@ fieldset
         &:hover
           background-color: #c73800
           opacity: 1
-      a:last-child
+      &:last-child
         margin-right: 0px
+      span
+        background-color: lightblue
+        cursor: auto
+        color: black
+        &:hover
+          background-color: lightblue
+          opacity: 1
 
 fieldset.opened
   .scroll_fieldset_block
