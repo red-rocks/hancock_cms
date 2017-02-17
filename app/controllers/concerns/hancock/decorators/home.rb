@@ -2,7 +2,7 @@ module Hancock::Decorators
   module Home
     extend ActiveSupport::Concern
 
-    # included
+    # included do
     #   def index
     #     render layout: Hancock.config.main_index_layout
     #   end

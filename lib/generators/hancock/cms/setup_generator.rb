@@ -7,26 +7,49 @@ module Hancock::Cms
     desc 'Hancock CMS Carcass generator'
     def install
 
+      def ask_with_timeout(question, timeout = 5)
+        ask(question)
+        # # temp
+        # begin
+        #   Timeout::timeout(timeout) {
+        #     ask("#{question} | U have only #{timeout} second(s)!")
+        #   }
+        # rescue
+        #   puts ""
+        #   ""
+        # end
+      end
+
 ####### DEVISE #######
 
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout for devise? (y or yes)").downcase.strip)
+_sessions_layout      = Devise::SessionsController._layout       == "hancock/devise/sessions"
+_registration_layout  = Devise::RegistrationsController._layout  == "hancock/devise/registrations"
+_confirmations_layout = Devise::ConfirmationsController._layout  == "hancock/devise/confirmations"
+_unlocks_layout       = Devise::UnlocksController._layout        == "hancock/devise/unlocks"
+_passwords_layout     = Devise::PasswordsController._layout      == "hancock/devise/passwords"
+if !_sessions_layout or !_registration_layout or !_confirmations_layout or !_unlocks_layout or !_passwords_layout
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
 
 Rails.application.config.to_prepare do
-  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      if Devise::SessionsController._layout       != "hancock/devise/sessions"}
-  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' if Devise::RegistrationsController._layout  != "hancock/devise/registrations"}
-  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' if Devise::ConfirmationsController._layout  != "hancock/devise/confirmations"}
-  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       if Devise::UnlocksController._layout        != "hancock/devise/unlocks"}
-  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     if Devise::PasswordsController._layout      != "hancock/devise/passwords"}
+  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      if _sessions_layout }
+  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' if _registration_layout }
+  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' if _confirmations_layout }
+  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       if _unlocks_layout }
+  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     if _passwords_layout }
 end
 TEXT
 end
-generate "devise", "User"
+end
+end
+generate "devise", "User", "--routes=false"
 
 
 ####### ROUTES #######
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's routes? (y or yes)").downcase.strip)
 remove_file 'config/routes.rb'
 create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
@@ -35,6 +58,7 @@ Rails.application.routes.draw do
   hancock_cms_routes
 end
 TEXT
+end
 end
 
 
@@ -54,9 +78,11 @@ end
 if mongoid
 if defined?(Paperclip)
 generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+unless Ckeditor::Asset < Hancock::Model
 inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
-    include Hancock::Model
+  include Hancock::Model
 TEXT
+end
 end
 remove_file 'app/models/ckeditor/picture.rb'
 create_file 'app/models/ckeditor/picture.rb' do <<-TEXT
@@ -194,7 +220,12 @@ end
 
 generate "hancock:cms:ability"
 
-unless User < Hancock::Model
+gsub_user_rb = begin
+  (User < Hancock::Model).nil?
+rescue
+  true
+end
+if gsub_user_rb
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
 include Hancock::Model
   include Hancock::Enableable
@@ -221,6 +252,7 @@ include Hancock::Model
 TEXT
 end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's User model? (y or yes)").downcase.strip)
 gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
 if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
@@ -352,6 +384,7 @@ TEXT
 end
 end
 end
+end
 
 
 ###### HANCOCK OTHERS ######
@@ -361,22 +394,32 @@ generate "hancock:cms:migration"
 generate "rails_admin_settings:migration"
 end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout? (y or yes)").downcase.strip)
 remove_file 'app/views/layouts/application.html.erb'
 generate "hancock:cms:layout"
+end
 
 run 'rails r "User.generate_first_admin_user"'
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's assets? (y or yes)").downcase.strip)
 remove_file 'app/assets/stylesheets/application.css'
 remove_file 'app/assets/javascripts/application.js'
 generate "hancock:cms:assets", app_name
+end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's robots.txt? (y or yes)").downcase.strip)
 remove_file 'public/robots.txt'
 generate "hancock:cms:robots", app_name
+end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's unicorn config? (y or yes)").downcase.strip)
 #god+unicorn
 generate "hancock:cms:unicorn_god", app_name
+end
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's scripts? (y or yes)").downcase.strip)
 #scripts
 generate "hancock:cms:scripts", app_name
+end
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
@@ -413,7 +456,7 @@ end
 create_file 'extra/.gitkeep', ''
 
 
-if ["yes", "y"].include?(ask("Do u want init git? (y or yes)").downcase.strip)
+if ["yes", "y"].include?(ask_with_timeout("Do u want init git? (y or yes)").downcase.strip)
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }

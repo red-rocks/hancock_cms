@@ -62,8 +62,6 @@ for ActiveRecord:
     cd my_app
     rails g hancock:cms:setup
 
-generator creates a new RVM gemset, runs `bundle install` and setup some files (assets, config/initializers/*, routes, etc).
-
 ### Localization
 
 All models included in the gem support localization via either [hstore_translate](https://github.com/Leadformance/hstore_translate) or built-in Mongoid localize: true option.
