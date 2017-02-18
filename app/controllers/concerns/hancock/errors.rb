@@ -26,7 +26,7 @@ module Hancock::Errors
         unless exception.nil?
           Rails.logger.error exception.message
           Rails.logger.error exception.backtrace.join("\n")
-          capture_exception(exception) if defined?(Raven)
+          Raven.capture_exception(exception) if defined?(Raven)
         end
         Rails.logger.error "__________________________"
         if !user_signed_in?
@@ -57,7 +57,7 @@ module Hancock::Errors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if defined?(Raven)
+      Raven.capture_exception(exception) if defined?(Raven)
     end
     Rails.logger.error "__________________________".freeze
     render_error(404)
