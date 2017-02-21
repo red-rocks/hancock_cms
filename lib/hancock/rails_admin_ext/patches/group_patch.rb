@@ -17,7 +17,8 @@ module RailsAdmin
         end
 
         def group(name, &block)
-          group = parent.groups.detect { |g| name == g.name }
+          _groups = parent.groups rescue root.groups
+          group = _groups.detect { |g| name == g.name }
           group ||= (parent.groups << RailsAdmin::Config::Fields::Group.new(self, name)).last
           group.tap { |g| g.section = self }.instance_eval(&block) if block
           group

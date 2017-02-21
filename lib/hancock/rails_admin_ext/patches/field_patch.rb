@@ -7,6 +7,7 @@ module RailsAdmin
         register_instance_option :weight do
           name.to_sym == :default ? -1_000_000 : 0
         end
+        
       end
 
     end

@@ -29,9 +29,11 @@ module Hancock
         ).visible_fields
         return if fields.empty?
 
-        @template.content_tag :fieldset, class: fieldset.name == :default ? 'default_fieldset' : '' do
+        _defailt_fieldset = fieldset.name == :default
+        @template.content_tag :fieldset, class: _defailt_fieldset ? 'default_fieldset' : '' do
           if fieldset.leftside_hider
-            leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', style: fieldset.active? ? 'display:none' : '', title: "Свернуть блок") do
+            # leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', style: _defailt_fieldset ? 'display:none' : '', title: "Свернуть блок") do
+            leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', title: _defailt_fieldset ? "" : "Свернуть блок") do
               # @template.content_tag(:div, class: 'scroll_fieldset_block', style: 'top: 50%') do
               @template.content_tag(:div, class: 'scroll_fieldset_block') do
                 ret = []
