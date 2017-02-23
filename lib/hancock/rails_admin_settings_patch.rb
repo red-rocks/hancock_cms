@@ -148,9 +148,12 @@ module Hancock
               render_object and (render_object.current_user.admin?)
             end
           end
-          field :label do
+          field :label, :string do
             weight 6
-            read_only true
+            read_only do
+              render_object = (bindings[:controller] || bindings[:view])
+              !render_object or !(render_object.current_user.admin?)
+            end
             help false
           end
           field :kind do

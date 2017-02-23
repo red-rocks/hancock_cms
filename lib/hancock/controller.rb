@@ -8,7 +8,7 @@ module Hancock::Controller
       include Hancock::Pages::NavMenu
       include Hancock::Pages::Blocksetable
     end
-    protect_from_forgery with: :exception
+    protect_from_forgery prepend: true, with: :exception
     helper_method :page_title
     helper_method :hide_ym_ga
   end

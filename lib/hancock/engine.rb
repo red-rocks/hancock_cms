@@ -27,7 +27,7 @@ module Hancock
       #     Settings.default_email_from(default: 'noreply@site.domain')
       #     Settings.form_email(default: 'admin@site.domain')
       #     Settings.email_topic(default: 'с сайта')
-          Settings.logo_image(kind: :image) if Settings.file_uploads_supported
+          Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Settings.ns("main").where(key: "logo_image").exists?
         end
       rescue
       end
@@ -54,7 +54,7 @@ module Hancock
           # Settings.default_email_from(default: 'noreply@site.domain')
           # Settings.form_email(default: 'admin@site.domain')
           # Settings.email_topic(default: 'с сайта')
-          Settings.logo_image(kind: :image) if Settings.file_uploads_supported
+          Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Settings.ns("main").where(key: "logo_image").exists?
         end
       rescue
       end
