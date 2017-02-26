@@ -2,7 +2,7 @@ module Hancock::UserDefined
   extend ActiveSupport::Concern
 
   included do
-    include Hancock::Insertions
+    include Hancock::InsertionField
 
     class_attribute :user_defined_fields
     self.user_defined_fields ||= {}
