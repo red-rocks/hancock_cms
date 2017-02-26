@@ -1,6 +1,6 @@
 module Hancock
-    class Engine < ::Rails::Engine
-      # isolate_namespace Hancock
+  class Engine < ::Rails::Engine
+    # isolate_namespace Hancock
 
     # rake_tasks do
     #   require File.expand_path('../tasks', __FILE__)
@@ -18,20 +18,20 @@ module Hancock
       ::RailsAdmin::FormBuilder.send :include, Hancock::RailsAdminFormBuilderFieldsetPatch
     end
 
-    initializer "hancock_cms.email_defaults" do
-      # Write default email settings to DB so they can be changed.
-
-      #temp
-      begin
-        if Settings and Settings.table_exists?
-      #     Settings.default_email_from(default: 'noreply@site.domain')
-      #     Settings.form_email(default: 'admin@site.domain')
-      #     Settings.email_topic(default: 'с сайта')
-          Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Settings.ns("main").where(key: "logo_image").exists?
-        end
-      rescue
-      end
-    end
+    # initializer "hancock_cms.email_defaults" do
+    #   # Write default email settings to DB so they can be changed.
+    #
+    #   #temp
+    #   begin
+    #     if Settings and Settings.table_exists?
+    #   #     Settings.default_email_from(default: 'noreply@site.domain')
+    #   #     Settings.form_email(default: 'admin@site.domain')
+    #   #     Settings.email_topic(default: 'с сайта')
+    #       Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Setting.ns("main").where(key: "logo_image").exists?
+    #     end
+    #   rescue
+    #   end
+    # end
     # initializer 'hancock_cms.paperclip' do
     #   # require 'paperclip/style'
     #   # module ::Paperclip
@@ -45,6 +45,7 @@ module Hancock
     # end
 
     config.after_initialize do
+      puts 'Hancock after_initialize'
       # trigger autoload so models are registered in Mongoid::Elasticearch
       # Hancock.config.search_models.map(&:constantize)
 
@@ -54,9 +55,10 @@ module Hancock
           # Settings.default_email_from(default: 'noreply@site.domain')
           # Settings.form_email(default: 'admin@site.domain')
           # Settings.email_topic(default: 'с сайта')
-          Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Settings.ns("main").where(key: "logo_image").exists?
+          Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Setting.ns("main").where(key: "logo_image").exists?
         end
-      rescue
+      rescue Exception => ex
+        puts ex.inspect
       end
     end
 
