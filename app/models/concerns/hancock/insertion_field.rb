@@ -1,4 +1,4 @@
-module Hancock::Insertions
+module Hancock::InsertionField
   extend ActiveSupport::Concern
 
   included do
@@ -98,4 +98,5 @@ module Hancock::Insertions
       @possible_insertions ||= (default_insertions + added_insertions).map(&:to_s).uniq - removed_insertions.map(&:to_s)
     end
   end
+
 end
