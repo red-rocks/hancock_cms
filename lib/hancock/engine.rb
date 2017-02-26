@@ -45,7 +45,6 @@ module Hancock
     # end
 
     config.after_initialize do
-      puts 'Hancock after_initialize'
       # trigger autoload so models are registered in Mongoid::Elasticearch
       # Hancock.config.search_models.map(&:constantize)
 
@@ -57,8 +56,7 @@ module Hancock
           # Settings.email_topic(default: 'с сайта')
           Settings.logo_image(kind: :image) if Settings.file_uploads_supported and !RailsAdminSettings::Setting.ns("main").where(key: "logo_image").exists?
         end
-      rescue Exception => ex
-        puts ex.inspect
+      rescue
       end
     end
 
