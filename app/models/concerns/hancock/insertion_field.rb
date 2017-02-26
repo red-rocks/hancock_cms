@@ -27,6 +27,8 @@ module Hancock::InsertionField
           get_insertion($1)
         end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
           (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
+        # end.gsub(/\{\{(['"])(.*?)(\1)\}\}/) do
+        #   $2
         end
         _ret
       end
