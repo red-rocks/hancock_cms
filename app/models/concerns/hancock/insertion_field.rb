@@ -1,4 +1,4 @@
-module Hancock::Insertions
+module Hancock::InsertionField
   extend ActiveSupport::Concern
 
   included do
@@ -27,6 +27,8 @@ module Hancock::Insertions
           get_insertion($1)
         end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
           (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
+        # end.gsub(/\{\{(['"])(.*?)(\1)\}\}/) do
+        #   $2
         end
         _ret
       end
@@ -98,4 +100,5 @@ module Hancock::Insertions
       @possible_insertions ||= (default_insertions + added_insertions).map(&:to_s).uniq - removed_insertions.map(&:to_s)
     end
   end
+
 end

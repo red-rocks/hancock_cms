@@ -78,17 +78,17 @@ body.rails_admin .form-horizontal .tab-content .tab-pane
       margin-bottom: 5px
 
 fieldset.default.hover
-  .leftside_hider
+  > .leftside_hider
     opacity: 0
 
 fieldset.hover
-  .leftside_hider
+  > .leftside_hider
     opacity: 1.0
 
 fieldset
   +transition(all 0.3s)
   position: relative
-  .leftside_hider
+  > .leftside_hider
     width: 65px
     position: absolute
     top: 30px
@@ -188,7 +188,7 @@ fieldset
           background-color: lightblue
           opacity: 1
 
-fieldset.opened
+fieldset.opened, fieldset.default_fieldset
   .scroll_fieldset_block
     +transform(scale(1))
 

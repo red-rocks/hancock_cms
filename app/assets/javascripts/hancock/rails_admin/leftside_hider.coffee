@@ -16,7 +16,7 @@ $(document).on "mouseleave", "fieldset", (e)->
 $(document).on "click", "fieldset .leftside_hider", (e)->
   e.preventDefault()
   fieldset = $(e.currentTarget).closest('fieldset')
-  fieldset.find('legend').click()
+  fieldset.find('legend:visible').click()
   return false
 
 #
@@ -60,7 +60,7 @@ $(document).on "click", "fieldset .leftside_hider .scroll_fieldset_bottom", (e)-
   finish_position = fieldset.next().offset().top - $(window).height() + 35   # 35px - offset-bottom
   return false if start_position > finish_position
   speed = 1.7 # px/msec
-  duration = Math.abs((finish_position - start_position) / speed)
+  duration = 300 #Math.abs((finish_position - start_position) / speed)
   $("html, body").animate({scrollTop: finish_position}, duration);
   return false
 
@@ -104,7 +104,7 @@ $(document).on "click", ".form-horizontal legend", (e)->
 $(document).on "click", "fieldset .leftside_hider .select_fieldset a", (e)->
   e.preventDefault()
   e.stopImmediatePropagation()
-  hide_previous = true
+  hide_previous = false #true
   me = $(e.currentTarget)
   fieldset = $(me.closest('fieldset'))
   fieldsets = fieldset.siblings('fieldset').andSelf()

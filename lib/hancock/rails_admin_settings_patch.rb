@@ -6,11 +6,14 @@ module Hancock
       ::Hancock.register_model(self)
 
       include ::Hancock::RailsAdminPatch
-      ::RailsAdminSettings::Setting.pluck(:ns).uniq.each do |c|
-         s = "ns_#{c.gsub('-', '_')}".to_sym
-         scope s, -> { where(ns: c) }
-         # t[s] = c
-       end
+
+      # t = {_all: 'Все'}
+      ::RailsAdminSettings::Setting.distinct(:ns).each do |c|
+        s = "ns_#{c.gsub('-', '_')}".to_sym
+        scope s, -> { where(ns: c) }
+        # t[s] = c
+      end
+      # I18n.backend.store_translations(:ru, {admin: {scopes: {'rails_admin_settings/setting': t}}})
 
       field :for_admin, type: Boolean, default: -> {
         !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
@@ -96,7 +99,7 @@ module Hancock
             searchable true
           end
           if ::Settings.table_exists?
-            nss = ::RailsAdminSettings::Setting.pluck(:ns).uniq.map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
+            nss = ::RailsAdminSettings::Setting.distinct(:ns).map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
             scopes([nil] + nss)
           end
         end
@@ -145,9 +148,12 @@ module Hancock
               render_object and (render_object.current_user.admin?)
             end
           end
-          field :label do
+          field :label, :string do
             weight 6
-            read_only true
+            read_only do
+              render_object = (bindings[:controller] || bindings[:view])
+              !render_object or !(render_object.current_user.admin?)
+            end
             help false
           end
           field :kind do
