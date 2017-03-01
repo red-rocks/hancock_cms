@@ -4,6 +4,7 @@ $(document).on "click", "#form_controls_fixed a", (e)->
   return false
 
 $(document).on 'rails_admin.dom_ready', ->
+  return if $("#form_controls_fixed").length > 0
   $('form .form-actions').each ->
     me = $(this)
     form = me.closest("form")
