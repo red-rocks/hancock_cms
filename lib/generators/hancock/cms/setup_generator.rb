@@ -24,6 +24,7 @@ module Hancock::Cms
 
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
+
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout for devise? (y or yes)").downcase.strip)
 _sessions_layout      = Devise::SessionsController._layout       == "hancock/devise/sessions"
 _registration_layout  = Devise::RegistrationsController._layout  == "hancock/devise/registrations"
@@ -48,6 +49,7 @@ generate "devise", "User", "--routes=false"
 
 
 ####### ROUTES #######
+
 
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's routes? (y or yes)").downcase.strip)
 remove_file 'config/routes.rb'
@@ -204,6 +206,7 @@ generate "simple_form:install"
 
 
 ####### CONTROLLERS #######
+
 
 unless ApplicationController < Hancock::Controller
 remove_file 'app/controllers/application_controller.rb'

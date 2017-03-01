@@ -8,7 +8,7 @@ gem 'sass-rails'
 gem 'compass-rails'
 gem 'compass'
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: '/home/ack/www/hancock_cms'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}
 
 gem 'devise'
 
@@ -19,9 +19,6 @@ gem 'cancancan'
 # gem 'cloner'
 gem 'unicorn'
 gem 'x-real-ip'
-
-#temp
-#gem 'sentry-raven'
 
 group :development do
   gem 'better_errors'
@@ -57,7 +54,7 @@ group :test do
   gem 'factory_girl_rails'
 end
 
-#{if mongoid then "gem 'mongo_session_store-rails4'" else "gem 'activerecord-session_store'" end}
+#{if mongoid then "gem 'mongo_session_store-rails5'" else "gem 'activerecord-session_store'" end}
 
 gem 'slim'
 gem 'sprockets'
@@ -65,5 +62,7 @@ gem 'sprockets'
 gem 'uglifier'
 
 group :production do
+  #temp
+  #gem 'sentry-raven'
   gem "god"
 end
