@@ -3,7 +3,7 @@
   span= " "
   span= " "
   span= " "
-  span= link_to '(изменить)', "#", onclick: "var _p = $(this).closest('.form-control-static'); _p.siblings('.hancock_enum').removeClass('hidden'); _p.remove(); return false;"
+  span= link_to '(изменить)', "#", onclick: "var _p = $(this).closest('.form-control-static'); _p.siblings('.hancock_enum').removeClass('hidden'); _p.remove(); return false;", style: 'color: grey;', onmouseover: 'this.style.color = "darkgrey";', onmouseout: 'this.style.color = "grey";'
 - unless field.multiple?
   = form.select field.method_name, field.enum, { include_blank: true }.reverse_merge({ selected: field.form_value }), field.html_attributes.reverse_merge({ data: { enumeration: true }, placeholder: t('admin.misc.search'), class: 'hancock_enum hidden'})
 - else
