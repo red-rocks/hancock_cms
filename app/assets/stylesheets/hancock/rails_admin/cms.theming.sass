@@ -1,6 +1,6 @@
 @import 'jquery.mCustomScrollbar'
 
-@import "custom/fieldsets"
+@import "./fieldsets"
 
 .btn
   +transition(all 0.3s)
@@ -185,7 +185,7 @@ body.rails_admin
         margin-top: -15px
         font-size: 26px
         font-family: "FontAwesome"
-      &:hover
+      &:hover, &.current_selected
         background: #646464
         a
           color: #fff
@@ -240,7 +240,7 @@ body.rails_admin
         font-weight: 100
         &:before
           content: "\f0da"
-      &:hover
+      &:hover, &.current_selected
         //background: rgba(0,0,0,0.32)
         background: #4b4b4b
         a
@@ -263,7 +263,7 @@ body.rails_admin
         content: "\f078"
         box-sizing: border-box
         margin-left: 12px
-      &:hover
+      &:hover, &.current_selected
         //background: rgba(0,0,0,0.32)
         background: #4b4b4b
         color: #fff
@@ -273,7 +273,7 @@ body.rails_admin
         border-top: 2px solid rgba(255,255,255,0.25)
         &::after
           content: "\f077"
-        &:hover
+        &:hover, &.current_selected
           //background: rgba(0,0,0,0.32)
           background: #4b4b4b
 
@@ -908,3 +908,6 @@ body.rails_admin .nav.nav-tabs
   body.rails_admin table.table thead tr th.user
     max-width: none
 
+
+.hancock_enum.hidden + *
+  display: none

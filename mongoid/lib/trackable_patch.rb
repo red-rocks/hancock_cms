@@ -42,7 +42,7 @@ module HistoryTrackerPatch
       end
       _validators.delete(f) if _validators[f].blank?
     end
-    belongs_to :modifier, class_name: Mongoid::History.modifier_class_name, required: false, optional: true, autosave: false, overwrite: true
+    belongs_to :modifier, class_name: Mongoid::History.modifier_class_name, required: false, optional: true, autosave: false#, overwrite: true
   end
 end
 

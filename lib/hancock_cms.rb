@@ -99,11 +99,11 @@ module Hancock
           end
         rescue
         end
-      end
+      end if defined?(::HistoryTracker)
     end
 
     def clear_history!
-      ::HistoryTracker.delete_all
+      ::HistoryTracker.delete_all if defined?(::HistoryTracker)
     end
 
   end
