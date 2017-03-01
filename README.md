@@ -55,14 +55,14 @@ For activerecord, generate migrations and run them
 
 ## Usage
 ### RAILS 5:  Using app generator
-Make sure you have rails 5.0 installed
+Make sure you have rails 5.0.0.1 installed
 
     rails -v
 
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install rails -v 5.0
+    gem install rails -v 5.0.0.1
 
 Then, for mongoid:
 
@@ -80,14 +80,14 @@ generator creates a new RVM gemset, runs `bundle install` and setup some files (
 
 
 ### RAILS 4: Using app generator
-Make sure you have rails 4.2 installed
+Make sure you have rails 4.2.7.1 installed
 
     rails -v
 
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install rails -v 4.2
+    gem install rails -v 4.2.7.1
 
 Then, for mongoid:
 
