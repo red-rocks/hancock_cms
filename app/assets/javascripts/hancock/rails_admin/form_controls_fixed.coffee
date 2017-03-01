@@ -1,10 +1,9 @@
-
 $(document).on "click", "#form_controls_fixed a", (e)->
   e.preventDefault()
   $(e.currentTarget).data('target').click()
   return false
 
-
+$(document).on 'rails_admin.dom_ready', ->
   $('form .form-actions').each ->
     me = $(this)
     form = me.closest("form")
@@ -27,3 +26,19 @@ $(document).on "click", "#form_controls_fixed a", (e)->
 #       $.getScript options['jspath'], (script, textStatus, jqXHR) ->
 #         if window.CKEDITOR
 #           window.CKEDITOR.dtd.$removeEmpty[tag] = false for tag of window.CKEDITOR.dtd.$removeEmpty
+
+$(document).on "keydown", 'form', (e)->
+  if e.ctrlKey and e.keyCode == 13
+    form = $(e.currentTarget)
+    # maybe try this conditions
+    # # form.prop('id').startsWith("edit_")
+    # # form.prop('id').startsWith("edit_")
+    # button = form.find("[type='submit'][name='_add_edit']")
+    # button = form.find("[type='submit'][name='_add_another']") if button.length == 0
+    # button = form.find("[type='submit'][name='_save']") if button.length == 0
+    button = form.find("[type='submit'][name='_save']")
+    if button.length > 0
+      button.click()
+    else
+      form.submit()
+    return false
