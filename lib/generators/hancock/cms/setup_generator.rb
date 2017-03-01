@@ -52,7 +52,7 @@ generate "devise", "User", "--routes=false"
 
 
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's routes? (y or yes)").downcase.strip)
-\remove_file 'config/routes.rb'
+remove_file 'config/routes.rb'
 create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'hancock/sessions'}
