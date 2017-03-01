@@ -34,11 +34,11 @@ if !_sessions_layout or !_registration_layout or !_confirmations_layout or !_unl
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
 
 Rails.application.config.to_prepare do
-  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      if _sessions_layout }
-  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' if _registration_layout }
-  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' if _confirmations_layout }
-  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       if _unlocks_layout }
-  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     if _passwords_layout }
+  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      unless _sessions_layout }
+  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' unless _registration_layout }
+  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' unless _confirmations_layout }
+  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       unless _unlocks_layout }
+  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     unless _passwords_layout }
 end
 TEXT
 end
