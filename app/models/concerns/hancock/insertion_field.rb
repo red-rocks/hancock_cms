@@ -25,10 +25,12 @@ module Hancock::InsertionField
         # {{self.%insertion%}}
         _ret = _data.gsub(/\{\{self\.(.*?)\}\}/) do
           get_insertion($1)
-        end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
-          (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
+        # {{"some_text"}} #temporary disabled - need tests
         # end.gsub(/\{\{(['"])(.*?)(\1)\}\}/) do
         #   $2
+        # {{%ns%.%key%}}
+        end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
+          (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
         end
         _ret
       end

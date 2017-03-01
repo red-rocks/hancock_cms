@@ -58,6 +58,12 @@ module Hancock
         end
       rescue
       end
+
+      # clear empty history for prevent admin panel crashs
+      begin
+        ::Hancock.clear_history_from_empty_objects
+      rescue
+      end
     end
 
   end

@@ -27,6 +27,7 @@ module Hancock::RailsAdminGroupPatch
             end
 
             _group_fields.each_pair do |name, type|
+              next if type == false
               if type.blank?
                 field name
               else
@@ -44,6 +45,7 @@ module Hancock::RailsAdminGroupPatch
 
       else
         fields.each_pair do |name, type|
+          next if type == false
           if type.nil?
             config.field name
           else
