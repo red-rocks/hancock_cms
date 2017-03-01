@@ -1,9 +1,10 @@
 module TrackablePatch
   extend ActiveSupport::Concern
-  include Mongoid::History::Trackable
-  include Mongoid::Userstamp
 
   included do
+
+    include Mongoid::History::Trackable
+    include Mongoid::Userstamp
 
     track_history({
       on: :fields,
@@ -14,4 +15,5 @@ module TrackablePatch
       except: ["created_at", "updated_at", "c_at", "u_at"],
     })
   end
+
 end

@@ -17,7 +17,7 @@ require 'geocoder'
 
 # require 'simple_captcha'
 # require 'validates_email_format_of'
-require 'filename_to_slug'
+require_relative 'filename_to_slug'
 
 require 'codemirror-rails'
 
@@ -130,6 +130,6 @@ module Hancock
   end
 end
 
-require 'manual_slug'
+require_relative 'manual_slug'
 
 require 'scrollbar-rails'
