@@ -11,9 +11,9 @@ $(document).on 'click', '.clear_navigation_filter_field', (e)->
 # $(document).delegate '#navigation_filter', 'keypress', (e)->
 $(document).on 'keydown', '#navigation_filter', (e)->
   _code = e.which || e.keyCode
-  if _code == 13 or _code == 39
-    e.preventDefault()
+  if _code == 13 or _code == 39 or _code == 37
     _navig = $(e.currentTarget).parent().siblings('.toolbar').find('.nav')
+    return true if _navig.find("li:visible").length == 0 and _code != 13
     if (_selected = _navig.find("li.current_selected")).length == 1
       if _selected.find("a").length > 0
         _selected.find('a').click()
@@ -21,12 +21,17 @@ $(document).on 'keydown', '#navigation_filter', (e)->
         if _selected.hasClass('opened')
           _selected.addClass('forced-closed').removeClass('forced-opened').click()
         else
+          return true if _code == 37
           _selected.removeClass('forced-closed').addClass('forced-opened').click()
     else
+      return true if _code == 37
       if (_selected = _navig.find('li.visible[data-model]')).length == 1
         _selected.find('a').click()
+      else
+        return true if _code == 39
 
 
+    e.preventDefault()
     return false
   else
     if _code == 38 or _code == 40
