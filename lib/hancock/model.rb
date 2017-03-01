@@ -14,6 +14,10 @@ module Hancock
         include Mongoid::Document
         include Mongoid::Timestamps::Short
 
+        if Hancock.config.mongoid_single_collection
+          include Hancock::MasterCollection
+        end
+
         if Hancock.config.localize
           include Hancock::ModelLocalizeable
         end

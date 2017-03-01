@@ -14,7 +14,7 @@ class Ability
 
       can :index, :all
       can :read, :all
-      can :history, :all
+      can :history, :all if Hancock.config.history_tracking
       can :export, :all
       can :toggle, :all
 

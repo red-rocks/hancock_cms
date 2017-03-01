@@ -1,7 +1,12 @@
 require 'rails_admin/custom_show_in_app'
 
+require_relative 'hancock_cms'
+# Add `require_relative '%hancock_plugin_name%'` here for configure it.
+# `require_relative 'hancock_cms'` reconfigure it by default.
+# So u need do it again. If u have some changes.
+
 <% if Hancock.mongoid? %>
-RailsAdminSettings.track_history!
+RailsAdminSettings.track_history! if Hancock.config.history_tracking
 <% end %>
 
 RailsAdmin.config do |config|
@@ -39,8 +44,10 @@ RailsAdmin.config do |config|
     edit
     delete
 
-    history_index
-    history_show
+    if Hancock.config.history_tracking
+      history_index
+      history_show
+    end
 
     toggle
     # toggle_menu # for Hancock::Pages
@@ -54,10 +61,11 @@ RailsAdmin.config do |config|
   config.excluded_models ||= []
   config.excluded_models << [
       'RailsAdmin::CustomShowInApp', 'HistoryTracker',
-      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture',
+      'Ckeditor::Asset', 'Ckeditor::AttachmentFile', 'Ckeditor::Picture', 'Ckeditor::Folder',
       'Hancock::EmbeddedElement'
   ]
   config.excluded_models.flatten!
+  config.excluded_models.uniq!
 end
 
 # [required] fix for timezones to be displayed in local time instead of UTC

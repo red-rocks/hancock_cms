@@ -51,7 +51,13 @@ module Hancock
       end
 
       if defined?(RailsAdminUserAbilities)
-        action_visible_for(:sort_embedded, Proc.new { false })
+        action_visible_for(:user_abilities, Proc.new { false })
+        action_visible_for(:model_accesses, Proc.new { false })
+      end
+
+      if defined?(RailsAdminComments)
+        action_visible_for(:comments, Proc.new { false })
+        action_visible_for(:model_comments, Proc.new { false })
       end
 
       action_visible_for(:sort_embedded, Proc.new { false })
@@ -115,7 +121,8 @@ module Hancock
                     end
                   end
                 end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                ret && bindings[:controller].can?(action, bindings[:abstract_model].model)
+                _context = bindings[:controller] || bindings[:view]
+                ret and _context and _context.can?(action, bindings[:abstract_model].model)
               end # !bindings or bindings[:abstract_model].blank?
             end # visible do
           end # rails_admin_actions.send(action) do

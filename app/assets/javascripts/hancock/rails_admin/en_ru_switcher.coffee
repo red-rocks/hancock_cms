@@ -34,7 +34,7 @@ window.hancock_cms.en_ru_keytable = {
   "m": "ь", "M": "Ь",
   ",": "б", "<": "Б",
   ".": "ю", ">": "Ю",
-  "/": ".", "?": ","
+  # "/": ".", "?": ","
 }
 window.hancock_cms.ru_en_keytable = {
   "й": "q", "Й": "Q",

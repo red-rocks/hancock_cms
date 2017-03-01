@@ -7,28 +7,52 @@ module Hancock::Cms
     desc 'Hancock CMS Carcass generator'
     def install
 
+      def ask_with_timeout(question, timeout = 5)
+        ask(question)
+        # # temp
+        # begin
+        #   Timeout::timeout(timeout) {
+        #     ask("#{question} | U have only #{timeout} second(s)!")
+        #   }
+        # rescue
+        #   puts ""
+        #   ""
+        # end
+      end
+
 ####### DEVISE #######
 
 generate "devise:install"
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
+
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout for devise? (y or yes)").downcase.strip)
+_sessions_layout      = Devise::SessionsController._layout       == "hancock/devise/sessions"
+_registration_layout  = Devise::RegistrationsController._layout  == "hancock/devise/registrations"
+_confirmations_layout = Devise::ConfirmationsController._layout  == "hancock/devise/confirmations"
+_unlocks_layout       = Devise::UnlocksController._layout        == "hancock/devise/unlocks"
+_passwords_layout     = Devise::PasswordsController._layout      == "hancock/devise/passwords"
+if !_sessions_layout or !_registration_layout or !_confirmations_layout or !_unlocks_layout or !_passwords_layout
 inject_into_file 'config/initializers/devise.rb', after: /^end/ do <<-TEXT
 
 Rails.application.config.to_prepare do
-  Devise::SessionsController.layout       "hancock/devise/sessions"
-  Devise::RegistrationsController.layout  "hancock/devise/registrations"
-  Devise::ConfirmationsController.layout  "hancock/devise/confirmations"
-  Devise::UnlocksController.layout        "hancock/devise/unlocks"
-  Devise::PasswordsController.layout      "hancock/devise/passwords"
+  #{'Devise::SessionsController.layout        "hancock/devise/sessions"'      unless _sessions_layout }
+  #{'Devise::RegistrationsController.layout   "hancock/devise/registrations"' unless _registration_layout }
+  #{'Devise::ConfirmationsController.layout   "hancock/devise/confirmations"' unless _confirmations_layout }
+  #{'Devise::UnlocksController.layout         "hancock/devise/unlocks"'       unless _unlocks_layout }
+  #{'Devise::PasswordsController.layout       "hancock/devise/passwords"'     unless _passwords_layout }
 end
 TEXT
 end
-
-generate "devise", "User"
+end
+end
+generate "devise", "User", "--routes=false"
 
 
 ####### ROUTES #######
 
-remove_file 'config/routes.rb'
+
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's routes? (y or yes)").downcase.strip)
+\remove_file 'config/routes.rb'
 create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
   devise_for :users, controllers: {sessions: 'hancock/sessions'}
@@ -37,25 +61,87 @@ Rails.application.routes.draw do
 end
 TEXT
 end
+end
 
 
 ####### INITIALIZERS #######
 
+add_assets_precompiled = ["*.svg", 'ckeditor/*', 'codemirror.js', 'codemirror.css', 'codemirror/**/*']
+if (Rails.application.config.assets.precompile & add_assets_precompiled).length < add_assets_precompiled.length
 inject_into_file 'config/initializers/assets.rb', before: /\z/ do <<-TEXT
 Rails.application.config.assets.precompile += %w( *.svg )
 Rails.application.config.assets.precompile += %w( ckeditor/* )
 Rails.application.config.assets.precompile += %w( codemirror.js codemirror.css codemirror/**/* )
 TEXT
 end
+end
+
 
 if mongoid
-  generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+if defined?(Paperclip)
+generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip"
+unless Ckeditor::Asset < Hancock::Model
+inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
+  include Hancock::Model
+TEXT
+end
+end
+remove_file 'app/models/ckeditor/picture.rb'
+create_file 'app/models/ckeditor/picture.rb' do <<-TEXT
+class Ckeditor::Picture < Ckeditor::Asset
+  # has_mongoid_attached_file :data,
+  #                           url: '/ckeditor_assets/pictures/:id/:style_:basename.:extension',
+  #                           path: ':rails_root/public/ckeditor_assets/pictures/:id/:style_:basename.:extension',
+  #                           styles: { content: '800>', thumb: '118x100#' }
+
+  include Hancock::Gallery::Paperclipable
+  hancock_cms_attached_file :data,
+                            url: '/ckeditor_assets/pictures/:id/:style/:basename.:extension',
+                            path: ':rails_root/public/ckeditor_assets/pictures/:id/:style/:basename.:extension'
+  def data_styles
+    if data_svg?
+      {}
+    else
+      { content: '800>', thumb: '118x100#' }
+    end
+  end
+
+  validates_attachment_size :data, less_than: 2.megabytes
+  validates_attachment_presence :data
+  validates_attachment_content_type :data, content_type: /\Aimage/
+
+  def url_content
+    # url(:content)
+    if data_svg?
+      url
+    else
+      url(:content)
+    end
+  end
+
+  def url_thumb
+    # url(:thumb)
+    if data_svg?
+      url
+    else
+      url(:thumb)
+    end
+  end
+end
+TEXT
+end
+end
+
 else
+if defined?(Paperclip)
   generate "ckeditor:install", "--orm=active_record", "--backend=paperclip"
 end
-gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
-# gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "config.authorize_with :cancancan"
-gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
+end
+if File.exists?(Rails.root.join 'config/initializers/ckeditor.rb')
+  gsub_file 'config/initializers/ckeditor.rb', "# config.image_file_types = %w(jpg jpeg png gif tiff)", "config.image_file_types = %w(jpg jpeg png gif tiff svg)"
+  gsub_file 'config/initializers/ckeditor.rb', "# config.authorize_with :cancan",                       "# config.authorize_with :cancancan"
+  gsub_file 'config/initializers/ckeditor.rb', "# config.assets_languages = ['en', 'uk']",              "config.assets_languages = ['en', 'ru']"
+end
 
 if mongoid
 remove_file 'config/initializers/cookies_serializer.rb'
@@ -73,7 +159,7 @@ gsub_file 'config/initializers/filter_parameter_logging.rb', "[:password]", "[:p
 
 # generate 'paperclip_optimizer:install'
 # remove_file 'config/initializers/paperclip_optimizer.rb'
-# generate "hancock:cms:paperclip_optimizer"
+generate "hancock:cms:paperclip_optimizer"
 
 # generate 'rails_email_preview:install'
 # remove_file 'app/mailer_previews/contact_mailer_preview.rb'
@@ -121,6 +207,8 @@ generate "simple_form:install"
 
 ####### CONTROLLERS #######
 
+
+unless ApplicationController < Hancock::Controller
 remove_file 'app/controllers/application_controller.rb'
 create_file 'app/controllers/application_controller.rb' do <<-TEXT
 class ApplicationController < ActionController::Base
@@ -128,12 +216,19 @@ class ApplicationController < ActionController::Base
 end
 TEXT
 end
+end
 
 
 ####### MODELS #######
 
 generate "hancock:cms:ability"
 
+gsub_user_rb = begin
+  (User < Hancock::Model).nil?
+rescue
+  true
+end
+if gsub_user_rb
 gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
 include Hancock::Model
   include Hancock::Enableable
@@ -160,6 +255,7 @@ include Hancock::Model
 TEXT
 end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's User model? (y or yes)").downcase.strip)
 gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
 if mongoid
 gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
@@ -290,42 +386,50 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
 TEXT
 end
 end
+end
+end
 
 
 ###### HANCOCK OTHERS ######
 
 unless mongoid
-  generate "hancock:cms:migration"
-  generate "rails_admin_settings:migration"
+generate "hancock:cms:migration"
+generate "rails_admin_settings:migration"
 end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout? (y or yes)").downcase.strip)
 remove_file 'app/views/layouts/application.html.erb'
 generate "hancock:cms:layout"
-
-unless mongoid
-  rake "db:migrate"
 end
 
 run 'rails r "User.generate_first_admin_user"'
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's assets? (y or yes)").downcase.strip)
 remove_file 'app/assets/stylesheets/application.css'
 remove_file 'app/assets/javascripts/application.js'
 generate "hancock:cms:assets", app_name
+end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's robots.txt? (y or yes)").downcase.strip)
 remove_file 'public/robots.txt'
 generate "hancock:cms:robots", app_name
+end
 
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's unicorn config? (y or yes)").downcase.strip)
 #god+unicorn
 generate "hancock:cms:unicorn_god", app_name
+end
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's scripts? (y or yes)").downcase.strip)
 #scripts
 generate "hancock:cms:scripts", app_name
+end
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
 
 unless mongoid
-  generate "paper_trail:install"
-  generate "friendly_id"
-  rake "db:migrate"
+generate "paper_trail:install"
+generate "friendly_id"
+rake "db:migrate"
 end
 
 generate "rspec:install"
@@ -347,16 +451,19 @@ create_file '.gitignore' do <<-TEXT
 /log/*.log
 /tmp/*
 /public/assets
-/public/ckeditor_assets
+# /public/ckeditor_assets
 Gemfile.lock
 TEXT
 end
 
 create_file 'extra/.gitkeep', ''
 
+
+if ["yes", "y"].include?(ask_with_timeout("Do u want init git? (y or yes)").downcase.strip)
 git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
+end
 
     end
 

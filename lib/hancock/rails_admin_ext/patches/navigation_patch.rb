@@ -37,7 +37,7 @@ module Hancock
           level_class = " nav-level-#{level}" if level > 0
           nav_icon = node.navigation_icon ? %(<i class="#{node.navigation_icon}"></i>).html_safe : ''
           li = content_tag :li, data: {model: model_param, "name-synonyms": node.name_synonyms} do
-            link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}"
+            link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural)
           end
           li + navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
         end.join.html_safe

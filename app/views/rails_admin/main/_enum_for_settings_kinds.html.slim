@@ -1,0 +1,24 @@
+.form-control-static
+  span= field.form_value
+  span= " "
+  span= " "
+  span= " "
+  span= link_to '(изменить)', "#", onclick: "var _p = $(this).closest('.form-control-static'); _p.siblings('.hancock_enum').removeClass('hidden'); _p.remove(); return false;", style: 'color: grey;', onmouseover: 'this.style.color = "darkgrey";', onmouseout: 'this.style.color = "grey";'
+- unless field.multiple?
+  = form.select field.method_name, field.enum, { include_blank: true }.reverse_merge({ selected: field.form_value }), field.html_attributes.reverse_merge({ data: { enumeration: true }, placeholder: t('admin.misc.search'), class: 'hancock_enum hidden'})
+- else
+  ruby:
+    js_data = {
+      xhr: false,
+      sortable: false,
+      cacheAll: true,
+      regional: {
+        chooseAll: t("admin.misc.chose_all"),
+        chosen: t("admin.misc.chosen", name: config.label_plural),
+        clearAll: t("admin.misc.clear_all"),
+        search: t("admin.misc.search"),
+        up: t("admin.misc.up"),
+        down: t("admin.misc.down")
+      }
+    }
+  = form.select field.method_name, field.enum, { selected: field.form_value, object: form.object }, field.html_attributes.reverse_merge({data: { filteringmultiselect: true, options: js_data.to_json }, multiple: true, class: 'hancock_enum hidden'})

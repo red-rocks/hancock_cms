@@ -26,7 +26,7 @@ module Hancock::Errors
         unless exception.nil?
           Rails.logger.error exception.message
           Rails.logger.error exception.backtrace.join("\n")
-          capture_exception(exception) if defined?(Raven)
+          capture_exception(exception) if Hancock.config.raven_support # if defined?(Raven)
         end
         Rails.logger.error "__________________________"
         if !user_signed_in?
@@ -44,7 +44,7 @@ module Hancock::Errors
     end
 
     rescue_from ActionController::InvalidAuthenticityToken do |exception|
-      redirect_to :back, alert: t('hancock.errors.form_expired')
+      redirect_back(fallback_location: root_path, alert: t('hancock.errors.form_expired'))
     end
   end
 
@@ -57,7 +57,7 @@ module Hancock::Errors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if defined?(Raven)
+      capture_exception(exception) if Hancock.config.raven_support #if defined?(Raven)
     end
     Rails.logger.error "__________________________".freeze
     render_error(404)
@@ -71,7 +71,7 @@ module Hancock::Errors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if defined?(Raven)
+      capture_exception(exception) if Hancock.config.raven_support #if defined?(Raven)
     end
     Rails.logger.error "__________________________".freeze
     begin

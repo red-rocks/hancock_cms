@@ -44,6 +44,14 @@ module RailsAdmin
             true
           end
 
+          register_instance_option :help do
+            if @abstract_model.model.respond_to?(:insertions_fields)
+              if @abstract_model.model.insertions_fields.include?(name)
+                'Можно использовать вставки'
+              end
+            end
+          end
+
 
           ############ localize ######################
           register_instance_option :html_translations_field do
@@ -68,8 +76,8 @@ module RailsAdmin
           end
 
           register_instance_option :localized? do
-            @abstract_model.model_name.constantize.public_instance_methods.include?(html_translations_field) and
-              @abstract_model.model_name.constantize.public_instance_methods.include?(clear_translations_field)
+            @abstract_model.model.public_instance_methods.include?(html_translations_field) and
+              @abstract_model.model.public_instance_methods.include?(clear_translations_field)
           end
 
           register_instance_option :allowed_methods do

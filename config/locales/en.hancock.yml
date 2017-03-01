@@ -4,6 +4,7 @@ en:
     cms: "CMS"
     menu: "Menu"
     settings: 'Settings'
+    insertions: "Insertions"
     news: 'News'
     with_final_slash: "should begin with a slash"
     page_url_regex: "Regular expression to check if page is current"

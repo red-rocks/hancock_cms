@@ -18,8 +18,9 @@
       = render "layouts/rails_admin/navigation"
 
     .admin-menubar.admin-menubar-fixed.admin-menubar-dark
-      = render "layouts/rails_admin/sidebar_navigation_filter"
-      .toolbar
+      .navigation-filter
+        = render "layouts/rails_admin/sidebar_navigation_filter"
+      .toolbar.custom_scroll
         = render "layouts/rails_admin/sidebar_navigation"
       .admin-menubar-footer
         = render "layouts/rails_admin/footer_navigation"

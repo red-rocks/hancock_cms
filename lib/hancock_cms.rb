@@ -26,6 +26,7 @@ require 'rails_admin'
 require 'hancock/rails_admin_ext/config'
 
 require 'hancock/rails_admin_ext/hancock_enum'
+require 'hancock/rails_admin_ext/hancock_enum_with_custom'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
@@ -33,9 +34,11 @@ require 'hancock/rails_admin_ext/hancock_multiselect'
 
 require 'hancock/rails_admin_ext/patches/navigation_patch'
 require 'hancock/rails_admin_ext/patches/field_patch'
+require 'hancock/rails_admin_ext/patches/fieldset_patch'
 require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
 require 'hancock/rails_admin_ext/patches/hancock_cms_group'
+require 'hancock/rails_admin_ext/patches/has_fields'
 
 
 require 'rails_admin_nested_set'
@@ -53,6 +56,8 @@ require 'kaminari/actionview'
 
 # require 'addressable/uri'
 # require 'turbolinks'
+
+require 'stickykit/rails'
 
 require 'hancock/model'
 require 'hancock/engine'
@@ -94,11 +99,11 @@ module Hancock
           end
         rescue
         end
-      end
+      end if defined?(::HistoryTracker)
     end
 
     def clear_history!
-      ::HistoryTracker.delete_all
+      ::HistoryTracker.delete_all if defined?(::HistoryTracker)
     end
 
   end
