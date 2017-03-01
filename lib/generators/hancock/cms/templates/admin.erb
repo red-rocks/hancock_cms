@@ -63,6 +63,7 @@ RailsAdmin.config do |config|
       'Hancock::EmbeddedElement'
   ]
   config.excluded_models.flatten!
+  config.excluded_models.uniq!
 end
 
 # [required] fix for timezones to be displayed in local time instead of UTC
