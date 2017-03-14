@@ -12,52 +12,9 @@ module Hancock
     end
 
 
-    initializer "RailsAdminPatch (Navigation)" do
-      # ::RailsAdmin::ApplicationHelper.send :include, Hancock::RailsAdminApplicationHelperNavigationPatch
-      # ::RailsAdmin::ApplicationHelper.module_eval "include Hancock::RailsAdminApplicationHelperNavigationPatch"
-      # Hancock::RailsAdminApplicationHelperNavigationPatch.patch
-    end
-
-
-    initializer "RailsAdminPatch (Fieldset)" do
-      # ::RailsAdmin::FormBuilder.send :include, Hancock::RailsAdminFormBuilderFieldsetPatch
-
-      # Hancock::RailsAdminFormBuilderFieldsetPatch.patch
-    end
-
-
-    initializer "RailsAdminPatch (MainNavigation)" do
-      # ::RailsAdmin::ApplicationHelper.send :include, Hancock::RailsAdminMainNavigationPatch
-      # ::RailsAdmin::ApplicationHelper.module_eval "include Hancock::RailsAdminMainNavigationPatch"
-      # Hancock::RailsAdminMainNavigationPatch.patch
-    end
-
-
-
     config.to_prepare do
-      # ::RailsAdmin::ApplicationHelper.module_eval "include Hancock::RailsAdminApplicationHelperNavigationPatch"
-      # #
-      # ::RailsAdmin::ApplicationHelper.module_eval "include Hancock::RailsAdminMainNavigationPatch"
-
-      # Hancock::RailsAdminApplicationHelperNavigationPatch.patch
-      # Hancock::RailsAdminMainNavigationPatch.patch
-      #
-      # Hancock::RailsAdminFormBuilderFieldsetPatch.patch
-
-      # require 'rails_admin/application/hancock_helper'
-      # require 'rails_admin/main/hancock_helper'
       require 'rails_admin/hancock/form_builder'
-
-      ::RailsAdmin::MainController.send(:include, ::RailsAdmin::Application::HancockHelper)
-      ::RailsAdmin::MainController.send(:include, ::RailsAdmin::Main::HancockHelper)
-      # ::RailsAdmin::ApplicationHelper.send(:include, ::RailsAdmin::Hancock::FormBuilder)
-
-      ::RailsAdmin::ApplicationController.send(:helper, ::RailsAdmin::Application::HancockHelper)
-      ::RailsAdmin::ApplicationController.send(:helper, ::RailsAdmin::Main::HancockHelper)
     end
-
-
-
 
     config.after_initialize do
 
