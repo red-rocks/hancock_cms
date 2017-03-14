@@ -15,7 +15,6 @@ $(document).on 'rails_admin.dom_ready', ->
       clone_link = $("<a href='#' class='clone" + $(this).attr( 'name' ) + "' title='" + $(this).text() + "'></a>")
       clone_link.data('target', $(this))
       form_controls_fixed.append(clone_link)
-
 ## load CKEDITOR env for user ckeditor assets loading anythere
 # $(document).on 'rails_admin.dom_ready', ->
 #   return if $("#form_controls_fixed").length > 0

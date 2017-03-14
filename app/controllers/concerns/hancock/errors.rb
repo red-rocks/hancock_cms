@@ -26,12 +26,10 @@ module Hancock::Errors
         unless exception.nil?
           Rails.logger.error exception.message
           Rails.logger.error exception.backtrace.join("\n")
-          capture_exception(exception) if Hancock.config.raven_support # if defined?(Raven)
+          capture_exception(exception) if Hancock.config.raven_support
         end
         Rails.logger.error "__________________________"
         if !user_signed_in?
-          #scope = rails_admin? ? main_app : self
-          #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
           authenticate_user!
         else
           if rails_admin? and can?(:access, :rails_admin)
@@ -57,7 +55,7 @@ module Hancock::Errors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if Hancock.config.raven_support #if defined?(Raven)
+      capture_exception(exception) if Hancock.config.raven_support
     end
     Rails.logger.error "__________________________".freeze
     render_error(404)
@@ -71,12 +69,12 @@ module Hancock::Errors
     unless exception.nil?
       Rails.logger.error exception.message
       Rails.logger.error exception.backtrace.join("\n")
-      capture_exception(exception) if Hancock.config.raven_support #if defined?(Raven)
+      capture_exception(exception) if Hancock.config.raven_support
     end
     Rails.logger.error "__________________________".freeze
     begin
       if rails_admin?
-        render text: t('hancock.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
+        render plain: t('hancock.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
         return
       end
     rescue Exception => e

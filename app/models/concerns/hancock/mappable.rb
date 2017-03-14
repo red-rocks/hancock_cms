@@ -88,4 +88,5 @@ module Hancock::Mappable
       map_address
     end
   end
+  
 end

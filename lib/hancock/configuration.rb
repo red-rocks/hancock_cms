@@ -62,6 +62,8 @@ module Hancock
 
     attr_accessor :mongoid_single_collection
 
+    attr_accessor :navigation_labels
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -80,9 +82,12 @@ module Hancock
 
       @captcha_on_development = false
 
-      @history_tracking = false
+      @history_tracking = true
 
       @mongoid_single_collection = nil
+
+      @navigation_labels = []
+
     end
   end
 end

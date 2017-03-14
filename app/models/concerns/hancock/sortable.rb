@@ -4,5 +4,8 @@ module Hancock::Sortable
 
   included do
     sort_field
+
+    before_create :set_default_order_value
   end
+
 end

@@ -18,7 +18,7 @@ module Hancock::RailsAdminPatch
     self.class.manager_cannot_actions
   end
 
-  module ClassMethods
+  class_methods do
     def rails_admin_model
       name.split('::').collect(&:underscore).join('~')
     end
@@ -36,7 +36,6 @@ module Hancock::RailsAdminPatch
     def rails_admin_name_synonyms
       ''.freeze
     end
-
 
 
     def admin_can_default_actions

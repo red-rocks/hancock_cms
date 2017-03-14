@@ -14,7 +14,7 @@ ul
       span
         i.fa.fa-home
 
-  - if logout_path.present?
+  - if signed_in? and logout_path.present?
     li.footer-nav-link = link_to logout_path, title: "Выйти".freeze, method: logout_method
       span
         i.fa.fa-power-off

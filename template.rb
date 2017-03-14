@@ -32,8 +32,6 @@ gem 'compass-rails'
 
 gem 'rails_admin', '~> 1.1'
 
-# gem 'sentry-raven'
-
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
 # gem "paperclip-optimizer"
@@ -109,6 +107,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
+  # gem 'sentry-raven'
   gem "god"
 end
 
@@ -196,7 +195,6 @@ require File.expand_path('../boot', __FILE__)
 require "active_model/railtie"
 #{'#' if mongoid}require "active_record/railtie"
 require "action_controller/railtie"
-# require "action_mailer/railtie" # mailer is off by default
 # require "active_job/railtie"
 # require "action_cable/engine"
 require "action_mailer/railtie"

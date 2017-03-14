@@ -10,5 +10,6 @@ module Hancock::Cms
     def install
       template 'ability.erb', 'app/models/ability.rb'
     end
+    
   end
 end

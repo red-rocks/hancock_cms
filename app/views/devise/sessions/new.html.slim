@@ -1,6 +1,4 @@
-/ h2= I18n.t("shared.enter_site")
 .devise-box
-  / = resource.errors.inspect if resource
   .white-box
     = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
       / = devise_error_messages!

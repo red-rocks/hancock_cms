@@ -17,5 +17,6 @@ module Hancock::Cms
       # route("mount RailsAdmin::Engine => '/#{namespace}', as: 'rails_admin'")
       template 'admin.erb', 'config/initializers/rails_admin.rb'
     end
+
   end
 end

@@ -1,19 +1,6 @@
-/.logo-block
-/  = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
-/    = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
-/
-/.top-nav
-/  .left-nav
-/    .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
-/      - plugin_name = _get_plugin_name[0] || 'Rails'
-/      span = "Административная панель: #{plugin_name}".freeze
-/  .right-nav
-/    = render partial: "layouts/rails_admin/secondary_navigation"
-
-
 .navbar-header-brand
   = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
-    = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
+    = image_tag "hancock/rails_admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
 
 .navbar-container.container-fluid
   .plugin-name-panel
@@ -37,33 +24,12 @@
             li.user-logout-action
               = link_to logout_path, title: "Выйти".freeze, method: logout_method
                 span Выйти
-
-        /.user_root_link = edit_user_link
-
-
-/.app-header.fixed
-/  .app-header-inner
-/    .brand-title
-/      h2 = link_to dashboard_path, title: "Hancock CMS".freeze, class: "admin-title".freeze
-/        span = image_tag "rails-admin/hancock_logo.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze
-/
-/    .top-nav-left
-/      .top-nav-project = link_to dashboard_path, title: "Административная панель".freeze
-/        - plugin_name = _get_plugin_name[0] || 'Rails'
-/        span = "Административная панель: #{plugin_name}".freeze
-/    /
-/    .top-nav-right
-/      = render partial: "layouts/rails_admin/secondary_navigation"
-      / ul.nav.navbar-nav.root_links
-        / - actions(:root).each do |action|
-        /   / li.top-nav-control-panel = link_to "", { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : ""
-        /   li.top-nav-control-panel = link_to "/admin", title: "Контрольная панель"
-        /     span
-        /       i.fa.fa-server
+                
         - if main_app_root_path = (main_app.root_path rescue false)
           li.top-nav-goto-home = link_to main_app_root_path, title: "На главную".freeze
             span
               i.fa.fa-home
+              
         - if _current_user
           - if user_link = edit_user_link
            li.top-nav-user_root_link = edit_user_link

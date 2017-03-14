@@ -65,11 +65,11 @@ module Hancock::InsertionField
         options: opts
       }
       if _method_name
-        class_eval <<-EVAL
+        class_eval <<-RUBY
           def #{_method_name}
             process_with_insertions(#{name})
           end
-        EVAL
+        RUBY
       end
       name
     end
@@ -92,6 +92,7 @@ module Hancock::InsertionField
     def default_insertions
       # self.fields.keys # we was here but inheritance and we need check
 
+      # # version with store in
       # return @default_insertions unless @default_insertions.nil?
       # @default_insertions =
       self.fields.select { |_name, _field|
