@@ -4,6 +4,7 @@ module Hancock::Cms
   module Generators
     module Utils
       module InstanceMethods
+
         def display(output, color = :green)
           say("           -  #{output}", color)
         end
@@ -15,6 +16,7 @@ module Hancock::Cms
             ask("           ?  #{wording} Press <enter> for [#{default_value}] >", :yellow).presence || default_value
           end
         end
+        
       end
     end
   end

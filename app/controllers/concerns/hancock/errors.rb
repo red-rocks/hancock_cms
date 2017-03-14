@@ -76,7 +76,7 @@ module Hancock::Errors
     Rails.logger.error "__________________________".freeze
     begin
       if rails_admin?
-        render text: t('hancock.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
+        render plain: t('hancock.errors.internal_error_full', klass: exception.class.name, message: exception.message), status: 500
         return
       end
     rescue Exception => e

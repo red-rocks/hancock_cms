@@ -15,7 +15,7 @@ module Hancock::PoweredHelper
   #         "hancock-goto-disabled": true
   #       }
   #     }
-  #     ret << link_to("Hancock CMS", "http://hancock.redrocks.pro/", _attrs)
+  #     ret << link_to("Hancock CMS", "https://hancock.redrocks.pro/", _attrs)
   #     ret.join.html_safe
   #   end
   # end
@@ -29,12 +29,12 @@ module Hancock::PoweredHelper
       _attrs = {
         class: "created_by",
         target: "_blank",
-        title: "Hancock Creative studio",
+        title: "Redrocks Creative studio",
         data: {
           "hancock-goto-disabled": true
         }
       }.freeze
-      ret << link_to("Redrocks studio".freeze, "http://redrocks.pro/".freeze, _attrs)
+      ret << link_to("Redrocks studio".freeze, "https://redrocks.pro/".freeze, _attrs)
       ret.join.html_safe
     end
   end

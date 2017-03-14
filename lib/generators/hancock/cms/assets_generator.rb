@@ -31,5 +31,6 @@ module Hancock::Cms
         application_coffee_path
       ]
     end
+    
   end
 end

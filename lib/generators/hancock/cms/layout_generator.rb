@@ -10,5 +10,6 @@ module Hancock::Cms
     def layout
       template('../app/views/layouts/application.html.slim', 'app/views/layouts/application.html.slim')
     end
+    
   end
 end

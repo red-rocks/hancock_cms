@@ -15,9 +15,7 @@ require 'hancock/simple_form_patch'
 
 require 'geocoder'
 
-# require 'simple_captcha'
-# require 'validates_email_format_of'
-require 'filename_to_slug'
+require_relative 'filename_to_slug'
 
 require 'codemirror-rails'
 
@@ -47,15 +45,9 @@ require 'rails_admin_toggleable'
 require 'ack_rails_admin_settings'
 require 'hancock/rails_admin_settings_patch'
 
-# require 'x-real-ip'
-
 require 'ckeditor'
 
-# require 'kaminari'
 require 'kaminari/actionview'
-
-# require 'addressable/uri'
-# require 'turbolinks'
 
 require 'stickykit/rails'
 
@@ -135,6 +127,6 @@ module Hancock
   end
 end
 
-require 'manual_slug'
+require_relative 'manual_slug'
 
 require 'scrollbar-rails'

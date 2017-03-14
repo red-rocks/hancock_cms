@@ -1,14 +1,10 @@
 #= require ./en_ru_switcher
 
-# $(document).delegate '.clear_navigation_filter_field', 'click', (e)->
 $(document).on 'click', '.clear_navigation_filter_field', (e)->
   e.preventDefault()
   $("#navigation_filter").val("").trigger("keyup")
   return false
 
-
-
-# $(document).delegate '#navigation_filter', 'keypress', (e)->
 $(document).on 'keydown', '#navigation_filter', (e)->
   _code = e.which || e.keyCode
   if _code == 13 or _code == 39 or _code == 37
@@ -52,6 +48,12 @@ $(document).on 'keydown', '#navigation_filter', (e)->
           _current = _visibled.last() if _current.length == 0
       else
         if _current.length == 0
+          # # if we want select first child of single visible .dropdown-header
+          # if _visibled.filter(".dropdown-header").length == 1
+          #   _current = _visibled.filter(".dropdown-header").nextAll(".visible").first()
+          # else
+          #   _current = _visibled.first()
+          # _current ||= _visibled.first()
           _current = _visibled.first()
         else
           _current = _current.nextAll(_possible_li_selector).first()
@@ -66,15 +68,11 @@ $(document).on 'keydown', '#navigation_filter', (e)->
 
 
 
-
-
-# $(document).delegate '#navigation_filter', 'keyup', (e)->
 $(document).on 'keyup', '#navigation_filter', (e)->
   filter = e.currentTarget.value
   navigation_block = $(e.currentTarget).parent().siblings('.toolbar').find('.nav')
   nav_first_lvl = navigation_block.find("li.dropdown-header:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('opened').removeClass('opened-filtered')
   nav_sec_lvl = navigation_block.find("li[data-model]:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('visible')
-
   select_menu_items = (filter, nav_first_lvl, nav_sec_lvl)->
     if filter.length > 0
       filter = new RegExp(filter, "i")
@@ -101,3 +99,10 @@ $(document).on 'keyup', '#navigation_filter', (e)->
     select_menu_items(window.hancock_cms.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
 
   window.hancock_cms.navigation_mscroll()
+
+
+
+$(document).on "rails_admin.dom_ready", ->
+  _search_field = $('form #filters_box ~ .input-group [type="search"][name="query"]:not(:focus)')
+  _val = _search_field.val()
+  _search_field.focus().val("").val(_val)

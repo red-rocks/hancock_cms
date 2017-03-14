@@ -27,7 +27,7 @@ module Hancock
       #   super - [:new, :create]
       # end
       # def self.manager_can_default_actions
-      #   ret =
+      #   ret = []
       #   # ret << :model_accesses if ::Hancock::Goto.config.user_abilities_support
       #   ret
       # end
@@ -49,7 +49,6 @@ module Hancock
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
         ret.freeze
       end
-
 
       rails_admin do
         navigation_label I18n.t('admin.settings.label')

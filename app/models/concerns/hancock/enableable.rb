@@ -5,4 +5,5 @@ module Hancock::Enableable
   included do
     boolean_field(:enabled)
   end
+  
 end

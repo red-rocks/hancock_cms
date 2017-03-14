@@ -11,5 +11,6 @@ module Hancock::Cms
       template 'unicorn.erb',     "config/unicorn.rb"
       template 'unicorn.god.erb', "config/unicorn.god"
     end
+    
   end
 end

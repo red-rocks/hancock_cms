@@ -1,4 +1,3 @@
-# $(document).delegate '.toolbar .nav .dropdown-header', 'click', (e)->
 $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   e.preventDefault()
   _target = $(e.currentTarget).toggleClass('opened')
@@ -17,7 +16,6 @@ $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
     li = li.next()
     break if li.length == 0 or li.hasClass('dropdown-header')
 
-    
 
 $(document).on 'pjax:complete ready', ()->
   active_nav_element = $(".toolbar .nav .active")

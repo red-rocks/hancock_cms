@@ -2,7 +2,7 @@ if Hancock.mongoid?
   module Hancock::HtmlField
     extend ActiveSupport::Concern
 
-    module ClassMethods
+    class_methods do
       def hancock_cms_html_field(name, opts = {})
         clear_by_default = opts.delete(:clear_by_default)
         clear_by_default = false unless clear_by_default == true
@@ -14,7 +14,7 @@ if Hancock.mongoid?
 
         insertions_for(name) if respond_to?(:insertions_for)
 
-        class_eval <<-EVAL
+        class_eval <<-RUBY
           def #{name}
             self.#{_html_field_name} ||= ""
             return self.#{_html_field_name} unless self.#{name}_clear
@@ -28,8 +28,9 @@ if Hancock.mongoid?
             self.#{_html_field_name} ||= ""
             Rails::Html::FullSanitizer.new.sanitize(self.#{_html_field_name}.strip)
           end
-        EVAL
+        RUBY
       end
     end
+
   end
 end
