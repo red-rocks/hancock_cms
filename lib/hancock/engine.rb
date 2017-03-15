@@ -14,6 +14,13 @@ module Hancock
 
     config.to_prepare do
       require 'rails_admin/hancock/form_builder'
+
+      ::RailsAdmin::MainController.send(:include, ::RailsAdmin::Application::HancockHelper)
+      ::RailsAdmin::MainController.send(:include, ::RailsAdmin::Main::HancockHelper)
+      # ::RailsAdmin::ApplicationHelper.send(:include, ::RailsAdmin::Hancock::FormBuilder)
+
+      ::RailsAdmin::ApplicationController.send(:helper, ::RailsAdmin::Application::HancockHelper)
+      ::RailsAdmin::ApplicationController.send(:helper, ::RailsAdmin::Main::HancockHelper)
     end
 
     config.after_initialize do
