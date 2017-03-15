@@ -30,8 +30,6 @@ module Hancock::Errors
         end
         Rails.logger.error "__________________________"
         if !user_signed_in?
-          #scope = rails_admin? ? main_app : self
-          #redirect_to scope.new_user_session_path, alert: "Необходимо авторизоваться"
           authenticate_user!
         else
           if rails_admin? and can?(:access, :rails_admin)
