@@ -14,7 +14,7 @@ module TrackablePatch
       modifier_field: :updater,
       except: ["created_at", "updated_at", "c_at", "u_at"],
     })
-    
+
     belongs_to :updater, class_name: Mongoid::History.modifier_class_name, optional: true, validate: false
     _validators.delete(:updater)
     _validate_callbacks.each do |callback|
@@ -23,6 +23,19 @@ module TrackablePatch
       end
     end
 
+  end
+
+end
+
+require 'mongoid-audit/history_tracker'
+class HistoryTracker
+
+  belongs_to :modifier, class_name: Mongoid::History.modifier_class_name, optional: true, validate: false
+  _validators.delete(:modifier)
+  _validate_callbacks.each do |callback|
+    if callback.raw_filter.respond_to?(:attributes) and callback.raw_filter.attributes.include?(:modifier)
+      _validate_callbacks.delete(callback)
+    end
   end
 
 end
