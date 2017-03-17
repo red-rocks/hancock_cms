@@ -14,7 +14,7 @@ module RailsAdmin::Main
       nodes_stack ||= RailsAdmin::Config.visible_models(controller: _controller)
       node_model_names ||= nodes_stack.collect { |c| c.abstract_model.model_name }
 
-      _order_array = _controller._current_user.navigation_labels
+      _order_array = _controller._current_user.navigation_labels if _controller._current_user and _controller._current_user.respond_to?(:navigation_labels)
       _order_array ||= Hancock.config.navigation_labels
       _order_array = _order_array.clone.reverse
 

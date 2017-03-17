@@ -80,10 +80,14 @@ end
 if mongoid
 if defined?(Paperclip)
 generate "ckeditor:install", "--orm=mongoid", "--backend=paperclip" if ["yes", "y"].include?(ask_with_timeout("generate `ckeditor:install --orm=mongoid --backend=paperclip`?(y or yes)").downcase.strip)
+require 'ckeditor/orm/mongoid'
+require Rails.root.join("app", "models", "ckeditor", "asset.rb")
+if defined?(Ckeditor::Asset)
 unless Ckeditor::Asset < Hancock::Model
 inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
   include Hancock::Model
 TEXT
+end
 end
 end
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's config for Ckeditor::Picture? (y or yes)").downcase.strip)

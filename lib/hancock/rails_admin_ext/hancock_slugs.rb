@@ -11,11 +11,6 @@ module RailsAdmin
           register_instance_option :enum_method do
             :slugs
           end
-          register_instance_option :searchable_columns do
-            [
-              {column: "#{abstract_model.table_name}._slugs" , type: :string}
-            ]
-          end
 
           register_instance_option :visible do
             bindings[:view].current_user.admin?
