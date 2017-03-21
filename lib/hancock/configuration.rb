@@ -64,6 +64,8 @@ module Hancock
 
     attr_accessor :navigation_labels
 
+    attr_accessor :erb2coffee_assets
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -87,6 +89,8 @@ module Hancock
       @mongoid_single_collection = nil
 
       @navigation_labels = []
+
+      @erb2coffee_assets = ['hancock/rails_admin/plugins.coffee.erb']
 
     end
   end

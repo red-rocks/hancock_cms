@@ -19,6 +19,7 @@ require_relative 'filename_to_slug'
 
 require 'codemirror-rails'
 
+require 'sprockets'
 
 require 'rails_admin'
 require 'hancock/rails_admin_ext/config'

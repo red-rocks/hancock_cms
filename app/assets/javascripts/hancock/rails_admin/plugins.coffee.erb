@@ -1,0 +1,16 @@
+#= require_self
+<% plugins = [] %>
+<% Hancock::PLUGINS.each do |plugin| %>
+<% p_name = plugin.name.demodulize.underscore %>
+<% if defined?(plugin::Engine) and File.exists?(plugin::Engine.root.join("app", "assets", "javascripts", "hancock", "rails_admin", "plugins", "#{p_name}.coffee")) %>
+<% plugins << p_name %>
+#= require hancock/rails_admin/plugins/<%= p_name %>
+<% end %>
+<% end %>
+
+window.hancock ||= {}
+window.hancock.plugins_list = <%= plugins.to_json %>
+window.hancock.plugins = {}
+<% plugins.each do |p| %>
+window.hancock.plugins.<%= p %> = {}
+<% end %>
