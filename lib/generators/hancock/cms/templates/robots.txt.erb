@@ -1,5 +1,9 @@
-Host: <%= app_name.downcase %>.ru
+Host: http://<%= app_name.downcase %>.ru
 User-Agent: *
 Allow: /
 Disallow: /admin
+# Disallow: /account
+Disallow: /ckeditor/*
+# Disallow: /goto
+# Disallow: /users
 Sitemap: http://<%= app_name.downcase %>.ru/sitemap.xml.gz

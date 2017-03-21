@@ -31,8 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'glebtv-mongoid_nested_set'
   spec.add_dependency 'rails_admin_sort_embedded'
 
-  spec.add_dependency 'mongoid-audit', '~> 1.3.0'
-  spec.add_dependency 'mongoid-slug', '~> 5.2.0'
+  spec.add_dependency 'mongoid-audit', '~> 1.3'
+  spec.add_dependency 'mongoid-slug', '~> 5.3'
 
   spec.add_dependency 'mongo_session_store-rails4'
 
@@ -40,5 +40,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'kaminari-mongoid'
 
-  spec.add_dependency 'glebtv_mongoid_userstamp', '~> 0.6'
+  spec.add_dependency 'glebtv_mongoid_userstamp', '< 0.7'
 end

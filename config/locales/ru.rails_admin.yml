@@ -130,6 +130,8 @@ ru:
       show_in_app:
         title: 'В приложении'
         menu: "Показать на сайте"
+      logout:
+        confirm: "Вы точно хотите выйти?"
     form:
       cancel: "Отмена"
       basic_info: "Основное"
