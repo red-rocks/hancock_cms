@@ -1,10 +1,10 @@
 ul.nav.navbar-nav.root_links
   - actions(:root).each do |action|
     - next if action.action_name.to_s == "dashboard"
-    - data_method = nil       if action.http_methods.include?(:get)
     - data_method = "post"    if action.http_methods.include?(:post)
     - data_method = "put"     if action.http_methods.include?(:put)
     - data_method = "delete"  if action.http_methods.include?(:delete)
+    - data_method = nil       if action.http_methods.include?(:get)
 
     li{class="#{action.action_name}_root_link top-nav-control-panel"}
       = link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: (action.pjax? ? "pjax" : ""), data: data_method ? {method: data_method, confirm: t("admin.actions.#{action.action_name}.confirm")} : nil
