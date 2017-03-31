@@ -15,6 +15,10 @@ module RailsAdmin
             []
           end
 
+          register_instance_option :unique do
+            true
+          end
+
           register_instance_option :selection do
             ([enum] + [form_value]).flatten.uniq
           end

@@ -47,7 +47,7 @@ gem 'rails_admin_model_settings'#, '~> 0.2'
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'slim-rails'
+gem 'slim-rails', '3.1.1'
 gem 'rs_russian'
 gem 'cancancan'
 
