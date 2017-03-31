@@ -1,5 +1,5 @@
 window.hancock_cms.set_enum_with_custom = () ->
-  $('.hancock_enum_with_custom_type .ra-filtering-select-input').autocomplete(
+  $('.hancock_enum_with_custom_type .ra-filtering-select-input, .hancock_array_type .ra-filtering-select-input').autocomplete(
     search: (e, ui)->
       if e.currentTarget
         $(e.currentTarget).closest(".controls").find("select.hancock_enum option:first").val(e.currentTarget.value).text(e.currentTarget.value)
@@ -8,7 +8,8 @@ window.hancock_cms.set_enum_with_custom = () ->
         ).toArray();
         $(e.currentTarget).closest(".controls").find("select").data('raFilteringSelect').options.source = _src
   )
-  $('.hancock_enum_with_custom_type .ra-multiselect-search').on('keydown', (e)->
+  $('.hancock_enum_with_custom_type .ra-multiselect-search, .hancock_array_type .ra-multiselect-search').on('keydown', (e)->
+    return true if e.ctrlKey
     if e.which == 13
       e.preventDefault()
       me = $(e.currentTarget)

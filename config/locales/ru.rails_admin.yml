@@ -31,6 +31,7 @@ ru:
     misc:
       filter_date_format: "dd.mm.yyyy"
       search: "Поиск"
+      search_or_add_yours: "Поиск/новый элемент"
       filter: "Фильтрация"
       refresh: "Обновить"
       show_all: "Показать все"
