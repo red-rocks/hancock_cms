@@ -8,7 +8,5 @@ window.hancock_cms.navigation_mscroll = () ->
     mouseWheel:
       scrollAmount: 0
   )
-$(window).bind 'load', ->
-  window.hancock_cms.navigation_mscroll()
-$(document).bind "page:load", ->
+$(document).on 'rails_admin.dom_ready', ->
   window.hancock_cms.navigation_mscroll()

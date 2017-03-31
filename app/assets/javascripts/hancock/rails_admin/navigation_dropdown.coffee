@@ -17,7 +17,7 @@ $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
     break if li.length == 0 or li.hasClass('dropdown-header')
 
 
-$(document).on 'pjax:complete ready', ()->
+$(document).on 'rails_admin.dom_ready', ->
   active_nav_element = $(".toolbar .nav .active")
   if active_nav_element.length > 0
     _parent = active_nav_element.prevAll(".dropdown-header:first")
