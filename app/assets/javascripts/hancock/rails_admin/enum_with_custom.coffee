@@ -16,16 +16,17 @@ window.hancock_cms.set_enum_with_custom = () ->
       return false if new_item_text.length == 0
       parent_block = me.closest(".ra-multiselect")
       left_collection   = parent_block.find(".ra-multiselect-left .ra-multiselect-collection")
-      right_collection  = parent_block.find(".ra-multiselect-right .ra-multiselect-selection")
       found_item = null
       left_collection.find("option").each ->
         found_item = $(this) if this.value == new_item_text
         return !found_item
       unless found_item
-        right_collection.find("option").each ->
-          found_item = $(this) if this.value == new_item_text
-          return !found_item
-        return false if found_item
+        if parent_block.siblings("[data-filteringmultiselect][data-unique=true]").length > 0
+          right_collection  = parent_block.find(".ra-multiselect-right .ra-multiselect-selection")
+          right_collection.find("option").each ->
+            found_item = $(this) if this.value == new_item_text
+            return !found_item
+          return false if found_item
         left_collection.append(found_item = $('<option></option>').attr('value', new_item_text).attr('title', new_item_text).text(new_item_text))
       found_item.prop('selected', true).trigger('dblclick')
 

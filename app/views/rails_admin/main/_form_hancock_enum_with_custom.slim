@@ -17,4 +17,4 @@
       }
     }
   / = form.select field.method_name, field.enum, { selected: field.form_value, object: form.object }, field.html_attributes.reverse_merge({data: { filteringmultiselect: true, options: js_data.to_json }, multiple: true, class: 'hancock_enum'})
-  = form.select field.method_name, field.selection, { selected: field.form_value, object: form.object }, field.html_attributes.reverse_merge({data: { filteringmultiselect: true, options: js_data.to_json }, multiple: true, class: 'hancock_enum'})
+  = form.select field.method_name, field.selection, { selected: field.form_value, object: form.object }, field.html_attributes.reverse_merge({data: { filteringmultiselect: true, options: js_data.to_json, unique: field.unique }, multiple: true, class: 'hancock_enum'})
