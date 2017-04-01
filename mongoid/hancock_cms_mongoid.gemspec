@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/red-rocks/hancock_cms'
   spec.license       = 'MIT'
 
-  spec.files         = %w(lib/hancock_cms_mongoid.rb)
+  spec.files         = %w(lib/hancock_cms_mongoid.rb lib/trackable_patch.rb)
   spec.executables   = []
   spec.test_files    = []
   spec.require_paths = ['lib']
