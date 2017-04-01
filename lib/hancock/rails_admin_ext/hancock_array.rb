@@ -1,4 +1,4 @@
-require_relative 'hancock_enum_with_custom'
+require 'hancock/rails_admin_ext/hancock_enum_with_custom'
 
 module RailsAdmin
   module Config
