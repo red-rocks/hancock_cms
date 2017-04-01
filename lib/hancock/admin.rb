@@ -5,7 +5,7 @@ module Hancock
         is_active, options = (is_active[:active] || false), is_active
       end
       fields = (options[:fields] ||= {})
-      field_names = [:slugs, :text_slug]
+      field_names = [:address, :map_address, :map_hint, :coordinates, :lat, :lon]
       field_showings = get_field_showings(fields, field_names)
 
       Proc.new {
@@ -37,7 +37,6 @@ module Hancock
         field :lon do
           searchable true
         end if field_showings[:lon]
-
 
         Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields])
 
