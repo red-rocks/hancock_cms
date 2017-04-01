@@ -15,7 +15,7 @@ require 'hancock/simple_form_patch'
 
 require 'geocoder'
 
-require_relative 'filename_to_slug'
+require 'filename_to_slug'
 
 require 'codemirror-rails'
 
@@ -128,6 +128,6 @@ module Hancock
   end
 end
 
-require_relative 'manual_slug'
+require 'manual_slug'
 
 require 'scrollbar-rails'
