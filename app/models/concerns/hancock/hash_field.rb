@@ -2,7 +2,7 @@ if Hancock.mongoid?
   module Hancock::HashField
     extend ActiveSupport::Concern
 
-    module ClassMethods
+    class_methods do
       def hancock_cms_hash_field(name, opts = {})
         opts.merge!({type: Hash, default: {}})
         field "#{name}_hash", opts
@@ -14,7 +14,7 @@ if Hancock.mongoid?
         if opts[:localize]
           meth_str_t = "#{meth_str}_translations".freeze
           meth_hsh_t = "#{meth_hsh}_translations".freeze
-          class_eval <<-EVAL
+          class_eval <<-RUBY
             def #{meth_str_t}=(val)
               return self.#{meth_hsh_t} = {} if val.blank?
               _hash = {}
@@ -63,10 +63,10 @@ if Hancock.mongoid?
               end
               true
             end
-          EVAL
+          RUBY
 
         else
-          class_eval <<-EVAL
+          class_eval <<-RUBY
             def #{meth_str}=(val)
               return self.#{meth_hsh} = {} if val.blank?
               if val.is_a?(String)
@@ -105,9 +105,10 @@ if Hancock.mongoid?
                 true
               end
             end
-          EVAL
-        end
-      end
-    end
+          RUBY
+        end #if opts[:localize]
+      end #def hancock_cms_hash_field(name, opts = {})
+    end # class_methods do
+
   end
 end

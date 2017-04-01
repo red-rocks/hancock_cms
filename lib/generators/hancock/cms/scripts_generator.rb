@@ -27,5 +27,6 @@ module Hancock::Cms
         FileUtils.chmod(0755, "#{destination_root}/scripts/#{script_name}") # chmod: 0755 in prev line doesnt work
       end
     end
+
   end
 end

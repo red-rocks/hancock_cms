@@ -1,6 +1,7 @@
 module Hancock
   module Admin
     module EmbeddedElement
+
       def self.config(nav_label = nil, fields = {})
         if nav_label.is_a?(Hash)
           nav_label, fields = nav_label[:nav_label], nav_label
@@ -10,7 +11,7 @@ module Hancock
         fields ||= {}
         field_names = [:enabled, :name]
         field_showings = Hancock::Admin.get_field_showings(fields, field_names)
-        
+
         Proc.new {
           navigation_label(nav_label || I18n.t('hancock.cms'))
           field :enabled, :toggle do
@@ -27,6 +28,7 @@ module Hancock
           end
         }
       end
+
     end
   end
 end

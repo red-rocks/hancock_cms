@@ -10,17 +10,7 @@ html lang="ru"
     / - cache 'favicons', skip_digest: true do
     /   = render partial: 'blocks/favicon'
 
-    - async = false #Rails.env.production?
-    = stylesheet_link_tag "application", media: "all", async: async
-    = javascript_include_tag "application", async: async
-    /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async
-    - cache 'layouts/application/custom_head', skip_digest: true do
-      - _cache_key = ['views/layouts/application/custom_head']
-      css:
-        #{{Settings.ns('application_layout').custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_key)}}
-      javascript:
-        #{{Settings.ns('application_layout').custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_key)}}
+    = render partial: 'assets'      
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
 

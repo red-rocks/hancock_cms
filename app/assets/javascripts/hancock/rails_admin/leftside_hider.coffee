@@ -19,27 +19,6 @@ $(document).on "click", "fieldset .leftside_hider", (e)->
   fieldset.find('legend:visible').click()
   return false
 
-#
-# $(document).on "mouseenter", "fieldset .leftside_hider", (e)->
-#   $(window).scroll()
-
-
-# $(window).scroll (e)->
-#  window_center = window.scrollY + $(window).height()/2
-#  offset = 50
-#  $("fieldset .leftside_hider:visible").each ->
-#    me = $(this)
-#    min_position = me.offset().top + offset
-#    max_position = me.offset().top + me.height() - offset
-#    scroll_block = me.find(".scroll_fieldset_block")
-#    if window_center <= min_position
-#      scroll_block.css(top: offset, bottom: "")
-#    else
-#      if window_center >= max_position
-#        scroll_block.css(top: "", bottom: 0)
-#      else
-#        scroll_block.css(top: window_center - min_position + offset, bottom: "")
-
 
 $(document).on "click", "fieldset .leftside_hider .scroll_fieldset_top", (e)->
   e.preventDefault()

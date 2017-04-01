@@ -35,5 +35,6 @@ module Hancock::Cms
     def underscored_pluralized_class_name
       underscored_class_name.pluralize
     end
+    
   end
 end

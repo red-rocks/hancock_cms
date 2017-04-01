@@ -335,19 +335,6 @@ body.rails_admin
     &:active
       background: rgba(0,0,0,0.3)
 
-.footer-nav-link.sitemap
-  a
-    font-size: 0
-    &:before
-      display: inline-block
-      font-family: FontAwesome
-      font-size: 18px
-      text-rendering: auto
-      -webkit-font-smoothing: antialiased
-      -moz-osx-font-smoothing: grayscale
-      content: "\f0e8"
-      box-sizing: border-box
-
 .admin-footer
   height: 30px
   width: 100%
@@ -911,3 +898,13 @@ body.rails_admin .nav.nav-tabs
 
 .hancock_enum.hidden + *
   display: none
+
+
+.hancock_enum_with_custom_type .ra-multiselect-search, .hancock_array_type .ra-multiselect-search
+  display: inline-block
+  margin-right: 10px
+
+
+@import "hancock/rails_admin/plugins"
+
+@import "hancock/rails_admin/custom/theming"

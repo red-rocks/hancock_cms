@@ -1,0 +1,6 @@
+<% Hancock::PLUGINS.each do |plugin| %>
+  <% p_name = plugin.name.demodulize.underscore %>
+  <% if defined?(plugin::Engine) and File.exists?(plugin::Engine.root.join("app", "assets", "stylesheets", "hancock", "rails_admin", "plugins", "#{p_name}.sass")) %>
+@import 'hancock/rails_admin/plugins/<%= p_name %>'
+  <% end  %>
+<% end %>

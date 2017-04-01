@@ -1,12 +1,14 @@
 module Hancock::ModelLocalizeable
   extend ActiveSupport::Concern
 
-  module ClassMethods
+  class_methods do
+    
     def convert2localize
       self.all.to_a.map do |p|
         p.convert2localize
       end
     end
+
   end
 
   def convert2localize(save_it = true)
@@ -30,4 +32,5 @@ module Hancock::ModelLocalizeable
     end
     self.save if save_it
   end
+
 end

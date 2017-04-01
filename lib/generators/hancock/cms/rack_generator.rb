@@ -8,5 +8,6 @@ module Hancock::Cms
     def install
       template('rack.erb', 'config/initializers/rack.rb')
     end
+    
   end
 end

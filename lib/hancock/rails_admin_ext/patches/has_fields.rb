@@ -1,3 +1,4 @@
+require 'rails_admin'
 module RailsAdmin
   module Config
     # Provides accessors and autoregistering of model's fields.

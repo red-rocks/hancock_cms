@@ -77,22 +77,11 @@ module Hancock
       field_names = [:excerpt, :content]
       field_showings = get_field_showings(fields, field_names)
 
-      # _excluded_fields = [options.delete(:excluded_fields) || []].flatten
       Proc.new {
         active is_active
         label options[:label] || I18n.t('hancock.content')
         field :excerpt, :hancock_html  if field_showings[:excerpt]
         field :content, :hancock_html  if field_showings[:content]
-
-        # ([:excerpt, :content] - _excluded_fields).each do |f|
-        #   field f, :hancock_html
-        # end
-        # unless _excluded_fields.include?(:excerpt)
-        #   field :excerpt, :hancock_html
-        # end
-        # unless _excluded_fields.include?(:content)
-        #   field :content, :hancock_html
-        # end
 
         Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
 
@@ -110,7 +99,6 @@ module Hancock
       field_names = [:main_category, :categories]
       field_showings = get_field_showings(fields, field_names)
 
-      # _excluded_fields = [options.delete(:excluded_fields) || []].flatten
       Proc.new {
         active is_active
         label options[:label] || I18n.t('hancock.categories')
@@ -120,12 +108,6 @@ module Hancock
           inline_edit false
         end if field_showings[:main_category]
         field :categories, :hancock_multiselect if field_showings[:categories]
-
-        # field :main_category do
-        #   inline_add false
-        #   inline_edit false
-        # end unless _excluded_fields.include?(:main_category)
-        # field :categories, :hancock_multiselect unless _excluded_fields.include?(:categories)
 
         Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
 
@@ -205,6 +187,6 @@ module Hancock
       end
       field_showings
     end
-    
+
   end
 end

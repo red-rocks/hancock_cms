@@ -10,6 +10,14 @@ module Hancock::InsertionField
       self.class.possible_insertions
     end
 
+    # /(\[\[(\w+?)\]\] | \{\{(self\.(\w+?))\}\} | \{\{(([\w\-\.]+?)\.(\w+?))\}\} | \{\{(\w+?)\}\} | \{\{(BS\|(\w+?))\}\})/
+    #
+    # reg1 = /\[\[(?<new_bs>(?<new_bs_name>\w+?))\]\]/i
+    # reg2 = /\{\{(?<insertion_old>self\.(?<insertion_old_name>\w+?))\}\}/i
+    # reg3 = /\{\{(?<setting_with_ns>(?<setting_with_ns_ns>[\w\-\.]+?)\.(?<setting_with_ns_name>\w+?))\}\}/i
+    # reg4 = /\{\{(?<setting>(?<setting_name>\w+?))\}\}/i
+    # reg5 = /\{\{(?<old_bs>BS\|(?<old_bs_name>\w+?))\}\}/i
+    # reg6 = /\{\{\{\{(?<insertion>(?<insertion_name>\w+?))\}\}\}\}/i
     private
     def process_with_insertions(_data)
       if _data.nil?
@@ -65,11 +73,11 @@ module Hancock::InsertionField
         options: opts
       }
       if _method_name
-        class_eval <<-EVAL
+        class_eval <<-RUBY
           def #{_method_name}
             process_with_insertions(#{name})
           end
-        EVAL
+        RUBY
       end
       name
     end
@@ -92,6 +100,7 @@ module Hancock::InsertionField
     def default_insertions
       # self.fields.keys # we was here but inheritance and we need check
 
+      # # version with store in
       # return @default_insertions unless @default_insertions.nil?
       # @default_insertions =
       self.fields.select { |_name, _field|

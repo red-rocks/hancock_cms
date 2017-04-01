@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 actual_rails_version = "5.0.1"
-notsupported_rails_version = "6.0.0"
+notsupported_rails_version = "6.x"
 
 if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
   puts "You are using an incorrect version of Rails (#{version})"
@@ -26,7 +26,7 @@ gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
 #{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
 
 gem 'sass'
-gem 'sass-rails'#, '~> 5.0'
+gem 'sass-rails'
 gem 'compass'
 gem 'compass-rails'
 
@@ -38,17 +38,15 @@ gem 'rails_admin', '~> 1.1'
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
 # gem 'rails_admin_multiple_file_upload'
-gem 'rails_admin_user_abilities'#, '~> 0.2'
-# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-gem 'rails_admin_model_settings'#, '~> 0.3'
-# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+gem 'rails_admin_user_abilities'
+gem 'rails_admin_model_settings'
 
 #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}
 
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'slim-rails'
+gem 'slim-rails', '3.1.1'
 gem 'rs_russian'
 gem 'cancancan'
 
@@ -63,19 +61,19 @@ group :development do
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  gem 'listen'#, '~> 3.0.5'
+  gem 'listen'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'spring-watcher-listen'#, '~> 2.0.0'
+  gem 'spring-watcher-listen'
 
-  gem 'ack_favicon_maker_rails'#, '~> 1.0.1'
+  gem 'ack_favicon_maker_rails'
   # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
 
-  # gem 'rails_email_preview'#, '~> 1.0.3'
+  # gem 'rails_email_preview'
 
   gem 'image_optim_pack'
 
-  gem 'puma'#, '~> 3.0'
+  gem 'puma'
 end
 
 group :test do
@@ -92,8 +90,8 @@ end
 gem 'slim'
 gem 'sprockets'
 
-gem 'coffee-rails'#, '~> 4.2'
-gem 'uglifier'#, '>= 1.3.0'
+gem 'coffee-rails'
+gem 'uglifier'
 
 # gem 'jbuilder', '~> 2.5'
 
@@ -194,7 +192,6 @@ require File.expand_path('../boot', __FILE__)
 require "active_model/railtie"
 #{'#' if mongoid}require "active_record/railtie"
 require "action_controller/railtie"
-# require "action_mailer/railtie" # mailer is off by default
 # require "active_job/railtie"
 # require "action_cable/engine"
 require "action_mailer/railtie"

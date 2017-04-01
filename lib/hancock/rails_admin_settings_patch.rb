@@ -17,7 +17,7 @@ module Hancock
         # t[s] = c
       end
       # I18n.backend.store_translations(:ru, {admin: {scopes: {'rails_admin_settings/setting': t}}})
-\
+
       field :for_admin, type: Boolean, default: -> {
         !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
       }

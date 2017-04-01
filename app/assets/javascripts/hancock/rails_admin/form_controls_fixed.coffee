@@ -15,18 +15,17 @@ $(document).on 'rails_admin.dom_ready', ->
       clone_link = $("<a href='#' class='clone" + $(this).attr( 'name' ) + "' title='" + $(this).text() + "'></a>")
       clone_link.data('target', $(this))
       form_controls_fixed.append(clone_link)
-
 ## load CKEDITOR env for user ckeditor assets loading anythere
-# $(document).on 'rails_admin.dom_ready', ->
-#   return if $("#form_controls_fixed").length > 0
-#   $editors = $('[data-richtext=ckeditor]').not('.ckeditored')
-#   if $editors.length
-#     if not window.CKEDITOR
-#       options = $editors.first().data('options')
-#       window.CKEDITOR_BASEPATH = options['base_location']
-#       $.getScript options['jspath'], (script, textStatus, jqXHR) ->
-#         if window.CKEDITOR
-#           window.CKEDITOR.dtd.$removeEmpty[tag] = false for tag of window.CKEDITOR.dtd.$removeEmpty
+$(document).on 'rails_admin.dom_ready', ->
+  # return if $("#form_controls_fixed").length > 0
+  # $editors = $('[data-richtext=ckeditor]').not('.ckeditored')
+  # if $editors.length
+  #   if not window.CKEDITOR
+  #     options = $editors.first().data('options')
+  #     window.CKEDITOR_BASEPATH = options['base_location']
+  #     $.getScript options['jspath'], (script, textStatus, jqXHR) ->
+  if window.CKEDITOR
+    window.CKEDITOR.dtd.$removeEmpty[tag] = false for tag of window.CKEDITOR.dtd.$removeEmpty
 
 $(document).on "keydown", 'form', (e)->
   if e.ctrlKey and e.keyCode == 13
