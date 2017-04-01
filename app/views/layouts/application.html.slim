@@ -8,9 +8,9 @@ html lang="ru"
     = csrf_meta_tags
     
     / - cache 'favicons', skip_digest: true do
-    /   = render partial: 'blocks/favicon'
+    /   = render partial: 'blocks/favicon'    
 
-    = render partial: 'assets'      
+    = render partial: 'hancock/assets'          
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
 
