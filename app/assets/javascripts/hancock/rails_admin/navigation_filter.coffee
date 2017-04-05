@@ -11,8 +11,11 @@ $(document).on 'keydown', '#navigation_filter', (e)->
     _navig = $(e.currentTarget).parent().siblings('.toolbar').find('.nav')
     return true if _navig.find("li:visible").length == 0 and _code != 13
     if (_selected = _navig.find("li.current_selected")).length == 1
-      if _selected.find("a").length > 0
-        _selected.find('a').click()
+      if (_link = _selected.find('a')).length > 0
+        if e.ctrlKey
+          window.open(_link[0].href, "_blank")
+        else
+          _link.click()
       else
         if _selected.hasClass('opened')
           _selected.addClass('forced-closed').removeClass('forced-opened').click()
@@ -22,7 +25,11 @@ $(document).on 'keydown', '#navigation_filter', (e)->
     else
       return true if _code == 37
       if (_selected = _navig.find('li.visible[data-model]')).length == 1
-        _selected.find('a').click()
+        _link = _selected.find('a')
+        if e.ctrlKey
+          window.open(_link[0].href, "_blank")
+        else
+          _link.click()
       else
         return true if _code == 39
 
