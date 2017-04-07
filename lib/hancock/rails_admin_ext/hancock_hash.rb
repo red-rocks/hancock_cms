@@ -10,12 +10,21 @@ module RailsAdmin
           RailsAdmin::Config::Fields::Types::register(self)
           include RailsAdmin::Engine.routes.url_helpers
 
+          register_instance_option :editor_type do
+            :default
+          end
+
           register_instance_option :string_method do
             "#{name}_str"
           end
 
           register_instance_option :hash_method do
-            "#{name}_hash"
+            case editor_type
+            when :default, :standard, :main, :text, :text_area, :textarea, :string
+              "#{name}_hash"
+            else
+              name
+            end
           end
 
           register_instance_option :value do
@@ -36,7 +45,13 @@ module RailsAdmin
 
           ############ localize ######################
           register_instance_option :translations_field do
-            (string_method.to_s + '_translations').to_sym
+            case editor_type
+            when :default, :standard, :main, :text, :text_area, :textarea, :string
+              (string_method.to_s + '_translations').to_sym
+            else
+              (name.to_s + '_translations').to_sym
+            end
+
           end
 
           register_instance_option :localized? do
@@ -62,23 +77,42 @@ module RailsAdmin
           register_instance_option :formatted_value do
             if localized?
               _val = bindings[:object].send((hash_method.to_s + '_translations').to_sym)
-              _val.each_pair { |l, _hash|
-                begin
-                  _val[l] = JSON.pretty_generate(_hash)
-                rescue
-                end
-              }
+
+              case editor_type
+              when :default, :standard, :main, :text, :text_area, :textarea, :string
+                _val.each_pair { |l, _hash|
+                  begin
+                    _val[l] = JSON.pretty_generate(_hash)
+                  rescue
+                  end
+                }
+              else
+                _val
+              end
+
+
             else
-              begin
-                JSON.pretty_generate(bindings[:object].send hash_method)
-              rescue
+              case editor_type
+              when :default, :standard, :main, :text, :text_area, :textarea, :string
+                begin
+                  JSON.pretty_generate(bindings[:object].send hash_method)
+                rescue
+                  bindings[:object].send hash_method
+                end
+              else
                 bindings[:object].send hash_method
               end
             end
           end
 
           register_instance_option :allowed_methods do
-            localized? ? [string_method, translations_field] : [string_method]
+            case editor_type
+            when :default, :standard, :main, :text, :text_area, :textarea, :string
+              localized? ? [string_method, translations_field] : [string_method]
+            else
+              localized? ? [hash_method, translations_field] : [hash_method]
+            end
+
           end
 
           register_instance_option :partial do

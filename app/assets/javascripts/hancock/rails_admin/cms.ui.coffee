@@ -12,6 +12,8 @@
 #= require ./multiselect
 #= require ./enum_with_custom
 
+#= require ./hash_element_renamer_link
+
 #= require ./plugins
 
 window.hancock_cms ||= {}
