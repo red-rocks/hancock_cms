@@ -11,10 +11,10 @@ module RailsAdmin::Hancock
       ).visible_fields
       return if fields.empty?
 
-      _defailt_fieldset = fieldset.name == :default
-      @template.content_tag :fieldset, class: _defailt_fieldset ? 'default_fieldset' : '' do
-        if fieldset.leftside_hider
-          leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', title: _defailt_fieldset ? "" : "Свернуть блок") do
+      _default_fieldset = fieldset.name == :default
+      @template.content_tag :fieldset, class: _default_fieldset ? 'default_fieldset' : '' do
+        if fieldset.leftside_hider and !nested_in
+          leftside_hider = @template.content_tag(:div, class: 'control-group leftside_hider', title: _default_fieldset ? "" : "Свернуть блок") do
             @template.content_tag(:div, class: 'scroll_fieldset_block') do
               ret = []
               ret << @template.content_tag(:div, class: 'scroll_fieldset_top', title: "Вверх блока") do
