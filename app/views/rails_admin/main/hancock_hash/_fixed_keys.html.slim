@@ -1,0 +1,8 @@
+.hash_element_block
+  = link_to "(изм)", "#", class: "hash_element_renamer_link", tabindex: -1
+  span= " "
+  = form.label "#{field.method_name}[#{name}]", name
+  span= ": "
+  = form.text_field "#{field.method_name}[#{name}]", value: val, class: 'value_field'
+  span= " "
+  = link_to "(удалить)", "#", class: "hash_element_delete_link", tabindex: -1

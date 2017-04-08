@@ -8,6 +8,10 @@ module RailsAdmin
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types.register(self)
 
+          register_instance_option :partial do
+            enum.blank? ? :hancock_array : :form_hancock_enum_with_custom
+          end
+
           register_instance_option :multiple do
             true
           end

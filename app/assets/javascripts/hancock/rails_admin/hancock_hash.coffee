@@ -1,8 +1,8 @@
 $(document).on "click", ".hancock_hash_type .hash_element_renamer_link", (ev)->
   ev.preventDefault()
   renamer_link = $(ev.currentTarget)
-  label = renamer_link.closest('p').find('label')
-  input = renamer_link.closest('p').find('input')
+  label = renamer_link.closest('.hash_element_block').find('label')
+  input = renamer_link.closest('.hash_element_block').find('input')
   new_renamer_link = renamer_link.clone()
   renamer_field = $("<input>").addClass('hash_element_renamer_field').prop("type", "string").prop("placeholder", "Новое имя").prop("value", label.text())
   renamer_link.replaceWith(renamer_field)
@@ -63,3 +63,10 @@ $(document).on 'blur', '.hancock_hash_type .hash_element_key_field', (e)->
   input.prop('id',    old_id.replace(reg_for_id, "[" + new_name + "]"))
   input.prop('name',  old_name.replace(reg_for_name, "[" + new_name + "]]"))
   return false
+
+
+$(document).on 'blur', '.hancock_hash_type .hash_element_block input', (e)->
+  fields_block = $(e.currentTarget).closest(".controls")
+  fields_block.find('.value_field').each ->
+    $(this).parent().removeClass('duplicate')
+    fields_block.find('.value_field').not($(this)).filter("[name='" + this.name + "']").parent().addClass('duplicate')

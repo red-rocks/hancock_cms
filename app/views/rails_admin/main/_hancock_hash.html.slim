@@ -11,45 +11,22 @@
   = form.text_area field.string_method, _opts
 
 - when :fixed_keys
-  - field.value.each_pair do |name, val|
-    p
-      = link_to "(изм)", "#", class: "hash_element_renamer_link"
-      span= " "
-      = form.label "#{field.method_name}[#{name}]", name
-      span= ": "
-      = form.text_field "#{field.method_name}[#{name}]", value: val
-      span= " "
-      = link_to "(удалить)", "#", class: "hash_element_delete_link"
+  - (field.value || {}).each_pair do |name, val|
+    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
       
   - _template = capture do
     - name, val = "new", ""
-    p
-      = link_to "(изм)", "#", class: "hash_element_renamer_link"
-      span= " "
-      = form.label "#{field.method_name}[#{name}]", name
-      span= ": "
-      = form.text_field "#{field.method_name}[#{name}]", value: val
-      span= " "
-      = link_to "(удалить)", "#", class: "hash_element_delete_link"
+    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    
       
 - when :full
-  - field.value.each_pair do |name, val|
-    p
-      = form.text_field nil, value: name, class: 'hash_element_key_field', name: ""
-      span= ": "
-      = form.text_field "#{field.method_name}[#{name}]", value: val
-      span= " #{name} "
-      = link_to "(удалить)", "#", class: "hash_element_delete_link"
+  - (field.value || {}).each_pair do |name, val|
+    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
       
   - _template = capture do
     - name, val = "new", ""
-    p
-      = form.text_field nil, value: name, class: 'hash_element_key_field', name: ""
-      span= ": "
-      = form.text_field "#{field.method_name}[#{name}]", value: val
-      span= " #{name} "
-      = link_to "(удалить)", "#", class: "hash_element_delete_link"
+    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}

@@ -12,7 +12,8 @@
 #= require ./multiselect
 #= require ./enum_with_custom
 
-#= require ./hash_element_renamer_link
+#= require ./hancock_array
+#= require ./hancock_hash
 
 #= require ./plugins
 
