@@ -33,7 +33,7 @@ $(document).on "click", ".hancock_hash_type .hash_element_renamer_link", (ev)->
     if key == 27
       renamer_field.blur()
       return false
-  )
+  ).select()
   return false
 
 
@@ -43,7 +43,8 @@ $(document).on "click", ".hancock_hash_type .hash_element_add_link", (e)->
   link = $(e.currentTarget)
   link_parent = link.parent()
   link_parent.before(link.data('template'))
-  link_parent.prev().find('input:first').focus().select()
+  # link_parent.prev().find('input:first').focus().select()
+  link_parent.prev().find('.hash_element_renamer_link').click()
   return false
 
 
