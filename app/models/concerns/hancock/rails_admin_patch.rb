@@ -1,6 +1,33 @@
 module Hancock::RailsAdminPatch
   extend ActiveSupport::Concern
 
+  included do
+    if respond_to?(:rails_admin_block) and (_block = rails_admin_block).is_a?(Proc)
+      rails_admin &_block
+    end
+    class << self
+      def inherited(base)
+        base_name = base.name.to_sym
+        self_name = self.name.to_sym
+        registry = ::RailsAdmin::Config.registry
+        if registry.keys.include?(self_name) and !registry.keys.include?(base_name)
+          # puts "inheriting #{base_name} from #{self_name}"
+          registry[base_name] = RailsAdmin::Config.model(base)
+          # puts registry[self_name].get_deferred_blocks.inspect
+          registry[self_name].get_deferred_blocks.each do |b|
+            registry[base_name].add_deferred_block &b
+          end
+        end
+        # puts "inheriting #{base_name} from #{self_name}"
+        if self.respond_to?(:rails_admin_block) and (_block = self.rails_admin_block).is_a?(Proc)
+          base.rails_admin &_block
+        end
+        # puts registry[base_name].get_deferred_blocks.inspect
+      end
+    end
+
+  end
+
   def rails_admin_model
     self.class.rails_admin_model
   end
@@ -19,6 +46,8 @@ module Hancock::RailsAdminPatch
   end
 
   class_methods do
+    def rails_admin_block
+    end
     def rails_admin_model
       name.split('::').collect(&:underscore).join('~')
     end
