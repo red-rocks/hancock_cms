@@ -71,3 +71,20 @@ $(document).on 'blur', '.hancock_hash_type .hash_element_block input', (e)->
   fields_block.find('.value_field').each ->
     $(this).parent().removeClass('duplicate')
     fields_block.find('.value_field').not($(this)).filter("[name='" + this.name + "']").parent().addClass('duplicate')
+
+
+
+
+  # $(document).on 'click', '.hash_element_duplicate_trigger', (e)->
+  #   e.preventDefault()
+  #   link = $(e.currentTarget)
+  #   link.data('show-duplicates', link.data('show-duplicates') ^ 1)
+  #   fields_block = link.closest(".controls")
+  #   fields_block.find('.value_field').each ->
+  #     $(this).parent().removeClass('duplicate')
+  #     if link.data('show-duplicates')
+  #       fields_block.find('.value_field').not($(this)).filter("[name='" + this.name + "']").parent().addClass('duplicate')
+  #   old_text = link.text()
+  #   new_text = link.data('text')
+  #   link.text(new_text).data('text', old_text)
+  #   return false

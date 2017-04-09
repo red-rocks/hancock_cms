@@ -19,6 +19,8 @@
     = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    / = " | "
+    / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
     
       
 - when :full
@@ -30,3 +32,5 @@
     = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    / = " | "
+    / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
