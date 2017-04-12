@@ -15,5 +15,23 @@ module RailsAdmin::Application
       end.join.html_safe
     end
 
+    def hancock_show_path(obj, opts = {})
+      if obj.is_a?(Hash)
+        (opts ||= {}).merge!(obj)
+      else
+        (opts ||= {}).merge!({model_name: obj.rails_admin_model, id: obj.id})
+      end
+      show_path(opts)
+    end
+
+    def hancock_edit_path(obj, opts = {})
+      if obj.is_a?(Hash)
+        (opts ||= {}).merge!(obj)
+      else
+        (opts ||= {}).merge!({model_name: obj.rails_admin_model, id: obj.id})
+      end
+      edit_path(opts)
+    end
+
   end
 end

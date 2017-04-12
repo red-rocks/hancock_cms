@@ -9,6 +9,7 @@ window.hancock_cms.set_enum_with_custom = () ->
         $(e.currentTarget).closest(".controls").find("select").data('raFilteringSelect').options.source = _src
   )
   $('.hancock_enum_with_custom_type .ra-multiselect-search, .hancock_array_type .ra-multiselect-search').on('keydown', (e)->
+    return true if e.ctrlKey
     if e.which == 13
       e.preventDefault()
       me = $(e.currentTarget)

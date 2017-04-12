@@ -38,7 +38,6 @@ module Hancock
           searchable true
         end if field_showings[:lon]
 
-
         Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields])
 
         if block_given?
