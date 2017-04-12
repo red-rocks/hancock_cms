@@ -7,6 +7,7 @@ module Hancock::RailsAdminPatch
     end
     class << self
       def inherited(base)
+        super
         base_name = base.name.to_sym
         self_name = self.name.to_sym
         registry = ::RailsAdmin::Config.registry

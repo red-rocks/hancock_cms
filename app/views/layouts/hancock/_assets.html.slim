@@ -7,6 +7,9 @@
 = javascript_include_tag javascript_name, async: async, defer: defer
 /[if lt IE 9]
 = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async, defer: defer
+    
+== hancock_cache_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
+
 - cache "layouts/#{layout_name}/custom_head", skip_digest: true do
   - _cache_key = ["layouts/#{layout_name}/custom_head"]
   css:
