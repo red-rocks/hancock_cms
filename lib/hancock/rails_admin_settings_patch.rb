@@ -25,6 +25,23 @@ module Hancock
         self.for_admin
       end
 
+      def val
+        ((upload_kind? and !file.blank?) ? file.url : value)
+      end
+      def value
+        ((upload_kind? and !file.blank?) ? file.url : super)
+      end
+      def processed_value
+        ((upload_kind? and !file.blank?) ? file.url : super)
+      end
+      def blank?
+        if upload_kind?
+          file.blank?
+        else
+          super
+        end
+      end
+
       # def self.manager_can_default_actions
       #   # [:index, :show, :read, :edit, :update]
       #   super - [:new, :create]

@@ -1,4 +1,4 @@
-require 'rails_admin/application_helper'
+# require 'rails_admin/application_helper'
 module RailsAdmin::Application
   module HancockHelper
 
