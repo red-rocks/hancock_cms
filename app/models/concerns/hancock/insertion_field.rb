@@ -13,11 +13,13 @@ module Hancock::InsertionField
     # /(\[\[(\w+?)\]\] | \{\{(self\.(\w+?))\}\} | \{\{(([\w\-\.]+?)\.(\w+?))\}\} | \{\{(\w+?)\}\} | \{\{(BS\|(\w+?))\}\})/
     #
     # reg1 = /\[\[(?<new_bs>(?<new_bs_name>\w+?))\]\]/i
-    # reg2 = /\{\{(?<insertion_old>self\.(?<insertion_old_name>\w+?))\}\}/i
-    # reg3 = /\{\{(?<setting_with_ns>(?<setting_with_ns_ns>[\w\-\.]+?)\.(?<setting_with_ns_name>\w+?))\}\}/i
-    # reg4 = /\{\{(?<setting>(?<setting_name>\w+?))\}\}/i
-    # reg5 = /\{\{(?<old_bs>BS\|(?<old_bs_name>\w+?))\}\}/i
-    # reg6 = /\{\{\{\{(?<insertion>(?<insertion_name>\w+?))\}\}\}\}/i
+    # reg2 = /\[\[\[\[(?<new_helper>(?<new_helper_name>\w+?))\]\]\]\]/i
+    # reg3 = /\{\{(?<insertion_old>self\.(?<insertion_old_name>\w+?))\}\}/i
+    # reg4 = /\{\{(?<setting_with_ns>(?<setting_with_ns_ns>[\w\-\.]+?)\.(?<setting_with_ns_name>\w+?))\}\}/i
+    # reg5 = /\{\{(?<setting>(?<setting_name>\w+?))\}\}/i
+    # reg6 = /\{\{(?<old_bs>BS\|(?<old_bs_name>\w+?))\}\}/i
+    # reg7 = /\{\{(?<old_helper>HELPER\|(?<old_helper_name>\w+?))\}\}/i
+    # reg8 = /\{\{\{\{(?<insertion>(?<insertion_name>\w+?))\}\}\}\}/i
     private
     def process_with_insertions(_data)
       if _data.nil?
