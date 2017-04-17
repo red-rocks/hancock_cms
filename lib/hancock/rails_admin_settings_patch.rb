@@ -234,3 +234,35 @@ module Hancock
 
   end
 end
+
+
+
+class ::Settings
+
+  def self.exists?(key)
+    !getnc(key).nil?
+  end
+  def self.enabled?(key)
+    getnc(key).enabled?
+  end
+  def self.rename(old_key, new_key)
+    get_default_ns.rename(old_key, new_key)
+  end
+
+end
+class ::RailsAdminSettings::Namespaced
+
+  def exists?(key)
+    !getnc(key).nil?
+  end
+  def enabled?(key)
+    getnc(key).enabled?
+  end
+  def rename(old_key, new_key)
+    _obj = getnc(old_key)
+    if _obj
+      _obj.key = new_key
+      _obj.save
+    end
+  end
+end
