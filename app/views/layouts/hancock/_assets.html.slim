@@ -1,6 +1,7 @@
-- layout_name ||= 'application'
-- stylesheet_name ||= layout_name
-- javascript_name ||= layout_name
+- layout_name           ||= controller.send(:_layout, []) || 'application' rescue 'application'
+- stylesheet_name       ||= layout_name
+- javascript_name       ||= layout_name
+- custom_head_cache_key ||= "layouts/#{layout_name}/custom_head"
 - async = false unless defined?(async) #Rails.env.production?
 - defer = true  unless defined?(defer) #Rails.env.production?
 = stylesheet_link_tag stylesheet_name, media: "all", async: async, defer: defer
@@ -8,11 +9,11 @@
 /[if lt IE 9]
 = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async, defer: defer
     
-== hancock_cache_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
+== hancock_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
 
-- cache "layouts/#{layout_name}/custom_head", skip_digest: true do
-  - _cache_key = ["layouts/#{layout_name}/custom_head"]
+- cache custom_head_cache_key, skip_digest: true do
+  - _cache_keys = [custom_head_cache_key]
   css:
-    #{{Settings.ns("#{layout_name}_layout").custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_key)}}
+    #{{Settings.ns("#{layout_name}_layout").custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_keys)}}
   javascript:
-    #{{Settings.ns("#{layout_name}_layout").custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_key)}}
+    #{{Settings.ns("#{layout_name}_layout").custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_keys)}}
