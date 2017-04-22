@@ -142,12 +142,6 @@ module Hancock
         if block_given?
           yield self
         end
-
-        Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
-
-        if block_given?
-          yield self
-        end
       }
     end
 

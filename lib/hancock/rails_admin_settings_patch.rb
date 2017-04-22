@@ -129,18 +129,26 @@ module Hancock
               render_object and (render_object.current_user.admin?)
             end
           end
-          field :ns  do
+          field :ns do
             weight 4
-            read_only true
+            read_only do
+              return true unless bindings[:object].new_record?
+              render_object = (bindings[:controller] || bindings[:view])
+              return !(render_object and (render_object.current_user.admin?))
+            end
             help false
             visible do
               render_object = (bindings[:controller] || bindings[:view])
               render_object and (render_object.current_user.admin?)
             end
           end
-          field :key  do
+          field :key do
             weight 5
-            read_only true
+            read_only do
+              return true unless bindings[:object].new_record?
+              render_object = (bindings[:controller] || bindings[:view])
+              return !(render_object and (render_object.current_user.admin?))
+            end
             help false
             visible do
               render_object = (bindings[:controller] || bindings[:view])
@@ -212,5 +220,36 @@ module Hancock
 
     end
 
+  end
+end
+
+
+class ::Settings
+
+  def self.exists?(key)
+    !getnc(key).nil?
+  end
+  def self.enabled?(key)
+    getnc(key).enabled?
+  end
+  def self.rename(old_key, new_key)
+    get_default_ns.rename(old_key, new_key)
+  end
+
+end
+class ::RailsAdminSettings::Namespaced
+
+  def exists?(key)
+    !getnc(key).nil?
+  end
+  def enabled?(key)
+    getnc(key).enabled?
+  end
+  def rename(old_key, new_key)
+    _obj = getnc(old_key)
+    if _obj
+      _obj.key = new_key
+      _obj.save
+    end
   end
 end
