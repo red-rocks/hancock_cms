@@ -39,6 +39,7 @@ require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
 require 'hancock/rails_admin_ext/patches/hancock_cms_group'
 require 'hancock/rails_admin_ext/patches/has_fields'
+require 'hancock/rails_admin_ext/patches/section_list_patch'
 
 
 require 'rails_admin_nested_set'
