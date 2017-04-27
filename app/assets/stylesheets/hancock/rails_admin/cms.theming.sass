@@ -1,6 +1,8 @@
 @import 'jquery.mCustomScrollbar'
 
 @import 'hancock/rails_admin/fieldsets'
+@import 'hancock/rails_admin/settings'
+@import 'hancock/rails_admin/tables'
 @import 'hancock/rails_admin/hancock_hash'
 
 .btn
@@ -860,6 +862,29 @@ body.rails_admin .nav.nav-tabs
       overflow: hidden
       white-space: nowrap
       text-overflow: ellipsis
+
+body.rails_admin .nav-tabs.filter
+  li
+    max-width: none
+    a
+      text-overflow: clip
+  #filters
+    li
+      display: block
+      width: 100%
+
+#filters_box
+  .label-info
+    color: #fff
+    background-color: #e53935
+    +transition(all 0.3s ease-in-out)
+    &:hover
+      color: #fff
+      background-color: darken(#e53935, 10%)
+    a
+      color: #fff
+    a:hover
+      color: #fff
 
 .form-group.form-actions
   margin-left: 0px
