@@ -1,4 +1,3 @@
-/ h2 Change your password
 .devise-box
   .white-box
     = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
@@ -15,7 +14,6 @@
       
       .form-group
         / = f.label :password_confirmation
-        / br
         / .form-control = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
         = f.input :password_confirmation, as: :password, autocomplete: 'off', title: I18n.t("shared.password_confirmation"), placeholder: I18n.t("shared.password_confirmation"), label: false, wrapper_html: {class: "form-control"}
     

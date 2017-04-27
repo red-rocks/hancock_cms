@@ -10,5 +10,6 @@ module Hancock::Cms
     def install
       template('robots.txt.erb', 'public/robots.txt')
     end
+    
   end
 end

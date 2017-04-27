@@ -10,5 +10,6 @@ module Hancock::Cms
     def install
       template "application.erb", "config/application.rb"
     end
+    
   end
 end

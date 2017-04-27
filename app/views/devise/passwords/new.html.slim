@@ -1,4 +1,3 @@
-/ h2 Forgot your password?
 .devise-box
   .white-box
     = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
@@ -6,7 +5,6 @@
       h2.title Забыли пароль?
       .form-group
         / = f.label :email
-        / br/
         / .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
         = f.input :email, as: :email, autocomplete: 'off', title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
 

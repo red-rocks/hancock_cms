@@ -15,8 +15,6 @@ require 'hancock/simple_form_patch'
 
 require 'geocoder'
 
-# require 'simple_captcha'
-# require 'validates_email_format_of'
 require 'filename_to_slug'
 
 require 'codemirror-rails'
@@ -27,11 +25,13 @@ require 'hancock/rails_admin_ext/config'
 
 require 'hancock/rails_admin_ext/hancock_enum'
 require 'hancock/rails_admin_ext/hancock_enum_with_custom'
+require 'hancock/rails_admin_ext/hancock_array'
 require 'hancock/rails_admin_ext/hancock_hash'
 require 'hancock/rails_admin_ext/hancock_html'
 require 'hancock/rails_admin_ext/hancock_slugs'
 require 'hancock/rails_admin_ext/hancock_multiselect'
 
+require 'hancock/rails_admin_ext/patches/lazy_model'
 require 'hancock/rails_admin_ext/patches/navigation_patch'
 require 'hancock/rails_admin_ext/patches/field_patch'
 require 'hancock/rails_admin_ext/patches/fieldset_patch'
@@ -39,6 +39,7 @@ require 'hancock/rails_admin_ext/patches/new_controller_patch'
 require 'hancock/rails_admin_ext/patches/group_patch'
 require 'hancock/rails_admin_ext/patches/hancock_cms_group'
 require 'hancock/rails_admin_ext/patches/has_fields'
+require 'hancock/rails_admin_ext/patches/section_list_patch'
 
 
 require 'rails_admin_nested_set'
@@ -47,15 +48,9 @@ require 'rails_admin_toggleable'
 require 'ack_rails_admin_settings'
 require 'hancock/rails_admin_settings_patch'
 
-# require 'x-real-ip'
-
 require 'ckeditor'
 
-# require 'kaminari'
 require 'kaminari/actionview'
-
-# require 'addressable/uri'
-# require 'turbolinks'
 
 require 'stickykit/rails'
 

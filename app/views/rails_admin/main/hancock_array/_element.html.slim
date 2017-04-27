@@ -1,0 +1,8 @@
+.array_element_block
+  = form.text_field field.method_name, value: val, multiple: true
+  span= " "
+  = link_to "(удалить)", "#", class: "array_element_delete_link", tabindex: -1
+  span= " "
+  = link_to "/\\", "#", class: "array_element_move_link array_element_move_up_link up", tabindex: -1
+  span= " "
+  = link_to "\\/", "#", class: "array_element_move_link array_element_move_down_link down", tabindex: -1

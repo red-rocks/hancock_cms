@@ -3,16 +3,16 @@ module ManualSlug::ActiveRecord
 
   included do
     extend FriendlyId
+
+    def text_slug
+      slug
+    end
+    def text_slug=(s)
+      self.slug = s
+    end
   end
 
-  def text_slug
-    slug
-  end
-  def text_slug=(s)
-    self.slug = s
-  end
-
-  module ClassMethods
+  class_methods do
     def manual_slug(field, options = {}, callback = true)
       friendly_id field, use: [:slugged, :finders]
       define_method(:should_generate_new_friendly_id?) do
@@ -28,5 +28,5 @@ module ManualSlug::ActiveRecord
       end if callback
     end
   end
+  
 end
- 

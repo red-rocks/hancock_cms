@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 actual_rails_version = "5.0.1"
-notsupported_rails_version = "6.0.0"
+notsupported_rails_version = "6.x"
 
 if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
   puts "You are using an incorrect version of Rails (#{version})"
@@ -32,8 +32,6 @@ gem 'compass-rails'
 
 gem 'rails_admin', '~> 1.1'
 
-# gem 'sentry-raven'
-
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
 # gem "paperclip-optimizer"
@@ -51,7 +49,7 @@ gem 'rails_admin_model_settings'#, '~> 0.3'
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'slim-rails'
+gem 'slim-rails', '3.1.1'
 gem 'rs_russian'
 gem 'cancancan'
 
@@ -109,6 +107,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
+  # gem 'sentry-raven'
   gem "god"
 end
 
@@ -196,7 +195,6 @@ require File.expand_path('../boot', __FILE__)
 require "active_model/railtie"
 #{'#' if mongoid}require "active_record/railtie"
 require "action_controller/railtie"
-# require "action_mailer/railtie" # mailer is off by default
 # require "active_job/railtie"
 # require "action_cable/engine"
 require "action_mailer/railtie"

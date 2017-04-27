@@ -1,9 +1,36 @@
-ruby:
-  _opts = {}
-  _opts[:rows] = 10
-  _opts[:cols] = 80
-  _opts[:class] = 'form-control'
-  _opts[:value] = field.formatted_value
-  _opts[:style] = "font-family: monospace"
-  
-= form.text_area field.string_method, _opts
+- case field.editor_type.to_sym
+- when :default, :standard, :main, :text, :text_area, :textarea, :string
+  ruby:
+    _opts = {}
+    _opts[:rows] = 10
+    _opts[:cols] = 80
+    _opts[:class] = 'form-control'
+    _opts[:value] = field.formatted_value
+    _opts[:style] = "font-family: monospace"
+    
+  = form.text_area field.string_method, _opts
+
+- when :fixed_keys
+  - (field.value || {}).each_pair do |name, val|
+    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
+      
+  - _template = capture do
+    - name, val = "new", ""
+    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
+  p
+    = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    / = " | "
+    / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
+    
+      
+- when :full
+  - (field.value || {}).each_pair do |name, val|
+    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
+      
+  - _template = capture do
+    - name, val = "new", ""
+    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
+  p
+    = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    / = " | "
+    / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}

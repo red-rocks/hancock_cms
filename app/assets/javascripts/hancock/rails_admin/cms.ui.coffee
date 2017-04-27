@@ -12,4 +12,9 @@
 #= require ./multiselect
 #= require ./enum_with_custom
 
+#= require ./hancock_array
+#= require ./hancock_hash
+
+#= require ./plugins
+
 window.hancock_cms ||= {}

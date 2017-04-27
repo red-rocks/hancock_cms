@@ -18,7 +18,7 @@ module Hancock::SettingsHelper
     options.delete(:cache_keys)
     options.delete(:cache_key)
 
-    options[:loadable] = cache_keys.blank? if options[:loadable].nil?
+    # options[:loadable] = cache_keys.blank? if options[:loadable].nil? # temporary
     options[:cache_keys_str] = cache_keys
     options[:kind] ||= :html
 

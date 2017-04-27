@@ -32,7 +32,7 @@ module Hancock::UserDefined
         options: opts
       }
       if _method_name
-        class_eval <<-EVAL
+        class_eval <<-RUBY
           def #{_method_name}
             page_#{name}.html_safe
           end
@@ -44,11 +44,10 @@ module Hancock::UserDefined
               nil
             end
           end
-        EVAL
+        RUBY
       end
       name
     end
-
 
   end
 end

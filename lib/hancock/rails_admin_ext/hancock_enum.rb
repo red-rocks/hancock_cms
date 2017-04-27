@@ -23,7 +23,7 @@ module RailsAdmin
           end
 
           register_instance_option :help do
-            'Двойной клик перемещает между списками'
+            'Двойной клик перемещает между списками' if multiple              
           end
 
         end

@@ -1,6 +1,6 @@
 class <%= camelcased_class_name %> < Hancock::EmbeddedElement
-  embedded_in :<%= underscored_parent_class_name %>, class_name: "<%= camelcased_parent_class_name %>"
 
+  embedded_in :<%= underscored_parent_class_name %>, class_name: "<%= camelcased_parent_class_name %>"
   def self.find(id)
     find_through(<%= camelcased_parent_class_name %>, '<%= underscored_pluralized_class_name %>', id)
   end
@@ -30,7 +30,7 @@ class <%= camelcased_class_name %> < Hancock::EmbeddedElement
   # def self.rails_admin_user_defined_visible_actions
   #   [].freeze
   # end
-  
+
   def self.rails_admin_add_fields
     super
   end

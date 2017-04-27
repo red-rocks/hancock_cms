@@ -5,7 +5,7 @@ module Hancock::Mappable
 
     if Hancock.mongoid?
       include ::Geocoder::Model::Mongoid
-      field :coordinates, type: Array
+      field :coordinates, type: Array, default: []
       field :address, type: String, localize: Hancock.configuration.localize
 
       field :map_address, type: String
@@ -88,4 +88,5 @@ module Hancock::Mappable
       map_address
     end
   end
+
 end

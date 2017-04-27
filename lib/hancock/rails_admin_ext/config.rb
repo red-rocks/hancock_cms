@@ -131,6 +131,7 @@ module Hancock
 
     end
 
+
     def cancancan_admin_rules(ability_object)
       Hancock.config.ability_admin_config.each do |config|
         _model = config[:model]
@@ -142,6 +143,7 @@ module Hancock
         ability_object.cannot _model.admin_cannot_actions,  _model
       end
     end
+
     def cancancan_manager_rules(ability_object)
       Hancock.config.ability_manager_config.each do |config|
         _model = config[:model]

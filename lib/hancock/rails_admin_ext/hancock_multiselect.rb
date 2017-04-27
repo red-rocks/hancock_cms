@@ -28,11 +28,7 @@ module RailsAdmin
           def nested_form
             false
           end
-
-          # def method_name
-          #   "#{super.to_s.singularize}_ids".to_sym
-          # end
-
+          
           # Reader for validation errors of the bound object
           def errors
             bindings[:object].errors[name]

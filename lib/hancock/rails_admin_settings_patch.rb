@@ -25,12 +25,29 @@ module Hancock
         self.for_admin
       end
 
+      def val
+        ((upload_kind? and !file.blank?) ? file.url : value)
+      end
+      def value
+        ((upload_kind? and !file.blank?) ? file.url : super)
+      end
+      def processed_value
+        ((upload_kind? and !file.blank?) ? file.url : super)
+      end
+      def blank?
+        if upload_kind?
+          file.blank?
+        else
+          super
+        end
+      end
+
       # def self.manager_can_default_actions
       #   # [:index, :show, :read, :edit, :update]
       #   super - [:new, :create]
       # end
       # def self.manager_can_default_actions
-      #   ret =
+      #   ret = []
       #   # ret << :model_accesses if ::Hancock::Goto.config.user_abilities_support
       #   ret
       # end
@@ -52,7 +69,6 @@ module Hancock
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
         ret.freeze
       end
-
 
       rails_admin do
         navigation_label I18n.t('admin.settings.label')
@@ -216,5 +232,37 @@ module Hancock
 
     end
 
+  end
+end
+
+
+
+class ::Settings
+
+  def self.exists?(key)
+    !getnc(key).nil?
+  end
+  def self.enabled?(key)
+    getnc(key).enabled?
+  end
+  def self.rename(old_key, new_key)
+    get_default_ns.rename(old_key, new_key)
+  end
+
+end
+class ::RailsAdminSettings::Namespaced
+
+  def exists?(key)
+    !getnc(key).nil?
+  end
+  def enabled?(key)
+    getnc(key).enabled?
+  end
+  def rename(old_key, new_key)
+    _obj = getnc(old_key)
+    if _obj
+      _obj.key = new_key
+      _obj.save
+    end
   end
 end

@@ -1,4 +1,4 @@
-require_relative 'hancock_enum'
+require 'hancock/rails_admin_ext/hancock_enum'
 
 module RailsAdmin
   module Config
@@ -13,6 +13,10 @@ module RailsAdmin
 
           register_instance_option :enum do
             []
+          end
+
+          register_instance_option :unique do
+            true
           end
 
           register_instance_option :selection do
