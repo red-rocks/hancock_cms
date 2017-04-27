@@ -3,40 +3,49 @@ module Hancock::RailsAdminGroupPatch
   class << self
     def hancock_cms_group(config, fields = {})
       return unless fields
+      if fields.is_a?(Proc)
+        return config.group :default, &fields
+      end
 
       if fields.is_a?(Array)
         fields.reject { |f| f.empty? }.each do |_group|
           _name_default = :default
-          _name = _group.delete(:name) || _name_default
+          _name = _group.delete(:name) || _group.delete(:group) || _name_default
           _active_default = _name == :default
           _group[:active] ||= _active_default
           _fields_default = {}
           _group_fields = (_group.delete(:fields) || _fields_default)
 
-          config.group _name do
-            _group.each_pair do |name, val|
+          if _group_fields.is_a?(Proc)
+            config.group _name, &_group_fields
 
-              # TODO: find more logical solution
-              begin
+          else
+            config.group _name do
+              _group.each_pair do |name, val|
+
+                # TODO: find more logical solution
                 begin
-                  send name, val
-                rescue
-                  send name
+                  begin
+                    send name, val
+                  rescue
+                    send name
+                  end
                 end
               end
-            end
 
-            _group_fields.each_pair do |name, type|
-              next if type == false
-              if type.blank?
-                field name
-              else
-                if type.is_a?(Array)
-                  field name, type[0], &type[1]
+              _group_fields.each_pair do |name, type|
+                next if type == false
+                if type.blank?
+                  field name
                 else
-                  field name, type
+                  if type.is_a?(Array)
+                    field name, type[0], &type[1]
+                  else
+                    field name, type
+                  end
                 end
               end
+
             end
 
 
