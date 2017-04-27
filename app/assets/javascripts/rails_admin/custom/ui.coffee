@@ -5,6 +5,6 @@ $(window).load ->
   $('#preloader').fadeOut 'slow', ->
     $(this).remove()
 
-$(document).bind "page:load", ->
+$(document).on 'ready pjax:success', ->
   $('#preloader').fadeOut 'slow', ->
     $(this).remove()
