@@ -12,10 +12,21 @@ module RailsAdmin
             true
           end
           register_instance_option :searchable_columns do
-            [{column: "#{abstract_model.table_name}.#{enum_method}" , type: :string}]
+            if enum_method
+              [{column: "#{abstract_model.table_name}.#{enum_method}" , type: :string}]
+            else
+              []
+            end
           end
           register_instance_option :queryable do
             true
+          end
+
+          register_instance_option :enum_method do
+            if bindings and (_obj = bindings[:object])
+              _class = _obj.class
+              @enum_method ||= _class.respond_to?("#{name}_enum") || _obj.respond_to?("#{name}_enum") ? "#{name}_enum" : name
+            end
           end
 
           register_instance_option :partial do
@@ -23,7 +34,7 @@ module RailsAdmin
           end
 
           register_instance_option :help do
-            'Двойной клик перемещает между списками' if multiple              
+            'Двойной клик перемещает между списками' if multiple
           end
 
         end
