@@ -4,12 +4,6 @@ module Hancock
     included do
       Hancock.register_model(self)
 
-      def self.inherited(base)
-        super
-        Hancock.register_model(base)
-        Hancock.register_model(self)
-      end
-
       if Hancock.mongoid?
         include Mongoid::Document
         include Mongoid::Timestamps::Short
@@ -43,6 +37,16 @@ module Hancock
       end
 
       include Hancock::RailsAdminPatch
+    end
+
+
+    class_methods do
+
+      def inherited(base)
+        Hancock.register_model(base)
+        super
+      end
+
     end
 
   end

@@ -51,7 +51,7 @@ gem 'rails_admin_model_settings'#, '~> 0.3'
 
 gem 'slim-rails', '3.1.1'
 gem 'rs_russian'
-gem 'cancancan'
+gem 'cancancan', '~> 1.16'
 
 # gem 'cloner'
 gem 'unicorn'
