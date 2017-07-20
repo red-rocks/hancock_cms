@@ -30,8 +30,8 @@ if defined?(Mongoid)
           :left_field => 'lft',
           :right_field => 'rgt',
           :outline_number_field => nil,
-          :dependent => :delete_all, # or :destroy
-          :klass => self,
+          :dependent => :destroy,
+          :klass => self
         }.merge(options)
 
         if options[:scope].is_a?(Symbol) && options[:scope].to_s !~ /_id$/
