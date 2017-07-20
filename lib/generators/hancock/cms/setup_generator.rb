@@ -64,6 +64,40 @@ end
 end
 
 
+####### RECAPTCHA #######
+
+
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's recaptcha? (y or yes)").downcase.strip)
+remove_file 'config/initializers/recaptcha.rb'
+create_file 'config/initializers/recaptcha.rb' do <<-TEXT
+if defined?(Recaptcha)
+  Recaptcha.configure do |config|
+    # v4
+    if Rails.env.production?
+      config.site_key     = ENV["#{app_name.underscore.upcase}_RECAPTCHA_SITE_KEY"]
+      config.secret_key   = ENV["#{app_name.underscore.upcase}_RECAPTCHA_SECRET_KEY"]
+    else
+      config.site_key     = nil
+      config.secret_key   = nil
+    end
+  end
+end
+
+TEXT
+end
+end
+
+
+####### LETTER_OPENER ######
+
+if ["yes", "y"].include?(ask_with_timeout("Set Hancock's letter_opener config? (y or yes)").downcase.strip)
+inject_into_file "config/environments/development.rb", before: "# Don't care if the mailer can't send." do <<-TEXT
+config.action_mailer.delivery_method = :letter_opener if defined?(LetterOpener)
+  TEXT
+end
+end
+
+
 ####### INITIALIZERS #######
 
 add_assets_precompiled = ["*.svg", 'ckeditor/*', 'codemirror.js', 'codemirror.css', 'codemirror/**/*']
@@ -211,6 +245,8 @@ end
 # end
 
 generate "simple_form:install" if ["yes", "y"].include?(ask_with_timeout("generate `simple_form:install`? (y or yes)").downcase.strip)
+
+gsub_file 'config/secrets.yml', 'secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>', "secret_key_base: <%= ENV['#{app_name.underscore.upcase}_SECRET_KEY_BASE'] %>"
 
 
 
@@ -435,6 +471,7 @@ end
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's scripts? (y or yes)").downcase.strip)
 #scripts
 generate "hancock:cms:scripts", app_name
+gsub_file 'config/puma.rb', /^port        ENV\.fetch\(\"PORT\"\) \{ 3000 \}/, '# port        ENV.fetch("PORT") { 3000 }'
 end
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)
