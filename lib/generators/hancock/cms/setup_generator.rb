@@ -443,6 +443,74 @@ end
 
 generate "rspec:install" if ["yes", "y"].include?(ask_with_timeout("generate `rspec:install`? (y or yes)").downcase.strip)
 
+###### CAPISTRANO ######
+
+if ["yes", "y"].include?(ask_with_timeout("Generate Capistrano? (y or yes)").downcase.strip)
+`cap install`
+prepend_file 'Capfile', "set :yes_array, ['y', 'yes', 'yeah', 'yep']\n"
+gsub_file 'config/deploy.rb', 'set :application, "my_app_name"', "set :application, '#{app_name.downcase.strip}'"
+gsub_file 'config/deploy.rb', 'set :repo_url, "git@example.com:me/my_repo.git"' do <<-TEXT
+set :repo_url, "git@bitbucket.org:red-rocks/#{app_name.downcase.strip}.git"
+
+set :use_sudo, false
+set :bundle_flags, '--quiet'
+
+set :rvm_type, :user                     # Defaults to: :auto
+set :rvm_ruby_version, "#{`cat .ruby-version`.strip}@#{`cat .ruby-gemset`.strip}"
+
+set :bundle_path, nil
+TEXT
+end
+inject_into_file 'config/deploy.rb', after: '# append :linked_files, "config/database.yml", "config/secrets.yml"' do <<-TEXT
+
+set :linked_files,  ["public/robots.txt", "public/sitemap.xml.gz"]
+TEXT
+end
+inject_into_file 'config/deploy.rb', after: '# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"' do <<-TEXT
+
+set :linked_dirs,  ["log",
+                    "tmp/pids", "tmp/cache", "tmp/sc", "tmp/sockets", "tmp/god",
+                    "public/system", "public/ckeditor_assets"]
+TEXT
+end
+remove_file 'config/deploy/staging.rb'
+create_file 'config/deploy/staging.rb' do <<-TEXT
+# require 'capistrano/rvm'
+
+server '#{app_name.downcase.strip}.ru', user: '#{app_name.downcase.strip}', roles: %w{app db web}
+
+set :branch, :master
+set :deploy_to, "/home/#{app_name.downcase.strip}/www/#{app_name.downcase.strip}/production"
+set :format, :pretty
+set :pty, true
+
+set :keep_releases, 3
+
+set :rails_env,       "production"
+
+set :ssh_options, {:forward_agent => true, non_interactive: false}
+TEXT
+end
+remove_file 'config/deploy/production.rb'
+create_file 'config/deploy/production.rb' do <<-TEXT
+# require 'capistrano/rvm'
+
+server '#{app_name.downcase.strip}.redrocks.pro', user: '#{app_name.downcase.strip}', roles: %w{app db web}
+
+set :branch, :master
+set :deploy_to, "/home/#{app_name.downcase.strip}/www/#{app_name.downcase.strip}/production"
+# set :deploy_to, "/home/#{app_name.downcase.strip}/www/#{app_name.downcase.strip}/staging"
+set :format, :pretty
+set :pty, true
+
+set :keep_releases, 3
+
+set :rails_env, "production"
+
+set :ssh_options, {:forward_agent => true, non_interactive: false}
+TEXT
+end
+end
 
 ####### GIT #######
 
@@ -456,11 +524,26 @@ create_file '.gitignore' do <<-TEXT
 .idea
 .idea/*
 
+/dump/
+/dump
+
 /.bundle
+/config/secrets.yml.example
 /log/*.log
+/tmp/
 /tmp/*
 /public/assets
-# /public/ckeditor_assets
+/public/assets/
+/public/assets/*
+/public/system
+/public/system/
+/public/system/*
+/public/ckeditor_assets
+/public/ckeditor_assets/
+/public/ckeditor_assets/*
+/public/sitemap.xml.gz
+/public/sitemap.xml
+/public/robots.txt
 Gemfile.lock
 TEXT
 end

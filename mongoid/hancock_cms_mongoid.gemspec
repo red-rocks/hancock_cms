@@ -43,5 +43,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'kaminari-mongoid'
 
-  spec.add_dependency 'glebtv_mongoid_userstamp'#, '~> 0.7'
+  spec.add_dependency 'glebtv_mongoid_userstamp', '~> 0.7'
 end

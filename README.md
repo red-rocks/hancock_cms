@@ -41,14 +41,14 @@ For activerecord, generate migrations and run them
 
 ### Using app generator
 
-Make sure you have rails 5.0 installed
+Make sure you have rails 5.1 installed
 
     rails -v
 
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install rails -v 5.0
+    gem install rails -v 5.1
 
 Then, for mongoid:
 

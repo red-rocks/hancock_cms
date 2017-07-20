@@ -2,7 +2,7 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
-actual_rails_version = "5.0.1"
+actual_rails_version = "5.1.2"
 notsupported_rails_version = "6.x"
 
 if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
@@ -30,7 +30,7 @@ gem 'sass-rails'#, '~> 5.0'
 gem 'compass'
 gem 'compass-rails'
 
-gem 'rails_admin', '~> 1.1'
+gem 'rails_admin', '~> 1.2'
 
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
@@ -77,6 +77,15 @@ group :development do
   gem 'image_optim_pack'
 
   gem 'puma'#, '~> 3.0'
+
+  gem "letter_opener"
+
+  gem 'capistrano', '3.8.1'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'sshkit-sudo'
+  gem 'net-ssh-shell'
 end
 
 group :test do
@@ -115,7 +124,7 @@ gem 'glebtv_mongoid_userstamp', '~> 0.7'
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.4.0"#"2.3.3"
+RVM_RUBY_VERSION = "2.4.1"#"2.3.3"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
 
