@@ -5,7 +5,7 @@ Rails + RailsAdmin + Mongoid/PostgreSQL CMS. Very opinionated and tuned for my n
 ###### Remaded from [EnjoyCMS](https://github.com/enjoycreative/enjoy_cms)
 
 ## Installation
-### RAILS 5
+### RAILS 5 (Hancock 2)
 Add this line to your application's Gemfile:
 
     gem 'hancock_cms_mongoid', '~> 2.0'
@@ -29,7 +29,7 @@ For activerecord, generate migrations and run them
     rails g hancock_cms:migration
     rake db:migrate
 
-### RAILS 4
+### RAILS 4 (Hancock 1)
 Add this line to your application's Gemfile:
 
     gem 'hancock_cms_mongoid', '~> 1.0'
@@ -54,7 +54,7 @@ For activerecord, generate migrations and run them
     rake db:migrate
 
 ## Usage
-### RAILS 5:  Using app generator
+### RAILS 5 (Hancock 2):  Using app generator
 Make sure you have rails 5.0 installed
 
     rails -v
@@ -79,7 +79,7 @@ for ActiveRecord:
 generator creates a new RVM gemset, runs `bundle install` and setup some files (assets, config/initializers/*, routes, etc).
 
 
-### RAILS 4: Using app generator
+### RAILS 4 (Hancock 1): Using app generator
 Make sure you have rails 4.2.7 installed
 
     rails -v
@@ -91,13 +91,13 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/1.0/template.rb
     cd my_app
     rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/1.0/template.rb
     cd my_app
     rails g hancock:cms:setup
 
