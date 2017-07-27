@@ -52,13 +52,13 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/1.0/template.rb
     cd my_app
     rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails4/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/1.0/template.rb
     cd my_app
     rails g hancock:cms:setup
 
