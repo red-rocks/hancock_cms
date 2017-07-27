@@ -45,6 +45,7 @@ $(document).on "click", ".hancock_hash_type .hash_element_add_link", (e)->
   link_parent.before(link.data('template'))
   # link_parent.prev().find('input:first').focus().select()
   link_parent.prev().find('.hash_element_renamer_link').click()
+  $(".hancock_hash_type .hash_element_block input:last").blur()
   return false
 
 
