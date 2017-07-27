@@ -303,12 +303,14 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
         puts "AdminUser with email and password '\#{_email_pass}' was created!"
         puts "#################################################################################"
         puts "#################################################################################"
+        return true
       else
         puts 'Creating AdminUser error'
       end
     else
       puts 'AdminUsers are here already'
     end
+    return false
   end
 
   def self.generate_first_manager_user
@@ -316,12 +318,14 @@ inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
       _email_pass = 'manager@#{app_name.dasherize.downcase}.ru'
       if ::User.create(roles: ["manager"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass)
         puts "ManagerUser with email and password '\#{_email_pass}' was created!"
+        return true
       else
         puts 'Creating ManagerUser error'
       end
     else
       puts 'ManagerUsers are here already'
     end
+    return false
   end
 
   rails_admin do
@@ -431,6 +435,7 @@ end
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's scripts? (y or yes)").downcase.strip)
 #scripts
 generate "hancock:cms:scripts", app_name
+gsub_file 'config/puma.rb', /^port        ENV\.fetch\(\"PORT\"\) \{ 3000 \}/, '# port        ENV.fetch("PORT") { 3000 }'
 end
 
 FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, Pathname.new(destination_root).join('config', 'secrets.yml.example').to_s)

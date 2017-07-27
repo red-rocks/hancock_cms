@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rails', ['>= 5.0.0', '< 5.1']
 
-  spec.add_dependency 'sprockets', '~> 3.7.1'
+  spec.add_dependency 'sprockets', '~> 3'
 
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'simple_form'
