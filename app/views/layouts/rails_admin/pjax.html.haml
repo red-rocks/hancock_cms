@@ -10,8 +10,8 @@
     %button.close{type: 'button', :'data-dismiss' => "alert"} &times;
     = value
 = breadcrumb
-%ul.nav.nav-tabs
-  = menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
+%ul.nav.nav-tabs.hancock-nav-tabs
+  = hancock_menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
 %ul.nav.nav-tabs.filter
   = content_for :contextual_tabs
 = yield
