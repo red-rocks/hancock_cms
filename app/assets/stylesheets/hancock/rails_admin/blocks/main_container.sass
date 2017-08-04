@@ -1,0 +1,38 @@
+#main-container
+  overflow-x: hidden
+  margin-bottom: -60px
+  &:after
+    content: ""
+    height: 60px
+    width: 100%
+    display: block
+    position: relative
+  .admin-wrapper
+    margin: 0 auto
+    padding: 10px 10px 1px
+    width: 100%
+    overflow-x: visible
+  .page-titles
+    width: 100%
+  .page-title
+    font-size: 16px
+    padding: 5px 0px
+    margin: 0
+    line-height: 22px
+    border-bottom: 1px solid rgba(0,0,0,0.05)
+  .breadcrumb
+    font-size: 14px
+    line-height: 18px
+    padding: 5px
+    margin-bottom: 0px
+    list-style: none
+    background-color: transparent
+    border-radius: 0px
+
+@media (min-width: 768px)
+  #main-container .admin-wrapper
+    margin: 0 auto
+    padding: 24px 24px 1px
+    width: 100%
+    overflow-x: visible
+

@@ -42,10 +42,16 @@
 
 =display-flex()
   display: -webkit-box
-  display: -moz-box
-  display: -ms-flexbox
   display: -webkit-flex
+  display: -ms-flexbox
   display: flex
+  -webkit-box-flex: 1
+  -webkit-flex: 1 0 auto
+  -ms-flex: 1 0 auto
+  flex: 1 0 auto
+  -webkit-flex-flow: row wrap
+  -ms-flex-flow: row wrap
+  flex-flow: row wrap
 
 =flex-wrap($value)
   -webkit-flex-wrap: $value
@@ -96,3 +102,9 @@
   -ms-transform: $transforms
   -webkit-transform: $transforms
   transform: $transforms
+
+=transform-origin-xy($origin)
+  -moz-transform-origin: $origin
+  -ms-transform-origin: $origin
+  -webkit-transform-origin: $origin
+  transform-origin: $origin

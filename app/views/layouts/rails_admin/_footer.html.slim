@@ -1,2 +1,7 @@
-= "2016-#{Time.new.year} © Hancock By "
-= link_to "Redrocks", "https://redrocks.pro", title: "Redrocks", target: "_blank"
+.cms-info.float-left
+  = link_to "Hancock", "https://github.com/red-rocks/hancock_cms", title: "Hancock", target: "_blank"
+  span = " © 2016-#{Time.new.year}"
+
+.dev-info.float-right
+  = "Created by "
+  span = link_to "Redrocks Studio", "https://redrocks.pro", title: "Redrocks", target: "_blank"

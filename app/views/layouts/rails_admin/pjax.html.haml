@@ -3,13 +3,15 @@
   $('.nav.nav-pills li[data-model="#{@abstract_model.to_param}"]').addClass('active');
 
 %title= "#{@abstract_model.try(:pretty_name) || @page_name} | #{[_get_plugin_name[0] || 'Rails', _get_plugin_name[1] || 'Admin'].join(' ')}"
-.page-header
-  %h1= @page_name
+.page-titles
+  %h1.page-title.hidden= @page_name
+  = breadcrumb
+
 - flash && flash.each do |key, value|
   .alert.alert-dismissible{class: flash_alert_class(key)}
     %button.close{type: 'button', :'data-dismiss' => "alert"} &times;
     = value
-= breadcrumb
+
 %ul.nav.nav-tabs.hancock-nav-tabs
   = hancock_menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
 %ul.nav.nav-tabs.filter

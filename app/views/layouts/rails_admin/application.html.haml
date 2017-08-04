@@ -10,27 +10,34 @@
     = javascript_include_tag "rails_admin/rails_admin.js"
 
   %body.rails_admin
-    #admin-js{:'data-i18n-options' => I18n.t("admin.js").to_json}
-    -# Initialize JS simple i18n
-    :javascript
-      RailsAdmin.I18n.init('#{I18n.locale}', document.getElementById("admin-js").dataset.i18nOptions);
-    #loading.label.label-warning{style: 'display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}= t('admin.loading')
-    %nav.navbar.navbar-default.navbar-fixed-top
-      = render "layouts/rails_admin/navigation"
+    #page-container
 
-    .admin-menubar.admin-menubar-fixed.admin-menubar-dark
-      .navigation-filter
-        = render "layouts/rails_admin/sidebar_navigation_filter"
-      .toolbar.custom_scroll
-        = render "layouts/rails_admin/sidebar_navigation"
-      .admin-menubar-footer
-        = render "layouts/rails_admin/footer_navigation"
+      #admin-js{:'data-i18n-options' => I18n.t("admin.js").to_json}
+      -# Initialize JS simple i18n
+      :javascript
+        RailsAdmin.I18n.init('#{I18n.locale}', document.getElementById("admin-js").dataset.i18nOptions);
+      #loading.label.label-warning{style: 'display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}= t('admin.loading')
 
-    %main.admin-content
-      .admin-wrapper
-        .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'
+      %nav#sidebar.admin-menubar.admin-menubar-fixed.admin-menubar-dark
+        .sidebar-header
+          = render "layouts/rails_admin/sidebar/sidebar_header"
+        .navigation-filter
+          = render "layouts/rails_admin/sidebar_navigation_filter"
+        .toolbar.custom_scroll
+          = render "layouts/rails_admin/sidebar_navigation"
+        .admin-menubar-footer
+          = render "layouts/rails_admin/footer_navigation"
 
-    %footer.admin-footer
-      = render "layouts/rails_admin/footer"
+      %header#page-header.navbar.navbar-default.navbar-fixed-top
+        .content-header
+          = render "layouts/rails_admin/navigation"
 
-    = render "layouts/rails_admin/preloader"
+      %main#main-container.admin-content
+        .admin-wrapper
+          .content{:'data-pjax-container' => true}= render template: 'layouts/rails_admin/pjax'
+
+      %footer#page-footer.admin-footer
+        .content-footer
+          = render "layouts/rails_admin/footer"
+
+      = render "layouts/rails_admin/preloader"
