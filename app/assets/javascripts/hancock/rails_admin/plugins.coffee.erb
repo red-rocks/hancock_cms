@@ -4,7 +4,8 @@
 <% p_name = plugin.name.demodulize.underscore %>
 <% if defined?(plugin::Engine) and File.exists?(plugin::Engine.root.join("app", "assets", "javascripts", "hancock", "rails_admin", "plugins", "#{p_name}.coffee")) %>
 <% plugins << p_name %>
-#= require hancock/rails_admin/plugins/<%= p_name %>
+<% require_asset "hancock/rails_admin/plugins/#{p_name}" %>
+# require hancock/rails_admin/plugins/<%= p_name %>
 <% end %>
 <% end %>
 

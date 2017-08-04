@@ -89,9 +89,6 @@ module Hancock
       @mongoid_single_collection = nil
 
       @navigation_labels = []
-
-      @erb2coffee_assets = ['hancock/rails_admin/plugins.coffee.erb']
-
     end
   end
 end

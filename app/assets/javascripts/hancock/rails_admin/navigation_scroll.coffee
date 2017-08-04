@@ -1,5 +1,8 @@
 #= require jquery.mCustomScrollbar.concat.min
 
+#= require_self
+
+
 window.hancock_cms.navigation_mscroll = () ->
   $('.custom_scroll').mCustomScrollbar(
     scrollInertia: 60
