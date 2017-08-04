@@ -43,7 +43,7 @@ module RailsAdmin::Main
 
         label = navigation_label || t('admin.misc.navigation')
 
-        %(<li class='dropdown-header'>#{capitalize_first_letter label}</li>#{li_stack}) if li_stack.present?
+        %(<li class='dropdown-header'><span>#{capitalize_first_letter label}</span><ul>#{li_stack}</ul></li>) if li_stack.present?
       end.join.html_safe
     end
 
