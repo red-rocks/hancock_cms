@@ -23,8 +23,9 @@
           = render "layouts/rails_admin/sidebar/sidebar_header"
         .navigation-filter
           = render "layouts/rails_admin/sidebar_navigation_filter"
-        .toolbar.custom_scroll
-          = render "layouts/rails_admin/sidebar_navigation"
+        .toolbar
+          .toolbar-wrapper.custom_scroll
+            = render "layouts/rails_admin/sidebar_navigation"
         .admin-menubar-footer
           = render "layouts/rails_admin/footer_navigation"
 
