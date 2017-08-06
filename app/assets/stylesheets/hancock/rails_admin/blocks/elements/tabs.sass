@@ -1,3 +1,6 @@
+body.rails_admin .admin-wrapper .nav.nav-tabs
+  padding: 0px
+
 .admin-wrapper > .content > #list
   margin-bottom: 24px
   background-color: #fff
@@ -21,10 +24,12 @@
     cursor: default
     +border-radius(0px)
   .nav-tabs > li > a
-    color: #575757
-    font-weight: 600
+    color: lighten(#575757, 20%)
+    font-weight: normal
     border: 0px solid transparent
     +transition(color 0.3s ease-in-out)
+  .nav-tabs > li.active > a
+    font-weight: 600
   .well
     min-height: 20px
     padding: 10px 0px
@@ -50,12 +55,49 @@
       font-weight: 400
       line-height: 16px
       color: #575757
-      text-align: center
+      text-align: left
       background-color: #fbfbfc
       border: 1px solid #dcdfe3
       +border-radius(.25rem)
+      &:focus, &:active
+        background-color: #fefefe
+    .form-control::-webkit-input-placeholder
+      opacity: 0.66
+      +transition(opacity 0.3s ease-in-out)
+    .form-control::-moz-placeholder
+      opacity: 0.66
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:-moz-placeholder
+      opacity: 0.66
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:-ms-input-placeholder
+      opacity: 0.66
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:focus::-webkit-input-placeholder
+      opacity: 0
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:focus::-moz-placeholder
+      opacity: 0
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:focus:-moz-placeholder
+      opacity: 0
+      +transition(opacity 0.3s ease-in-out)
+    .form-control:focus:-ms-input-placeholder
+      opacity: 0
+      +transition(opacity 0.3s ease-in-out)
     .btn-info
       display: inline-block
   .well .btn-info
     display: none
 
+.hancock-nav-tabs
+  li > a
+    +border-radius(0px)
+    background-color: transparent
+    border: 0px solid transparent
+  li.active > a
+    border: 0px solid transparent
+    background-color: transparent
+  li > a:hover, li.active > a:hover
+    border: 0px solid transparent
+    background-color: transparent

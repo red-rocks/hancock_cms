@@ -27,3 +27,68 @@
 @media all and (min-width: 920px)
   #page-header
     padding-left: 220px
+
+.current_user
+  float: right
+  display: block
+  width: 50px
+  height: 50px
+  &:hover
+    .user_info
+      +transform(scale(1))
+      +box-shadow(0 10px 10px -10px rgba(0,0,0,0.5))
+    .user_icon
+      background: #eee
+
+.user_icon
+  width: 50px
+  height: 50px
+  +display-flex-center
+  +transition(all 0.3s)
+  i
+    cursor: default
+    font-size: 26px
+
+.user_info
+  +transition(all 0.3s)
+  +transform(scale(0))
+  +box-shadow(0 0 0 0 rgba(0,0,0,0.5))
+  position: absolute
+  display: block
+  transform-origin: top right
+  right: 0
+  background: #eee
+  list-style: none
+  margin: 0px
+  padding: 7px 10px
+  overflow: hidden
+  li
+    padding: 7px 15px
+    font-size: 14px
+    a
+      text-transform: none
+      text-decoration: none
+      +transition(all 0.3s)
+      &:before
+        display: inline-block
+        font-family: FontAwesome
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        box-sizing: border-box
+        margin-right: 7px
+      &:hover
+        color: #ff2b58
+  .user-logout-action
+    border-top: 1px solid rgba(170,170,170,0.5)
+    a
+      &:before
+        content: "\f011"
+  .user-edit-action
+    a
+      &:before
+        content: "\f040"
+  .user_email
+    text-transform: lowercase
+    text-align: center
+    margin-bottom: 7px
