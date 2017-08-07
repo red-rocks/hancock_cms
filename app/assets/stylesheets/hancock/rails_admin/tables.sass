@@ -1,3 +1,50 @@
+table.table
+  thead > tr > th
+    font-size: 13px
+    font-weight: 600
+    padding: 10px
+  tbody > tr > td
+    padding: 10px
+    font-size: 13px
+    line-height: 13px
+    vertical-align: middle
+    border-top: 0px solid transparent
+  input[type="radio"], input[type="checkbox"]
+    margin: 0px
+
+body.rails_admin .table .headerSortUp, body.rails_admin .table .headerSortDown
+  background: transparent
+  text-shadow: 0 0px 0px rgba(255, 255, 255, 0.0)
+
+body.rails_admin .table .header
+  padding-right: 20px
+  position: relative
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+body.rails_admin .table .header:after
+  content: "\f0dc"
+  font-family: "FontAwesome"
+  margin-left: -10px
+  position: absolute
+  right: 5px
+  top: 10px
+  float: none
+  margin-top: 0px
+  border-width: 0 0px 0px
+  border-style: solid
+  border-color: #000 transparent
+  visibility: hidden
+
+body.rails_admin .table .headerSortUp:after
+  content: "\f0d8"
+  visibility: visible
+
+body.rails_admin .table .headerSortDown:after
+  content: "\f0d7"
+  visibility: visible
+
 td.other
   a
     font-size: 0
@@ -13,3 +60,4 @@ td.other.right
 td.other.left
   a:before
     content: "\f048"
+
