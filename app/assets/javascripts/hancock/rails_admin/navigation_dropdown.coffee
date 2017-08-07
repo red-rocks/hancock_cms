@@ -11,7 +11,7 @@ $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   else
     li.removeClass('forced-opened')
 
-$(document).on 'click', '.toolbar .nav .dropdown-header > *', (e)->
+$(document).on 'click', '.toolbar .nav .dropdown-header li', (e)->
   e.stopPropagation()
 
 
