@@ -117,14 +117,14 @@ module Hancock
             weight 9
             searchable true
             pretty_value do
-              bindings[:object].raw_array.join("<br>").html_safe
+              (bindings[:object].raw_array || []).join("<br>").html_safe
             end
           end
           field :raw_hash do
             weight 10
             searchable true
             pretty_value do
-              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash)}</pre>".html_safe
+              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
             end
           end
           field :cache_keys_str, :text do
@@ -220,7 +220,7 @@ module Hancock
             weight 9
             partial "setting_value".freeze
             pretty_value do
-              bindings[:object].raw_array.map(&:to_s).join("<br>").html_safe
+              (bindings[:object].raw_array || []).map(&:to_s).join("<br>").html_safe
             end
             visible do
               bindings[:object].array_kind?
@@ -238,7 +238,7 @@ module Hancock
             weight 10
             partial "setting_value".freeze
             pretty_value do
-              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash)}</pre>".html_safe
+              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
             end
             visible do
               bindings[:object].hash_kind?
