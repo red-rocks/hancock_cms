@@ -2,12 +2,14 @@
 @import 'hancock/rails_admin/blocks/header'
 @import 'hancock/rails_admin/blocks/main_container'
 @import 'hancock/rails_admin/blocks/footer'
+@import 'hancock/rails_admin/blocks/nav_tabs'
+@import 'hancock/rails_admin/plugins'
 
 body
   color: #575757
   background-color: #f5f5f5
   margin: 0
-  font-family: "Roboto-Regular", "Helvetica Neue", Arial, sans-serif
+  font-family: "Roboto-Regular", "Helvetica Neue", Tahoma, sans-serif
   font-weight: 400
   line-height: 1.5
   font-size: 14px
@@ -26,13 +28,14 @@ body.rails_admin
   #page-container
     padding-left: 220px
 
-a, a:hover
+a
   text-decoration: none
   color: #C92B32
   +transition(color 0.3s ease-in-out)
 
-a:hover
-  color: darken(#C92B32, 20%)
+a:hover, a:focus
+  color: #0583f2
+  text-decoration: none
 
 .hidden
   display: none
@@ -43,8 +46,6 @@ a:hover
 .float-right
   float: right
 
-//@import 'jquery.mCustomScrollbar'
-//
 @import 'hancock/rails_admin/fieldsets'
 @import 'hancock/rails_admin/settings'
 @import 'hancock/rails_admin/tables'
