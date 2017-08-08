@@ -1,6 +1,36 @@
 @import 'hancock/rails_admin/blocks/elements/tabs'
 @import 'hancock/rails_admin/blocks/elements/buttons'
 
+#dashboard-table
+  background-color: #fff
+  box-shadow: 0 1px rgba(0,0,0,.03)
+  padding: 10px
+  margin-bottom: 25px
+  .progress
+    height: 17px
+    display: flex
+    overflow: hidden
+    line-height: 20px
+    text-align: center
+    background-color: #e9ecef
+    +box-shadow(inset 0 0px 0px rgba(0, 0, 0, 0.0))
+  .progress-bar
+    line-height: 17px
+    font-size: 11px
+  table.table tbody > tr > td
+    padding: 8px 10px
+
+#block-tables
+  background-color: #fff
+  box-shadow: 0 1px rgba(0,0,0,.03)
+  padding: 10px
+  margin-bottom: 25px
+  h2
+    font-size: 18px
+    margin-top: 0px
+    margin-bottom: 10px
+    padding: 5px 10px
+
 #main-container
   overflow-x: hidden
   margin-bottom: -60px
@@ -18,6 +48,7 @@
     padding: 0px 10px 1px
     width: 100%
     overflow-x: visible
+    position: relative
   .page-titles
     width: 100%
   .page-title
@@ -30,7 +61,7 @@
     font-size: 12px
     line-height: 18px
     padding: 10px 5px
-    margin-bottom: 10px
+    margin-bottom: 0px
     margin-top: 0px
     list-style: none
     background-color: transparent
