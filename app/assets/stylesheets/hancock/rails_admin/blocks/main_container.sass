@@ -1,6 +1,14 @@
 @import 'hancock/rails_admin/blocks/elements/tabs'
 @import 'hancock/rails_admin/blocks/elements/buttons'
 
+.admin-content
+  +transition(padding 0.3s ease-in-out)
+  padding-left: 0px
+
+@media all and (min-width: 920px)
+  .admin-content
+    padding-left: 252px
+
 #dashboard-table
   background-color: #fff
   box-shadow: 0 1px rgba(0,0,0,.03)

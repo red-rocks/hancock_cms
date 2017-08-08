@@ -3,6 +3,7 @@
   margin: 0 auto
   width: 100%
   background-color: #fff
+  +transition(padding 0.3s ease-in-out)
 
 #page-header .content-header
   display: block
@@ -13,7 +14,7 @@
 
 @media all and (min-width: 920px)
   #page-header
-    padding-left: 220px
+    padding-left: 252px
 
 .toggle-sidebar, .plugin-name-panel, .user-panel
   display: inline-block
@@ -29,6 +30,22 @@
   +transition(all 0.3s ease-in-out)
   i
     line-height: 20px
+  &:before, &:after
+    content: ""
+    font-family: 'FontAwesome'
+    display: inline-block
+    vertical-align: top
+    line-height: 20px
+    font-size: 16px
+    margin: 0px 3px
+  &:before
+    content: "\f104"
+    font-size: 16px
+  &:after
+    content: "\f105"
+    font-size: 0px
+  &:hover
+    background: #eee
 
 .plugin-name-panel
   padding: 15px 10px
