@@ -15,19 +15,27 @@ module RailsAdmin::Main
       node_model_names ||= nodes_stack.collect { |c| c.abstract_model.model_name }
 
       _order_array = _controller._current_user.navigation_labels if _controller._current_user and _controller._current_user.respond_to?(:navigation_labels)
-      _order_array ||= Hancock.config.navigation_labels
+      _order_array = Hancock.config.navigation_labels if _order_array.blank?
+      _order_array.map! { |label|
+        Hancock.config.navigation_labels.detect { |n_l|
+          label == n_l or n_l.is_a?(Array) and label == n_l[1]
+        } || label
+      }
       _order_array = _order_array.clone.reverse
 
       ret = {}
       grouped_nodes_stack = nodes_stack.group_by(&:navigation_label)
       navigation_labels = grouped_nodes_stack.keys
       navigation_labels.sort! do |label_1, label_2|
-        label_1_index = _order_array.index(label_1) || -1
-        label_2_index = _order_array.index(label_2) || -1
+        label_1_index = _order_array.index { |label| label == label_1 or label[1] == label_1 } || -1
+        label_2_index = _order_array.index { |label| label == label_2 or label[1] == label_2 } || -1
         label_2_index <=> label_1_index
       end
       navigation_labels.each do |label|
-        ret[label] = grouped_nodes_stack[label]
+        nav_label = _order_array.detect { |n_l|
+          label == n_l or n_l.is_a?(Array) and label == n_l[1]
+        }
+        ret[label] = [nav_label, grouped_nodes_stack[label]]
       end
       ret
     end
@@ -36,14 +44,22 @@ module RailsAdmin::Main
       nodes_stack = RailsAdmin::Config.visible_models(controller: controller)
       node_model_names = nodes_stack.collect { |c| c.abstract_model.model_name }
       _ordered_nodes_stack = ordered_nodes_stack(nodes_stack, node_model_names)
-
-      _ordered_nodes_stack.collect do |navigation_label, nodes|
-        nodes = nodes.select { |n| n.parent.nil? || !n.parent.to_s.in?(node_model_names) }
+      
+      _ordered_nodes_stack.collect do |navigation_label, label_n_nodes|
+        label = label_n_nodes[0]
+        nodes = label_n_nodes[1].select { |n| n.parent.nil? || !n.parent.to_s.in?(node_model_names) }
         li_stack = hancock_navigation nodes_stack, nodes
 
-        label = navigation_label || t('admin.misc.navigation')
+        if label.is_a?(Array)
+          navigation_label_class, navigation_label = label[0], label[1]
+        else
+          navigation_label_class = nil
+        end
 
-        %(<li class='dropdown-header'><span>#{capitalize_first_letter label}</span><ul>#{li_stack}</ul></li>) if li_stack.present?
+        label = navigation_label || t('admin.misc.navigation')
+        label_class = navigation_label_class || t('admin.misc.navigation_label_class')
+
+        %(<li class='dropdown-header #{label_class}'><span>#{capitalize_first_letter label}</span><ul>#{li_stack}</ul></li>) if li_stack.present?
       end.join.html_safe
     end
 
