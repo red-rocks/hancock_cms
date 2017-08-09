@@ -170,3 +170,7 @@ ru:
         default_col_sep: ","
         col_sep: "Разделитель столбцов"
         col_sep_help: "Оставьте пустым, чтобы было по умолчанию ('%{value}')" # value is default_col_sep
+
+  rails_admin:
+    multiple_file_upload_collection:
+      hancock/gallery/images: "Мультизагрузка фото"

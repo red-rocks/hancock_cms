@@ -1,0 +1,87 @@
+.rails_admin_multiple_file_upload_block
+  margin-top: 25px
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
+    color: #ccc
+    background-color: #eee
+    border-color: #d3d7dc
+    border: 1px solid #d3d7dc
+  .controls
+    a
+      display: inline-block
+      text-align: center
+      white-space: nowrap
+      vertical-align: middle
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      border: 0px solid transparent
+      padding: 8px 14px
+      font-size: 14px
+      line-height: 16px
+      +border-radius(.25rem)
+      +transition(all 0.2s ease-in-out)
+      color: #fff
+      background-color: #42a5f5
+      border-color: #0d89ed
+      &:hover, &:focus
+        background-color: #0d89ed
+        border-color: #0a6dbd
+      &:active
+        background-color: #42a5f5
+        border-color: #0d89ed
+  button
+    display: inline-block
+    text-align: center
+    white-space: nowrap
+    vertical-align: middle
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    border: 0px solid transparent
+    padding: 8px 14px
+    font-size: 14px
+    line-height: 16px
+    +border-radius(.25rem)
+    +transition(all 0.2s ease-in-out)
+    color: #fff
+    background-color: #9ccc65
+    border-color: #7eb73d
+    &:hover, &:focus
+      color: #fff
+      background-color: #7eb73d
+      border-color: #649130
+    &:active
+      background-color: #9ccc65
+      border-color: #7eb73d
+  .tab-content
+    margin-top: 25px
+
+.rails_admin_multiple_file_upload_collection
+  margin-bottom: 10px
+  padding: 10px 0px
+  .file_block_load_already
+    margin: 5px
+    background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
+    border: 3px solid #fff
+    +border-radius(3px)
+    +box-shadow(0 1px 1px rgba(0,0,0,0.2))
+    -webkit-transition: all 0.2s ease-in-out
+    -o-transition: all 0.2s ease-in-out
+    transition: all 0.2s ease-in-out
+    display: inline-block
+    vertical-align: top
+    max-width: 300px
+    max-height: 200px
+    overflow: hidden
+    img
+      max-width: 100%
+
+.rails_admin_multiple_file_upload_block .rails_admin_multiple_file_upload_collection .file_block_load_already
+  max-width: none
+  margin-left: 5px
+
+.rails_admin_multiple_file_upload_collection
+  .dropzone .dz-preview .dz-image
+    +border-radius(10px)
