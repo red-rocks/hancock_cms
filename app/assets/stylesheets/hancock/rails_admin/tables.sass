@@ -70,12 +70,19 @@ td.other
     font-weight: 600
     font-size: 18px
 
-body.rails_admin .table td.links
-  width: 250px
-
 body.rails_admin .table
+  th
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
   td
     max-width: 130px
+    .img-thumbnail
+      background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
+      border: 3px solid #fff
+      +border-radius(3px)
+      +box-shadow(0 1px 1px rgba(0,0,0,0.2))
+      padding: 0
   td.raw_field
     max-width: 160px
     a
@@ -83,5 +90,21 @@ body.rails_admin .table
     a > img
       max-width: 100%
       background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
+      border: 3px solid #fff
+      +border-radius(3px)
+      +box-shadow(0 1px 1px rgba(0,0,0,0.2))
+      -webkit-transition: all 0.2s ease-in-out
+      -o-transition: all 0.2s ease-in-out
+      transition: all 0.2s ease-in-out
+      display: inline-block
+      height: auto
+  //td.links
+  //  width: 300px
   td.ns_field
     max-width: 60px
+  th.enabled_field
+    max-width: 92px
+  th.is_action_cache_field
+    max-width: 118px
+  th.sitemap_data_field_field
+    max-width: 120px
