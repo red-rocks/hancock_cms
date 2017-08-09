@@ -44,7 +44,7 @@ module RailsAdmin::Main
       nodes_stack = RailsAdmin::Config.visible_models(controller: controller)
       node_model_names = nodes_stack.collect { |c| c.abstract_model.model_name }
       _ordered_nodes_stack = ordered_nodes_stack(nodes_stack, node_model_names)
-      
+
       _ordered_nodes_stack.collect do |navigation_label, label_n_nodes|
         label = label_n_nodes[0]
         nodes = label_n_nodes[1].select { |n| n.parent.nil? || !n.parent.to_s.in?(node_model_names) }
@@ -59,7 +59,9 @@ module RailsAdmin::Main
         label = navigation_label || t('admin.misc.navigation')
         label_class = navigation_label_class || t('admin.misc.navigation_label_class')
 
-        %(<li class='dropdown-header #{label_class}'><span>#{capitalize_first_letter label}</span><ul>#{li_stack}</ul></li>) if li_stack.present?
+        span = "<span>#{capitalize_first_letter label}</span>"
+        ul = "<ul>#{li_stack}</ul>"
+        %(<li class='dropdown-header #{label_class}' title='#{capitalize_first_letter label}'>#{span}#{ul}</li>) if li_stack.present?
       end.join.html_safe
     end
 

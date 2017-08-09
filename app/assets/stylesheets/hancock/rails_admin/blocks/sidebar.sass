@@ -27,18 +27,18 @@
 #sidebar.shorted
   .navigation-filter
     width: 36px
-  &:hover
-    width: 100%
-    .navigation-filter
-      width: 100%
+  // &:hover
+  //   width: 100%
+  //   .navigation-filter
+  //     width: 100%
 
 @media all and (min-width: 920px)
   #sidebar
     width: 252px
     +transform(translateX(0) translateY(0) translateZ(0))
   #sidebar.shorted
-    &:hover
-      width: 252px
+    // &:hover
+    //   width: 252px
 
 .content-header
   display: -ms-flexbox
@@ -117,6 +117,9 @@
   &.shorted
     width: 36px
     ~ .navbar
+      //   padding-left: 38px
+      // ~ #main-container, #page-footer
+      //   margin-left: -182px
       padding-left: 36px
       .toggle-sidebar:before
         font-size: 0px
