@@ -1,5 +1,10 @@
 $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   e.preventDefault()
+
+  if $("#sidebar.shorted").length > 0
+    $('.toggle-sidebar').trigger("click")
+    $('.clear_navigation_filter_field').trigger("click")
+
   _target = $(e.currentTarget).toggleClass('opened')
   li = _target.find("li").toggleClass('visible')
   if _target.hasClass('forced-closed')
@@ -11,8 +16,11 @@ $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   else
     li.removeClass('forced-opened')
 
+
+
 $(document).on 'click', '.toolbar .nav .dropdown-header li', (e)->
   e.stopPropagation()
+
 
 
 $(document).on 'rails_admin.dom_ready', ->
