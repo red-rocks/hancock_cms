@@ -11,6 +11,26 @@ table.table
     border-top: 0px solid transparent
   input[type="radio"], input[type="checkbox"]
     margin: 0px
+  td a
+    color: #575757
+  td a:hover, td a:focus
+    color: #e53935
+  td a:active
+    color: darken(#e53935, 10%)
+  a.label, a.label:hover, a.label:active, a.label:focus, a.btn, a.btn:hover, a.btn:active, a.btn:focus
+    color: #ffffff
+  a.btn, a.btn:hover, a.btn:active, a.btn:focus
+    margin-bottom: 0px !important
+  td.links li
+    padding-left: 0px
+    padding-right: 0px
+  td.links a
+    color: #C92B32
+    padding: 5px
+  td.links a:hover, td.links a:focus
+    color: #0583f2
+  td.links a:active
+    color: darken(#0583f2, 10%)
 
 body.rails_admin .table .headerSortUp, body.rails_admin .table .headerSortDown
   background: transparent
@@ -53,3 +73,15 @@ td.other
 body.rails_admin .table td.links
   width: 250px
 
+body.rails_admin .table
+  td
+    max-width: 130px
+  td.raw_field
+    max-width: 160px
+    a
+      display: block
+    a > img
+      max-width: 100%
+      background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
+  td.ns_field
+    max-width: 60px
