@@ -13,17 +13,32 @@
   z-index: 1033
   width: 100%
   overflow-y: auto
-  -webkit-transform: translateX(-100%) translateY(0) translateZ(0)
-  transform: translateX(-100%) translateY(0) translateZ(0)
+  overflow-x: hidden
+  +transform(translateX(-100%) translateY(0) translateZ(0))
   -webkit-overflow-scrolling: touch
   will-change: transform
   +box-shadow(5px 0 10px rgba(0,0,0,.02))
+  +transition(width 0.3s ease-in-out)
+  .content-header
+    width: 252px
+    overflow: hidden
+    padding-left: 6px
+
+#sidebar.shorted
+  .navigation-filter
+    width: 36px
+  // &:hover
+  //   width: 100%
+  //   .navigation-filter
+  //     width: 100%
 
 @media all and (min-width: 920px)
   #sidebar
-    width: 220px
-    -webkit-transform: translateX(0) translateY(0) translateZ(0)
-    transform: translateX(0) translateY(0) translateZ(0)
+    width: 252px
+    +transform(translateX(0) translateY(0) translateZ(0))
+  #sidebar.shorted
+    // &:hover
+    //   width: 252px
 
 .content-header
   display: -ms-flexbox
@@ -39,12 +54,19 @@
   height: 50px
   a
     max-width: 100%
+  a.admin-title
+    display: block
+    margin: 0 auto
   img
     max-width: 100%
     width: auto
     height: 25px
 
 .navigation-filter
+  height: 30px
+  width: 252px
+  overflow: hidden
+  +transition(width 0.3s ease-in-out)
   input
     background: rgba(0,0,0,0.1)
     width: 100%
@@ -81,27 +103,35 @@
   bottom: 0
   display: block
   z-index: 1400
-  width: 220px
+  width: 252px
   height: 50px
   background: #2d3238
-  text-align: right
+  text-align: center
   ul
     list-style: none
     margin: 0
     padding: 0
     height: 100%
 
-// TODO set css for short sidebar
 #sidebar
   &.shorted
-    width: 38px
+    width: 36px
     ~ .navbar
-      padding-left: 38px
-    ~ #main-container, #page-footer
-      margin-left: -182px
+      //   padding-left: 38px
+      // ~ #main-container, #page-footer
+      //   margin-left: -182px
+      padding-left: 36px
+      .toggle-sidebar:before
+        font-size: 0px
+      .toggle-sidebar:after
+        font-size: 16px
+    ~ .admin-content
+      padding-left: 36px
+    ~ #page-footer
+      padding-left: 36px
 
 .footer-nav-link
-  width: 20%
+  width: 36px
   height: 100%
   display: inline-block
   vertical-align: top
@@ -181,10 +211,22 @@
       list-style: none
       padding: 0
     li > a
-      padding: 6px 0 6px 30px
+      padding: 6px 0 6px 36px
       display: block
       text-decoration: none
       color: rgba(234,236,238,.6)
+    li > a.nav-level-1
+      padding-left: 36px
+    li > a.nav-level-2
+      padding-left: 46px
+    li > a.nav-level-3
+      padding-left: 56px
+    li > a.nav-level-4
+      padding-left: 66px
+    li > a.nav-level-5
+      padding-left: 76px
+    li > a.nav-level-6
+      padding-left: 86px
     li > a:hover
       color: rgba(234,236,238,1)
       background: rgba(0,0,0,0.1)

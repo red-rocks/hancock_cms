@@ -46,7 +46,7 @@
   font-size: 14px
   line-height: 16px
   +border-radius(.25rem)
-  +transition(all 0.3s ease-in-out)
+  +transition(all 0.2s ease-in-out)
 
 .btn:focus, .btn:active:focus, .btn.active:focus
   outline: 0px
@@ -54,3 +54,19 @@
 
 .btn#remove_filter
   padding: 8px 12px
+
+.btn.btn-default
+  color: #fff
+  background-color: #9ccc65
+  border-color: #7eb73d
+  &:hover, &:focus
+    color: #fff
+    background-color: #7eb73d
+    border-color: #649130
+  &:active
+    background-color: #9ccc65
+    border-color: #7eb73d
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus
+  background-color: #ef5350
+  border-color: #ea1c18
