@@ -25,12 +25,15 @@
     padding-left: 6px
 
 #sidebar.shorted
+  overflow-x: auto
   .navigation-filter
     width: 36px
-  // &:hover
-  //   width: 100%
-  //   .navigation-filter
-  //     width: 100%
+  li.dropdown-header
+    overflow: hidden
+    width: 36px
+  li.dropdown-header:hover
+    overflow: auto
+    width: auto
 
 @media all and (min-width: 920px)
   #sidebar
