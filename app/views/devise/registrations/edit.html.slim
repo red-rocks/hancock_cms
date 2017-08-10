@@ -1,13 +1,15 @@
+.device-background
 .devise-box
   .white-box
+    .header-box
+      h2.title Редактирование профиля
     = simple_form_for(resource, as: resource_name, url: user_registration_path) do |f|
       / = devise_error_messages!
-      h2.title Редактирование профиля
       .form-group
         / = f.label :email, label: I18n.t("shared.email")
         / .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
         = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
-            
+
       .form-group
         / = f.label :password
         - if @minimum_password_length

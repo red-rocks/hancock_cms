@@ -1,5 +1,13 @@
-#content.devise
+.device-background
   background: #333C44 image-url("hancock/devise/login-bg.jpg") no-repeat center center / cover !important
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  +filter(blur(30px))
+
+#content.devise
   position: fixed
   top: 0
   right: 0
@@ -8,7 +16,7 @@
   overflow: auto
   white-space: nowrap
   text-align: center
-  font-family: "Verdana", SansSerif
+  font-family: "Roboto-Regular", Tahoma, SansSerif
   font-weight: normal
   &:before
     height: 100%
@@ -24,13 +32,57 @@
   background: #fff
   +box-shadow(0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19))
   min-width: 400px
-
+  z-index: 1
+  position: relative
   .white-box
     background: #ffffff
-    padding: 25px
-    margin-bottom: 15px
-
+    .header-box
+      padding: 25px
+      background: #EF5350
+      color: #fff
+      h2
+        font-family: "Roboto-Regular"
+        font-size: 15px
+        font-weight: 600
+        text-transform: uppercase
+        line-height: 1.2
     form
+      padding: 25px
+      .form-group .checkbox-primary .checkbox input
+        opacity: 0
+        position: absolute
+      .checkbox, .link-to-recover
+        font-size: 14px
+      .checkbox input+span
+        position: relative
+        display: inline-block
+        margin-top: -2px
+        margin-right: 5px
+        vertical-align: middle
+        width: 36px
+        height: 20px
+        background-color: #eee
+        +border-radius(30px)
+        +transition(background-color .4s)
+        &:after
+          position: absolute
+          content: ""
+          top: 2px
+          bottom: 2px
+          left: 2px
+          width: 16px
+          background-color: #fff
+          +border-radius(50%)
+          +box-shadow(1px 0 3px rgba(0,0,0,0.1))
+          +transition(background-color .15s)
+      .checkbox input:checked+span
+        background-color: #EF5350
+        &:after
+          -webkit-box-shadow: -2px 0 3px rgba(0,0,0,0.2)
+          box-shadow: -2px 0 3px rgba(0,0,0,0.2)
+          -webkit-transform: translateX(15px)
+          -ms-transform: translateX(15px)
+          transform: translateX(15px)
       #error_explanation
         margin-bottom: 25px
         h2
@@ -48,8 +100,23 @@
         font-size: 18px
 
       .form-group
+        .form-control input:focus+label
+          +transform(translateY(-24px))
+      .form-group
         display: block
         margin: 10px 0px
+        position: relative
+        label
+          white-space: nowrap
+          position: absolute
+          top: 6px
+          left: 0
+          +transform(translateY(0px))
+          font-size: 15px
+          font-weight: 400
+          cursor: text
+          z-index: 10
+          +transition(all .15s ease-out)
         &::before
           display: table
           content: " "
@@ -128,19 +195,20 @@
           display: inline-block
           overflow: hidden
           background: #EF5350
-          border: 1px solid #EF5350
+          border: 1px solid #ea1c18
           color: #fff
           text-transform: uppercase
           text-align: center
           width: 100%
-          padding: 10px 16px
-          font-size: 18px
+          padding: 8px 16px
+          font-size: 14px
           line-height: 1.3333333
-          +transition(all ease-in-out .15s)
+          +transition(all .15s)
+          margin: 5px auto
+          +border-radius(3px)
           &:hover
-            background: rgba(#ee5350, 0.8)
-            border: 1px solid rgba(#ee5350, 0.8)
-
+            background-color: #ea1c18
+            border-color: #bd1511
 
       .form-group.links
         margin-top: 25px

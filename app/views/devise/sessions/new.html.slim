@@ -1,28 +1,28 @@
+.device-background
 .devise-box
   .white-box
+    .header-box
+      h2.title = I18n.t("shared.enter_site")
     = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
       / = devise_error_messages!
-      h2.title = I18n.t("shared.enter_site")
+
       .form-group
-        / label.form-label = f.label :email, I18n.t("shared.email")
         / .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
-        = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
-      
+        = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), label: I18n.t("shared.email"), wrapper_html: {class: "form-control"}
+        /= f.label :email, I18n.t("shared.email")
+
       .form-group
-        / label.form-label = f.label :password, title: I18n.t("shared.password")
         / .form-control = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password"), placeholder: I18n.t("shared.password")
-        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
-            
+        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), label: I18n.t("shared.password"), wrapper_html: {class: "form-control"}
+        /= f.label :password, title: I18n.t("shared.password")
+
       .form-group.links
         - if devise_mapping.rememberable?
-          / .checkbox-primary
-            = f.check_box :remember_me, title: I18n.t("shared.remember_me")
-            = f.label :remember_me, I18n.t("shared.remember_me")
-          = f.input :remember_me, as: :boolean, title: I18n.t("shared.remember_me"), label: I18n.t("shared.remember_me"), wrapper_html: {class: "checkbox-primary"}
+          - label = content_tag(:span, "") + I18n.t("shared.remember_me")
+          = f.input :remember_me, as: :boolean, title: I18n.t("shared.remember_me"), label: label, wrapper_html: {class: "checkbox-primary"}
         .link-to-recover
           = render "devise/shared/links"
-      
-      
+
       .actions
         - if Hancock.config.admin_enter_captcha and (!Rails.env.development? or Hancock.config.captcha_on_development)
           - if Hancock.config.recaptcha_support
