@@ -5,7 +5,7 @@
 
 #sidebar
   color: #ebebeb
-  background-color: #212121
+  background-color: #343a40
   position: fixed
   top: 0
   bottom: 0
@@ -20,25 +20,25 @@
   +box-shadow(5px 0 10px rgba(0,0,0,.02))
   +transition(width 0.3s ease-in-out)
   .content-header
-    border-bottom: 3px solid #ef5350
     width: 252px
     overflow: hidden
     padding-left: 6px
-    height: 53px
 
 #sidebar.shorted
-  overflow-x: auto
-  li.dropdown-header
-    overflow: hidden
+  .navigation-filter
     width: 36px
-  li.dropdown-header:hover
-    overflow: auto
-    width: auto
+  // &:hover
+  //   width: 100%
+  //   .navigation-filter
+  //     width: 100%
 
 @media all and (min-width: 920px)
   #sidebar
     width: 252px
     +transform(translateX(0) translateY(0) translateZ(0))
+  #sidebar.shorted
+    // &:hover
+    //   width: 252px
 
 .content-header
   display: -ms-flexbox
@@ -56,7 +56,7 @@
     max-width: 100%
   a.admin-title
     display: block
-    //margin: 0 auto
+    margin: 0 auto
   img
     max-width: 100%
     width: auto
@@ -68,25 +68,22 @@
   overflow: hidden
   +transition(width 0.3s ease-in-out)
   input
-    //background: rgba(0,0,0,0.1)
-    background: darken(#414141, 10%)
+    background: rgba(0,0,0,0.1)
     width: 100%
     padding: 5px 30px 5px 10px
     line-height: 20px
     border: 0px
     +transition(background 0.3s ease-in-out)
     &:hover
-      //background: rgba(0,0,0,0.15)
-      background: #414141
+      background: rgba(0,0,0,0.15)
     &:focus
       border: 0px
       outline-offset: 0px
       outline: 0px
-      //background: rgba(0,0,0,0.25)
-      background: lighten(#414141, 5%)
+      background: rgba(0,0,0,0.25)
   span
     display: inline-block
-    background: darken(#414141, 15%)
+    background: rgba(0, 0, 0, 0.1)
     vertical-align: top
     margin-left: -30px
     height: 30px
@@ -108,8 +105,7 @@
   z-index: 1400
   width: 252px
   height: 50px
-  //background: #2d3238
-  background: darken(#414141, 10%)
+  background: #2d3238
   text-align: center
   ul
     list-style: none
@@ -122,6 +118,15 @@
     width: 36px
     .navigation-filter
       visibility: hidden
+    .sidebar-header
+      .content-header
+        a
+          width: 25px
+          overflow: hidden
+          margin: 0
+          img
+            width: 144px
+            max-width: none
     ~ .navbar
       //   padding-left: 38px
       // ~ #main-container, #page-footer
@@ -161,8 +166,8 @@
   display: block
   width: 100%
   overflow: auto
-  margin-top: -83px
-  padding-top: 83px
+  margin-top: -80px
+  padding-top: 80px
   margin-bottom: -50px
   padding-bottom: 50px
   .toolbar-wrapper
@@ -180,8 +185,8 @@
     padding: 10px 18px 10px 40px
     font-size: 12px
     line-height: 16px
-    //color: rgba(234,236,238,.6)
-    color: #c1c1c1
+    font-weight: 600
+    color: rgba(234,236,238,.6)
     text-transform: uppercase
     +transition(all 0.3s ease-in-out)
     text-align: left
@@ -202,13 +207,13 @@
       content: "\f104"
       right: 0px
     &:hover
-      color: #ffffff
-      background: #4b4b4b
+      color: rgba(234,236,238,1)
+      background: rgba(0,0,0,0.1)
   li.dropdown-header.opened > span
     &:after
       content: "\f103"
   li.dropdown-header.opened
-    background-color: rgba(0,0,0,0.33)
+    background-color: rgba(0,0,0,0.2)
   li.dropdown-header
     ul
       height: 0px
@@ -235,29 +240,16 @@
       padding-left: 86px
     li > a:hover
       color: rgba(234,236,238,1)
-      background: #4b4b4b
+      background: rgba(0,0,0,0.1)
     li.active > a
       color: rgba(234,236,238,1)
-      //background: rgba(0,0,0,0.1)
-      background: #4b4b4b
+      background: rgba(0,0,0,0.1)
       cursor: default
       pointer-events: none
     ul > li
       opacity: 0
       +transition(all .2s cubic-bezier(.25,.46,.45,.94))
       +transform(translateY(-15px))
-    li > a > i[class=""]
-      display: inline-block
-      font: normal normal normal 14px/1 FontAwesome
-      font-size: inherit
-      text-rendering: auto
-      -webkit-font-smoothing: antialiased
-      -moz-osx-font-smoothing: grayscale
-      width: 12px
-      text-align: center
-      &:before
-        content: "\f0da"
-
   li.dropdown-header.opened
     ul
       height: auto

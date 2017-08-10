@@ -10,3 +10,8 @@ $(document).on 'click', ".toggle-sidebar", (e)->
     navigation_filter_input.val(navigation_filter_input.data("value")).prop( "disabled", false )
   navigation_filter_input.trigger("keyup")
   return false
+
+$(document).on 'click', "#sidebar.shorted .content-header a", (e)->
+  e.preventDefault()
+  $(".toggle-sidebar").trigger("click")
+  return false
