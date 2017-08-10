@@ -28,6 +28,10 @@ html lang="ru"
         = yield
 
     footer#footer
+      = render partial: "hancock/home/cookies_policy"
+      br
+      = render partial: "hancock/home/privacy_policy"
+      br
       = render partial: 'blocks/footer'
 
     = render partial: 'hancock/toplink/toplink'
