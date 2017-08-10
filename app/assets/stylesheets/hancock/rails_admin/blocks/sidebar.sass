@@ -55,12 +55,17 @@
   a
     max-width: 100%
   a.admin-title
+    position: relative
     display: block
-    margin: 0 auto
+    // margin: 0 auto
+    left: 50%
+    margin-left: -25%
+    transition: all 0.3s ease-in-out
   img
     max-width: 100%
     width: auto
     height: 25px
+    transition: all 0.3s ease-in-out
 
 .navigation-filter
   height: 30px
@@ -120,10 +125,11 @@
       visibility: hidden
     .sidebar-header
       .content-header
-        a
+        a.admin-title
           width: 25px
           overflow: hidden
-          margin: 0
+          left: 0%
+          margin-left: 0%
           img
             width: 144px
             max-width: none
