@@ -29,15 +29,25 @@
   white-space: normal
   vertical-align: middle
   text-align: left
-  background: #fff
-  +box-shadow(0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19))
   min-width: 400px
   z-index: 1
   position: relative
+  padding-top: 50px
+  .hancock-cms-link
+    display: block
+    margin-top: 25px
+    text-align: center
+    a, span
+      font-size: 14px
+      color: #ffffff
+      +transition(all 0.3s ease-in-out)
+    a:hover
+      color: #EF5350
   .white-box
     background: #ffffff
+    +box-shadow(0 8px 17px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19))
     .header-box
-      padding: 25px
+      padding: 15px 25px
       background: #EF5350
       color: #fff
       h2
@@ -52,7 +62,7 @@
         opacity: 0
         position: absolute
       .checkbox, .link-to-recover
-        font-size: 14px
+        font-size: 15px
       .checkbox input+span
         position: relative
         display: inline-block
@@ -78,11 +88,8 @@
       .checkbox input:checked+span
         background-color: #EF5350
         &:after
-          -webkit-box-shadow: -2px 0 3px rgba(0,0,0,0.2)
-          box-shadow: -2px 0 3px rgba(0,0,0,0.2)
-          -webkit-transform: translateX(15px)
-          -ms-transform: translateX(15px)
-          transform: translateX(15px)
+          +box-shadow(-2px 0 3px rgba(0,0,0,0.2))
+          +transform(translateX(15px))
       #error_explanation
         margin-bottom: 25px
         h2
@@ -98,13 +105,19 @@
         color: #333C44
         width: 100%
         font-size: 18px
-
       .form-group
-        .form-control input:focus+label
-          +transform(translateY(-24px))
+        .form-control.field_with_errors label
+          color: #EF5350
+      .form-group
+        .form-control input:focus+label, .form-control.opened input+label
+          +transform(translateY(-20px))
+          font-size: 13px
+          opacity: 0.8
+        .form-control.opened input+label
+          opacity: 1
       .form-group
         display: block
-        margin: 10px 0px
+        margin: 20px 0px 5px
         position: relative
         label
           white-space: nowrap
@@ -126,19 +139,11 @@
           content: " "
 
         .form-control
-          background-image: linear-gradient(#9675ce, #9675ce), linear-gradient(rgba(120, 130, 140, 0.13), rgba(120, 130, 140, 0.13))
           border: 0 none
           +border-radius(0)
           +box-shadow(none)
-          background-color: rgba(0, 0, 0, 0)
-          background-position: center bottom, center calc(99%)
-          background-repeat: no-repeat
-          background-size: 0 2px, 100% 1px
-          background-color: #ffffff
           color: #565656
-          height: 38px
           width: 100%
-          padding: 7px 12px
           +transition(all 300ms linear 0s)
           display: block
           font-size: 14px
@@ -146,6 +151,10 @@
           +transition(border-color ease-in-out .15s,box-shadow ease-in-out .15s)
           input
             width: 100%
+          span.error
+            font-size: 14px
+            color: #EF5350
+            line-height: 2em
 
         .link-to-recover
           float: right
@@ -189,6 +198,15 @@
               color: #EF5350
 
       .actions
+        .g-recaptcha
+          margin: 15px 0px
+          +transform(scale(0.9))
+          +transform-origin(left)
+        h4.error.g-recaptcha-error
+          margin-bottom: -15px
+          margin-top: 15px
+          color: #EF5350
+          font-size: 14px
         input
           position: relative
           cursor: pointer
@@ -229,6 +247,7 @@
 
 .devise-box .white-box form .form-group .checkbox-primary label
   padding-left: 0px
+  top: 0px
   input
     margin: 0px
     margin-right: 5px

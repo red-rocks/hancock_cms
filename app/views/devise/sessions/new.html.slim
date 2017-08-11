@@ -8,13 +8,18 @@
 
       .form-group
         / .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
-        = f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), label: I18n.t("shared.email"), wrapper_html: {class: "form-control"}
+        /= f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), label: I18n.t("shared.email"), wrapper_html: {class: "form-control"}
         /= f.label :email, I18n.t("shared.email")
-
+        = f.input :email, label: false, wrapper_html: {class: "form-control opened"} do
+          = f.input_field :email, autofocus: true, title: I18n.t("shared.email"), autocomplete: "off"
+          = f.label :email, I18n.t("shared.email")
       .form-group
         / .form-control = f.password_field :password, autocomplete: "off", title: I18n.t("shared.password"), placeholder: I18n.t("shared.password")
-        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), label: I18n.t("shared.password"), wrapper_html: {class: "form-control"}
+        /= f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), label: I18n.t("shared.password"), wrapper_html: {class: "form-control"}
         /= f.label :password, title: I18n.t("shared.password")
+        = f.input :password, label: false, wrapper_html: {class: "form-control"} do
+          = f.input_field :password, autofocus: true, title: I18n.t("shared.password"), autocomplete: "off"
+          = f.label :password, I18n.t("shared.password")
 
       .form-group.links
         - if devise_mapping.rememberable?
@@ -27,11 +32,14 @@
         - if Hancock.config.admin_enter_captcha and (!Rails.env.development? or Hancock.config.captcha_on_development)
           - if Hancock.config.recaptcha_support
             - unless @recaptcha_error.blank?
-              h4.error= @recaptcha_error
+              h4.error.g-recaptcha-error= @recaptcha_error
             = recaptcha_tags
           - elsif Hancock.config.simple_captcha_support
             = f.input :captcha, as: :simple_captcha, label: false
-            
+
         = f.submit I18n.t("shared.enter")
 
+  .hancock-cms-link
+    = link_to "Hancock v.2.1", "https://github.com/red-rocks/hancock_cms", title: "Hancock", target: "_blank"
+    span = " © 2016-#{Time.new.year}"
     
