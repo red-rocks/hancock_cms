@@ -1,9 +1,9 @@
-.btn-primary:focus, .btn-primary:active, .btn#remove_filter:focus, .btn#remove_filter:active
+.btn:focus, .btn:active
   color: #fff
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125)
   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125)
 
-.btn-primary:focus, .btn-primary:active
+.btn:focus, .btn:active
   background-color: #9ccc65
   border-color: #7eb73d
 
@@ -20,11 +20,12 @@
   z-index: 2
   position: relative
 
-.btn-primary
+.btn
   background-color: #9ccc65
   border-color: #7eb73d
+  color: #fff
 
-.btn-primary:hover
+.btn:hover
   background-color: #7eb73d
   border-color: #649130
 
@@ -57,15 +58,27 @@
 
 .btn.btn-default
   color: #fff
-  background-color: #9ccc65
-  border-color: #7eb73d
+  background-color: #ef5350
+  border-color: #ea1c18
   &:hover, &:focus
     color: #fff
-    background-color: #7eb73d
-    border-color: #649130
+    background-color: #ea1c18
+    border-color: #bd1511
   &:active
-    background-color: #9ccc65
-    border-color: #7eb73d
+    background-color: #ef5350
+    border-color: #ea1c18
+
+.btn.btn-info
+  color: #fff
+  background-color: #26c6da
+  border-color: #1c97a6
+  &:hover, &:focus
+    color: #fff
+    background-color: #1c97a6
+    border-color: #15707b
+  &:active
+    background-color: #26c6da
+    border-color: #1c97a6
 
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus
   background-color: #ef5350
