@@ -16,12 +16,8 @@ $(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
   else
     li.removeClass('forced-opened')
 
-
-
 $(document).on 'click', '.toolbar .nav .dropdown-header li', (e)->
   e.stopPropagation()
-
-
 
 $(document).on 'rails_admin.dom_ready', ->
   active_nav_element = $(".toolbar .nav .active")
@@ -29,3 +25,5 @@ $(document).on 'rails_admin.dom_ready', ->
     _parent = active_nav_element.closest(".dropdown-header:first")
     if _parent.length > 0 and !_parent.hasClass('opened')
       _parent.click()
+
+
