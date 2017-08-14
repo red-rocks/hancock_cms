@@ -3,15 +3,15 @@
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125)
   -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, 0.125)
 
-.btn:focus, .btn:active
-  background-color: #9ccc65
-  border-color: #7eb73d
-
-.btn#remove_filter:focus, .btn#remove_filter:active
+.btn#remove_filter, .btn.btn-remove
   background-color: #ef5350
   border-color: #ea1c18
 
-.btn#remove_filter
+.btn#remove_filter:hover, .btn.btn-remove:hover
+  background-color: #ea1c18
+  border-color: #bd1511
+
+.btn#remove_filter:focus, .btn#remove_filter:active, .btn.btn-remove:focus, .btn.btn-remove:active
   background-color: #ef5350
   border-color: #ea1c18
 
@@ -29,9 +29,9 @@
   background-color: #7eb73d
   border-color: #649130
 
-.btn#remove_filter:hover
-  background-color: #ea1c18
-  border-color: #bd1511
+.btn:focus, .btn:active
+  background-color: #9ccc65
+  border-color: #7eb73d
 
 .btn
   display: inline-block
