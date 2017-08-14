@@ -4,13 +4,16 @@
     .header-box
       h2.title = I18n.t("shared.enter_site")
     = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
-      / = devise_error_messages!
+      - if @enter_site_error
+        p.error.enter_site_error= @enter_site_error
+      / p= resource.errors.inspect
+      / p= devise_error_messages!
 
       .form-group
         / .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
         /= f.input :email, as: :email, autofocus: true, title: I18n.t("shared.email"), label: I18n.t("shared.email"), wrapper_html: {class: "form-control"}
         /= f.label :email, I18n.t("shared.email")
-        = f.input :email, label: false, wrapper_html: {class: "form-control opened"} do
+        = f.input :email, label: false, wrapper_html: {class: "form-control #{"opened" unless resource.email.blank?}".strip} do
           = f.input_field :email, autofocus: true, title: I18n.t("shared.email"), autocomplete: "off"
           = f.label :email, I18n.t("shared.email")
       .form-group
@@ -40,6 +43,6 @@
         = f.submit I18n.t("shared.enter")
 
   .hancock-cms-link
-    = link_to "Hancock v.2.1", "https://github.com/red-rocks/hancock_cms", title: "Hancock", target: "_blank"
+    = link_to "Hancock v.#{Hancock::VERSION}", "https://github.com/red-rocks/hancock_cms", title: "Hancock", target: "_blank"
     span = " © 2016-#{Time.new.year}"
     

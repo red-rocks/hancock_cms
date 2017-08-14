@@ -30,6 +30,7 @@ module Hancock::Errors
         end
         Rails.logger.error "__________________________"
         if !user_signed_in?
+          flash['enter_site_error'] = I18n.t("shared.enter_site_error").freeze
           authenticate_user!
         else
           if rails_admin? and can?(:access, :rails_admin)

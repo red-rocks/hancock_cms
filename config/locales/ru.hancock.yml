@@ -34,3 +34,6 @@ ru:
     enter: Войти
     registration: Зарегистрироваться
     forget_password: Забыли пароль?
+    are_you_robot: "Вы робот?"
+    incorrect_email_or_password: "Неверный e-mail или пароль"
+    enter_site_error: Необходимо авторизоваться
