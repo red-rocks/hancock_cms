@@ -7,9 +7,15 @@ $rails-admin-red-color: #C92B32
 @import 'hancock/rails_admin/blocks/nav_tabs'
 @import 'hancock/rails_admin/robots_txt'
 @import 'hancock/rails_admin/sitemap'
+@import 'hancock/rails_admin/blocks/fieldsets'
 @import 'hancock/rails_admin/blocks/cache'
 @import 'hancock/rails_admin/multiple_upload'
 @import 'hancock/rails_admin/plugins'
+
+//@import 'hancock/rails_admin/fieldsets'
+@import 'hancock/rails_admin/settings'
+@import 'hancock/rails_admin/tables'
+@import 'hancock/rails_admin/hancock_hash'
 
 body
   color: #575757
@@ -49,14 +55,12 @@ a:hover, a:focus
 .float-right
   float: right
 
-@import 'hancock/rails_admin/fieldsets'
-@import 'hancock/rails_admin/settings'
-@import 'hancock/rails_admin/tables'
-@import 'hancock/rails_admin/hancock_hash'
-
 a, a:focus, button, .btn:focus, .btn:active:focus, .btn.active:focus
   outline: none
   outline: 0px
+
+.nav-tabs
+  border-bottom: 0px solid transparent
 
 .well
   min-height: 20px

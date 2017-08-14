@@ -4,6 +4,5 @@
     
 - _template = capture do
   = render partial: field.element_partial, locals: {form: form, field: field, val: field.empty_element_value}
-p
-  = link_to "добавить", "#", class: "array_element_add_link", data: {template: _template.html_safe}
-  
+= link_to "#", class: "array_element_add_link", data: {template: _template.html_safe} do
+  span Добавить

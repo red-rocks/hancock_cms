@@ -65,6 +65,16 @@
 
 .user-panel
   float: right
+  position: relative
+  button#user-dropdown
+    margin-top: 9px
+    margin-right: 9px
+    i
+      margin: 0px 5px
+
+.user-panel.open
+  .fa-angle-down:before
+    content: "\f106"
 
 .current_user
   display: inline-block
@@ -72,9 +82,6 @@
   width: 50px
   height: 50px
   &:hover
-    .user_info
-      +transform(scale(1))
-      +box-shadow(0 10px 10px -10px rgba(0,0,0,0.5))
     .user_icon
       background: #eee
 
@@ -88,25 +95,37 @@
     font-size: 26px
 
 .user_info
-  +transition(all 0.3s)
-  +transform(scale(0))
-  +box-shadow(0 0 0 0 rgba(0,0,0,0.5))
   position: absolute
-  display: block
-  transform-origin: top right
-  right: 0
-  background: #eee
+  z-index: 1000
+  display: none
+  float: left
+  min-width: 10em
+  padding: 8px 0
+  margin: 5px 0 0
+  font-size: 14px
+  color: #575757
+  text-align: left
   list-style: none
-  margin: 0px
-  padding: 7px 10px
-  overflow: hidden
+  background-color: #fff
+  background-clip: padding-box
+  border: 1px solid #eaecee
+  padding-right: 8px
+  padding-left: 8px
+  border-radius: 2px
+  +box-shadow(0 2px 4px rgba(0, 0, 0, 0.025))
+  right: 5px
+  left: auto
   li
-    padding: 7px 15px
     font-size: 14px
     a
-      text-transform: none
-      text-decoration: none
-      +transition(all 0.3s)
+      display: block
+      padding: 3px 20px
+      clear: both
+      font-weight: normal
+      line-height: 1.42857
+      color: #333333
+      white-space: nowrap
+      +transition(all 0.3s ease-in-out)
       &:before
         display: inline-block
         font-family: FontAwesome
@@ -115,17 +134,16 @@
         -moz-osx-font-smoothing: grayscale
         box-sizing: border-box
         margin-right: 7px
-      &:hover
-        color: #ff2b58
-  .user-logout-action
-    border-top: 1px solid rgba(170,170,170,0.5)
-    a
-      &:before
-        content: "\f011"
-  .user-edit-action
-    a
-      &:before
-        content: "\f040"
+      &:hover, &:focus
+        text-decoration: none
+        color: #262626
+        background-color: #f5f5f5
+  .user-logout-action a
+    &:before
+      content: "\f011"
+  .user-edit-action a
+    &:before
+      content: "\f040"
   .user_email
     text-transform: lowercase
     text-align: center

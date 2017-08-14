@@ -5,7 +5,7 @@
 
 #sidebar
   color: #ebebeb
-  background-color: #343a40
+  background-color: #212121
   position: fixed
   top: 0
   bottom: 0
@@ -20,6 +20,7 @@
   +box-shadow(5px 0 10px rgba(0,0,0,.02))
   +transition(width 0.3s ease-in-out)
   .content-header
+    border-bottom: 3px solid #ef5350
     width: 252px
     overflow: hidden
     padding-left: 6px
@@ -27,18 +28,11 @@
 #sidebar.shorted
   .navigation-filter
     width: 36px
-  // &:hover
-  //   width: 100%
-  //   .navigation-filter
-  //     width: 100%
 
 @media all and (min-width: 920px)
   #sidebar
     width: 252px
     +transform(translateX(0) translateY(0) translateZ(0))
-  #sidebar.shorted
-    // &:hover
-    //   width: 252px
 
 .content-header
   display: -ms-flexbox
@@ -51,13 +45,13 @@
   align-items: center
   margin: 0 auto
   padding: 10px 18px
-  height: 50px
+  height: 53px
   a
     max-width: 100%
   a.admin-title
     position: relative
     display: block
-    // margin: 0 auto
+    //margin: 0 auto
     left: 50%
     margin-left: -25%
     transition: all 0.3s ease-in-out
@@ -73,22 +67,35 @@
   overflow: hidden
   +transition(width 0.3s ease-in-out)
   input
-    background: rgba(0,0,0,0.1)
+    background: darken(#414141, 10%)
     width: 100%
     padding: 5px 30px 5px 10px
     line-height: 20px
     border: 0px
     +transition(background 0.3s ease-in-out)
     &:hover
-      background: rgba(0,0,0,0.15)
+      background: #414141
     &:focus
       border: 0px
       outline-offset: 0px
       outline: 0px
-      background: rgba(0,0,0,0.25)
+      background: rgba(255,255,255,0.85)
+      color: #575757
+      &::-webkit-input-placeholder
+        color: #575757
+        opacity: 0.75
+      &::-moz-placeholder
+        color: #575757
+        opacity: 0.75
+      &:-moz-placeholder
+        color: #575757
+        opacity: 0.75
+      &:-ms-input-placeholder
+        color: #575757
+        opacity: 0.75
   span
     display: inline-block
-    background: rgba(0, 0, 0, 0.1)
+    background: darken(#414141, 15%)
     vertical-align: top
     margin-left: -30px
     height: 30px
@@ -110,7 +117,7 @@
   z-index: 1400
   width: 252px
   height: 50px
-  background: #2d3238
+  background: darken(#414141, 10%)
   text-align: center
   ul
     list-style: none
@@ -134,9 +141,6 @@
             width: 144px
             max-width: none
     ~ .navbar
-      //   padding-left: 38px
-      // ~ #main-container, #page-footer
-      //   margin-left: -182px
       padding-left: 36px
       .toggle-sidebar:before
         font-size: 0px
@@ -166,28 +170,14 @@
     &:active
       background: rgba(0,0,0,0.3)
 
-// TODO: fix focused filter field; now it`s ugly but remarkable
-#navigation_filter
-  &:focus
-    background-color: #C92B32
-    &::-webkit-input-placeholder
-      color: white
-    &::-moz-placeholder
-      color: white
-    &:-moz-placeholder
-      color: white
-    &:-ms-input-placeholder
-      color: white
-
-
 .toolbar
   max-height: 100%
   height: 100%
   display: block
   width: 100%
   overflow: auto
-  margin-top: -80px
-  padding-top: 80px
+  margin-top: -83px
+  padding-top: 83px
   margin-bottom: -50px
   padding-bottom: 50px
   .toolbar-wrapper
@@ -205,8 +195,7 @@
     padding: 10px 18px 10px 40px
     font-size: 12px
     line-height: 16px
-    font-weight: 600
-    color: rgba(234,236,238,.6)
+    color: #c1c1c1
     text-transform: uppercase
     +transition(all 0.3s ease-in-out)
     text-align: left
@@ -227,13 +216,13 @@
       content: "\f104"
       right: 0px
     &:hover
-      color: rgba(234,236,238,1)
-      background: rgba(0,0,0,0.1)
+      color: #ffffff
+      background: #4b4b4b
   li.dropdown-header.opened > span
     &:after
       content: "\f103"
   li.dropdown-header.opened
-    background-color: rgba(0,0,0,0.2)
+    background-color: rgba(0,0,0,0.33)
   li.dropdown-header
     ul
       height: 0px
@@ -260,19 +249,26 @@
       padding-left: 86px
     li > a:hover
       color: rgba(234,236,238,1)
-      background: rgba(0,0,0,0.1)
-    // TODO: fix active menu item; for visible difference from selected one
+      background: #4b4b4b
     li.active > a
-      color: #C92B32
-      background: rgba(0,0,0,0.1)
+      color: #fff
+      background: #4b4b4b
       cursor: default
       pointer-events: none
-      // border-bottom: 1px solid #C92B32
-      text-decoration: underline
-
+    li > a > i[class=""]
+      display: inline-block
+      font: normal normal normal 14px/1 FontAwesome
+      font-size: inherit
+      text-rendering: auto
+      -webkit-font-smoothing: antialiased
+      -moz-osx-font-smoothing: grayscale
+      width: 12px
+      text-align: center
+      &:before
+        content: "\f0da"
     &.current_selected > span, li.current_selected > a
-      color: #C92B32
-      background: rgba(0,0,0,0.1)
+      color: #fff
+      background: #4b4b4b
     ul > li
       opacity: 0
       +transition(all .2s cubic-bezier(.25,.46,.45,.94))

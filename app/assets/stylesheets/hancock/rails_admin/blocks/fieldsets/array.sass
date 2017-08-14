@@ -1,0 +1,84 @@
+.array_element_add_link
+  font-size: 14px
+  margin-top: 10px
+  +border-radius(3px)
+  padding: 6px 10px
+  line-height: 18px
+  border: 1px solid
+  color: #fff
+  background-color: #9ccc65
+  border-color: #7eb73d
+  display: inline-block
+  vertical-align: top
+  position: relative
+  +transition(all 0.3s ease-in-out)
+  text-transform: capitalize
+  text-decoration: none
+  &:hover, &:focus
+    background-color: #7eb73d
+    border-color: #649130
+    color: #fff
+  &:active
+    background-color: #9ccc65
+    border-color: #7eb73d
+    color: #fff
+  span:before
+    content: "\f067"
+    font-family: FontAwesome
+    line-height: 18px
+    font-size: 14px
+    color: #ffffff
+    display: inline-block
+    vertical-align: top
+    position: relative
+    margin-right: 5px
+
+.array_element_block
+  input
+    margin: 0px 0px 4px
+    display: inline-block
+    vertical-align: top
+    width: auto
+    height: auto
+    padding: 5px 12px
+    font-size: 13px
+    line-height: 1.42857
+    color: #555555
+    background-color: #fff
+    background-image: none
+    border: 1px solid #ccc
+    +border-radius(3px)
+    +box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075))
+    +transition(border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s)
+  input:focus
+    border-color: #66afe9
+    outline: 0
+    +box-shadow(inset 0 0px 0px rgba(0, 0, 0, 0.0), 0 0 0px rgba(102, 175, 233, 0.0))
+  .sorting
+    display: inline-block
+    vertical-align: top
+    height: 30px
+    width: 30px
+    .array_element_move_link
+      display: block
+      width: 30px
+      text-align: center
+      height: 15px
+      padding: 0px
+      margin: 0
+      +border-radius(0px)
+      font-size: 13px
+      line-height: 15px
+    .array_element_move_link.up
+      border-top-right-radius: 3px
+      -webkit-border-top-right-radius: 3px
+    .array_element_move_link.down
+      border-bottom-right-radius: 3px
+      -webkit-border-bottom-right-radius: 3px
+  .array_element_delete_link
+    display: inline-block
+    vertical-align: top
+    height: 30px
+    margin-left: -2px
+    z-index: 2
+    +border-radius(0px)
