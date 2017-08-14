@@ -1,5 +1,35 @@
+body.rails_admin
+  .form-horizontal.denser.dropzone
+    min-height: 200px
+    background-color: #fbfbfc
+    border: 2px dotted #dcdfe3
+    +border-radius(3px)
+    +transition(all 0.3s ease-in-out)
+    margin-top: 25px
+    margin-bottom: 0px
+    margin-left: 10px
+    margin-right: 10px
+    &:hover
+      background-color: #fff
+      border-color: #42a5f5
+      span
+        color: #42a5f5
+    .dz-message
+      margin: 65px 0
+      font-size: 14px
+      font-style: italic
+      font-weight: 400
+      color: #575757
+      span
+        +transition(all 0.3s ease-in-out)
+
 .rails_admin_multiple_file_upload_block
-  margin-top: 25px
+  .tab-content
+    margin-top: 0px
+    padding: 0px 15px
+    background: #ffffff
+    margin-bottom: 24px
+    box-shadow: 0 1px rgba(0, 0, 0, 0.03)
   .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus
     color: #ccc
     background-color: #eee
@@ -85,3 +115,6 @@
 .rails_admin_multiple_file_upload_collection
   .dropzone .dz-preview .dz-image
     +border-radius(10px)
+
+#rails_admin_multiple_upload_collection_hancock_gallery_images_image_button
+  margin-bottom: 15px
