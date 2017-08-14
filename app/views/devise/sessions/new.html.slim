@@ -5,7 +5,7 @@
       h2.title = I18n.t("shared.enter_site")
     = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
       - if @enter_site_error
-        p.error= @enter_site_error
+        p.error.enter_site_error= @enter_site_error
       / p= resource.errors.inspect
       / p= devise_error_messages!
 
