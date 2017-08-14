@@ -1,4 +1,5 @@
 @import 'hancock/rails_admin/blocks/fieldsets/array'
+@import 'hancock/rails_admin/blocks/fieldsets/gallery'
 @import 'hancock/rails_admin/blocks/fieldsets/multiselect'
 
 .leftside_hider
@@ -8,14 +9,14 @@
   margin-bottom: 24px
   background-color: #fff
   box-shadow: 0 1px rgba(0, 0, 0, 0.03)
-  padding: 20px
+  padding: 20px 20px 20px 70px
   .form-actions
     margin-top: 25px
   .form-group
     margin-left: 0px
     margin-right: 0px
     margin-bottom: 0px
-    padding-left: 50px
+    padding-left: 0px
     padding-top: 3px
     padding-bottom: 3px
     label
@@ -55,6 +56,12 @@
         color: #737373
         font-size: 12px
   .boolean_type
+    position: relative
+    padding-left: 0px
+    padding-top: 10px
+    padding-bottom: 10px
+    vertical-align: top
+    margin: 0 3px 0 0
     .controls
       display: inline-block
       vertical-align: top
@@ -64,12 +71,6 @@
       cursor: pointer
       position: relative
       line-height: 21px
-    position: relative
-    padding-left: 50px
-    padding-top: 10px
-    padding-bottom: 10px
-    vertical-align: top
-    margin: 0 3px 0 0
     .controls > span
       width: 36px
       height: 20px
