@@ -1,7 +1,8 @@
 $(document).on "click", ".hancock_array_type .array_element_add_link", (e)->
   e.preventDefault()
   link = $(e.currentTarget)
-  link_parent = link.parent()
+  # link_parent = link.parent()
+  link_parent = link#.parent()
   link_parent.before(link.data('template'))
   link_parent.prev().find('input:first').focus().select().trigger('change')
   return false
@@ -18,7 +19,8 @@ $(document).on 'click', '.hancock_array_type .array_element_delete_link', (e)->
 $(document).on 'click', '.hancock_array_type .array_element_move_link', (e)->
   e.preventDefault()
   link = $(e.currentTarget)
-  array_element_block = link.parent()
+  # array_element_block = link.parent()
+  array_element_block = link.parent().parent()
   if link.hasClass("up")
     prev = array_element_block.prev(".array_element_block")
     array_element_block.insertBefore(prev) if prev.length > 0

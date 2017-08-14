@@ -1,10 +1,8 @@
 = form.hidden_field field.method_name, value: "", multiple: true
 - (field.value || []).each do |val|
-  = render partial: 'rails_admin/main/hancock_array/element', locals: {form: form, field: field, val: val}
+  = render partial: field.element_partial, locals: {form: form, field: field, val: val}
     
 - _template = capture do
-  = render partial: 'rails_admin/main/hancock_array/element', locals: {form: form, field: field, val: ""}
-
+  = render partial: field.element_partial, locals: {form: form, field: field, val: field.empty_element_value}
 = link_to "#", class: "array_element_add_link", data: {template: _template.html_safe} do
   span Добавить
-

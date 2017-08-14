@@ -12,11 +12,11 @@
 
 - when :fixed_keys
   - (field.value || {}).each_pair do |name, val|
-    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
+    = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
       
   - _template = capture do
-    - name, val = "new", ""
-    = render partial: 'rails_admin/main/hancock_hash/fixed_keys', locals: {form: form, field: field, name: name, val: val}
+    - name, val = "new", field.empty_element_value
+    = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
     / = " | "
@@ -25,11 +25,11 @@
       
 - when :full
   - (field.value || {}).each_pair do |name, val|
-    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
+    = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
       
   - _template = capture do
-    - name, val = "new", ""
-    = render partial: 'rails_admin/main/hancock_hash/full', locals: {form: form, field: field, name: name, val: val}
+    - name, val = "new", field.empty_element_value
+    = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
   p
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
     / = " | "

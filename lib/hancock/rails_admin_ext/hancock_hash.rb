@@ -43,6 +43,28 @@ module RailsAdmin
           end
 
 
+
+          register_instance_option :element_partial do
+            "rails_admin/main/hancock_hash/#{partial_name}".freeze if partial_name
+          end
+
+          register_instance_option :partial_name do
+            case editor_type.to_sym
+            when :default, :standard, :main, :text, :text_area, :textarea, :string
+              nil
+            when :fixed_keys
+              'fixed_keys'.freeze
+            when :full
+              'full'.freeze
+            end
+
+          end
+
+          register_instance_option :empty_element_value do
+            ''.freeze
+          end
+
+
           ############ localize ######################
           register_instance_option :translations_field do
             case editor_type
