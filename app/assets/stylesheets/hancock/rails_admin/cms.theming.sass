@@ -126,6 +126,59 @@ a, a:focus, button, .btn:focus, .btn:active:focus, .btn.active:focus
 .well .btn-info
   display: none
 
+body.rails_admin .modal .modal-dialog
+  width: 780px !important
+
+#modal
+  position: fixed
+  left: 0px
+  top: 0px
+  width: 100vw
+  height: 100vh
+  background: rgba(22, 22, 22, 0.85)
+  z-index: 9999
+  display: none
+  +transition(opacity 0.3s ease-out)
+  .modal-header
+    padding: 15px 25px
+    border-bottom: 0px solid #e5e5e5
+    h3
+      font-size: 18px
+      line-height: 24px
+      margin: 0px
+  .modal-body
+    padding: 0px 15px
+  .modal-footer
+    padding: 15px 25px
+    border-top: 0px solid #e5e5e5
+  .form-horizontal
+    margin-bottom: 0px
+    background-color: #fff
+    +box-shadow(none)
+    padding: 10px
+  .jcrop-holder
+    border: 0px
+  .jcrop-holder, .jcrop-subject
+    max-width: 720px !important
+    max-height: 640px !important
+    max-height: 75vh !important
+
+.modal .modal-dialog
+  position: absolute
+  left: 50%
+  top: 50%
+  margin: 0px auto
+
+.modal.in .modal-dialog
+  +transform(translate3d(-50%, -50%, 0))
+  opacity: 0
+  +transition(opacity 0.3s ease-in-out)
+
+.modal.fade .modal-dialog
+  opacity: 1
+  +transform(translate3d(-50%, -50%, 0))
+  +transition(opacity 0.3s ease-in-out)
+
 //
 //html, body.rails_admin
 //  padding: 0
