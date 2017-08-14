@@ -1,5 +1,7 @@
 #= require_self
 
+#= require ./custom_checkboxes
+
 #= require jquery.sticky-kit.js
 
 #= require ./form_controls_fixed
