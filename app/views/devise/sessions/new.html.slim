@@ -4,7 +4,10 @@
     .header-box
       h2.title = I18n.t("shared.enter_site")
     = simple_form_for(resource, as: resource_name, url: user_session_path) do |f|
-      / = devise_error_messages!
+      - if @enter_site_error
+        p.error= @enter_site_error
+      / p= resource.errors.inspect
+      / p= devise_error_messages!
 
       .form-group
         / .form-control = f.email_field :email, autofocus: true, title: I18n.t("shared.email"), placeholder: I18n.t("shared.email")
