@@ -13,12 +13,13 @@
 .breadcrumbs
   = breadcrumb
 
-- flash && flash.each do |key, value|
-  .alert.alert-dismissible{class: flash_alert_class(key)}
-    %button.close{type: 'button', :'data-dismiss' => "alert"} &times;
-    = value
-
 %ul.nav.nav-tabs.filter
   = content_for :contextual_tabs
 
 = yield
+
+.alerts
+  - flash && flash.each do |key, value|
+    .alert.alert-dismissible{class: flash_alert_class(key)}
+      %button.close{type: 'button', :'data-dismiss' => "alert"} &times;
+      = value
