@@ -1,0 +1,128 @@
+#rails_admin_model_accesses, #rails_admin_user_abilities
+  .nav > li > a
+    +border-radius(3px)
+    color: #fff
+    background-color: #42a5f5
+    border-color: #0d89ed
+    border: 1px solid
+    text-decoration: none
+    +transition(all 0.3s ease-in-out)
+    text-align: center
+    padding: 6px 10px
+    &:active, &:focus
+      background-color: #42a5f5
+      border-color: #0d89ed
+      color: #fff
+    &:hover
+      background-color: #0d89ed
+      border-color: #0a6dbd
+      color: #fff
+  .nav > li.active > a
+    background-color: #9ccc65
+    border-color: #7eb73d
+    color: #fff
+    pointer-events: none
+    cursor: default
+    &:active, &:focus, &:hover
+      background-color: #9ccc65
+      border-color: #7eb73d
+      color: #fff
+  .controls
+    label
+      +transition(all 0.3s ease-in-out)
+      cursor: pointer
+    input[type="checkbox"]
+      vertical-align: top
+      margin: 0px 5px 0px 0px
+    label
+      font-size: 15px
+      font-weight: normal
+      line-height: 21px
+      vertical-align: top
+    span:not(.message)
+      width: 36px
+      height: 20px
+      background-color: #eee
+      border-radius: 30px
+      transition: background-color .3s
+      position: relative
+      display: inline-block
+      vertical-align: middle
+      margin-top: -2px
+      margin-right: 10px
+      &:after
+        top: 2px
+        bottom: 2px
+        left: 2px
+        width: 16px
+        background-color: #fff
+        border-radius: 50%
+        +box-shadow(1px 0 3px rgba(0,0,0,.1))
+        +transition(transform .15s ease-out)
+        +transform(translateX(0px))
+        position: absolute
+        content: ''
+    input[type="checkbox"]:checked+span:not(.message)
+      background-color: #42a5f5
+      &:after
+        +transform(translateX(15px))
+    input[type="checkbox"]:hover+span
+      background-color: darken(#eeeeee, 5%)
+    input[type="checkbox"]:checked:hover+span:not(.message)
+      background-color: lighten(#42a5f5, 10%)
+    input.custom_checkbox
+      margin-right: -36px
+      position: relative
+      z-index: 2
+      cursor: pointer
+      opacity: 0
+      width: 36px
+    input
+      height: 21px
+      width: 21px
+      margin: 0
+      padding: 0
+      display: inline-block
+      vertical-align: top
+      margin-left: 10px
+    span.message
+      margin-left: 10px
+
+#rails_admin_user_abilities_wrapper, #rails_admin_model_accesses
+  button
+    background-color: #9ccc65
+    border-color: #7eb73d
+    color: #fff
+    +border-radius(3px)
+    border: 1px solid
+    display: inline-block
+    padding: 5px 20px
+    +transition(all 0.3s ease-in-out)
+  button:hover
+    background-color: #7eb73d
+    border-color: #649130
+    color: #fff
+  button:active, button:focus
+    background-color: #9ccc65
+    border-color: #7eb73d
+    color: #fff
+
+  .collapse, .collapsing
+    border-radius: 3px
+    border: 1px solid
+    padding: 10px 20px
+    margin-top: 25px
+    -webkit-rtl-ordering: logical
+    user-select: text
+    flex-direction: column
+    white-space: pre-wrap
+    word-wrap: break-word
+    border-color: #ccc
+    border-image: initial
+    min-height: 100px
+    background: #fafafa
+    opacity: 1
+    resize: auto
+    width: 100%
+    max-width: 100%
+    +transition(all 0.3s ease-in-out)
