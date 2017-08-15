@@ -3,6 +3,7 @@
 @import 'hancock/rails_admin/blocks/fieldsets/multiselect'
 @import 'hancock/rails_admin/blocks/fieldsets/hancock_html'
 @import 'hancock/rails_admin/blocks/fieldsets/insertions'
+@import 'hancock/rails_admin/blocks/fieldsets/hash_element'
 
 .leftside_hider
   display: none !important
@@ -257,3 +258,36 @@ body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields
     padding: 0
     line-height: 30px
     margin: 0px
+
+.help-block
+  a
+    margin: 2px 0px
+    color: #0965ae
+    background-color: #d3eafd
+    border-color: #d3eafd
+    display: inline-block
+    text-align: center
+    white-space: nowrap
+    vertical-align: middle
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    border: 1px solid #d3eafd
+    padding: 6px 14px
+    font-size: 14px
+    line-height: 16px
+    +border-radius(0.25rem)
+    +transition(all 0.2s ease-in-out)
+    text-transform: capitalize
+    &:hover
+      color: #0965ae
+      background-color: #a3d3fa
+      border-color: #a3d3fa
+    &:focus, &:active
+      color: #0965ae
+      background-color: #d3eafd
+      border-color: #d3eafd
+
+.CodeMirror
+  +border-radius(3px)
