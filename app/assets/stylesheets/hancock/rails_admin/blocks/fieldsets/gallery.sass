@@ -1,8 +1,18 @@
 .form-horizontal
   .control-group.hancock_image_type
     .crop-btn
+      position: absolute
       left: 10px
-      right: auto
+      top: 10px
+      background: rgba(0,0,0,0.66)
+      color: #fff
+      border: 0px
+      border-radius: 3px
+      font-size: 18px
+      padding: 5px 10px
+      +transition(all 0.3s ease-in-out)
+      &:hover
+        background: #ef5350
     .controls
       padding: 10px
       +border-radius(3px)
@@ -14,7 +24,7 @@
       text-align: left
       .img-thumbnail
         max-height: 200px
-    .autocrop-lable
+    .perform-label
       margin-top: 10px
       margin-bottom: 10px
       line-height: 21px
@@ -25,7 +35,7 @@
         vertical-align: top
       input[type="checkbox"]
         margin-left: 10px
-    .autocrop-lable > span
+    .perform-lable > span
       width: 36px
       height: 20px
       background-color: #eee
