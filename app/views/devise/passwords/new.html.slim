@@ -1,4 +1,4 @@
-.device-background
+.devise-background
 .devise-box
   .white-box
     .header-box
@@ -10,8 +10,10 @@
       .form-group
         / = f.label :email
         / .form-control = f.email_field :email, autofocus: true, placeholder: I18n.t("shared.email")
-        = f.input :email, as: :email, autocomplete: 'off', title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
-
+        /= f.input :email, as: :email, autocomplete: 'off', title: I18n.t("shared.email"), placeholder: I18n.t("shared.email"), label: false, wrapper_html: {class: "form-control"}
+        = f.input :email, label: false, wrapper_html: {class: "form-control #{"opened" unless resource.email.blank?}".strip} do
+          = f.input_field :email, autofocus: true, title: I18n.t("shared.email"), autocomplete: "off"
+          = f.label :email, I18n.t("shared.email")
       
       .form-group.links
         .link-to-recover.center

@@ -1,4 +1,4 @@
-.device-background
+.devise-background
 .devise-box
   .white-box
     .header-box
@@ -14,13 +14,18 @@
         - if @minimum_password_length
           em= " (Минимум символов: #{@minimum_password_length})".freeze
         / .form-control = f.password_field :password, label: I18n.t("shared.password"), autocomplete: "off", placeholder: I18n.t("shared.password")
-        = f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
-      
+        /= f.input :password, as: :password, autocomplete: 'off', title: I18n.t("shared.password"), placeholder: I18n.t("shared.password"), label: false, wrapper_html: {class: "form-control"}
+        = f.input :password, label: false, wrapper_html: {class: "form-control"} do
+          = f.input_field :password, autofocus: true, title: I18n.t("shared.password"), autocomplete: "off"
+          = f.label :password, I18n.t("shared.password")
+
       .form-group
         / = f.label :password_confirmation
         / .form-control = f.password_field :password_confirmation, label: I18n.t("shared.password_confirmation"), autocomplete: "off", placeholder: I18n.t("shared.password_confirmation")
-        = f.input :password_confirmation, as: :password, autocomplete: 'off', title: I18n.t("shared.password_confirmation"), placeholder: I18n.t("shared.password_confirmation"), label: false, wrapper_html: {class: "form-control"}
-    
+        /= f.input :password_confirmation, as: :password, autocomplete: 'off', title: I18n.t("shared.password_confirmation"), placeholder: I18n.t("shared.password_confirmation"), label: false, wrapper_html: {class: "form-control"}
+        = f.input :password_confirmation, label: false, wrapper_html: {class: "form-control"} do
+          = f.input_field :password_confirmation, autofocus: true, title: I18n.t("shared.password_confirmation"), autocomplete: "off"
+          = f.label :password_confirmation, I18n.t("shared.password_confirmation")
         
       .form-group.links
         .link-to-recover.center
