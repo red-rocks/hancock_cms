@@ -291,3 +291,117 @@ body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields
 
 .CodeMirror
   +border-radius(3px)
+
+fieldset.default.hover, fieldset.default_fieldset
+  > .leftside_hider
+    opacity: 0
+
+fieldset.hover
+  > .leftside_hider
+    opacity: 1.0
+
+fieldset
+  +transition(all 0.3s)
+  position: relative
+  > .leftside_hider
+    overflow: hidden
+    width: 30px
+    position: absolute
+    top: 30px
+    bottom: 0px
+    background: rgba(100,100,100,0.05)
+    cursor: pointer
+    padding: 10px 0px
+    z-index: 9
+    opacity: 0
+    +transition(background 0.3s, opacity 0.2s)
+    &:hover
+      background: rgba(100,100,100,0.1)
+    &:active
+      background: rgba(100,100,100,0.075)
+  .scroll_fieldset_block
+    overflow: visible
+    position: absolute
+    width: 20px
+    top: 10px
+    margin-left: 5px
+    opacity: 0.75
+    cursor: pointer
+    z-index: 10
+    +transition(scale 0.3s, opacity 0.3s)
+    +transform(scale(0))
+    transform-origin: top center
+    -webkit-transform-origin: top left
+    -o-transform-origin: top left
+    -moz-transform-origin: top left
+    padding: 0px
+    &:hover
+      opacity: 1.0
+    > *
+      height: 20px
+      width: 20px
+      +border-radius(3px)
+      margin: 2px 0px
+      z-index: 11
+      display: flex
+      align-items: center
+      justify-content: center
+      background-color: #e53935
+      +transition(all 0.3s)
+      color: #fff
+      &:hover
+        background-color: #c73800
+        opacity: 1
+      &:active
+        background-color: #e53935
+        opacity: 1
+
+    .links-list
+      width: auto
+      display: inline-flex
+      background: #fff
+      border: 1px solid #e3e3e3
+      +border-radius(4px)
+      +box-shadow(0px 5px 10px -5px rgba(0, 0, 0, 0.5))
+      padding: 3px
+
+    .select_fieldset
+      +transition(all 0.3s)
+      overflow: visible
+      a, span
+        background-color: #e53935
+        display: inline-block
+        text-align: center
+        width: 30px
+        height: 30px
+        margin-right: 3px
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        color: #ffffff
+        padding: 0px 3px
+        font-size: 10px
+        line-height: 30px
+        text-decoration: none
+        +transition(all 0.3s)
+        +border-radius(3px)
+        &:hover
+          background-color: #c73800
+          opacity: 1
+      &:last-child
+        margin-right: 0px
+      span
+        background-color: lightblue
+        cursor: auto
+        color: black
+        &:hover
+          background-color: lightblue
+          opacity: 1
+
+fieldset.opened, fieldset.default_fieldset
+  .scroll_fieldset_block
+    +transform(scale(1))
+
+fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active
+  background-color: #ef3b36
+  border-color: #e53a36
