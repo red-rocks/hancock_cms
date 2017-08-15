@@ -2,6 +2,7 @@
 @import 'hancock/rails_admin/blocks/fieldsets/gallery'
 @import 'hancock/rails_admin/blocks/fieldsets/multiselect'
 @import 'hancock/rails_admin/blocks/fieldsets/hancock_html'
+@import 'hancock/rails_admin/blocks/fieldsets/insertions'
 
 .leftside_hider
   display: none !important
@@ -10,14 +11,15 @@
   margin-bottom: 24px
   background-color: #fff
   box-shadow: 0 1px rgba(0, 0, 0, 0.03)
-  padding: 20px 20px 20px 70px
+  padding: 20px 20px 20px 20px
   .form-actions
     margin-top: 25px
   .form-group
     margin-left: 0px
     margin-right: 0px
     margin-bottom: 0px
-    padding-left: 0px
+    padding-left: 50px
+    padding-right: 20px
     padding-top: 3px
     padding-bottom: 3px
     label
@@ -58,7 +60,7 @@
         font-size: 12px
   .boolean_type
     position: relative
-    padding-left: 0px
+    padding-left: 50px
     padding-top: 10px
     padding-bottom: 10px
     vertical-align: top
@@ -140,12 +142,13 @@ body.rails_admin .form-horizontal.denser
   fieldset.default_fieldset
     padding-top: 15px
     padding-bottom: 15px
+    background: transparent
   fieldset
+    background: #fafafa
     .form-group:last-child
       padding-bottom: 15px
-  fieldset.opened
-    legend
-      margin-bottom: 15px
+  fieldset.opened > legend
+    margin-bottom: 15px
   .filtering-select
     input
       margin-right: -2px
@@ -171,3 +174,85 @@ body.rails_admin .form-horizontal.denser
   width: auto
   padding-left: 0px
   padding-right: 0px
+
+body.rails_admin
+  label.input-group-addon
+    display: inline-block
+    vertical-align: top
+    margin: 0
+    padding: 0
+    height: 30px
+    width: 30px
+    margin-left: -2px
+    text-align: center
+    border: 1px solid
+    position: relative
+    z-index: 2
+    color: #fff
+    background-color: #26c6da
+    border-color: #1c97a6
+    +transition(all 0.3s ease-in-out)
+    &:hover, &:focus
+      background-color: #1c97a6
+      border-color: #15707b
+    &:active
+      background-color: #26c6da
+      border-color: #1c97a6
+    i
+      line-height: 30px
+  .form-inline .input-group .input-group-addon
+    width: 30px
+
+body.rails_admin .form-horizontal .tab-content .tab-pane
+  position: relative
+  border-left: 0px
+  padding: 20px 20px 20px 50px
+  background: #ffffff
+  box-shadow: 0 1px rgba(0, 0, 0, 0.03)
+  .form-group
+    margin-left: 0px
+  fieldset
+    padding-top: 0px
+
+body.rails_admin .form-horizontal.denser .has_many_association_type
+  .btn-group
+    a.btn.btn-info.toggler
+      width: 32px
+      text-align: center
+      padding-left: 0px
+      padding-right: 0px
+      cursor: pointer
+  .controls .nav
+    margin: 0px
+    background: #fbfbfc
+    li
+      margin-bottom: -2px
+    li.active
+      background: #ffffff
+    li.active > a
+      pointer-events: none
+    li > a
+      border: 0px
+      +border-radius(0px)
+      margin-right: 0px
+      text-decoration: none
+      +transition(all 0.3s ease-in-out)
+      color: #333
+      &:hover
+        background: rgba(0,0,0,0.05)
+        color: #333
+
+body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields, body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_one_fields
+  display: block
+  opacity: 1
+  position: absolute
+  top: 10px
+  left: 10px
+  +transition(all .15s ease)
+  span
+    width: 30px
+    height: 30px
+    text-align: center
+    padding: 0
+    line-height: 30px
+    margin: 0px
