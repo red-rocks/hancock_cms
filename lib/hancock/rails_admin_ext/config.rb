@@ -158,3 +158,5 @@ module Hancock
 
   end
 end
+
+RailsAdmin::Config.total_columns_width = 570
