@@ -405,3 +405,49 @@ fieldset.opened, fieldset.default_fieldset
 fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active
   background-color: #ef3b36
   border-color: #e53a36
+
+.admin-wrapper
+  .content > .fieldset
+    background-color: #fff
+    box-shadow: 0 1px rgba(0, 0, 0, 0.03)
+    padding: 10px 25px
+    margin-bottom: 25px
+    dt > span.label-info
+      background: transparent
+      color: #333
+    dd
+      margin-bottom: 25px
+      width: auto
+      display: inline-block
+      padding: 10px
+      +border-radius(3px)
+      box-shadow: 0 1px rgba(0, 0, 0, 0.03)
+      border: 1px solid #ccc
+      span.label
+        width: 36px
+        height: 20px
+        border-radius: 30px
+        transition: background-color 0.3s
+        position: relative
+        display: inline-block
+        vertical-align: middle
+        margin-top: -2px
+        font-size: 0
+        &:after
+          top: 2px
+          bottom: 2px
+          left: 2px
+          width: 16px
+          background-color: #fff
+          +border-radius(50%)
+          +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+          +transition(transform 0.15s ease-out)
+          +transform(translateX(0px))
+          position: absolute
+          content: ""
+      span.label.label-danger
+        background-color: #eee
+      span.label.label-success
+        background-color: #42a5f5
+        &:after
+          +transform(translateX(15px))
