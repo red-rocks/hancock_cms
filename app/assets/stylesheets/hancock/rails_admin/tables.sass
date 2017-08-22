@@ -155,3 +155,31 @@ body.rails_admin .table
     padding-bottom: 5px
   .hancock_hash_type
     max-width: 120px
+  a.toggle-btn.label-danger, a.toggle-btn.label-success
+    width: 36px
+    height: 20px
+    border-radius: 30px
+    transition: background-color 0.3s
+    position: relative
+    display: inline-block
+    vertical-align: middle
+    margin-top: -2px
+    font-size: 0
+    &:after
+      top: 2px
+      bottom: 2px
+      left: 2px
+      width: 16px
+      background-color: #fff
+      +border-radius(50%)
+      +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+      +transition(transform 0.15s ease-out)
+      +transform(translateX(0px))
+      position: absolute
+      content: ""
+  a.toggle-btn.label-danger
+    background-color: #eee
+  a.toggle-btn.label-success
+    background-color: #42a5f5
+    &:after
+      +transform(translateX(15px))
