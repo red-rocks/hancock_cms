@@ -1,6 +1,14 @@
 module Hancock::InsertionField
   extend ActiveSupport::Concern
 
+  REGEXP = {
+    old_insertion:    /\{\{(?<old_insertion>self\.(?<old_insertion_name>\w+?))\}\}/i,
+    new_insertion:    /\{\{\{\{(?<new_insertion>(?<new_insertion_name>\w+?))\}\}\}\}/i,
+    insertion:        /(\{\{(?<insertion>self\.(?<insertion_name>\w+?))\}\}|\{\{\{\{(?<insertion>(?<insertion_name>\w+?))\}\}\}\})/i,
+    settings:         /\{\{(?<setting>(?<setting_name>\w+?))\}\}/i,
+    settings_with_ns: /\{\{(?<setting_with_ns>(?<setting_with_ns_ns>[\w\-\.]+?)\.(?<setting_with_ns_name>\w+?))\}\}/i
+  }
+
   included do
     class_attribute :added_insertions, :removed_insertions, :insertions_fields
     self.removed_insertions ||= []
@@ -33,14 +41,45 @@ module Hancock::InsertionField
           end
         end
         # {{self.%insertion%}}
-        _ret = _data.gsub(/\{\{self\.(.*?)\}\}/) do
-          get_insertion($1)
-        # {{"some_text"}} #temporary disabled - need tests
-        # end.gsub(/\{\{(['"])(.*?)(\1)\}\}/) do
-        #   $2
-        # {{%ns%.%key%}}
-        end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/) do
-          (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
+        # _ret = _data.gsub(/\{\{self\.(.*?)\}\}/i) do
+        #   get_insertion($1)
+        # # {{"some_text"}} #temporary disabled - need tests
+        # # end.gsub(/\{\{(['"])(.*?)(\1)\}\}/) do
+        # #   $2
+        # # {{%ns%.%key%}}
+        # end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/i) do
+        #   (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
+        # end
+        _ret = _data.gsub(REGEXP[:old_insertion]) do
+          get_insertion($~[:old_insertion_name]) rescue ""
+
+        end.gsub(REGEXP[:new_insertion]) do
+          get_insertion($~[:new_insertion_name]) rescue ""
+
+        end.gsub(REGEXP[:settings]) do
+          if defined?(Settings)
+            name = $~[:setting_name]
+            if !name.blank?
+              Settings.ns(ns).get(name) rescue ""
+            else
+              ""
+            end
+          end
+
+        end.gsub(REGEXP[:settings_with_ns]) do
+          if defined?(Settings)
+            ns = $~[:setting_with_ns_ns]
+            name = $~[:setting_with_ns_name]
+            if ns != "self" and !name.blank?
+              Settings.ns(ns).get(name) rescue ""
+            else
+              ""
+            end
+          end
+        # end.gsub(/\{\{(?<old_helper>HELPER\|(?<old_helper_name>\w+?))\}\}/i) do
+        #   ActionView::Base.send($~[:old_helper_name]) rescue ""
+        # end.gsub(/\[\[\[\[(?<new_helper>(?<new_helper_name>\w+?))\]\]\]\]/i) do
+        #   ActionView::Base.send($~[:new_helper_name]) rescue ""
         end
         _ret
       end

@@ -100,9 +100,26 @@ module Hancock
             searchable true
             weight 7
           end
+          field :raw_data do
+            weight 8
+            pretty_value do
+              if bindings[:object].file_kind?
+                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
+              elsif bindings[:object].image_kind?
+                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe.freeze
+              elsif bindings[:object].array_kind?
+                (bindings[:object].raw_array || []).join("<br>").html_safe
+              elsif bindings[:object].hash_kind?
+                "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
+              else
+                value
+              end
+            end
+          end
           field :raw do
             weight 8
             searchable true
+            visible false
             pretty_value do
               if bindings[:object].file_kind?
                 "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
@@ -116,6 +133,7 @@ module Hancock
           field :raw_array do
             weight 9
             searchable true
+            visible false
             pretty_value do
               (bindings[:object].raw_array || []).join("<br>").html_safe
             end
@@ -123,6 +141,7 @@ module Hancock
           field :raw_hash do
             weight 10
             searchable true
+            visible false
             pretty_value do
               "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
             end

@@ -14,12 +14,12 @@ module RailsAdmin::Main
       nodes_stack ||= RailsAdmin::Config.visible_models(controller: _controller)
       node_model_names ||= nodes_stack.collect { |c| c.abstract_model.model_name }
 
-      _order_array = _controller._current_user.navigation_labels if _controller._current_user and _controller._current_user.respond_to?(:navigation_labels)
-      _order_array = Hancock.config.navigation_labels if _order_array.blank?
+      _order_array = _controller._current_user.navigation_labels.clone if _controller._current_user and _controller._current_user.respond_to?(:navigation_labels)
+      _order_array = Hancock.config.navigation_labels.clone if _order_array.blank?
       _order_array.map! { |label|
         Hancock.config.navigation_labels.detect { |n_l|
-          label == n_l or n_l.is_a?(Array) and label == n_l[1]
-        } || label
+          (label == n_l or (n_l.is_a?(Array) and label == n_l[1]))
+        } || label || []
       }
       _order_array = _order_array.clone.reverse
 

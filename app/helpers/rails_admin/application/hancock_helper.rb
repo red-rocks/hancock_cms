@@ -10,6 +10,11 @@ module RailsAdmin::Application
         # nav_icon = node.navigation_icon ? %(<i class="#{node.navigation_icon}"></i>).html_safe : ''
         nav_icon = %(<i class="#{node.navigation_icon}"></i>).html_safe
         li = content_tag :li, data: {model: model_param, "name-synonyms": node.name_synonyms} do
+          # alt version with icon new window open
+          # ret = []
+          # ret << (link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural))
+          # ret << (link_to "_blank", url, target: :_blank, title: "#{capitalize_first_letter(node.label_plural)} (В новой вкладке)")
+          # ret.join.html_safe
           link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural)
         end
         li + hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
