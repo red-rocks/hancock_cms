@@ -32,6 +32,16 @@ module Hancock
               Settings.logo_image(kind: :image)
             end
           end
+
+          Settings.ns('admin').helpers_whitelist(default: {}, kind: :hash)
+          Settings.ns('admin').helpers_blacklist(default: [], kind: :array)
+          # unless Settings.ns('admin').exists?("helpers_whitelist")
+          #   Settings.ns('admin').helpers_whitelist(default: '', kind: :text, label: 'Белый список хелперов')
+          # end
+          # unless Settings.ns('admin').exists?("helpers_human_names")
+          #   Settings.ns('admin').helpers_human_names(default: '', kind: :yaml, label: 'Имена хелперов')
+          # end
+
         end
       rescue
       end

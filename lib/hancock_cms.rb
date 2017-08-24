@@ -57,6 +57,7 @@ require 'stickykit/rails'
 require 'hancock/model'
 require 'hancock/engine'
 require 'hancock/controller'
+require 'hancock/helpers_whitelist'
 
 
 module Hancock
@@ -65,6 +66,8 @@ module Hancock
   PLUGINS = []
 
   include Hancock::Plugin
+  
+  include Hancock::HelpersWhitelist
 
   class << self
 

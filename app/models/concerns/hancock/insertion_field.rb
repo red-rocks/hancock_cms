@@ -5,6 +5,11 @@ module Hancock::InsertionField
     old_insertion:    /\{\{(?<old_insertion>self\.(?<old_insertion_name>\w+?))\}\}/i,
     new_insertion:    /\{\{\{\{(?<new_insertion>(?<new_insertion_name>\w+?))\}\}\}\}/i,
     insertion:        /(\{\{(?<insertion>self\.(?<insertion_name>\w+?))\}\}|\{\{\{\{(?<insertion>(?<insertion_name>\w+?))\}\}\}\})/i,
+
+    new_helper: /\[\[\[\[(?<new_helper>(?<new_helper_name>\w+?))\]\]\]\]/i,
+    old_helper: /\{\{(?<old_helper>HELPER\|(?<old_helper_name>\w+?))\}\}/i,
+    helper:     /(\[\[\[\[(?<helper>(?<helper_name>\w+?))\]\]\]\]|\{\{(?<helper>HELPER\|(?<helper_name>\w+?))\}\})/i,
+
     settings:         /\{\{(?<setting>(?<setting_name>\w+?))\}\}/i,
     settings_with_ns: /\{\{(?<setting_with_ns>(?<setting_with_ns_ns>[\w\-\.]+?)\.(?<setting_with_ns_name>\w+?))\}\}/i
   }
@@ -50,11 +55,11 @@ module Hancock::InsertionField
         # end.gsub(/\{\{(([^\.]*?)\.)?(.*?)\}\}/i) do
         #   (Settings and !$3.nil? and $2 != "self") ? Settings.ns($2).get($3).val : "" #temp
         # end
-        _ret = _data.gsub(REGEXP[:old_insertion]) do
-          get_insertion($~[:old_insertion_name]) rescue ""
-
-        end.gsub(REGEXP[:new_insertion]) do
+        _ret = _data.gsub(REGEXP[:new_insertion]) do
           get_insertion($~[:new_insertion_name]) rescue ""
+
+        end.gsub(REGEXP[:old_insertion]) do
+          get_insertion($~[:old_insertion_name]) rescue ""
 
         end.gsub(REGEXP[:settings]) do
           if defined?(Settings)
@@ -64,6 +69,16 @@ module Hancock::InsertionField
             else
               ""
             end
+          end
+
+        end.gsub(REGEXP[:new_helper]) do
+          if Hancock.helpers_whitelist_as_array.include?($~[:new_helper_name].to_s)
+            ApplicationController.helpers.__send__($~[:new_helper_name]) rescue ""
+          end
+
+        end.gsub(REGEXP[:old_helper]) do
+          if Hancock.helpers_whitelist_as_array.include?($~[:old_helper_name].to_s)
+            ApplicationController.helpers.__send__($~[:old_helper_name]) rescue ""
           end
 
         end.gsub(REGEXP[:settings_with_ns]) do
@@ -76,11 +91,12 @@ module Hancock::InsertionField
               ""
             end
           end
+
+        end
         # end.gsub(/\{\{(?<old_helper>HELPER\|(?<old_helper_name>\w+?))\}\}/i) do
         #   ActionView::Base.send($~[:old_helper_name]) rescue ""
         # end.gsub(/\[\[\[\[(?<new_helper>(?<new_helper_name>\w+?))\]\]\]\]/i) do
         #   ActionView::Base.send($~[:new_helper_name]) rescue ""
-        end
         _ret
       end
     end

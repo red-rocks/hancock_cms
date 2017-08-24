@@ -122,7 +122,7 @@ module Hancock
         is_active, options = (is_active[:active] || false), is_active
       end
       fields = (options[:fields] ||= {})
-      field_names = [:possible_insertions]
+      field_names = [:possible_insertions, :helpers_list]
       field_showings = get_field_showings(fields, field_names)
 
       Proc.new {
@@ -132,10 +132,31 @@ module Hancock
           read_only true
           pretty_value do
             ("<dl class='possible_insertions_list'>" + bindings[:object].possible_insertions.map do |_ins|
-              "<dt>#{_ins}</dt><dd>#{bindings[:object].send(_ins)}</dd>"
+              _code = bindings[:view].content_tag(:input, "", value: "{{{{#{_ins}}}}}", onclick: "this.setSelectionRange(0, this.value.length)", readonly: true, class: "insertion_copy_field")
+              dt = "#{_ins} #{_code}"
+              "<dt>#{dt}</dt><dd>#{bindings[:object].send(_ins)}</dd>"
             end.join + "</dl>").html_safe
           end
+          help do
+            "Код для вставки - {{{{ИМЯ_ВСТАВКИ}}}}"
+          end
         end if field_showings[:possible_insertions]
+        field :helpers_list do
+          read_only true
+          formatted_value Hancock.helpers_whitelist.keys
+          pretty_value do
+            (Hancock.helpers_whitelist_enum || []).map do |_ins|
+              _code = bindings[:view].content_tag(:input, "", value: "[[[[#{_ins}]]]]", onclick: "this.select()", readonly: true, class: "insertion_copy_field")
+              _name = Hancock.helpers_whitelist_human_names[_ins.to_s] || Hancock.helpers_whitelist_human_names[_ins.to_s]
+              _ins = "#{_ins} #{_code}".html_safe
+              _ins = "#{_ins} (#{_name})" unless _name.blank?
+              bindings[:view].content_tag :div, _ins
+            end.join.html_safe
+          end
+          help do
+            "Код для вставки - [[[[ИМЯ_ХЕЛПЕРА]]]]"
+          end
+        end if field_showings[:helpers_list]
 
         Hancock::RailsAdminGroupPatch::hancock_cms_group(self, options[:fields] || {})
 

@@ -66,6 +66,8 @@ module Hancock
 
     attr_accessor :erb2coffee_assets
 
+    attr_accessor :helpers_whitelist
+
     def initialize
       @main_index_layout = 'application'
       @error_layout = 'application'
@@ -89,6 +91,8 @@ module Hancock
       @mongoid_single_collection = nil
 
       @navigation_labels = []
+
+      @helpers_whitelist = {}
     end
   end
 end
