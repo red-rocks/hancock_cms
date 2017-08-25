@@ -1,0 +1,113 @@
+#rails_admin_nestable, #rails_admin_sort_embedded_blocks_order
+  .dd-item
+    margin: 5px 0px
+  .dd3-content
+    display: block
+    min-height: 40px
+    padding: 5px 10px 5px 40px
+    color: #333
+    text-decoration: none
+    font-weight: bold
+    border: 1px solid #ccc
+    background: #fafafa
+    +border-radius(3px)
+    box-sizing: border-box
+    -moz-box-sizing: border-box
+    line-height: 40px
+    img
+      max-width: 100%
+      background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
+      border: 3px solid #fff
+      +border-radius(3px)
+      +box-shadow(0 1px 1px rgba(0,0,0,0.2))
+      -webkit-transition: all 0.2s ease-in-out
+      -o-transition: all 0.2s ease-in-out
+      transition: all 0.2s ease-in-out
+      display: inline-block
+      height: auto
+    a.label
+      width: 36px
+      height: 20px
+      border-radius: 30px
+      transition: background-color 0.3s
+      position: relative
+      display: inline-block
+      vertical-align: middle
+      margin-top: 0px
+      font-size: 0
+      &:after
+        top: 2px
+        bottom: 2px
+        left: 2px
+        width: 16px
+        background-color: #fff
+        +border-radius(50%)
+        +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+        +transition(transform 0.15s ease-out)
+        +transform(translateX(0px))
+        position: absolute
+        content: ""
+    a.label.label-success
+      background-color: #42a5f5
+      &:after
+        +transform(translateX(15px))
+    a.label.label-danger
+      background-color: #eee
+  .dd3-handle
+    position: absolute
+    margin: 0
+    left: 0
+    top: 0
+    width: 30px
+    text-indent: 100px
+    white-space: nowrap
+    overflow: hidden
+    border: 1px solid darken(#42a5f5, 5%)
+    background: lighten(#42a5f5, 5%)
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    cursor: move
+    color: #fafafa
+    +transition(all 0.3s ease-in-out)
+    &:hover
+      background: darken(#42a5f5, 10%)
+      border: 1px solid darken(#42a5f5, 15%)
+    &:before
+      font-family: FontAwesome
+      content: "\f047"
+      font-size: 16px
+      line-height: 30px
+  .pull-right.links
+    margin-left: 25px
+    li
+      margin: 0px 2px
+      font-size: 14px
+  .rails_admin_sort_embedded
+    padding-left: 0px
+
+.controls
+  .nav.nav-tabs
+    li > a
+      display: inline-block
+      text-align: center
+      white-space: nowrap
+      vertical-align: middle
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      border: 0px solid transparent
+      padding: 8px 14px
+      font-size: 14px
+      line-height: 16px
+      +border-radius(.25rem)
+      +transition(all 0.2s ease-in-out)
+      color: #fff
+      background-color: #42a5f5
+      border-color: #0d89ed
+      &:hover, &:focus
+        background-color: #0d89ed
+        border-color: #0a6dbd
+      &:active
+        background-color: #42a5f5
+        border-color: #0d89ed

@@ -128,3 +128,58 @@ body.rails_admin .table
     max-width: 120px
   td.recieved_url_field, td.url_field
     font-size: 11px
+  .polymorphic_association_type
+    max-width: 190px
+  .description_field.text_type, .og_description_field.text_type
+    max-width: 100px
+  .keywords_field.text_type
+    max-width: 100px
+  dl
+    margin-bottom: 0px
+    max-height: 100px
+    overflow-Y: scroll
+  dd, dt
+    white-space: nowrap
+    text-overflow: ellipsis
+    overflow: hidden
+    padding-left: 0px
+    padding-right: 0px
+    line-height: 16px
+    min-height: 16px
+    background: transparent
+  dt
+    margin-top: 5px
+    padding-top: 5px
+  dd
+    margin-bottom: 5px
+    padding-bottom: 5px
+  .hancock_hash_type
+    max-width: 120px
+  a.label.label-danger, a.label.label-success
+    width: 36px
+    height: 20px
+    border-radius: 30px
+    transition: background-color 0.3s
+    position: relative
+    display: inline-block
+    vertical-align: middle
+    margin-top: -2px
+    font-size: 0
+    &:after
+      top: 2px
+      bottom: 2px
+      left: 2px
+      width: 16px
+      background-color: #fff
+      +border-radius(50%)
+      +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+      +transition(transform 0.15s ease-out)
+      +transform(translateX(0px))
+      position: absolute
+      content: ""
+  a.label.label-danger
+    background-color: #eee
+  a.label.label-success
+    background-color: #42a5f5
+    &:after
+      +transform(translateX(15px))

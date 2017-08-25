@@ -225,12 +225,14 @@ body.rails_admin .form-horizontal.denser .has_many_association_type
       cursor: pointer
   .controls .nav
     margin: 0px
-    background: #fbfbfc
+    background: #f9f9f9
     li
       margin-bottom: -2px
+      background: transparent
     li.active
-      background: #ffffff
+      background: transparent
     li.active > a
+      background: #ffffff
       pointer-events: none
       font-weight: 600px
     li > a
@@ -240,6 +242,7 @@ body.rails_admin .form-horizontal.denser .has_many_association_type
       text-decoration: none
       +transition(all 0.3s ease-in-out)
       color: #333
+      background: transparent
       &:hover
         background: rgba(0,0,0,0.05)
         color: #333
@@ -398,6 +401,12 @@ fieldset
           background-color: lightblue
           opacity: 1
 
+body.rails_admin .form-horizontal.denser
+  fieldset.default_fieldset > p
+    line-height: 1.8em
+    font-size: 13px
+    margin: 0px 0px 25px 50px
+
 fieldset.opened, fieldset.default_fieldset
   .scroll_fieldset_block
     +transform(scale(1))
@@ -405,3 +414,49 @@ fieldset.opened, fieldset.default_fieldset
 fieldset[disabled] .btn-info, fieldset[disabled] .btn-info:hover, fieldset[disabled] .btn-info:focus, fieldset[disabled] .btn-info:active, fieldset[disabled] .btn-info.active
   background-color: #ef3b36
   border-color: #e53a36
+
+.admin-wrapper
+  .content > .fieldset
+    background-color: #fff
+    box-shadow: 0 1px rgba(0, 0, 0, 0.03)
+    padding: 10px 25px
+    margin-bottom: 25px
+    dt > span.label-info
+      background: transparent
+      color: #333
+    dd
+      margin-bottom: 25px
+      width: auto
+      display: inline-block
+      padding: 10px
+      +border-radius(3px)
+      box-shadow: 0 1px rgba(0, 0, 0, 0.03)
+      border: 1px solid #ccc
+      span.label
+        width: 36px
+        height: 20px
+        border-radius: 30px
+        transition: background-color 0.3s
+        position: relative
+        display: inline-block
+        vertical-align: middle
+        margin-top: -2px
+        font-size: 0
+        &:after
+          top: 2px
+          bottom: 2px
+          left: 2px
+          width: 16px
+          background-color: #fff
+          +border-radius(50%)
+          +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+          +transition(transform 0.15s ease-out)
+          +transform(translateX(0px))
+          position: absolute
+          content: ""
+      span.label.label-danger
+        background-color: #eee
+      span.label.label-success
+        background-color: #42a5f5
+        &:after
+          +transform(translateX(15px))
