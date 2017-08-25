@@ -1,4 +1,4 @@
-#rails_admin_nestable
+#rails_admin_nestable, #rails_admin_sort_embedded_blocks_order
   .dd-item
     margin: 5px 0px
   .dd3-content
@@ -82,3 +82,32 @@
     li
       margin: 0px 2px
       font-size: 14px
+  .rails_admin_sort_embedded
+    padding-left: 0px
+
+.controls
+  .nav.nav-tabs
+    li > a
+      display: inline-block
+      text-align: center
+      white-space: nowrap
+      vertical-align: middle
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+      border: 0px solid transparent
+      padding: 8px 14px
+      font-size: 14px
+      line-height: 16px
+      +border-radius(.25rem)
+      +transition(all 0.2s ease-in-out)
+      color: #fff
+      background-color: #42a5f5
+      border-color: #0d89ed
+      &:hover, &:focus
+        background-color: #0d89ed
+        border-color: #0a6dbd
+      &:active
+        background-color: #42a5f5
+        border-color: #0d89ed
