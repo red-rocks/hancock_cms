@@ -228,9 +228,11 @@ body.rails_admin .form-horizontal.denser .has_many_association_type
     background: #f9f9f9
     li
       margin-bottom: -2px
+      background: transparent
     li.active
-      background: #ffffff
+      background: transparent
     li.active > a
+      background: #ffffff
       pointer-events: none
       font-weight: 600px
     li > a
@@ -240,6 +242,7 @@ body.rails_admin .form-horizontal.denser .has_many_association_type
       text-decoration: none
       +transition(all 0.3s ease-in-out)
       color: #333
+      background: transparent
       &:hover
         background: rgba(0,0,0,0.05)
         color: #333
