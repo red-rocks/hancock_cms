@@ -231,22 +231,22 @@
       list-style: none
       padding: 0
     li > a
-      padding: 6px 0 6px 36px
+      padding: 6px 0 6px 26px
       display: block
       text-decoration: none
       color: rgba(234,236,238,.6)
     li > a.nav-level-1
-      padding-left: 46px
+      padding-left: 36px
     li > a.nav-level-2
-      padding-left: 56px
+      padding-left: 46px
     li > a.nav-level-3
-      padding-left: 66px
+      padding-left: 56px
     li > a.nav-level-4
-      padding-left: 71px
+      padding-left: 61px
     li > a.nav-level-5
-      padding-left: 76px
+      padding-left: 66px
     li > a.nav-level-6
-      padding-left: 81px
+      padding-left: 71px
     li > a:hover
       color: rgba(234,236,238,1)
       background: #4b4b4b
@@ -282,3 +282,7 @@
       opacity: 1
       +transition(all .2s cubic-bezier(.25,.46,.45,.94))
       +transform(translateY(0px))
+
+.toolbar i, .toolbar li.dropdown-header li > a > i[class=""]
+  width: 15px
+  text-align: center
