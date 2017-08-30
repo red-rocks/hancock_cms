@@ -109,7 +109,8 @@ $(document).on 'keyup', '#sidebar, #sidebar *', (e)->
 
       nav_first_lvl.each ->
         me = $(this)
-        if !filter.test(me.html())
+        span = me.find("> span")
+        if !filter.test(span.html())
           me.addClass("hidden")
         else
           me.addClass("opened").addClass("opened-filtered")
