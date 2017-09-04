@@ -28,6 +28,14 @@ module RailsAdmin
             ''.freeze
           end
 
+          register_instance_option :element_data do
+            {
+              min_size: 10,
+              max_size: 100,
+              autosize: true
+            }
+          end
+
         end
       end
     end

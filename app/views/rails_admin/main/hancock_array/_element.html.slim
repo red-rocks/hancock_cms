@@ -1,5 +1,5 @@
 .array_element_block
-  = form.text_field field.method_name, value: val, multiple: true
+  = form.text_field field.method_name, value: val, multiple: true, data: field.element_data
 
   /= link_to "#", class: "array_element_delete_link", tabindex: -1 do
   /  span

@@ -43,3 +43,15 @@ $(document).on "change", ".hancock_array_type :input, .hancock_enum_type :input,
 
 $(document).on "rails_admin.dom_ready", (e)->
   $(".hancock_array_type, .hancock_enum_type, .hancock_enum_with_custom_type, .enum_type").find(":input[type='hidden']").trigger('change')
+  $(".hancock_array_type :input[data-autosize]").trigger("change")
+
+
+$(document).on "keyup keydown change", ".hancock_array_type :input[data-autosize]", (e)->
+  input = $(e.currentTarget)
+  value = input.val()
+  min_len = parseInt(input.data("min-size")) || 10
+  max_len = parseInt(input.data("max-size")) || 100
+  set_len = value.length
+  set_len = min_len if min_len > set_len
+  set_len = max_len if max_len < set_len
+  input.prop("size", set_len)
