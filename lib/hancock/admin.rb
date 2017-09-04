@@ -131,11 +131,15 @@ module Hancock
         field :possible_insertions do
           read_only true
           pretty_value do
-            ("<dl class='possible_insertions_list'>" + bindings[:object].possible_insertions.map do |_ins|
-              _code = bindings[:view].content_tag(:input, "", value: "{{{{#{_ins}}}}}", onclick: "this.setSelectionRange(0, this.value.length)", readonly: true, class: "insertion_copy_field")
-              dt = "#{_ins} #{_code}"
-              "<dt>#{dt}</dt><dd>#{bindings[:object].send(_ins)}</dd>"
-            end.join + "</dl>").html_safe
+            bindings[:view].content_tag(:dl, class: "possible_insertions_list") do
+              bindings[:object].possible_insertions.map do |_ins|
+                _title = bindings[:view].content_tag(:span, _ins)
+                _code = bindings[:view].content_tag(:input, "", value: "{{{{#{_ins}}}}}", onclick: "this.setSelectionRange(0, this.value.length)", readonly: true, class: "insertion_copy_field")
+                dt = "#{_title} #{_code}".html_safe
+                dd = bindings[:object].send(_ins)
+                bindings[:view].content_tag(:dt, dt) + bindings[:view].content_tag(:dd, dd)
+              end.join.html_safe
+            end
           end
           help do
             "Код для вставки - {{{{ИМЯ_ВСТАВКИ}}}}"
@@ -146,11 +150,12 @@ module Hancock
           formatted_value Hancock.helpers_whitelist.keys
           pretty_value do
             (Hancock.helpers_whitelist_enum || []).map do |_ins|
+              _title = bindings[:view].content_tag(:span, _ins)
               _code = bindings[:view].content_tag(:input, "", value: "[[[[#{_ins}]]]]", onclick: "this.select()", readonly: true, class: "insertion_copy_field")
               _name = Hancock.helpers_whitelist_human_names[_ins.to_s] || Hancock.helpers_whitelist_human_names[_ins.to_s]
-              _ins = "#{_ins} #{_code}".html_safe
-              _ins = "#{_ins} (#{_name})" unless _name.blank?
-              bindings[:view].content_tag :div, _ins
+              content = "#{_title} #{_code}"
+              content = "#{_title} (#{_name})" unless _name.blank?
+              bindings[:view].content_tag :div, content.html_safe
             end.join.html_safe
           end
           help do
