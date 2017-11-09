@@ -77,6 +77,12 @@ ru:
       social_auth:
         menu: Авторизовать
 
+      hancock_management:
+        title: "Управление сервером"
+        menu: "Управление сервером"
+        breadcrumb: "Управление сервером"
+        link: "Управление сервером"
+
       dashboard:
         title: "Управление сайтом"
         menu: "Контрольная панель"

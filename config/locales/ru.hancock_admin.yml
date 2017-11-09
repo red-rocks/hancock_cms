@@ -5,5 +5,23 @@ ru:
         title: 'На сайте'
         menu: "Показать на сайте"
 
+      hancock_management:
+        success: "Действие успешно запущено. Ждем окончания."
+        unknown_error: "Произошла неизвестная ошибка."
+        unknown_script: "Неизвестное действие."
+        already_started: "Скрипт уже выполняется."
+        thread_killed: "Выполнение скрипта остановлено."
+        scripts:
+          assets_precompile: "Перекомпилировать ассеты"
+          full_assets_precompile: "Полностью перекомпилировать ассеты (с удалением)"
+          bundle_production: "Бандл"
+          bundle_production2: "Бандл (без удаления старых версий)"
+          restart_thru_kill: "Хардребут (через kill -9)"
+          send_usr2: "Софтребут"
+          send_hup: "Старый софтребут (использовать если не обычный)"
+          db_dump: "Дамп БД"
+          db_restore: "Восстановление БД"
+
+
     logout:
       confirm: "Вы точно хотите покинуть АдминПанель?"

@@ -1,0 +1,10 @@
+#hancock_management_commands
+  - @scripts.each do |s|
+    - script_name = t("admin.actions.hancock_management.scripts.#{s}")
+    p.command_block
+      - if (script_status = @script_statuses[s]).nil?
+        = button_to script_name, {do_script: s}, {class: "hancock_management_script #{s}"}
+      - else
+        span.hancock_management_script= "#{script_name} (Выполняется): "
+        span.status= script_status
+        = button_to 'Отменить', {kill_thread: script_status.split(" ").first}, {class: "hancock_management_kill_thread"}

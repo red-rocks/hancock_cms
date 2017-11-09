@@ -18,6 +18,8 @@
 #= require ./hancock_array
 #= require ./hancock_hash
 
+#= require ./management
+
 #= require ./plugins
 
 window.hancock_cms ||= {}

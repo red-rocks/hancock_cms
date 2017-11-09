@@ -39,28 +39,34 @@ module Hancock
       @actions_visibility ||= {}
 
       action_unvisible_for(:custom_show_in_app, Proc.new { false })
-      action_visible_for(:model_settings, Proc.new { false })
+      action_visible_for(:model_settings, Proc.new { true })
 
       if defined?(RailsAdminNestedSet)
-        action_visible_for(:nested_set, Proc.new { false })
+        action_visible_for(:nested_set, Proc.new { true })
       end
 
       if defined?(RailsAdminMultipleFileUpload)
-        action_visible_for(:multiple_file_upload, Proc.new { false })
-        action_visible_for(:multiple_file_upload_collection, Proc.new { false })
+        action_visible_for(:multiple_file_upload, Proc.new { true })
+        action_visible_for(:multiple_file_upload_collection, Proc.new { true })
       end
 
       if defined?(RailsAdminUserAbilities)
-        action_visible_for(:user_abilities, Proc.new { false })
-        action_visible_for(:model_accesses, Proc.new { false })
+        action_visible_for(:user_abilities, Proc.new { true })
+        action_visible_for(:model_accesses, Proc.new { true })
       end
 
       if defined?(RailsAdminComments)
-        action_visible_for(:comments, Proc.new { false })
-        action_visible_for(:model_comments, Proc.new { false })
+        action_visible_for(:comments, Proc.new { true })
+        action_visible_for(:model_comments, Proc.new { true })
       end
 
-      action_visible_for(:sort_embedded, Proc.new { false })
+      action_visible_for(:sort_embedded, Proc.new { true })
+
+      action_visible_for(:hancock_management, Proc.new { |config|
+        bindings = (config and config.bindings)
+        _context = (bindings and (bindings[:controller] || bindings[:view]))
+        _context._current_user and _context._current_user.admin?
+      })
 
     end
 
@@ -107,7 +113,15 @@ module Hancock
           rails_admin_actions.send(action) do
             visible do
               if !bindings or bindings[:abstract_model].blank?
-                true
+                unless (visibility = Hancock.rails_admin_config.actions_visibility[action]).nil?
+                  if visibility.is_a?(Proc)
+                    visibility.call(self)
+                  else
+                    visibility
+                  end
+                else
+                  true
+                end
               else
                 ret = false
                 if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)

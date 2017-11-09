@@ -11,6 +11,7 @@ module Hancock::Cms
       %w( assets_precompile.sh
           full_assets_precompile.sh
           bundle_production.sh
+          bundle_production2.sh
 
           restart_thru_kill.sh
           send_usr2.sh
