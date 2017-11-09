@@ -29,6 +29,14 @@ module RailsAdmin
             def get_script_filename(script)
               Rails.root.join("scripts", "#{script}.sh").to_s
             end
+            def parse_status_string(status)
+              return {} if status.blank?
+              status = status.split(" ", 2)
+              {
+                thread_id: status[0].to_i,
+                timestamp: status[1]
+              }.compact
+            end
 
             @scripts = %w(  assets_precompile
                             full_assets_precompile
@@ -58,11 +66,18 @@ module RailsAdmin
               @scripts.each { |s|
                 lock_filename = get_lock_filename(s)
                 @script_statuses[s] = ((File.exist?(lock_filename) ? File.read(lock_filename) : nil) rescue nil)
+                if @script_statuses[s]
+                  @script_statuses[s] = {
+                    status: @script_statuses[s],
+                    parsed_status: parse_status_string(@script_statuses[s])
+                  }
+                end
               }
               render action: @action.template_name
 
             else
               error = nil
+              notice = nil
               begin
 
                 if @scripts.include?(params[:do_script])
@@ -89,7 +104,7 @@ module RailsAdmin
                   Thread.list.each do |t|
                     t.kill if t.object_id == kill_thread
                   end
-                  error ||= t("admin.actions.hancock_management.thread_killed")
+                  notice = t("admin.actions.hancock_management.thread_killed")
 
                 else
                   error ||= t("admin.actions.hancock_management.unknown_script")
@@ -101,7 +116,7 @@ module RailsAdmin
               end
 
               if error.blank?
-                flash[:notice]  = t("admin.actions.hancock_management.success")
+                flash[:notice]  = notice || t("admin.actions.hancock_management.success")
               else
                 flash[:error]   = error
               end

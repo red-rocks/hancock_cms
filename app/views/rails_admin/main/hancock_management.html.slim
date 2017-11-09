@@ -6,5 +6,5 @@
         = button_to script_name, {do_script: s}, {class: "hancock_management_script #{s}"}
       - else
         span.hancock_management_script= "#{script_name} (Выполняется): "
-        span.status= script_status
-        = button_to 'Отменить', {kill_thread: script_status.split(" ").first}, {class: "hancock_management_kill_thread"}
+        span.status= script_status[:status]
+        = button_to 'Отменить', {kill_thread: script_status[:parsed_status][:thread_id]}, {class: "hancock_management_kill_thread"}
