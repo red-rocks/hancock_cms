@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rails_admin', '1.2.0'
   spec.add_dependency 'rails_admin_nested_set'
-  spec.add_dependency 'rails_admin_toggleable', '< 0.8.0'
+  spec.add_dependency 'rails_admin_toggleable', '< 0.9.0'
 
   spec.add_dependency 'ack_rails_admin_settings', '~> 1.2.4.rc'
   spec.add_dependency 'safe_yaml'
