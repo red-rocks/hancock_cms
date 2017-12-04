@@ -15,7 +15,10 @@ module RailsAdmin::Application
           # ret << (link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural))
           # ret << (link_to "_blank", url, target: :_blank, title: "#{capitalize_first_letter(node.label_plural)} (В новой вкладке)")
           # ret.join.html_safe
-          link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural)
+          link_name = nav_icon + capitalize_first_letter(node.label_plural)
+          title = capitalize_first_letter(node.label_plural)
+          title = "#{title} (#{node.abstract_model.model_name})" if _current_user and _current_user.admin?
+          link_to link_name, url, class: "pjax#{level_class}", title: title
         end
         li + hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
       end.join.html_safe
