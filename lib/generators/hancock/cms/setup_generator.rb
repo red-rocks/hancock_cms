@@ -518,7 +518,7 @@ remove_file 'config/deploy/staging.rb'
 create_file 'config/deploy/staging.rb' do <<-TEXT
 # require 'capistrano/rvm'
 
-server '#{app_name.downcase.strip}.ru', user: '#{app_name.downcase.strip}', roles: %w{app db web}
+server '#{app_name.downcase.strip}.redrocks.pro', user: '#{app_name.downcase.strip}', roles: %w{app db web}
 
 set :branch, :master
 set :deploy_to, "/home/#{app_name.downcase.strip}/www/#{app_name.downcase.strip}/production"
@@ -536,7 +536,7 @@ remove_file 'config/deploy/production.rb'
 create_file 'config/deploy/production.rb' do <<-TEXT
 # require 'capistrano/rvm'
 
-server '#{app_name.downcase.strip}.redrocks.pro', user: '#{app_name.downcase.strip}', roles: %w{app db web}
+server '#{app_name.downcase.strip}.ru', user: '#{app_name.downcase.strip}', roles: %w{app db web}
 
 set :branch, :master
 set :deploy_to, "/home/#{app_name.downcase.strip}/www/#{app_name.downcase.strip}/production"

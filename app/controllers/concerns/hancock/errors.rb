@@ -88,7 +88,7 @@ module Hancock::Errors
   end
 
   def render_error(code = 500)
-    render template: "hancock/errors/error_#{code}", formats: [:html], handlers: [:slim], layout: Hancock.config.error_layout, status: code
+    _layout = (request.xhr? ? false : Hancock.config.error_layout)
+    render template: "hancock/errors/error_#{code}", formats: [:html], handlers: [:slim], layout: _layout, status: code
   end
-
 end
