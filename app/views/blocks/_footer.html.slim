@@ -1,1 +1,1 @@
-p = Settings.copyright(default: "© Copyright {{year|2018}} | Etc", kind: :html).html_safe
+p = Settings.copyright(default: "© Copyright {{year|#{Time.now.year}}} | Etc", kind: :html).html_safe

@@ -20,5 +20,5 @@ button.toggle-sidebar{type='button'}
           = link_to rails_admin.url_for(action: :edit, model_name: abstract_model.to_param, id: _current_user.id, controller: 'rails_admin/main'), title: "Редактировать профиль"
             span Редактировать профиль
         li.user-logout-action
-          = link_to logout_path, title: "Выйти".freeze, method: logout_method, title: "Выйти"
+          = link_to logout_path, title: "Выйти".freeze, method: logout_method
             span Выйти

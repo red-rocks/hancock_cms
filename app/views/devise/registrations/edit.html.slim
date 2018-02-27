@@ -30,11 +30,11 @@
         = f.input :password_confirmation, label: false, wrapper_html: {class: "form-control"} do
           = f.input_field :password_confirmation, autofocus: true, title: I18n.t("shared.password_confirmation"), autocomplete: "off"
           = f.label :password_confirmation, I18n.t("shared.password_confirmation")
-          
+
       .form-group.links
         .link-to-recover.center
           = render "devise/shared/links"
-      
+
       .actions
         = f.submit "Зарегистрироваться".freeze
 
