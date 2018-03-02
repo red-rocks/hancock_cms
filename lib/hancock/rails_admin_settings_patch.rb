@@ -10,14 +10,6 @@ module Hancock
         include ::Hancock::MasterCollection
       end
 
-      # t = {_all: 'Все'}
-      ::RailsAdminSettings::Setting.distinct(:ns).each do |c|
-        s = "ns_#{c.gsub('-', '_')}".to_sym
-        scope s, -> { where(ns: c) }
-        # t[s] = c
-      end
-      # I18n.backend.store_translations(:ru, {admin: {scopes: {'rails_admin_settings/setting': t}}})
-
       field :for_admin, type: Boolean, default: -> {
         !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
       }
@@ -151,7 +143,16 @@ module Hancock
             searchable true
           end
           if ::Settings.table_exists?
-            nss = ::RailsAdminSettings::Setting.distinct(:ns).map { |c| "ns_#{c.gsub('-', '_')}".to_sym }
+            nss = ::RailsAdminSettings::Setting.distinct(:ns).map { |c|
+              next if c =~ /^rails_admin_model_settings_/ and defined?(RailsAdminModelSettings)
+              "ns_#{c.gsub('-', '_')}".to_sym
+            }.compact
+          else
+            nss = []
+          end
+          if defined?(RailsAdminModelSettings)
+            scopes([:no_model_settings, :model_settings, nil] + nss)
+          else
             scopes([nil] + nss)
           end
         end
