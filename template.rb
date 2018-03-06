@@ -2,7 +2,7 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
-actual_rails_version = "5.1.2"
+actual_rails_version = "5.1.5"
 notsupported_rails_version = "6.x"
 
 if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
@@ -30,7 +30,7 @@ gem 'sass-rails'#, '~> 5.0'
 gem 'compass'
 gem 'compass-rails'
 
-gem 'rails_admin', '~> 1.2'
+gem 'rails_admin', '~> 1.3'
 
 # #{if mongoid then "gem 'glebtv-mongoid-paperclip'" else "gem 'paperclip'" end}
 # gem "image_optim"
