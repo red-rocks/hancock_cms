@@ -17,8 +17,9 @@ module RailsAdmin
           @_ro_fields = @_fields = RailsAdmin::Config::Fields.factory(self)
         else
           # parent is RailsAdmin::Config::Model, recursion is on Section's classes
-          @_ro_fields ||= parent.send(self.class.superclass.to_s.underscore.split('/').last)._fields(true)
-          @_ro_fields.freeze if Rails.env.production? or Rails.env.staging?
+          # https://github.com/sferik/rails_admin/pull/2999
+          @_ro_fields ||= parent.send(self.class.superclass.to_s.underscore.split('/').last)._fields(true).clone.freeze
+          # @_ro_fields.freeze if Rails.env.production? or Rails.env.staging?
         end
         readonly ? @_ro_fields : (@_fields ||= @_ro_fields.collect(&:clone))
       end
