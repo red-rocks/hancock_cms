@@ -57,11 +57,12 @@ module RailsAdmin
             )
 
             @scripts.select! { |s|
-              File.exist?(get_script_filename(s))
+              File.exist?(get_script_filename(s))# or s == "clear_locks"
             }
             #################
 
             if request.get?
+              @scripts << "clear_locks"
               @script_statuses = {}
               @scripts.each { |s|
                 lock_filename = get_lock_filename(s)
@@ -80,7 +81,7 @@ module RailsAdmin
               notice = nil
               begin
 
-                if @scripts.include?(params[:do_script])
+                if @scripts.include?(params[:do_script]) and
                   do_script = @scripts[@scripts.index(params[:do_script])]
 
                   lock_filename = get_lock_filename(do_script)
@@ -105,6 +106,17 @@ module RailsAdmin
                     t.kill if t.object_id == kill_thread
                   end
                   notice = t("admin.actions.hancock_management.thread_killed")
+
+                elsif params[:do_script] == "clear_locks" and false
+                  @scripts.each do |s|
+                    lock_filename = get_lock_filename(script)
+                    if lock_filename and File.exists?(lock_filename)
+                      lock_info = parse_status_string(File.read(lock_filename))
+                      if thr_id = lock_info[:thread_id]
+                        system("kill #{thr_id}")
+                      end
+                    end
+                  end
 
                 else
                   error ||= t("admin.actions.hancock_management.unknown_script")

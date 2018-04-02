@@ -76,7 +76,7 @@ module Hancock
     end
 
     def remove_action(action_name)
-      @remove_action.delete remove_action.to_sym
+      @actions_list.delete action_name.to_sym
       @actions_list.uniq
     end
 
@@ -98,11 +98,15 @@ module Hancock
       add_action(action_name) unless @actions_list.include?(action_name)
 
       if model_name.is_a?(Proc)
-        # @actions_visibility[action_name] = model_name
-      else
         @actions_visibility[action_name] = [] if @actions_visibility[action_name].is_a?(Proc)
+      end
+      unless model_name.is_a?(Proc)
         @actions_visibility[action_name] ||= []
         @actions_visibility[action_name].delete model_name.to_s
+      end
+      if @actions_visibility[action_name].blank?
+        @actions_visibility.delete(action_name)
+        remove_action(action_name)
       end
     end
 
