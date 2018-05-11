@@ -10,11 +10,13 @@ module Hancock
         include ::Hancock::MasterCollection
       end
 
-      field :for_admin, type: Boolean, default: -> {
-        !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
-      }
+      if RailsAdminSettings.mongoid?
+        field :for_admin, type: Boolean, default: -> {
+          !!(self.ns == "admin" or self.ns =~ /\Aadmin(\.\w+)*\z/)
+        }
+      end
       def for_admin?
-        self.for_admin
+        false
       end
 
       def val
@@ -63,12 +65,12 @@ module Hancock
       end
 
       rails_admin do
-        navigation_label I18n.t('admin.settings.label')
+        # navigation_label I18n.t('admin.settings.label')
 
         list do
           field :label do
             visible false
-            searchable true
+            # searchable true
             weight 1
           end
           field :enabled, :toggle do
@@ -78,72 +80,72 @@ module Hancock
             weight 3
           end
           field :ns do
-            searchable true
+            # searchable true
             weight 4
           end
           field :key do
-            searchable true
+            # searchable true
             weight 5
           end
           field :name do
             weight 6
           end
           field :kind do
-            searchable true
+            # searchable true
             weight 7
           end
           field :raw_data do
             weight 8
-            pretty_value do
-              if bindings[:object].file_kind?
-                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
-              elsif bindings[:object].image_kind?
-                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe.freeze
-              elsif bindings[:object].array_kind?
-                (bindings[:object].raw_array || []).join("<br>").html_safe
-              elsif bindings[:object].hash_kind?
-                "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
-              else
-                value
-              end
-            end
+            # pretty_value do
+            #   if bindings[:object].file_kind?
+            #     "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
+            #   elsif bindings[:object].image_kind?
+            #     "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe.freeze
+            #   elsif bindings[:object].array_kind?
+            #     (bindings[:object].raw_array || []).join("<br>").html_safe
+            #   elsif bindings[:object].hash_kind?
+            #     "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
+            #   else
+            #     value
+            #   end
+            # end
           end
           field :raw do
             weight 8
-            searchable true
-            visible false
-            pretty_value do
-              if bindings[:object].file_kind?
-                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
-              elsif bindings[:object].image_kind?
-                "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe.freeze
-              else
-                value
-              end
-            end
+            # searchable true
+            # visible false
+            # pretty_value do
+            #   if bindings[:object].file_kind?
+            #     "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
+            #   elsif bindings[:object].image_kind?
+            #     "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'><img src='#{CGI::escapeHTML(bindings[:object].file.url)}' /></a>".html_safe.freeze
+            #   else
+            #     value
+            #   end
+            # end
           end
           field :raw_array do
             weight 9
-            searchable true
-            visible false
-            pretty_value do
-              (bindings[:object].raw_array || []).join("<br>").html_safe
-            end
+            # searchable true
+            # visible false
+            # pretty_value do
+            #   (bindings[:object].raw_array || []).join("<br>").html_safe
+            # end
           end
           field :raw_hash do
             weight 10
-            searchable true
-            visible false
-            pretty_value do
-              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
-            end
+            # searchable true
+            # visible false
+            # pretty_value do
+            #   "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
+            # end
           end
           field :cache_keys_str, :text do
             weight 11
             searchable true
           end
           if ::Settings.table_exists?
-            nss = ::RailsAdminSettings::Setting.distinct(:ns).map { |c|
+            nss = ::RailsAdminSettings::Setting.pluck(:ns).map { |c|
               next if c =~ /^rails_admin_model_settings_/ and defined?(RailsAdminModelSettings)
               "ns_#{c.gsub('-', '_')}".to_sym
             }.compact
@@ -162,8 +164,7 @@ module Hancock
             weight 1
             visible do
               if bindings[:object].for_admin?
-                render_object = (bindings[:controller] || bindings[:view])
-                render_object and (render_object.current_user.admin?)
+                is_current_user_admin
               else
                 true
               end
@@ -172,15 +173,13 @@ module Hancock
           field :loadable, :toggle do
             weight 2
             visible do
-              render_object = (bindings[:controller] || bindings[:view])
-              render_object and (render_object.current_user.admin?)
+              is_current_user_admin
             end
           end
           field :for_admin, :toggle do
             weight 3
             visible do
-              render_object = (bindings[:controller] || bindings[:view])
-              render_object and (render_object.current_user.admin?)
+              is_current_user_admin
             end
           end
           field :ns  do
@@ -188,8 +187,7 @@ module Hancock
             read_only true
             help false
             visible do
-              render_object = (bindings[:controller] || bindings[:view])
-              render_object and (render_object.current_user.admin?)
+              is_current_user_admin
             end
           end
           field :key  do
@@ -197,23 +195,20 @@ module Hancock
             read_only true
             help false
             visible do
-              render_object = (bindings[:controller] || bindings[:view])
-              render_object and (render_object.current_user.admin?)
+              is_current_user_admin
             end
           end
           field :label, :string do
             weight 6
             read_only do
-              render_object = (bindings[:controller] || bindings[:view])
-              !render_object or !(render_object.current_user.admin?)
+              !is_current_user_admin
             end
             help false
           end
           field :kind, :enum do
             weight 7
             read_only do
-              render_object = (bindings[:controller] || bindings[:view])
-              !render_object or !(render_object.current_user.admin?)
+              !is_current_user_admin
             end
             enum do
               RailsAdminSettings.kinds
@@ -224,13 +219,17 @@ module Hancock
           field :raw do
             weight 8
             partial "setting_value".freeze
+            # visible do
+            #   !bindings[:object].upload_kind? and !bindings[:object].array_kind? and !bindings[:object].hash_kind?
+            # end
+
             visible do
-              !bindings[:object].upload_kind? and !bindings[:object].array_kind? and !bindings[:object].hash_kind?
+              puts 'hancock'
+              bindings[:object] and !bindings[:object].upload_kind? and !bindings[:object].array_kind? and !bindings[:object].hash_kind?
             end
             read_only do
               if bindings[:object].for_admin?
-                render_object = (bindings[:controller] || bindings[:view])
-                !(render_object and (render_object.current_user.admin?))
+                !is_current_user_admin
               else
                 false
               end
@@ -239,16 +238,18 @@ module Hancock
           field :raw_array do
             weight 9
             partial "setting_value".freeze
+            formatted_value do
+              (bindings[:object].raw_array || [])
+            end
             pretty_value do
-              (bindings[:object].raw_array || []).map(&:to_s).join("<br>").html_safe
+              formatted_value.map(&:to_s).join("<br>").html_safe
             end
             visible do
               bindings[:object].array_kind?
             end
             read_only do
               if bindings[:object].for_admin?
-                render_object = (bindings[:controller] || bindings[:view])
-                !(render_object and (render_object.current_user.admin?))
+                !is_current_user_admin
               else
                 false
               end
@@ -257,16 +258,18 @@ module Hancock
           field :raw_hash do
             weight 10
             partial "setting_value".freeze
+            formatted_value do
+              (bindings[:object].raw_hash || {})
+            end
             pretty_value do
-              "<pre>#{JSON.pretty_generate(bindings[:object].raw_hash || {})}</pre>".html_safe
+              "<pre>#{JSON.pretty_generate(formatted_value)}</pre>".html_safe
             end
             visible do
               bindings[:object].hash_kind?
             end
             read_only do
               if bindings[:object].for_admin?
-                render_object = (bindings[:controller] || bindings[:view])
-                !(render_object and (render_object.current_user.admin?))
+                !is_current_user_admin
               else
                 false
               end
@@ -280,8 +283,7 @@ module Hancock
               end
               read_only do
                 if bindings[:object].for_admin?
-                  render_object = (bindings[:controller] || bindings[:view])
-                  !(render_object and (render_object.current_user.admin?))
+                  !is_current_user_admin
                 else
                   false
                 end
@@ -292,8 +294,7 @@ module Hancock
           field :cache_keys_str, :text do
             weight 10
             visible do
-              render_object = (bindings[:controller] || bindings[:view])
-              render_object and render_object.current_user.admin?
+              is_current_user_admin
             end
           end
 

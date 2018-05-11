@@ -8,6 +8,11 @@ module RailsAdmin
           name.to_sym == :default ? -1_000_000 : 0
         end
 
+        def is_current_user_admin
+          render_object = (bindings and (bindings[:controller] || bindings[:view]))
+          render_object and render_object.current_user and render_object.current_user.admin?
+        end
+
         def visible_fields
           section.with(bindings).visible_fields.select { |f|
             f.group == self

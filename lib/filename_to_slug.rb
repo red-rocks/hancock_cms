@@ -1,4 +1,6 @@
-require 'stringex'
+if ::Hancock.mongoid?
+  require 'stringex'
+end
 require 'digest/md5'
 
 class String

@@ -40,5 +40,32 @@ module RailsAdmin::Hancock
       end
     end
 
+
+    def input_for(field)
+      field_name_type_selector = [
+        @object_name.to_s.gsub(/\]\[|[^-a-zA-Z0-9:.]/, '_').sub(/_$/, ''),
+        options[:index],
+        field.method_name
+      ].reject(&:blank?).join('_')
+      css = "col-sm-10 controls #{field_name_type_selector}"
+      css += ' has-error' if field.errors.present?
+      @template.content_tag(:div, class: css) do
+        field_for(field) +
+          errors_for(field) +
+          help_for(field)
+      end
+    end
+
+
+
+    def dom_id(field)
+      (@dom_id ||= {})[field.name] ||= [
+        @object_name.to_s.gsub(/\]\[|[^-a-zA-Z0-9:.]/, '_').sub(/_$/, ''),
+        (self.object.new_record? ?  nil : self.object.id.to_s),
+        options[:index],
+        field.method_name,
+      ].reject(&:blank?).join('_')
+    end
+
   end
 end

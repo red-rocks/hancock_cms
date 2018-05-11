@@ -2,8 +2,10 @@ rails_spec = (Gem.loaded_specs["railties"] || Gem.loaded_specs["rails"])
 version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
+pg = !!(options[:database] == "postgresql")
 actual_rails_version = "5.1.5"
 notsupported_rails_version = "6.x"
+
 
 if Gem::Version.new(version) < Gem::Version.new(actual_rails_version) or Gem::Version.new(version) >= Gem::Version.new(notsupported_rails_version)
   puts "You are using an incorrect version of Rails (#{version})"
@@ -23,12 +25,16 @@ create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
 gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
-#{if mongoid then "gem 'mongoid'" else "gem 'pg'" end}
+#{if mongoid then "gem 'mongoid', '< 7.0.x'" else
+  if pg then "gem 'pg'" else "gem 'ruby-mysql'\ngem 'mysql2'" end
+end
+}
 
-gem 'sass'
-gem 'sass-rails'#, '~> 5.0'
-gem 'compass'
-gem 'compass-rails'
+# gem 'sass'
+# gem 'sass-rails'#, '~> 5.0'
+# gem 'compass', '1.0.3'
+# gem 'compass-rails'
+# gem "bourbon"
 
 gem 'rails_admin', '~> 1.3'
 
@@ -37,20 +43,43 @@ gem 'rails_admin', '~> 1.3'
 # gem "paperclip-optimizer"
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-# gem 'rails_admin_multiple_file_upload'
-gem 'rails_admin_user_abilities'#, '~> 0.2'
-# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-gem 'rails_admin_model_settings'#, '~> 0.3'
-# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings"
+# gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
 
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: '2.1'
+# gem 'rails_admin_multiple_file_upload'
+#{if mongoid then "gem 'rails_admin_user_abilities'#, '~> 0.2'" else "" end}
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# gem 'rails_admin_model_settings'#, '~> 0.3'
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings", branch: 'rails5'
+
+# gem "image_optim"
+# gem "paperclip-optimizer"
+# gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
+
+# gem 'rails_admin_multiple_file_upload'
+# gem 'rails_admin_user_abilities'#, '~> 0.2'
+# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+# gem 'rails_admin_model_settings'#, '~> 0.3'
+# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings", branch: 'rails5'
+gem 'rails_admin_model_settings', path: "/home/ack/www/rails_admin/rails_admin_model_settings"
+
+# gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
+gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_settings"
+
+
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'front'
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: '2.1'
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'front'
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails5'
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/ack/www/redrocks/hancock"
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/oleg/redrocks/hancock_cms"
 
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
 gem 'slim-rails', '3.1.1'
 gem 'rs_russian'
-gem 'cancancan', '~> 1.16'
+gem 'cancancan'#, '~> 1.16'
+#{if mongoid then "gem 'cancancan-mongoid'" end}
 
 # gem 'cloner'
 gem 'unicorn'
@@ -79,7 +108,7 @@ group :development do
 
   gem "letter_opener"
 
-  gem 'capistrano', '3.8.1'
+  gem 'capistrano', '3.10.1'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
@@ -119,7 +148,7 @@ group :production do
   gem "god"
 end
 
-gem 'glebtv_mongoid_userstamp', '~> 0.7'
+#{if mongoid then "gem 'glebtv_mongoid_userstamp', '~> 0.7'" else "" end}
 TEXT
 end
 
@@ -181,17 +210,17 @@ else
 remove_file 'config/database.yml'
 create_file 'config/database.yml' do <<-TEXT
 development:
-  adapter: postgresql
-  encoding: unicode
+  adapter: #{if pg then "postgresql" else "mysql2" end}
   database: #{app_name.underscore}_development
   pool: 5
-  username: #{app_name.underscore}
-  password: #{app_name.underscore}
-  template: template0
+  username: #{if pg then app_name.underscore else "root" end}
+  password: #{if pg then app_name.underscore else "1" end}
+  encoding: #{if pg then "unicode" else "utf8mb4" end}
+  #{if pg then  "template: template0" else "charset: utf8mb4\n  collation: utf8mb4_unicode_ci" end}
 TEXT
 end
 FileUtils.cp(Pathname.new(destination_root).join('config', 'database.yml').to_s, Pathname.new(destination_root).join('config', 'database.yml.example').to_s)
-say "Please create a PostgreSQL user #{app_name.underscore} with password #{app_name.underscore} and a database #{app_name.underscore}_development owned by him for development NOW.", :red
+say "Please create a #{if pg then "PostgreSQL" else "MySQL/MariaDB" end} user #{if pg then app_name.underscore else "root" end} with password #{if pg then app_name.underscore else "1" end} and a database #{app_name.underscore}_development owned by him for development NOW.", :red
 ask("Press <enter> when done.", true)
 end
 

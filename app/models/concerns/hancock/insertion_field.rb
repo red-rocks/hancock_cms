@@ -160,9 +160,13 @@ module Hancock::InsertionField
       # # version with store in
       # return @default_insertions unless @default_insertions.nil?
       # @default_insertions =
-      self.fields.select { |_name, _field|
-        _field.options[:klass] and self <= _field.options[:klass]
-      }.keys
+      if Hancock.mongoid?
+        self.fields.select { |_name, _field|
+          _field.options[:klass] and self <= _field.options[:klass]
+        }.keys
+      else
+        self.column_names
+      end
     end
     def possible_insertions
       @possible_insertions ||= (default_insertions + added_insertions).map(&:to_s).uniq - removed_insertions.map(&:to_s)

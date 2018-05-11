@@ -8,17 +8,24 @@ module Hancock::Cms
     def install
 
       def ask_with_timeout(question, timeout = 5)
-        ask(question)
-        # # temp
-        # begin
-        #   Timeout::timeout(timeout) {
-        #     ask("#{question} | U have only #{timeout} second(s)!")
-        #   }
-        # rescue
-        #   puts ""
-        #   ""
-        # end
+        # ask(question)
+        # temp
+        begin
+          Timeout::timeout(timeout) {
+            ask("#{question} | U have only #{timeout} second(s)!")
+          }
+        rescue
+          puts "y"
+          "y"
+        end
       end
+
+
+####### SIMPLE FORM ######
+
+generate "simple_form:install" if ["yes", "y"].include?(ask_with_timeout("generate `simple_form:install`? (y or yes)").downcase.strip)
+
+
 
 ####### DEVISE #######
 
@@ -229,7 +236,7 @@ Rails.application.config.session_store :mongoid_store
 TEXT
 end
 else
-generate 'active_record_store:session_migration'
+generate 'active_record:session_migration'
 create_file 'config/initializers/session_store.rb' do  <<-TEXT
 # Be sure to restart your server when you modify this file.
 
@@ -243,8 +250,6 @@ end
 # unless mongoid
 #   generate 'simple_captcha'
 # end
-
-generate "simple_form:install" if ["yes", "y"].include?(ask_with_timeout("generate `simple_form:install`? (y or yes)").downcase.strip)
 
 gsub_file 'config/secrets.yml', 'secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>', "secret_key_base: <%= ENV['#{app_name.underscore.upcase}_SECRET_KEY_BASE'] %>"
 
@@ -443,6 +448,7 @@ end
 
 unless mongoid
 generate "hancock:cms:migration"
+# https://github.com/RolifyCommunity/rolify/issues/444
 generate "rails_admin_settings:migration"
 end
 
@@ -451,7 +457,9 @@ remove_file 'app/views/layouts/application.html.erb'
 generate "hancock:cms:layout"
 end
 
+if mongoid
 run 'rails r "User.generate_first_admin_user"'
+end
 
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's assets? (y or yes)").downcase.strip)
 remove_file 'app/assets/stylesheets/application.css'
@@ -479,6 +487,7 @@ FileUtils.cp(Pathname.new(destination_root).join('config', 'secrets.yml').to_s, 
 unless mongoid
 generate "paper_trail:install"
 generate "friendly_id"
+run 'grep -rl "ActiveRecord::Migration$" db | xargs sed -i "s/ActiveRecord::Migration/ActiveRecord::Migration[5.1]/g"'
 rake "db:migrate"
 end
 
@@ -489,6 +498,16 @@ generate "rspec:install" if ["yes", "y"].include?(ask_with_timeout("generate `rs
 if ["yes", "y"].include?(ask_with_timeout("Generate Capistrano? (y or yes)").downcase.strip)
 `cap install`
 prepend_file 'Capfile', "set :yes_array, ['y', 'yes', 'yeah', 'yep']\n"
+gsub_file 'Capfile', 'require "capistrano/deploy"' do <<-TEXT
+require "capistrano/deploy"
+
+require 'capistrano/linked_files'
+TEXT
+end
+gsub_file 'Capfile', '# require "capistrano/rvm"', 'require "capistrano/rvm"'
+gsub_file 'Capfile', '# require "capistrano/bundler"', 'require "capistrano/bundler"'
+gsub_file 'Capfile', '# require "capistrano/rails/assets"', 'require "capistrano/rails/assets"'
+
 gsub_file 'config/deploy.rb', 'set :application, "my_app_name"', "set :application, '#{app_name.downcase.strip}'"
 gsub_file 'config/deploy.rb', 'set :repo_url, "git@example.com:me/my_repo.git"' do <<-TEXT
 set :repo_url, "git@bitbucket.org:red-rocks/#{app_name.downcase.strip}.git"
@@ -504,7 +523,7 @@ TEXT
 end
 inject_into_file 'config/deploy.rb', after: '# append :linked_files, "config/database.yml", "config/secrets.yml"' do <<-TEXT
 
-set :linked_files,  ["public/robots.txt", "public/sitemap.xml.gz"]
+set :linked_files,  ["public/robots.txt", "public/sitemap.xml.gz", "config/unicorn.god"]
 TEXT
 end
 inject_into_file 'config/deploy.rb', after: '# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"' do <<-TEXT
@@ -570,6 +589,7 @@ create_file '.gitignore' do <<-TEXT
 
 /.bundle
 /config/secrets.yml.example
+/config/unicorn.god
 /log/*.log
 /tmp/
 /tmp/*
@@ -597,6 +617,8 @@ git :init
 git add: "."
 git commit: %Q{ -m 'Initial commit' }
 end
+
+
 
     end
 
