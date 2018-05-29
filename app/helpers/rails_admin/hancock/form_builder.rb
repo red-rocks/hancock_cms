@@ -2,6 +2,24 @@ require 'rails_admin/form_builder'
 module RailsAdmin::Hancock
   class FormBuilder < ::RailsAdmin::FormBuilder
 
+    def generate(options = {})
+      without_field_error_proc_added_div do
+        options.reverse_merge!(
+          action: @template.controller.params[:action],
+          model_config: @template.instance_variable_get(:@model_config),
+          nested_in: false,
+        )
+
+        object_infos +
+          visible_groups(options[:model_config], generator_action(options[:action], options[:nested_in])).select do |fieldset|
+            options[:fieldsets].nil? or options[:fieldsets].blank? or options[:fieldsets].include?(fieldset.name)
+          end.collect do |fieldset|
+            fieldset_for fieldset, options[:nested_in]
+          end.join.html_safe +
+          (options[:nested_in] ? '' : @template.render(partial: 'rails_admin/main/submit_buttons'))
+      end
+    end
+
     def fieldset_for(fieldset, nested_in)
       fields = fieldset.with(
         form: self,

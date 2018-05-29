@@ -13,6 +13,10 @@ module RailsAdmin
           render_object and render_object.current_user and render_object.current_user.admin?
         end
 
+        def render_object
+          (bindings && (bindings[:view] || bindings[:controller]))
+        end
+
       end
 
     end

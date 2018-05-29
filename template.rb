@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 pg = !!(options[:database] == "postgresql")
-actual_rails_version = "5.1.5"
+actual_rails_version = "5.1"
 notsupported_rails_version = "6.x"
 
 
@@ -24,8 +24,10 @@ remove_file 'Gemfile'
 create_file 'Gemfile' do <<-TEXT
 source 'https://rubygems.org'
 
+gem 'bootsnap', require: false
+
 gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
-#{if mongoid then "gem 'mongoid', '< 7.0.x'" else
+#{if mongoid then "gem 'mongoid', '< 8.0.x'" else
   if pg then "gem 'pg'" else "gem 'ruby-mysql'\ngem 'mysql2'" end
 end
 }
@@ -76,7 +78,7 @@ gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_set
 # gem 'recaptcha', require: 'recaptcha/rails'
 # gem 'glebtv-simple_captcha'
 
-gem 'slim-rails', '3.1.1'
+gem 'slim-rails'#, '3.1.1'
 gem 'rs_russian'
 gem 'cancancan'#, '~> 1.16'
 #{if mongoid then "gem 'cancancan-mongoid'" end}
@@ -108,7 +110,7 @@ group :development do
 
   gem "letter_opener"
 
-  gem 'capistrano', '3.10.1'
+  gem 'capistrano', '3.10.2'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
@@ -148,11 +150,11 @@ group :production do
   gem "god"
 end
 
-#{if mongoid then "gem 'glebtv_mongoid_userstamp', '~> 0.7'" else "" end}
+#{if mongoid then "gem 'glebtv_mongoid_userstamp'#, '~> 0.7'" else "" end}
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.4.1"#"2.3.3"
+RVM_RUBY_VERSION = "2.5.1"
 create_file '.ruby-version', "#{RVM_RUBY_VERSION}\n"
 create_file '.ruby-gemset', "#{app_name.underscore}\n"
 

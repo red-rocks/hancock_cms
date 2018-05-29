@@ -33,8 +33,24 @@ module Hancock
             end
           end
 
-          Settings.ns('admin').helpers_whitelist(default: {}, kind: :hash)
-          Settings.ns('admin').helpers_blacklist(default: [], kind: :array)
+          helpers_whitelist_default = {}
+          if !(_helpers_whitelist = Settings.ns('admin').getnc('helpers_whitelist')).nil?
+            if _helpers_whitelist.kind != :hash
+              helpers_whitelist_default = JSON.parse(_helpers_whitelist.val) rescue YAML.load(_helpers_whitelist.val) rescue {}
+              _helpers_whitelist.remove
+            end
+          end
+          Settings.ns('admin').helpers_whitelist(default: helpers_whitelist_default, kind: :hash)
+
+
+          helpers_blacklist_default = []
+          if !(_helpers_blacklist = Settings.ns('admin').getnc('helpers_blacklist')).nil?
+            if _helpers_blacklist.kind != :array
+              helpers_blacklist_default = JSON.parse(_helpers_whitelist.val) rescue YAML.load(_helpers_whitelist.val) rescue []
+              _helpers_blacklist.remove
+            end
+          end
+          Settings.ns('admin').helpers_blacklist(default: helpers_blacklist_default, kind: :array)
           # unless Settings.ns('admin').exists?("helpers_whitelist")
           #   Settings.ns('admin').helpers_whitelist(default: '', kind: :text, label: 'Белый список хелперов')
           # end

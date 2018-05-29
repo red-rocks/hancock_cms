@@ -23,6 +23,19 @@ module RailsAdmin
           Proc.new do
             verify_authenticity_token
 
+
+            def reload_rails_admin
+              models = RailsAdmin::Config.models.map do |m|
+                m.abstract_model.model.name
+              end
+              models.each do |m|
+                RailsAdmin::Config.reset_model(m)
+              end
+              RailsAdmin::Config::Actions.reset
+
+              load(Rails.root.join("config", "initializers", "rails_admin.rb"))
+            end
+
             def get_lock_filename(script)
               Rails.root.join("tmp", "#{script}.lock").to_s
             end
@@ -49,6 +62,8 @@ module RailsAdmin
 
                             db_dump
                             db_restore
+
+                            reload_rails_admin
             )
 
             # safety version
@@ -57,7 +72,7 @@ module RailsAdmin
             )
 
             @scripts.select! { |s|
-              File.exist?(get_script_filename(s))# or s == "clear_locks"
+              File.exist?(get_script_filename(s))# or s == 'reload_rails_admin' # or s == "clear_locks"
             }
             #################
 
@@ -81,23 +96,27 @@ module RailsAdmin
               notice = nil
               begin
 
-                if @scripts.include?(params[:do_script]) and
-                  do_script = @scripts[@scripts.index(params[:do_script])]
+                if do_script = @scripts.detect { |s| s == params[:do_script] }
 
-                  lock_filename = get_lock_filename(do_script)
-                  script_filename = get_script_filename(do_script)
-                  unless File.exist?(lock_filename)
-                    Thread.new(lock_filename, script_filename) do |lock_filename, script_filename|
-                      begin
-                        File.write(lock_filename, "#{Thread.current.object_id} (#{Russian::strftime Time.new})")
-                        system(script_filename)
-                      ensure
-                        File.delete(lock_filename)
-                      end
-                    end
+                  if do_script == "reload_rails_admin"
+                    reload_rails_admin
+
                   else
-                    error ||= t("admin.actions.hancock_management.already_started")
-                    error += " #{File.read(lock_filename)}."
+                    lock_filename = get_lock_filename(do_script)
+                    script_filename = get_script_filename(do_script)
+                    unless File.exist?(lock_filename)
+                      Thread.new(lock_filename, script_filename) do |lock_filename, script_filename|
+                        begin
+                          File.write(lock_filename, "#{Thread.current.object_id} (#{Russian::strftime Time.new})")
+                          system(script_filename)
+                        ensure
+                          File.delete(lock_filename)
+                        end
+                      end
+                    else
+                      error ||= t("admin.actions.hancock_management.already_started")
+                      error += " #{File.read(lock_filename)}."
+                    end
                   end
 
                 elsif (kill_thread = params[:kill_thread]).present?
@@ -149,6 +168,8 @@ module RailsAdmin
         register_instance_option :http_methods do
           [:get, :post]
         end
+
+
       end
     end
   end
