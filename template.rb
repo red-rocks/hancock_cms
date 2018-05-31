@@ -27,7 +27,7 @@ source 'https://rubygems.org'
 gem 'bootsnap', require: false
 
 gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
-#{if mongoid then "gem 'mongoid', '< 8.0.x'" else
+#{if mongoid then "gem 'mongoid', '< 7.0.x' #'< 8.0.x'" else
   if pg then "gem 'pg'" else "gem 'ruby-mysql'\ngem 'mysql2'" end
 end
 }
@@ -45,24 +45,11 @@ gem 'rails_admin', '~> 1.3'
 # gem "paperclip-optimizer"
 # gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
 
-# gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
-
 # gem 'rails_admin_multiple_file_upload'
-#{if mongoid then "gem 'rails_admin_user_abilities'#, '~> 0.2'" else "" end}
+# #{if mongoid then "gem 'rails_admin_user_abilities'#, '~> 0.2'" else "" end}
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
 # gem 'rails_admin_model_settings'#, '~> 0.3'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings", branch: 'rails5'
-
-# gem "image_optim"
-# gem "paperclip-optimizer"
-# gem 'ack-paperclip-meta', github: "red-rocks/paperclip-meta"
-
-# gem 'rails_admin_multiple_file_upload'
-# gem 'rails_admin_user_abilities'#, '~> 0.2'
-# gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
-# gem 'rails_admin_model_settings'#, '~> 0.3'
-# gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings", branch: 'rails5'
-gem 'rails_admin_model_settings', path: "/home/ack/www/rails_admin/rails_admin_model_settings"
 
 # gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
 gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_settings"
