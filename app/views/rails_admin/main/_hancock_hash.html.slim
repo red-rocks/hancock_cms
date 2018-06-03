@@ -7,13 +7,13 @@
     _opts[:class] = 'form-control'
     _opts[:value] = field.formatted_value
     _opts[:style] = "font-family: monospace"
-    
+
   = form.text_area field.string_method, _opts
 
 - when :fixed_keys
   - (field.value || {}).each_pair do |name, val|
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
-      
+
   - _template = capture do
     - name, val = "new", field.empty_element_value
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
@@ -21,12 +21,12 @@
     = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
     / = " | "
     / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
-    
-      
+
+
 - when :full
   - (field.value || {}).each_pair do |name, val|
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
-      
+
   - _template = capture do
     - name, val = "new", field.empty_element_value
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}

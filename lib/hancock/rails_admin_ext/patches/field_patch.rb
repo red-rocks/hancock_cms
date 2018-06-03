@@ -8,9 +8,13 @@ module RailsAdmin
           0
         end
 
-        def is_current_user_admin
+        def current_user
           render_object = (bindings and (bindings[:controller] || bindings[:view]))
-          render_object and render_object.current_user and render_object.current_user.admin?
+          (render_object and render_object.current_user and render_object.current_user)
+        end
+
+        def is_current_user_admin
+          (_current_user = current_user and _current_user.admin?)
         end
 
         def render_object

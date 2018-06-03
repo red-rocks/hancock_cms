@@ -25,6 +25,10 @@ module Hancock
             ret and ret.name
           end
 
+          def to_param
+            (super or id.to_s) rescue id.to_s
+          end
+
         end
 
       end
