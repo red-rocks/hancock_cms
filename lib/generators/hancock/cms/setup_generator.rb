@@ -521,9 +521,13 @@ set :rvm_ruby_version, "#{`cat .ruby-version`.strip}@#{`cat .ruby-gemset`.strip}
 set :bundle_path, nil
 TEXT
 end
-inject_into_file 'config/deploy.rb', after: '# append :linked_files, "config/database.yml", "config/secrets.yml"' do <<-TEXT
+inject_into_file 'config/deploy.rb', after: '# append :linked_files, "config/database.yml"' do <<-TEXT
 
-set :linked_files,  ["public/robots.txt", "public/sitemap.xml.gz", "config/unicorn.god"]
+set :linked_files,  [
+  "config/unicorn.god", "config/unicorn.rb",
+  "public/robots.txt", "public/sitemap.xml.gz",
+  "config/secrets.yml", "config/mongoid.yml"
+]
 TEXT
 end
 inject_into_file 'config/deploy.rb', after: '# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"' do <<-TEXT
@@ -605,7 +609,7 @@ create_file '.gitignore' do <<-TEXT
 /public/sitemap.xml.gz
 /public/sitemap.xml
 /public/robots.txt
-Gemfile.lock
+/node_modules
 TEXT
 end
 

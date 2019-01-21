@@ -224,7 +224,6 @@ module Hancock
             # end
 
             visible do
-              puts 'hancock'
               bindings[:object] and !bindings[:object].upload_kind? and !bindings[:object].array_kind? and !bindings[:object].hash_kind?
             end
             read_only do

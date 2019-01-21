@@ -75,7 +75,6 @@ module Hancock::HashField
         end
 
         def #{meth_json}
-          puts "meth_jsonmeth_jsonmeth_json"
           self.#{meth_hsh} = @#{meth_hsh} if #{meth_hsh_changed}
           super
         end
