@@ -1,4 +1,4 @@
-ul.nav.nav-tabs
+ul.nav.nav-tabs.locales-tabs
   - uuid = "#{field.name}_#{field.object_id}_unique_id"
   - I18n.available_locales.each do |locale|
     li(class="#{'active' if locale == I18n.locale}")

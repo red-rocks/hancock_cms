@@ -1,0 +1,48 @@
+/ TODO; goto HANCOCK (RailsAdminSettings)
+- embedded_in = s._parent&.class&.rails_admin_model
+.setting_block{data-setting-id=s.id.to_s}
+  span.filterable= s.label
+  span.filterable= s.key
+  span.filterable= s.type
+  span.toggle-block.opened.right-offset = link_to "свернуть/развернуть".freeze, '#', remote: true
+  - if s.persisted?
+    span.update-setting.right-offset = link_to "обновить".freeze, object_settings_path(@abstract_model.to_param, setting_id: s.id), remote: true
+    / span.navigate-block.right-offset = link_to "открыть".freeze, show_path('object_setting'.freeze, id: s.id, embedded_in: embedded_in), target: :_blank
+    / span.navigate-block.right-offset = link_to "редактировать".freeze, edit_path('object_setting'.freeze, id: s.id, embedded_in: embedded_in), target: :_blank
+    - if current_user.admin?
+      / span.navigate-block.right-offset= link_to "удалить".freeze, delete_path(model_name: 'rails_admin_settings~setting'.freeze, id: s.id, embedded_in: embedded_in), target: :_blank
+      span.navigate-block.delete-setting.right-offset= link_to "удалить".freeze, object_settings_path(@abstract_model.to_param, setting_id: s.id), data: {remote: true, method: :delete, confirm: "Вы уверены, что хотите удалить эту настройку?"}
+    span = link_to "Редактировать здесь".freeze, '#', class: 'inline-edit'.freeze
+
+    span.rails_admin_model_settings_inline_form.rails_admin_settings_inline_form.hidden.need-hidden
+      ruby:
+        _object = s
+        _abstract_model = RailsAdmin::AbstractModel.new(s.class)
+        _object_name = s.class.name
+        locals = {
+          object: _object,
+          _object: _object,
+          _abstract_model: _abstract_model,
+          _object_name: _object_name
+        }
+      / = render partial: "rails_admin/main/setting_value_form".freeze, locals: locals
+      / = hancock_rails_admin_form_for _object, url: edit_path(_abstract_model, _object.id, embedded_in: embedded_in), as: _abstract_model.param_key, html: { method: "put", multipart: true, class: "form-horizontal denser", id: "edit_object_setting_#{s.id}"} do |form|
+      - form_html = { multipart: true, class: "form-horizontal denser", id: "edit_object_setting_#{s.id}", data: {}}
+      - opts = {as: _abstract_model.param_key,  method: "put", html: form_html}
+      - opts[:url] = object_settings_path(@abstract_model.to_param, setting_id: s.id)
+      - form_html[:data][:remote] = false if _object.file_kind?
+      = hancock_rails_admin_form_for _object, opts do |form|
+        = form.generate action: :update, model_config: _abstract_model.config
+
+  .setting_value.filterable
+    - if s.file_kind?
+      .link_to_file
+        = link_to CGI::escapeHTML(s.file.url), CGI::escapeHTML(s.file.url), target: "_blank"
+    - elsif s.image_kind?
+      = link_to CGI::escapeHTML(s.file.url), target: "_blank" do
+        = image_tag CGI::escapeHTML(s.file.url)
+    / - elsif s.enum_kind?
+    /   - option = s.enum_collection.select { |e| e.last.to_s == s.value }.first
+    /   = option ? option.first : s.value
+    - else
+      == s.value

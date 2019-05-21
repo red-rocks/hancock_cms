@@ -1,0 +1,28 @@
+%ul.nav.nav-tabs.locales-tabs
+  - uuid = "#{field.name}_#{field.object_id}_unique_id"
+  - I18n.available_locales.each do |locale|
+    %li{ class: ( 'active' if locale == I18n.locale ) }
+      %a{ href: "##{locale}_#{uuid}", data: { toggle: "tab" }, class: uuid }= locale
+.tab-content
+  = form.fields_for field.translations_field do |localized_field|
+    - I18n.available_locales.each do |locale|
+      .fields.tab-pane{ style: 'padding:5px; margin: 0;', id: "#{locale}_#{uuid}", class: [( 'active' if locale == I18n.locale ), uuid] }
+        - if field_type.to_sym == :select
+          - if field.respond_to?(:enum_method)
+            - collection = I18n.with_locale(locale) { form.object.send(field.enum_method) }
+          - else
+            - collection ||= options.delete(:collection)
+          = localized_field.select locale, collection || [], options.reverse_merge({selected: field.value.try(:[], locale.to_s) }), html_attributes
+        - else
+          = localized_field.send field_type, locale, html_attributes.reverse_merge({ :value => field.value.try(:[], locale.to_s) })
+        
+:javascript
+  var #{field.name}#{field.object_id} = (new Date().getTime()) + Math.floor(Math.random()*100000);
+  $("ul.nav.nav-tabs a.#{uuid}").each(function(e){
+    this.href = $(this).attr('href').replace('_unique_id', #{field.name}#{field.object_id});
+    $(this).removeClass('#{uuid}');
+  });
+  $(".tab-content .#{uuid}").each(function(e){
+    this.id = this.id.replace('_unique_id', #{field.name}#{field.object_id});
+    $(this).removeClass('#{uuid}');
+  });

@@ -9,7 +9,8 @@ module RailsAdmin
           RailsAdmin::Config::Fields::Types.register(self)
 
           register_instance_option :partial do
-            :form_hancock_multiselect
+            # :form_hancock_multiselect
+            "hancock/form_multiselect"
           end
 
           # orderable associated objects

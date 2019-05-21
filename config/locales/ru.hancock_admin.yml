@@ -23,6 +23,24 @@ ru:
           db_restore: "Восстановление БД"
           reload_rails_admin: "Перезагрузка конфига админки"
           clear_locks: "Очистка lock-файлов"
+          
+
+      tabbed_edit: &tabbed_edit
+        title: Раздельное редактирование
+        menu: Раздельное редактирование
+        breadcrumb: Раздельное редактирование
+
+      hancock_tabbed_edit: 
+        <<: *tabbed_edit
+
+
+      hancock_backup: &backup
+        title: Бэкапы
+        menu: Бэкапы
+        breadcrumb: Бэкапы
+
+      hancock_backup:
+        <<: *backup
 
 
     logout:

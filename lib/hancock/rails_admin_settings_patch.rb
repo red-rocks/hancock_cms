@@ -47,6 +47,7 @@ module Hancock
       # end
       def self.manager_can_add_actions
         ret = []
+        ret << [:tabbed_edit]
         # ret << :model_accesses if defined?(::RailsAdminUserAbilities)
         ret += [:comments, :model_comments] if defined?(::RailsAdminComments)
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
@@ -58,6 +59,7 @@ module Hancock
 
       def self.rails_admin_add_visible_actions
         ret = manager_can_actions.dup
+        ret << [:tabbed_edit]
         ret << :model_accesses if defined?(::RailsAdminUserAbilities)
         ret += [:comments, :model_comments] if defined?(::RailsAdminComments)
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
@@ -146,13 +148,13 @@ module Hancock
           end
           if ::Settings.table_exists?
             nss = ::RailsAdminSettings::Setting.pluck(:ns).map { |c|
-              next if c =~ /^rails_admin_model_settings_/ and defined?(RailsAdminModelSettings)
+              next if c =~ /^rails_admin_model_settings_/ and Hancock.config.model_settings_support
               "ns_#{c.gsub('-', '_')}".to_sym
             }.compact
           else
             nss = []
           end
-          if defined?(RailsAdminModelSettings)
+          if Hancock.config.model_settings_support
             scopes([:no_model_settings, :model_settings, nil] + nss)
           else
             scopes([nil] + nss)
@@ -299,6 +301,7 @@ module Hancock
 
         end
       end
+  
 
     end
 
@@ -335,4 +338,5 @@ class ::RailsAdminSettings::Namespaced
       _obj.save
     end
   end
+  
 end

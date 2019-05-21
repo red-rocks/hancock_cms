@@ -1,0 +1,6 @@
+- form ||= nil
+- field ||= nil
+- field_type ||= :string
+- options ||= {}
+- html_attributes ||= {}
+= render "rails_admin/main/form_types/#{field.tabbed ? 'form_tabbed' : 'form_simple'}", form: form, field: field, field_type: field_type, options: options, html_attributes: html_attributes

@@ -8,7 +8,7 @@ module Hancock::HtmlField
 
       _html_field_name = "#{name}_html".freeze
       
-      if Hancock::Pages.mongoid?
+      if Hancock.mongoid?
         field _html_field_name, opts
         field "#{name}_clear", type: Boolean, default: clear_by_default, localize: opts[:localize]
       end

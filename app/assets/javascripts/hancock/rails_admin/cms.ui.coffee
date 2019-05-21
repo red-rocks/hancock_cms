@@ -5,7 +5,6 @@
 #= require jquery.sticky-kit.js
 
 #= require ./form_controls_fixed
-#= require ./leftside_hider
 
 #= require ./navigation_dropdown
 #= require ./navigation_scroll
@@ -19,6 +18,9 @@
 #= require ./hancock_hash
 
 #= require ./management
+
+#= require ./hancock_tabbed_edit
+
 
 #= require ./plugins
 

@@ -1,0 +1,23 @@
+/ TODO; goto HANCOCK (RailsAdminModelSettings)
+- if @setting
+  = render partial: "rails_admin/main/object_settings/setting_block", locals: {s: @setting}
+
+- else
+  #rails_admin_model_settings_wrapper
+    = stylesheet_link_tag 'rails_admin/rails_admin_model_settings'
+    = javascript_include_tag 'rails_admin/rails_admin_model_settings'
+
+    span.filter-settings= search_field_tag "filter".freeze
+    - url = object_settings_path(@abstract_model.param_key, id: @object.id, embedded_id: @object._parent&.class&.rails_admin_model)
+    span.navigate-block.update-settings= link_to "обновить".freeze, url, data: {remote: true}
+
+    span.auto-update-block.right-offset
+      label
+        = "Автообновление"
+        = check_box_tag "auto_update", nil, checked: false
+    .clearfix
+
+    #rails_admin_model_settings
+      .controls
+        - @settings.each do |s|
+          = render partial: "rails_admin/main/object_settings/setting_block", locals: {s: s}

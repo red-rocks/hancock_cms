@@ -5,7 +5,7 @@ module Hancock::Errors
     if Rails.env.production? || Rails.env.staging? || (respond_to?(:hancock_check_errors) and hancock_check_errors)
       rescue_from Exception, with: :render_500
       rescue_from ActionController::RoutingError, with: :render_404
-      rescue_from ActionController::UnknownController, with: :render_404
+      # rescue_from ActionController::UnknownController, with: :render_404
       rescue_from ActionController::MissingFile, with: :render_404
       rescue_from AbstractController::ActionNotFound, with: :render_404
       if Hancock.mongoid?

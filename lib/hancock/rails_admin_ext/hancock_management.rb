@@ -16,7 +16,8 @@ module RailsAdmin
         end
 
         register_instance_option :template_name do
-          'hancock_management'
+          # 'hancock_management'
+          'hancock/management'
         end
 
         register_instance_option :controller do

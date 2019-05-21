@@ -1,3 +1,4 @@
+# TODO remove
 require 'rails/generators'
 
 module Hancock::Cms

@@ -1,19 +1,43 @@
-- layout_name           ||= controller.send(:_layout, []) || 'application' rescue 'application'
-- stylesheet_name       ||= layout_name
-- javascript_name       ||= layout_name
-- custom_head_cache_key ||= "layouts/#{layout_name}/custom_head"
-- async = false unless defined?(async) #Rails.env.production?
-- defer = true  unless defined?(defer) #Rails.env.production?
-= stylesheet_link_tag stylesheet_name, media: "all", async: async, defer: defer
-= javascript_include_tag javascript_name, async: async, defer: defer
-/[if lt IE 9]
-= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async, defer: defer
-    
-== hancock_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
+ruby:
+  layout_name           ||= controller.send(:_layout, []) || 'application' rescue 'application'
+  stylesheet_name       ||= layout_name
+  javascript_name       ||= layout_name
+  assets_cache_key      ||= "layouts/#{layout_name}/assets"
+  custom_head_cache_key ||= "layouts/#{layout_name}/custom_head"
+  async = false unless defined?(async) #Rails.env.production?
+  defer = true  unless defined?(defer) #Rails.env.production?
 
-- cache custom_head_cache_key, skip_digest: true do
-  - _cache_keys = [custom_head_cache_key]
+- packs ||= {}
+- css_packs ||= packs[:css] || []
+- js_packs ||= packs[:js] || []
+
+
+= stylesheet_link_tag stylesheet_name, media: "all", async: async, defer: defer
+/ = stylesheet_pack_tag stylesheet_name, media: "all", async: async, defer: defer
+/ - css_packs.each do |css_pack|
+/   = stylesheet_pack_tag css_pack, media: "all", async: async, defer: defer
+
+= javascript_include_tag javascript_name, async: async, defer: defer
+/ = javascript_pack_tag javascript_name, async: async, defer: defer
+/ - js_packs.each do |js_pack|
+/   = javascript_pack_tag js_pack, media: "all", async: async, defer: defer
+
+  /[if lt IE 9]
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async, defer: defer
+
+== hancock_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
+- css = hancock_settings "custom_css", ns: "#{layout_name}_layout", default: '', kind: :css, label: "Дополнительный CSS"
+- js = hancock_settings "custom_js", ns: "#{layout_name}_layout", default: '', kind: :js, label: "Дополнительный JS"
+css:
+  #{{Sass::Engine.new(css, syntax: :scss, style: :compressed).render}}
+javascript:
+  #{{Uglifier.new(harmony: true).compress(js)}}
+
+- if seo_object and seo_object.respond_to?(:get_setting)
+  == seo_object.get_setting("custom_head", kind: 'code', default: '', label: "Дополнительный код в head")
+  - css = seo_object.get_setting("custom_css", kind: 'css', default: '', label: "Дополнительный CSS")
+  - js = seo_object.get_setting("custom_js", kind: 'js', default: '', label: "Дополнительный JS")
   css:
-    #{{Settings.ns("#{layout_name}_layout").custom_css(default: '', kind: :css, label: "Дополнительный CSS", cache_keys: _cache_keys)}}
+    #{{Sass::Engine.new(css, syntax: :scss, style: :compressed).render}}
   javascript:
-    #{{Settings.ns("#{layout_name}_layout").custom_js(default: '', kind: :js, label: "Дополнительный JS", cache_keys: _cache_keys)}}
+    #{{Uglifier.new(harmony: true).compress(js)}}

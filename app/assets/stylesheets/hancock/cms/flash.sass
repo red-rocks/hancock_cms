@@ -1,3 +1,30 @@
+=animation($delay, $duration, $animation)
+  -webkit-animation-delay: $delay
+  -webkit-animation-duration: $duration
+  -webkit-animation-name: $animation
+  -webkit-animation-fill-mode: forwards
+
+  -moz-animation-delay: $delay
+  -moz-animation-duration: $duration
+  -moz-animation-name: $animation
+  -moz-animation-fill-mode: forwards
+
+  -o-animation-delay: $delay
+  -o-animation-duration: $duration
+  -o-animation-name: $animation
+  -o-animation-fill-mode: forwards
+
+  animation-delay: $delay
+  animation-duration: $duration
+  animation-name: $animation
+  animation-fill-mode: forwards
+
+=background($imgpath,$position:0 0,$repeat: no-repeat)
+  background:
+    image: url($imgpath)
+    position: $position
+    repeat: $repeat
+
 @-webkit-keyframes flash-fade-in
   from
     +transform(translate(0px, 50px))
@@ -40,9 +67,7 @@
   bottom: 10px
   margin-left: 0px
   .alert
-    +animation(flash-fade-in 1s)
-    +animation-iteration-count(1)
-    +animation-fill-mode(forwards)
+    +animation(1s, 1, flash-fade-in)
     +transition(all 0.3s ease-in-out)
 
 .flash

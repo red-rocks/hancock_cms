@@ -24,7 +24,8 @@ module RailsAdmin
           end
 
           register_instance_option :partial do
-            :form_hancock_enum_with_custom
+            # :form_hancock_enum_with_custom
+            "hancock/form_enum_with_custom"
           end
 
         end

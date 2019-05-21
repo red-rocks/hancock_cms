@@ -41,24 +41,24 @@ For activerecord, generate migrations and run them
 
 ### Using app generator
 
-Make sure you have rails 5.1 installed
+Make sure you have rails 6.0 installed
 
     rails -v
 
 If not, uninstall rails and install again
 
     gem uninstall rails
-    gem install rails -v 5.1
+    gem install rails -v 6.0
 
 Then, for mongoid:
 
-    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb --skip-javascript
     cd my_app
     rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb --skip-javascript
     cd my_app
     rails g hancock:cms:setup
 

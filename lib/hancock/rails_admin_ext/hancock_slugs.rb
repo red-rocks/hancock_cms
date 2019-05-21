@@ -8,6 +8,18 @@ module RailsAdmin
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types::register(self)
 
+          register_instance_option :allowed_methods do
+            unless localized? 
+              ret = [name] 
+            else
+              ret = [name, translations_field] 
+              # VERY hardfix
+              ret << "_#{translations_field}".to_sym unless translations_field.to_s.starts_with?("_slugs_")
+              ret << translations_field.to_s.sub("_", "").to_sym if translations_field.to_s.starts_with?("_slugs_")
+            end
+            ret.uniq
+          end
+
           register_instance_option :enum_method do
             :slugs
           end

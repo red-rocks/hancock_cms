@@ -17,6 +17,7 @@ $rails-admin-red-color: #C92B32
 @import 'hancock/rails_admin/settings'
 @import 'hancock/rails_admin/tables'
 @import 'hancock/rails_admin/hancock_hash'
+@import 'hancock/rails_admin/hancock_tabbed_edit'
 
 body
   color: #575757
@@ -185,6 +186,14 @@ body.rails_admin .modal .modal-dialog
   margin: 0px 10px 15px
   font-size: 13px
   line-height: 1.8em
+
+
+// TODO
+ul.nav-tabs.locales-tabs
+  li
+    &.active
+      background-color: #0d89ed
+      border-color: #0a6dbd
 
 //.hancock_enum_with_custom_type .ra-multiselect-search, .hancock_array_type .ra-multiselect-search
 //  display: inline-block
@@ -1110,4 +1119,5 @@ body.rails_admin .modal .modal-dialog
 //  margin-right: 10px
 //
 //
-//@import "hancock/rails_admin/plugins"
+@import "hancock/rails_admin/plugins"
+

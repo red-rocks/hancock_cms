@@ -1,0 +1,37 @@
+ruby:
+  path = "public/system/snapshots"
+  snapshots = Dir["./#{path}/snapshot-*"].map { |f| f.gsub("./public", "") }.map do |path|
+    snapshot_name = path.scan(/snapshot\-\d+/)[0]
+    snapshot_id = snapshot_name.split("-")[1]
+    [snapshot_name, path, snapshot_id]
+  end
+  can_backup = true
+  delete_data = { confirm: "Уверены, что хотите удалить бэкап?", pjax: false }
+  backup_data = { confirm: "Уверены, что хотите сделать бэкап?", pjax: false }
+#backup
+  = link_to "обновить", backup_path, data: {pjax: false}
+  ul
+    - snapshots.each do |snapshot|
+      - next if File.size("./public#{snapshot[1]}") == 0
+      - time = Time.at(snapshot[2].to_i)
+      - can_backup = false if time >= 30.minutes.ago
+      / - next if File.size("./public/#{snapshot[1]}") == 0
+      li      
+        / - counter = 0
+        p= "#{snapshot[0]} (#{time}):"
+        - files = Dir["./public#{snapshot[1]}/*"].map { |f| f.gsub("./public", "") }
+        - files.sort_by! do |f| 
+          - ext = File.extname(f)
+          - ext == ".zip" ? "" : ext # "zip" is first
+        - files.each do |f|  
+          - fname = File.basename(f)
+          - next if fname == "*"
+          / - download = snapshot[0].gsub("snapshot-", "snapshot-vg-media-ru-")
+          / - download.gsub!('zip', "z#{counter}")
+          p= link_to fname, f
+          / , download: download
+        = button_to "удалить", backup_path(snapshot: snapshot[2]), method: :delete, data: delete_data
+
+  - if can_backup
+    = button_to "Backup NOW", backup_path, method: :post, data: backup_data
+    = button_to "Mongodump NOW", backup_path(mongodump: 1), method: :post, data: backup_data

@@ -3,14 +3,20 @@ html lang="ru"
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, maximum-scale=1"
-    title= yield(:title) || page_title
+    / title= yield(:title) || page_title
+    - content_for :page_title, hancock_page_title
+    - if defined?(Flutie)
+      / = page_title(app_name: Rails.application.class.name.split('::')[0], separator: " | ")
+      = site_page_title(app_name: hancock_app_name, separator: " | ")
+    - else
+      title= content_for :page_title
     = yield :meta
     = csrf_meta_tags
     
     / - cache 'favicons', skip_digest: true do
-    /   = render partial: 'blocks/favicon'    
+    /   = render partial: 'blocks/favicon'
 
-    = render partial: 'hancock/assets'          
+    = render partial: 'hancock/assets'
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
 

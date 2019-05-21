@@ -16,8 +16,13 @@ module RailsAdmin
             true
           end
 
+          register_instance_option :partial do
+            "hancock/array".freeze
+          end
+
           register_instance_option :element_partial do
-            "rails_admin/main/hancock_array/#{partial_name}".freeze
+            # "rails_admin/main/hancock_array/#{partial_name}".freeze
+            "rails_admin/main/hancock/array/#{partial_name}".freeze
           end
 
           register_instance_option :partial_name do

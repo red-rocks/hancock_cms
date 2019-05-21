@@ -61,7 +61,11 @@ module RailsAdmin
             (clear_method.to_s + '_translations').to_sym
           end
 
-          register_instance_option :form_value do
+          # register_instance_option :form_value do
+          register_instance_option :value do
+            form_value
+          end
+          def form_value
             if localized?
               {
                 html: bindings[:object].send(html_translations_field),
@@ -85,7 +89,8 @@ module RailsAdmin
           end
 
           register_instance_option :partial do
-            localized? ? :hancock_html_ml : :hancock_html
+            # localized? ? :hancock_html_ml : :hancock_html
+            localized? ? "hancock/html_ml" : "hancock/html"
           end
         end
       end

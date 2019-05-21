@@ -4,9 +4,6 @@ module RailsAdmin
     module Fields
 
       class Group
-        register_instance_option :leftside_hider do
-          true
-        end
       end
 
     end

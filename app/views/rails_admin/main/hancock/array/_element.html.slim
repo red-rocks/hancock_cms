@@ -8,7 +8,8 @@
   /= link_to "#", class: "array_element_move_link array_element_move_down_link down", tabindex: -1 do
   /  span
 
-  button{class='btn btn-remove array_element_delete_link' tabindex='-1' title='Удалить'}
+  / button{class='btn btn-remove array_element_delete_link' tabindex='-1' title='Удалить'}
+  a{class='btn btn-remove array_element_delete_link' tabindex='-1' title='Удалить' href="javascript:void(0);"}
     i.fa.fa-trash
   .sorting
     button{class="btn array_element_move_link array_element_move_up_link up" tabindex="-1" title="Вверх"}

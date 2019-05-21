@@ -45,7 +45,8 @@ module RailsAdmin
 
 
           register_instance_option :element_partial do
-            "rails_admin/main/hancock_hash/#{partial_name}".freeze if partial_name
+            # "rails_admin/main/hancock_hash/#{partial_name}".freeze if partial_name
+            "rails_admin/main/hancock/hash/#{partial_name}".freeze if partial_name
           end
 
           register_instance_option :partial_name do
@@ -138,7 +139,8 @@ module RailsAdmin
           end
 
           register_instance_option :partial do
-            localized? ? :hancock_hash_ml : :hancock_hash
+            # localized? ? :hancock_hash_ml : :hancock_hash
+            localized? ? "hancock/hash_ml" : "hancock/hash"
           end
         end
       end

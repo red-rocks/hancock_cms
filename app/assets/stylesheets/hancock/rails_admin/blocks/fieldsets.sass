@@ -5,9 +5,6 @@
 @import 'hancock/rails_admin/blocks/fieldsets/insertions'
 @import 'hancock/rails_admin/blocks/fieldsets/hash_element'
 
-.leftside_hider
-  display: none !important
-
 .form-horizontal
   margin-bottom: 24px
   background-color: #fff
@@ -295,33 +292,9 @@ body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields
 .CodeMirror
   +border-radius(3px)
 
-fieldset.default.hover, fieldset.default_fieldset
-  > .leftside_hider
-    opacity: 0
-
-fieldset.hover
-  > .leftside_hider
-    opacity: 1.0
-
 fieldset
   +transition(all 0.3s)
   position: relative
-  > .leftside_hider
-    overflow: hidden
-    width: 30px
-    position: absolute
-    top: 30px
-    bottom: 0px
-    background: rgba(100,100,100,0.05)
-    cursor: pointer
-    padding: 10px 0px
-    z-index: 9
-    opacity: 0
-    +transition(background 0.3s, opacity 0.2s)
-    &:hover
-      background: rgba(100,100,100,0.1)
-    &:active
-      background: rgba(100,100,100,0.075)
   .scroll_fieldset_block
     overflow: visible
     position: absolute

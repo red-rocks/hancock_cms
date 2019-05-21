@@ -68,6 +68,24 @@ module Hancock
         _context._current_user and _context._current_user.admin?
       })
 
+      if Hancock.config.model_settings_support
+        action_visible_for(:object_settings, Proc.new { |config|
+          bindings = (config and config.bindings)
+          abstract_model = (bindings and bindings[:abstract_model])
+          !!(abstract_model and abstract_model.model.relations.has_key?("settings"))
+        })
+      end
+      
+      action_visible_for(:hancock_tabbed_edit, Proc.new { true })
+
+      action_visible_for(:hancock_backup, Proc.new {  |config|
+        bindings = (config and config.bindings)
+        _context = (bindings and (bindings[:controller] || bindings[:view]))
+        _context._current_user and _context._current_user.admin?
+      })
+      
+      
+
     end
 
     def add_action(action_name)
