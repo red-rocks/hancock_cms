@@ -37,8 +37,6 @@
             - unless @recaptcha_error.blank?
               h4.error.g-recaptcha-error= @recaptcha_error
             = recaptcha_tags
-          - elsif Hancock.config.simple_captcha_support
-            = f.input :captcha, as: :simple_captcha, label: false
 
         = f.submit I18n.t("shared.enter")
 

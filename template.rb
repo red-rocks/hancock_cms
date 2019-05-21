@@ -82,7 +82,6 @@ gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_set
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/oleg/redrocks/hancock_cms"
 
 # gem 'recaptcha', require: 'recaptcha/rails'
-# gem 'glebtv-simple_captcha'
 
 # gem 'responders', '~> 2.0'
 gem 'responders', github: 'king601/responders'

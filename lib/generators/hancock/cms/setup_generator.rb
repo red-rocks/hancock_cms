@@ -247,10 +247,6 @@ end
 end
 end
 
-# unless mongoid
-#   generate 'simple_captcha'
-# end
-
 # gsub_file 'config/secrets.yml', 'secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>', "secret_key_base: <%= ENV['#{app_name.underscore.upcase}_SECRET_KEY_BASE'] %>"
 
 

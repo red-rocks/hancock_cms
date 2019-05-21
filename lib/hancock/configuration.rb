@@ -54,7 +54,6 @@ module Hancock
     attr_accessor :admin_enter_captcha
     attr_accessor :registration_captcha
     attr_accessor :recaptcha_support
-    attr_accessor :simple_captcha_support
 
     attr_accessor :model_settings_support
 
@@ -81,11 +80,10 @@ module Hancock
       @ability_admin_config = []
 
       @recaptcha_support = !!defined?(Recaptcha)
-      @simple_captcha_support = !!defined?(SimpleCaptcha)
 
       @model_settings_support = !!(defined?(RailsAdminModelSettings))
 
-      @admin_enter_captcha = @recaptcha_support or @simple_captcha_support
+      @admin_enter_captcha = @recaptcha_support
       @registration_captcha = @admin_enter_captcha
 
       @captcha_on_development = false

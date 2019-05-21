@@ -27,9 +27,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'jquery-rails'
   spec.add_dependency 'simple_form'
 
-  # spec.add_dependency 'glebtv-simple_captcha'
-  # spec.add_dependency 'galetahub-simple_captcha'
-
   spec.add_dependency 'coffee-rails'
   spec.add_dependency 'uglifier'
   
