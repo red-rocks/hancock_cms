@@ -4,12 +4,12 @@ html lang="ru"
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, maximum-scale=1"
     / title= yield(:title) || page_title
-    - content_for :page_title, hancock_page_title
+    - content_for :site_page_title, hancock_page_title
     - if defined?(Flutie)
       / = page_title(app_name: Rails.application.class.name.split('::')[0], separator: " | ")
-      = site_page_title(app_name: hancock_app_name, separator: " | ")
+      title= site_page_title(app_name: hancock_app_name, separator: " | ")
     - else
-      title= content_for :page_title
+      title= content_for :site_page_title
     = yield :meta
     = csrf_meta_tags
     
@@ -19,7 +19,7 @@ html lang="ru"
     = render partial: 'hancock/assets'
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
-
+  
     - cache 'preloader', skip_digest: true do
       = render partial: 'blocks/preloader'
       

@@ -28,7 +28,11 @@ module Hancock::Controller
   end
 
   def hancock_page_title
-    defined?(::Settings) ? ::Settings.default_title : "" #temp
+    _page_title = page_title
+    if _page_title.blank?
+      _page_title = (defined?(::Settings) ? ::Settings.default_title : "") #temp
+    end
+    _page_title
   end
   def hancock_app_name
     hancock_settings(
