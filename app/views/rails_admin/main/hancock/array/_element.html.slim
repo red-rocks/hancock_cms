@@ -1,18 +1,18 @@
 .array_element_block
   = form.text_field field.method_name, value: val, multiple: true, data: field.element_data
 
-  /= link_to "#", class: "array_element_delete_link", tabindex: -1 do
+  /= link_to "#", class: "array_element_delete_link", tabindex: 0 do
   /  span
-  /= link_to "#", class: "array_element_move_link array_element_move_up_link up", tabindex: -1 do
+  /= link_to "#", class: "array_element_move_link array_element_move_up_link up", tabindex: 0 do
   /  span
-  /= link_to "#", class: "array_element_move_link array_element_move_down_link down", tabindex: -1 do
+  /= link_to "#", class: "array_element_move_link array_element_move_down_link down", tabindex: 0 do
   /  span
 
-  / button{class='btn btn-remove array_element_delete_link' tabindex='-1' title='Удалить'}
-  a{class='btn btn-remove array_element_delete_link' tabindex='-1' title='Удалить' href="javascript:void(0);"}
+  / button{class='btn btn-remove array_element_delete_link' tabindex='0' title='Удалить'}
+  a{class='btn btn-remove array_element_delete_link' tabindex='0' title='Удалить' href="javascript:void(0);"}
     i.fa.fa-trash
   .sorting
-    button{class="btn array_element_move_link array_element_move_up_link up" tabindex="-1" title="Вверх"}
+    button{class="btn array_element_move_link array_element_move_up_link up" tabindex="0" title="Вверх"}
       i.fa.fa-caret-up
-    button{class="btn array_element_move_link array_element_move_down_link down" tabindex="-1" title="Вниз"}
+    button{class="btn array_element_move_link array_element_move_down_link down" tabindex="0" title="Вниз"}
       i.fa.fa-caret-down

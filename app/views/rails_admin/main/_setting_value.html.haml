@@ -46,9 +46,11 @@
 
     = javascript_include_tag "rich/base.js"
     :javascript
-      var instance = CKEDITOR.instances['#{form.dom_id(field)}'];
-      if(instance) { CKEDITOR.remove(instance); }
-      CKEDITOR.replace('#{form.dom_id(field)}', #{Rich.options().to_json.html_safe});
+      if(window.CKEDITOR){
+        var instance = window.CKEDITOR.instances['#{form.dom_id(field)}'];
+        if(instance) { window.CKEDITOR.remove(instance); }
+        window.CKEDITOR.replace('#{form.dom_id(field)}', #{Rich.options().to_json.html_safe});
+      }
   - else
     .alert.alert-error
       = t('admin.settings.no_ckeditor_detected')

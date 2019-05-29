@@ -4,7 +4,7 @@
 
 #= require jquery.sticky-kit.js
 
-#= require ./form_controls_fixed
+# require ./form_controls_fixed
 
 #= require ./navigation_dropdown
 #= require ./navigation_scroll
