@@ -1,1 +1,31 @@
-// @import "global/fonts"
+=font-face($font-family, $file-path, $font-weight: normal, $font-style: normal)
+  @font-face
+    font-family: $font-family
+    src:  font-path('#{$file-path}.eot')
+    src:  font-path('#{$file-path}.eot?#iefix') format('embedded-opentype'), font-path('#{$file-path}.woff') format('woff'), font-path('#{$file-path}.woff2') format('woff2'), font-path('#{$file-path}.ttf') format('truetype'), font-path('#{$file-path}.svg') format('svg')
+    font-weight: $font-weight
+    font-style: $font-style
+
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-ExtraBold',        800,       normal)
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-ExtraBoldItalic',  800,       italic)
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-Regular',          normal,    normal)
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-RegularItalic',    normal,    italic)
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-Light',            300,       normal)
+@include font-face("Montserrat",  'app/Montserrat/Montserrat-LightItalic',      300,       italic)
+
+html
+  -moz-font-smoothing: antialiased
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+.bold
+  font-weight: 800
+
+.normal
+  font-weight: 400
+
+.light
+  font-weight: 300
+
+.italic
+  font-style: italic

@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'devise'
 
-  # spec.add_dependency 'ckeditor'
   spec.add_dependency 'geocoder'
 
   spec.add_dependency 'rails_admin'#, '1.3.0'
@@ -52,4 +51,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'stickykit-rails'
 
   spec.add_dependency 'rails_admin_jsoneditor'
+
 end

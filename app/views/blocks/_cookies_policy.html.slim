@@ -1,0 +1,12 @@
+- unless session[:cookies_notification_was_accepted]
+  #cookie-notice.mui-panel
+    .container.mui-container
+
+      = hancock_settings(key: 'cookies_policy_excerpt', ns: 'cookies_policy', label: "Cookies") do
+        p
+          = 'Этот сайт использует cookie для хранения данных. '
+          = 'Продолжая использовать сайт, вы даёте своё согласие на работу с этими файлами. '
+
+          = button_to "Хорошо", cookies_policy_accept_path, form: {id: 'cookies_policy_accept'}, remote: true, title: 'Подтвердить', class: 'cookie-notice-button mui-btn mui-btn--small mui-btn--primary'
+
+          = link_to "Что это значит?", cookies_policy_path, title: 'Подробнее', class: 'cookie-notice-button mui-btn mui-btn--small'

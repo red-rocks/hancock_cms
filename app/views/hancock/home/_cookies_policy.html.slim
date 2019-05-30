@@ -1,6 +1,0 @@
-- unless session[:cookies_notification_was_accepted]
-  #cookies_policy
-    p
-      | cookies_policy_excerpt
-    = button_to "хорошо", cookies_policy_accept_path, form: {id: 'cookies_policy_accept'}, remote: true
-    = link_to "текст", cookies_policy_path 

@@ -1,1 +1,13 @@
-p = Settings.copyright(default: "© Copyright {{year|#{Time.now.year}}} | Etc", kind: :html).html_safe
+.container.mui-container.mui-container-fluid
+  .mui-row
+    .mui-col-xs-12.mui-col-md-4
+      nav#footer-navigation
+        ul#footer-menu
+          = render partial: 'blocks/privacy_policy'
+
+    .mui-col-xs-12.mui-col-md-4
+      p.copyright
+        = Settings.copyright(default: "© Copyright {{year|#{Time.now.year}}} | All Rights Reserved", kind: :html).html_safe
+
+    .mui-col-xs-12.mui-col-md-4
+      = render partial: 'blocks/created_by'
