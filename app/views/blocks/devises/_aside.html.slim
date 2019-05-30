@@ -1,0 +1,14 @@
+header
+  .container
+.content
+  .container
+    h3 Добро пожаловать!
+    h4 Сайт находится под управлением Hancock CMS
+footer
+  .container
+    = render partial: "blocks/privacy_policy"
+    = link_to "Связаться с разработчиком", "//redrocks.pro/contacts", title: "Перейти на сайт разработчика", target: "_blank"
+
+  .hancock-cms-link
+    = link_to "Hancock v.#{Hancock::VERSION}", "https://github.com/red-rocks/hancock_cms", title: "Информация по Hancock CMS", target: "_blank"
+    span = " © 2016-#{Time.new.year}"

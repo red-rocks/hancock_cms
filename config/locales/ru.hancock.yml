@@ -24,6 +24,9 @@ ru:
       access_denied: "Доступ запрещен"
       not_found: 'Запрашиваемая страница была удалена, или введён некорректный адрес'
 
+    sessions:
+      new:
+        sign_in: Войти
 
   shared:
     enter_site: Войти на сайт
@@ -37,3 +40,4 @@ ru:
     are_you_robot: "Вы робот?"
     incorrect_email_or_password: "Неверный e-mail или пароль"
     enter_site_error: Необходимо авторизоваться
+

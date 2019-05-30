@@ -1,188 +1,142 @@
-$red-color: "#F00"
-$green-color: "#0F0"
-$blue-color: "#00F"
+body.devise
+  background: $white
+  +display-flex()
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
+  flex-direction: column
+  color: $black
 
-#content.devise
-  position: fixed
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  padding: 0
-  margin: 0%
-  background: #fafafa
-  text-align: center
-  #logo
-    margin-bottom: 25px
-    margin-top: -80px
-    max-width: 180px
-    max-height: none
-    width: auto
-    height: auto
-    img
-      max-height: none
-      max-width: 100%
+  #root
+    +display-flex()
+    -webkit-box-flex: 1
+    -ms-flex: 1 0 auto
+    flex: 1 0 auto
+    -webkit-box-orient: horizontal
+    -webkit-box-direction: normal
+    -ms-flex-direction: row
+    flex-direction: row
 
-.devise-background
-  background: #333C44 image-url("hancock/devise/devise.jpg")
-  // +cover-image()
-  // +absolute-block(0,0,0,0)
-  z-index: 0
-
-.devise-box
-  position: absolute
-  top: 50%
-  left: 50%
-  +transform(translate(-50%, -50%))
-  width: auto
-  height: auto
-  .white-box
-    background: rgba(255,255,255,0.9)
-  .header-box
-    background: #e21e26
-    text-transform: uppercase
-    color: #ffffff
-    padding: 7px 15px
-    border-bottom: 1px darken(#e21e26, 10%)
-    font-size: 12px
-    font-weight: bold
-  .simple_form
-    padding: 15px
-    color: #666666
-    text-align: left
-    min-width: 300px
-  .form-group.links > .link-to-recover
-    text-align: right
-  .form-group.links > .link-to-recover.center
-    text-align: center
-    width: 100%
-  .form-group.links > *
-    min-width: 200px
-    width: 50%
-    display: inline-block
-    vertical-align: top
-    height: 30px
-    line-height: 30px
-    a
-      text-decoration: none
-      color: #666666
-      text-decoration: underline
-      +transition(all 0.2s ease-in)
-      &:hover
-        color: $blue-color
-  .form-group:not(.links)
-    .input
-      position: relative
-    input
-      position: relative
-      z-index: 1
-      color: #333333
-      margin: 0
-      padding: 20px 0px 5px
-      border: 0px
-      border-bottom: 1px solid #666666
-      background: transparent
-      +transition(all 0.2s ease-in)
-      width: 100%
-    label
-      position: absolute
-      left: 0
-      top: 19px
-      z-index: 0
-      color: #666666
-      opacity: 0.66
-      +transform(translateY(0) scale(1))
-      +transition(all 0.2s ease-in)
-      -webkit-transform-origin: left center
-      -moz-transform-origin: left center
-      -o-transform-origin: left center
-      -ms-transform-origin: left center
-      transform-origin: left center
-    .input.opened input~label, input:valid~label, input:focus~label
-      opacity: 1
-      +transform(translateY(-20px) scale(0.8))
-    .input.opened input, input:valid, input:focus
-      border-bottom: 1px solid #666666
-    .input.field_with_errors
-      input
-        border-bottom: 1px solid $red-color
-      input~label
-        color: $red-color
-      span.error
-        padding: 1px 3px
+  .aside
+    +display-flex()
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
+    flex-direction: column
+    -webkit-box-pack: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-box-align: center
+    -ms-flex-align: center
+    align-items: center
+    -webkit-box-flex: 1
+    -ms-flex: 1 0 auto
+    flex: 1 0 auto
+    max-width: 605px
+    padding: 48px 56px
+    background-image: image-url("hancock/devise/devise.jpg")
+    +cover-image()
+    header
+      -webkit-box-flex: 0
+      -ms-flex: none
+      flex: none
+    .content
+      -webkit-box-flex: 1
+      -ms-flex: 1 0 auto
+      flex: 1 0 auto
+      +display-flex()
+      -webkit-box-orient: vertical
+      -webkit-box-direction: normal
+      -ms-flex-direction: column
+      flex-direction: column
+      -webkit-box-pack: center
+      -ms-flex-pack: center
+      justify-content: center
+    footer
+      -webkit-box-flex: 0
+      -ms-flex: none
+      flex: none
+      .container
+        +display-flex()
+        -webkit-box-pack: justify
+        -ms-flex-pack: justify
+        justify-content: space-between
+      a
         font-size: 12px
-        color: $red-color
-        position: absolute
-        left: 50%
-        bottom: -20px
-        white-space: nowrap
-        z-index: 2
-        +transform(translateX(-50%))
+        text-decoration: none
+        margin-right: 32px
+        display: inline-block
+        color: rgba(255, 255, 255, 0.7)
+        position: relative
+        &:after
+          display: block
+          content: ''
+          position: absolute
+          bottom: 0
+          top: 16px
+          left: 0
+          width: 0%
+          +transition(width 0.3s ease)
+      a:hover
+        color: $white
+        &:after
+          border-bottom: 1px solid $white
+          opacity: 0.3
+          width: 100%
 
-  .form-group.links
-    margin-top: 25px
-  .actions
+
+  h3
+    color: $white
+    font-size: 32px
+    font-weight: 500
+
+  h4
+    font-size: 18px
+    font-weight: 300
+    margin: 24px 0 56px 0
+    color: rgba(255, 255, 255, 0.7)
+
+  #content
+    -webkit-box-flex: 1
+    flex: 1 auto
+    -ms-flex: 1 0 0px
+    min-width: 0
+    padding: 48px 48px
+    background: $white
+    max-width: 100%
+    +display-flex
+    -webkit-box-orient: vertical
+    -webkit-box-direction: normal
+    -ms-flex-direction: column
+    flex-direction: column
+    -webkit-box-pack: center
+    -ms-flex-pack: center
+    justify-content: center
+    -webkit-box-align: center
+    -ms-flex-align: center
+    align-items: center
+
+  h2
+    font-size: 32px
+    color: #67666e
+    font-weight: 500
+    margin-bottom: 80px
+
+  form
+    width: 100%
+    max-width: 450px
+    .actions
+      +display-flex()
+      -webkit-box-pack: justify
+      -ms-flex-pack: justify
+      justify-content: space-between
+      -webkit-box-align: center
+      -ms-flex-align: center
+      align-items: center
+      margin: 3rem 0
+
+  .hancock-cms-link
     text-align: center
-    padding: 15px
-
-  .simple_form
-    .form-group .checkbox-primary label
-      cursor: pointer
-      white-space: nowrap
-    .form-group .checkbox-primary .checkbox input
-      opacity: 0
-      position: absolute
-    .checkbox, .link-to-recover
-      font-size: 15px
-    .checkbox input+span
-      position: relative
-      display: inline-block
-      margin-top: -2px
-      margin-right: 5px
-      vertical-align: middle
-      width: 36px
-      height: 20px
-      background-color: #aaaaaa
-      +border-radius(30px)
-      +transition(background-color .4s)
-      &:after
-        position: absolute
-        content: ""
-        top: 2px
-        bottom: 2px
-        left: 2px
-        width: 16px
-        background-color: #fff
-        +border-radius(50%)
-        +box-shadow(1px 0 3px rgba(0,0,0,0.1))
-        +transition(background-color .15s)
-    .checkbox input:checked+span
-      background-color: #e21e26
-      &:after
-        +box-shadow(-2px 0 3px rgba(0,0,0,0.2))
-        +transform(translateX(15px))
-
-
-.hancock-cms-link
-  position: fixed
-  bottom: 0
-  left: 50%
-  +transform(translateX(-50%))
-  padding: 10px
-  font-weight: bold
-  color: #ffffff
-  text-shadow: 1px 2px 4px #28A828
-  a
-    color: #ffffff
-    text-decoration: none
-    +transition(all 0.2s ease-in)
-    &:hover
-      color: #333333
-
-.change-email-link
-  font-size: 14px
-  font-weight: bold
-  color: #666666
-  +transition(all 0.2s ease-in)
-  &:hover
-    color: #2584C5
+    font-size: 12px
+    padding: 20px 0px 0px
+    color: rgba(255,255,255,0.8)

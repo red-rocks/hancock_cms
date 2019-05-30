@@ -7,8 +7,8 @@ html lang="ru"
     = yield :meta
     = csrf_meta_tags
     
-    / - cache 'favicons', skip_digest: true do
-    /   = render partial: 'blocks/favicon'
+    - cache 'favicons', skip_digest: true do
+      = render partial: 'blocks/favicon'
     
     - async = false #Rails.env.production?
     - defer = false #Rails.env.production?    
@@ -17,9 +17,12 @@ html lang="ru"
     /[if lt IE 9]
       = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", defer: defer
       
-  body
+  body.devise
     #preloader
     #root
-      = render 'shared/messages'
-      #content.devise
+      .aside
+        = render partial: 'blocks/devises/aside'
+      #content
         = yield
+
+    = render 'shared/messages'
