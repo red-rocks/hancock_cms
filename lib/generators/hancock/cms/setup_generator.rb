@@ -458,9 +458,9 @@ class User
     ###########################################################################
   end
   
-  include Hancock::User::Devise if defined?(Devise)
+  include Hancock::Users::Devise if defined?(Devise)
 
-  include Hancock::User::Roles
+  include Hancock::Users::Roles
   def self.default_admin_email;    "admin@#{app_name.dasherize.downcase}.ru"; end
   def self.default_manager_email;  "manager@#{app_name.dasherize.downcase}.ru"; end
 
@@ -482,9 +482,9 @@ class User
 
 
   attr_accessor :token_2fa # i thunk it will be shared
-  include Hancock::User::Authy if defined?(Authy)
+  include Hancock::Users::Authy if defined?(Authy)
 
-  include Hancock::User::GoogleAuthenticator if defined?(GoogleAuthenticatorRails)
+  include Hancock::Users::GoogleAuthenticator if defined?(GoogleAuthenticatorRails)
   
 end
 

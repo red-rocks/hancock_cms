@@ -1,4 +1,4 @@
-module Hancock::User::GoogleAuthenticator
+module Hancock::Users::GoogleAuthenticator
   extend ActiveSupport::Concern
 
   included do 

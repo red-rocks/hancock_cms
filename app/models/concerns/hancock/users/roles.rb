@@ -1,4 +1,4 @@
-module Hancock::User::Roles
+module Hancock::Users::Roles
   extend ActiveSupport::Concern
 
   included do
