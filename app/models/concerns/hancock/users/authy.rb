@@ -1,4 +1,4 @@
-module Hancock::User::Authy
+module Hancock::Users::Authy
   extend ActiveSupport::Concern
 
   included do

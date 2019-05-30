@@ -1,3 +1,6 @@
+= stylesheet_link_tag 'rails_admin/medium-editor'
+= javascript_include_tag 'rails_admin/medium-editor'
+
 ul.nav.nav-tabs.locales-tabs
   - uuid = "#{field.name}_#{field.object_id}_unique_id"
   - I18n.available_locales.each do |locale|
@@ -16,7 +19,7 @@ ul.nav.nav-tabs.locales-tabs
             config_options: field.config_options.to_json
           }
 
-        = form.text_area field.html_method_name, field.html_attributes.reverse_merge(data: { richtext: 'medium-editor', options: js_data.to_json }).reverse_merge({ value: field.form_value[:html] })
+        = form.text_area field.html_method, field.html_attributes.reverse_merge(data: { richtext: 'medium-editor', options: js_data.to_json }).reverse_merge({ value: field.form_value[:html] })
 
 
 javascript:

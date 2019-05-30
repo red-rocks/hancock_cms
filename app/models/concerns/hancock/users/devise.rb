@@ -1,4 +1,4 @@
-module Hancock::User::Devise
+module Hancock::Users::Devise
   extend ActiveSupport::Concern
 
   included do
