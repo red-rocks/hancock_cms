@@ -10,4 +10,4 @@
 #= require ./cms/map
 #= require ./cms/flash
 #= require ./cms/cookies
-#= require ./cms/devise
+#= require hancock/cms/devise

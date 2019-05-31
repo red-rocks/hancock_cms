@@ -31,6 +31,7 @@ generate "simple_form:install" if ["yes", "y"].include?(ask_with_timeout("genera
 
 generate "devise:install" if ["yes", "y"].include?(ask_with_timeout("generate `devise:install`?(y or yes)").downcase.strip)
 gsub_file 'config/initializers/devise.rb', "'please-change-me-at-config-initializers-devise@example.com'", "'noreply@#{app_name.dasherize.downcase}.ru'"
+gsub_file 'config/initializers/devise.rb', "# config.mailer = 'Devise::Mailer'", "config.mailer = 'Hancock::DeviseMailer'"
 
 if ["yes", "y"].include?(ask_with_timeout("Set Hancock's layout for devise? (y or yes)").downcase.strip)
 _sessions_layout      = Devise::SessionsController._layout       == "hancock/devise/sessions"
@@ -62,7 +63,13 @@ if ["yes", "y"].include?(ask_with_timeout("Set Hancock's routes? (y or yes)").do
 remove_file 'config/routes.rb'
 create_file 'config/routes.rb' do <<-TEXT
 Rails.application.routes.draw do
-  devise_for :users, controllers: {sessions: 'hancock/sessions'}
+  devise_for :users, controllers: {
+    sessions:       'hancock/sessions',
+    registrations:  'hancock/registrations',
+    passwords:      'hancock/passwords',
+    unlocks:        'hancock/unlocks'
+  }
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   hancock_cms_routes
 end

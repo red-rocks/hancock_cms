@@ -8,3 +8,6 @@ gem 'devise', github: 'plataformatec/devise', branch: '5-rc'
 
 # gem "rails_admin_jsoneditor"
 gem "rails_admin_jsoneditor", git: "https://github.com/red-rocks/rails_admin_advanced_json_editor"
+
+# gem "hancock_devise"
+gem "hancock_devise", git: "https://gitlab.com/redrocks/hancock_devise"

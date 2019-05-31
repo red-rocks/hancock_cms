@@ -34,7 +34,7 @@ ru:
         <<: *tabbed_edit
 
 
-      hancock_backup: &backup
+      backup: &backup
         title: Бэкапы
         menu: Бэкапы
         breadcrumb: Бэкапы

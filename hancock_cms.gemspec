@@ -31,7 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'uglifier'
   
 
-  spec.add_dependency 'devise'
+  # spec.add_dependency 'devise'
+  spec.add_dependency 'hancock_devise'
 
   # spec.add_dependency 'ckeditor'
   spec.add_dependency 'geocoder'
