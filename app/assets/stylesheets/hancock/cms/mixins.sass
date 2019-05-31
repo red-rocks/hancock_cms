@@ -1,110 +1,374 @@
-=transition($transition...)
-  -moz-transition:    $transition
-  -o-transition:      $transition
-  -webkit-transition: $transition
-  transition:         $transition
+/* -------------------------------------------------------------
+ *  Sass CSS3 Mixins! The Cross-Browser CSS3 Sass Library
+ *  By: Matthieu Aussaguel, http://www.mynameismatthieu.com, @matthieu_tweets
+ *
+ *  List of CSS3 Sass Mixins File to be @imported and @included as you need
+ *
+ *  The purpose of this library is to facilitate the use of CSS3 on different browsers avoiding HARD TO READ and NEVER
+ *  ENDING css files
+ *
+ *  note: All CSS3 Properties are being supported by Safari 5
+ *  more info: http://www.findmebyip.com/litmus/#css3-properties
+ *
+ *-------------------------------------------------------------
 
-=transition-property($property...)
-  -moz-transition-property:    $property
-  -o-transition-property:      $property
-  -webkit-transition-property: $property
-  transition-property:         $property
+////
+/// @author Matthieu Aussaguel
+/// @group sass-css3-mixins
+////
 
-=transition-duration($duration...)
-  -moz-transition-property:    $duration
-  -o-transition-property:      $duration
-  -webkit-transition-property: $duration
-  transition-property:         $duration
+/// Adds a browser prefix to the property
+/// @param {*} $property Property
+/// @param {*} $value Value
 
-=transition-timing-function($timing...)
-  -moz-transition-timing-function:    $timing
-  -o-transition-timing-function:      $timing
-  -webkit-transition-timing-function: $timing
-  transition-timing-function:         $timing
+=css3-prefix($property, $value)
+  -webkit-#{$property}: #{$value}
+  -khtml-#{$property}: #{$value}
+  -moz-#{$property}: #{$value}
+  -ms-#{$property}: #{$value}
+  -o-#{$property}: #{$value}
+  #{$property}: #{$value}
 
-=transition-delay($delay...)
-  -moz-transition-delay:    $delay
-  -o-transition-delay:      $delay
-  -webkit-transition-delay: $delay
-  transition-delay:         $delay
+/// Background Gradient
+/// @param {Color} $startColor [#3C3C3C] - Start Color
+/// @param {Color} $endColor [#999999] - End Color
 
-=box-shadow($shadow...)
-  -webkit-box-shadow: $shadow
-  box-shadow: $shadow
-  -moz-box-shadow: $shadow
-  -o-box-shadow: $shadow
+=background-gradient($startColor: #3C3C3C, $endColor: #999999)
+  background-color: $startColor
+  background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor))
+  background-image: -webkit-linear-gradient(top, $startColor, $endColor)
+  background-image: -moz-linear-gradient(top, $startColor, $endColor)
+  background-image: -ms-linear-gradient(top, $startColor, $endColor)
+  background-image: -o-linear-gradient(top, $startColor, $endColor)
+  background-image: linear-gradient(top, $startColor, $endColor)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}')
 
-=border-radius($radius)
-  -webkit-border-radius: $radius
-  -moz-border-radius:    $radius
-  -ms-border-radius:     $radius
-  border-radius:         $radius
+/// Background Horizontal
+/// @param {Color} $startColor [#3C3C3C] - Start Color
+/// @param {Color} $endColor [#999999] - End Color
+
+=background-horizontal($startColor: #3C3C3C, $endColor: #999999)
+  background-color: $startColor
+  background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor))
+  background-image: -webkit-linear-gradient(left, $startColor, $endColor)
+  background-image: -moz-linear-gradient(left, $startColor, $endColor)
+  background-image: -ms-linear-gradient(left, $startColor, $endColor)
+  background-image: -o-linear-gradient(left, $startColor, $endColor)
+  background-image: linear-gradient(left, $startColor, $endColor)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', gradientType='1')
+
+/// Background Horizontal - inverse direction
+/// @param {Color} $startColor [#999999] - Start Color
+/// @param {Color} $endColor [#3C3C3C] - End Color
+
+=background-horizontal-inverse($startColor: #999999, $endColor: #3C3C3C)
+  background-color: $startColor
+  background-image: -webkit-gradient(linear, right top, left top, from($startColor), to($endColor))
+  background-image: -webkit-linear-gradient(right, $startColor, $endColor)
+  background-image: -moz-linear-gradient(right, $startColor, $endColor)
+  background-image: -ms-linear-gradient(right, $startColor, $endColor)
+  background-image: -o-linear-gradient(right, $startColor, $endColor)
+  background-image: linear-gradient(right, $startColor, $endColor)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$endColor}', endColorStr='#{$startColor}', gradientType='1')
+
+/// Background Radial
+/// @param {Color} $startColor [#3C3C3C] - Start Color
+/// @param {Percentage} $startPos [0%] - Start position
+/// @param {Color} $endColor [#999999] - End Color
+/// @param {Percentage} $endPos [100%] - End position
+
+=background-radial($startColor: #FFFFFF, $startPos: 0%, $endColor: #000000, $endPos: 100%)
+  background: -moz-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($startPos, $startColor), color-stop($endPos, $endColor))
+  background: -webkit-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
+  background: -o-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
+  background: -ms-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
+  background: radial-gradient(ellipse at center, $startColor $startPos, $endColor $endPos)
+
+/// Background Size
+/// @param {Size} $width [100%] - Width
+/// @param {Size} $width [$width] - Height
+/// @require {mixin} css3-prefix
+
+=background-size($width: 100%, $height: $width)
+  @if type-of($width) == "number" and $height != null
+    +css3-prefix("background-size", $width $height)
+  @else
+    +css3-prefix("background-size", $width)
+
+/// Background Color Opacity
+/// @param {Color} $color [100%] - Color
+/// @param {Double} $opacity [0.85] - Opacity
+
+=background-opacity($color: #000, $opacity: 0.85)
+  background: $color
+  background: rgba($color, $opacity)
+
+/// Border Radius
+/// @param {Size} $radius [5px] - Radius
+/// @require {mixin} css3-prefix
+
+=border-radius($radius: 5px)
+  +css3-prefix("border-radius", $radius)
+
+/// Border Radius Separate
+/// @param {Size} $topLeftRadius [5px] - Top Left
+/// @param {Size} $topRightRadius [5px] - Top Right
+/// @param {Size} $bottomLeftRadius [5px] - Bottom Left
+/// @param {Size} $bottomRightRadius [5px] - Bottom Right
+
+=border-radius-separate($topLeftRadius: 5px, $topRightRadius: 5px, $bottomLeftRadius: 5px, $bottomRightRadius: 5px)
+  -webkit-border-top-left-radius: $topLeftRadius
+  -webkit-border-top-right-radius: $topRightRadius
+  -webkit-border-bottom-right-radius: $bottomRightRadius
+  -webkit-border-bottom-left-radius: $bottomLeftRadius
+  -moz-border-radius-topleft: $topLeftRadius
+  -moz-border-radius-topright: $topRightRadius
+  -moz-border-radius-bottomright: $bottomRightRadius
+  -moz-border-radius-bottomleft: $bottomLeftRadius
+  border-top-left-radius: $topLeftRadius
+  border-top-right-radius: $topRightRadius
+  border-bottom-right-radius: $bottomRightRadius
+  border-bottom-left-radius: $bottomLeftRadius
+
+/// Box
+/// @param {*} $orient [horizontal] - Orientation
+/// @param {*} $pack [center] - Pack
+/// @param {*} $align [center] - Align
+/// @require {mixin} css3-prefix
+
+=box($orient: horizontal, $pack: center, $align: center)
+  display: -webkit-box
+  display: -moz-box
+  display: box
+  +css3-prefix("box-orient", $orient)
+  +css3-prefix("box-pack", $pack)
+  +css3-prefix("box-align", $align)
+
+/// Box RGBA
+/// @param {Integer} $r [60] - Red
+/// @param {Integer} $g [3] - Green
+/// @param {Integer} $b [12] - Blue
+/// @param {Double} $opacity [0.23] - Opacity
+/// @param {Color} $color [#3C3C3C] - Color
+
+=box-rgba($r: 60, $g: 3, $b: 12, $opacity: 0.23, $color: #3C3C3C)
+  background-color: transparent
+  background-color: rgba($r, $g, $b, $opacity)
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$color}',endColorstr='#{$color}')
+  zoom: 1
+
+/// Box Shadow
+/// @param {Size} $x [2px] - X
+/// @param {Size} $y [2px] - Y
+/// @param {Size} $blur [5px] - Blur
+/// @param {Color} $color [rgba(0,0,0,.4)] - Color
+/// @param {Boolean} $inset - Inset
+
+=box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0, 0, 0, 0.4), $inset: "")
+  @if $inset != ""
+    +css3-prefix("box-shadow", $inset $x $y $blur $color)
+  @else
+    +css3-prefix("box-shadow", $x $y $blur $color)
+
+/// Box Sizing
+/// @param {*} $type [border-box] - Type
+/// @require {mixin} css3-prefix
+
+=box-sizing($type: border-box)
+  +css3-prefix("box-sizing", $type)
+
+/// Columns
+/// @param {Integer} $count [3] - Count
+/// @param {Integer} $gap [10] - Gap
+/// @require {mixin} css3-prefix
+
+=columns($count: 3, $gap: 10)
+  +css3-prefix("column-count", $count)
+  +css3-prefix("column-gap", $gap)
+
+/// Double Borders
+/// @param {Color} $colorOne [#3C3C3C] - Color One
+/// @param {Color} $colorTwo [#999999] - Color Two
+/// @param {Size} $radius [0] - Radius
+/// @require {mixin} css3-prefix
+/// @require {mixin} border-radius
+
+=double-borders($colorOne: #3C3C3C, $colorTwo: #999999, $radius: 0)
+  border: 1px solid $colorOne
+  +css3-prefix("box-shadow", 0 0 0 1px $colorTwo)
+  +border-radius($radius)
+
+/// Flex
+/// @param {Integer} $value [1] - Value
+/// @require {mixin} css3-prefix
+
+=flex($value: 1)
+  +css3-prefix("box-flex", $value)
+
+/// Flip
+/// @param {Double} $scaleX [-1] - ScaleX
+/// @require {mixin} css3-prefix
+
+=flip($scaleX: -1)
+  +css3-prefix("transform", scaleX($scaleX))
+  filter: FlipH
+  -ms-filter: "FlipH"
+
+/// Opacity
+/// @param {Double} $opacity [0.5] - Opacity
+/// @require {mixin} css3-prefix
+
+=opacity($opacity: 0.5)
+  $opacityMultiplied: $opacity * 100
+  filter: alpha(opacity = $opacityMultiplied)
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $opacityMultiplied + ")"
+  +css3-prefix("opacity", $opacity)
+
+/// Outline Radius
+/// @param {Size} $radius [5px] - Radius
+/// @require {mixin} css3-prefix
+
+=outline-radius($radius: 5px)
+  +css3-prefix("outline-radius", $radius)
+
+/// Resize
+/// @param {*} $directoin [both] - Direction
+/// @require {mixin} css3-prefix
+
+=resize($direction: both)
+  +css3-prefix("resize", $direction)
+
+/// Rotate
+//
+// / CSS Matrix Rotation Calculator http://www.boogdesign.com/examples/transforms/matrix-calculator.html
+// / @param {Double} $deg [0] - Degree
+// / @param {Double} $m11 [0] - M11
+// / @param {Double} $m12 [0] - M12
+// / @param {Double} $m21 [0] - M21
+// / @param {Double} $m22 [0] - M22
+// / @require {mixin} css3-prefix
+
+=rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0)
+  +css3-prefix("transform", rotate($deg + deg))
+  filter: progid:DXImageTransform.Microsoft.Matrix( M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod='auto expand')
+  zoom: 1
+
+/// Text Shadow
+/// @param {Size} $x [2px] - X
+/// @param {Size} $y [2px] - Y
+/// @param {Size} $blur [2px] - Blur
+/// @param {Color} $color [rgba(0,0,0,.4)] - Color
+
+=text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0, 0, 0, 0.4))
+  text-shadow: $x $y $blur $color
+
+/// Transform
+/// @param {List} $params - Params
+/// @require {mixin} css3-prefix
+
+=transform($params)
+  +css3-prefix("transform", $params)
+
+/// Transform-Origin
+/// @param {List} $params - Params
+/// @require {mixin} css3-prefix
+
+=transform-origin($params)
+  +css3-prefix("transform-origin", $params)
+
+// Transform-Style
+/// @param {List} $params - Params
+/// @require {mixin} css3-prefix
+
+=transform-style($style: preserve-3d)
+  +css3-prefix("transform-style", $style)
+
+/// Transition
+/// @param {List} $properties - Properties
+/// @require {mixin} css3-prefix
+
+=transition($properties...)
+  @if length($properties) >= 1
+    +css3-prefix("transition", $properties)
+  @else
+    +css3-prefix("transition", "all 0.2s ease-in-out 0s")
+
+/// Triple Borders
+/// @param {Color} $colorOne [#3C3C3C] - Color One
+/// @param {Color} $colorTwo [#999999] - Color Two
+/// @param {Color} $colorThree [#000000] - Color Three
+/// @param {Size} $radius [0] - Radius
+/// @require {mixin} border-radius
+/// @require {mixin} css3-prefix
+
+=triple-borders($colorOne: #3C3C3C, $colorTwo: #999999, $colorThree: #000000, $radius: 0)
+  border: 1px solid $colorOne
+  +border-radius($radius)
+  +css3-prefix("box-shadow", "0 0 0 1px #{$colorTwo}, 0 0 0 2px #{$colorThree}")
+
+/// Keyframes
+/// @param {*} $animation-name - Animation name
+/// @content [Animation css]
+
+=keyframes($animation-name)
+  @-webkit-keyframes #{$animation-name}
+    @content
+
+  @-moz-keyframes #{$animation-name}
+    @content
+
+  @-ms-keyframes #{$animation-name}
+    @content
+
+  @-o-keyframes #{$animation-name}
+    @content
+
+  @keyframes #{$animation-name}
+    @content
+
+/// Animation
+/// @param {*} $str - name duration timing-function delay iteration-count direction fill-mode play-state ([http://www.w3schools.com/cssref/css3_pr_animation.asp](http://www.w3schools.com/cssref/css3_pr_animation.asp))
+/// @require {mixin} css3-prefix
+
+=animation($str)
+  +css3-prefix("animation", $str)
+
+/* -------------------------------------------------------------
+ *
+ * Others mixins
+ *
+ *-------------------------------------------------------------
+
+/// Cover background
+
+=cover-image()
+  background-position: center center
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale')
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')"
+
+/// Cover background
+/// @param {*} $top     - position top
+/// @param {*} $bottom  - position top
+/// @param {*} $left    - position left
+/// @param {*} $right   - position right
+
+=absolute-block($top: 0px, $bottom: 0px, $left: 0px, $right: 0px)
+  position: absolute
+  top: $top
+  bottom: $bottom
+  left: $left
+  right: $right
+
+/// Display flex
 
 =display-flex()
-  display: -webkit-box
-  display: -webkit-flex
-  display: -ms-flexbox
-  display: flex
-  -webkit-box-flex: 1
-  -webkit-flex: 1 0 auto
-  -ms-flex: 1 0 auto
-  flex: 1 0 auto
-  -webkit-flex-flow: row wrap
-  -ms-flex-flow: row wrap
-  flex-flow: row wrap
-
-=flex-wrap($value)
-  -webkit-flex-wrap: $value
-  flex-wrap: $value
-
-=flex-grow($value)
-  -webkit-flex-grow: $value
-  flex-grow: $value
-
-=flex-shrink($value)
-  -webkit-flex-shrink: $value
-  flex-shrink: $value
-
-=flex-basis($value)
-  -webkit-flex-basis: $value
-  flex-basis: $value
-
-=flex($value)
-  -webkit-flex: $value
-  flex: $value
-
-=justify-content($value)
-  -webkit-justify-content: $value
-  justify-content: $value
-
-=align-items($value)
-  -webkit-align-content: $value
-  align-content: $value
-
-=display-flex-center()
   display: -webkit-box
   display: -moz-box
   display: -ms-flexbox
   display: -webkit-flex
   display: flex
-  -webkit-box-pack: center
-  -ms-flex-pack: center
-  -webkit-justify-content: center
-  justify-content: center
-  -webkit-box-align: center
-  -ms-flex-align: center
-  -webkit-align-items: center
-  align-items: center
-
-=transform($transforms)
-  -moz-transform: $transforms
-  -o-transform: $transforms
-  -ms-transform: $transforms
-  -webkit-transform: $transforms
-  transform: $transforms
-
-=transform-origin-xy($origin)
-  -moz-transform-origin: $origin
-  -ms-transform-origin: $origin
-  -webkit-transform-origin: $origin
-  transform-origin: $origin

@@ -3,41 +3,34 @@ html lang="ru"
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, maximum-scale=1"
-    / title= yield(:title) || page_title
     - content_for :site_page_title, hancock_page_title
     - if defined?(Flutie)
-      / = page_title(app_name: Rails.application.class.name.split('::')[0], separator: " | ")
       title= site_page_title(app_name: hancock_app_name, separator: " | ")
     - else
       title= content_for :site_page_title
     = yield :meta
     = csrf_meta_tags
-    
-    / - cache 'favicons', skip_digest: true do
-    /   = render partial: 'blocks/favicon'
+
+    - cache 'favicons', skip_digest: true do
+      = render partial: 'blocks/favicon'
 
     = render partial: 'hancock/assets'
 
   body{class="application_layout #{controller_name} #{action_name} #{controller_name}_#{action_name}"}
-  
+
     - cache 'preloader', skip_digest: true do
       = render partial: 'blocks/preloader'
-      
-    #root role="main"
-    
+
+    main#root role="main"
+
       header#header
         = render partial: 'blocks/header'
-      
-      = render "shared/messages"
-      
+
       #content
-        = yield
+        .container.mui-container
+          = yield
 
     footer#footer
-      = render partial: "hancock/home/cookies_policy"
-      br
-      = render partial: "hancock/home/privacy_policy"
-      br
       = render partial: 'blocks/footer'
-
-    = render partial: 'hancock/toplink/toplink'
+      = render partial: 'blocks/cookies_policy'
+      = render 'shared/messages'
