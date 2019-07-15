@@ -1,3 +1,4 @@
+h1= "hancock/backup"
 ruby:
   path = "public/system/snapshots"
   snapshots = Dir["./#{path}/snapshot-*"].map { |f| f.gsub("./public", "") }.map do |path|
@@ -9,7 +10,7 @@ ruby:
   delete_data = { confirm: "Уверены, что хотите удалить бэкап?", pjax: false }
   backup_data = { confirm: "Уверены, что хотите сделать бэкап?", pjax: false }
 #backup
-  = link_to "обновить", backup_path, data: {pjax: false}
+  = link_to "обновить", hancock_backup_path, data: {pjax: false}
   ul
     - snapshots.each do |snapshot|
       - next if File.size("./public#{snapshot[1]}") == 0
@@ -30,8 +31,13 @@ ruby:
           / - download.gsub!('zip', "z#{counter}")
           p= link_to fname, f
           / , download: download
-        = button_to "удалить", backup_path(snapshot: snapshot[2]), method: :delete, data: delete_data
+        = button_to "удалить", hancock_backup_path(snapshot: snapshot[2]), method: :delete, data: delete_data
 
   - if can_backup
-    = button_to "Backup NOW", backup_path, method: :post, data: backup_data
-    = button_to "Mongodump NOW", backup_path(mongodump: 1), method: :post, data: backup_data
+    = button_to "Backup NOW", hancock_backup_path, method: :post, data: backup_data
+    = button_to "Mongodump NOW", hancock_backup_path(mongodump: 1), method: :post, data: backup_data
+
+css: 
+  #{{'body {
+    content: ""
+  }'}}

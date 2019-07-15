@@ -1,0 +1,18 @@
+ruby:
+  opts = {
+    builder: (defined?(RailsAdmin::Hancock::FormBuilder) ? RailsAdmin::Hancock::FormBuilder : RailsAdmin::FormBuilder),
+    url: edit_path(@abstract_model, @object.id),
+    as: @abstract_model.param_key,
+    html: {
+      method: "put",
+      multipart: true,
+      class: "form-horizontal denser",
+      data: {
+        title: @page_name
+      }
+    }
+  }
+/ = rails_admin_form_for @object, opts do |form|
+/   = form.generate action: :update
+= hancock_rails_admin_form_for @object, opts do |form|
+  = form.generate action: :update

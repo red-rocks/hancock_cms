@@ -70,6 +70,7 @@ module RailsAdmin
           register_instance_option :partial do
             # localized? ? :hancock_hash_ml : :hancock_hash
             localized? ? "hancock/form_enum_ml" : "hancock/form_enum"
+            # "rails_admin/main/" + (localized? ? "hancock/form_enum_ml" : "hancock/form_enum")
           end
 
           register_instance_option :help do

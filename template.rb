@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 pg = !!(options[:database] == "postgresql")
-actual_rails_version = "6.0.0.beta3"
+actual_rails_version = "6.0.0.rc1"
 notsupported_rails_version = "6.1"
 
 
@@ -28,10 +28,10 @@ git_source(:gitlab) { |repo| "https://gitlab.com/\#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'rails', '~> #{actual_rails_version}'#, '>= #{actual_rails_version}'
-#{if mongoid then "gem 'mongoid', '< 8.0.x'" else
+#{if mongoid then "gem 'mongoid', github: 'mongodb/mongoid'" else
   if pg then "gem 'pg'" else "gem 'ruby-mysql'\ngem 'mysql2'" end
 end
 }
@@ -43,7 +43,7 @@ end
 gem "bourbon"
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'#, '~> 5.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 # gem 'webpacker', '>= 4.0.0.rc.3'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -53,7 +53,7 @@ gem 'sass-rails', '~> 5.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.12'
+gem 'bcrypt'#, '~> 3.1.12'
 
 # # libvips + shrine
 # gem 'ruby-vips'
@@ -63,23 +63,22 @@ gem 'bcrypt', '~> 3.1.12'
 # # gem "shrine", "~> 3.0"
 # #{if mongoid then "gem 'shrine-mongoid'" end}
 
-gem 'rails_admin', '~> 1.4'
+# gem 'rails_admin', '~> 1.4'
+gem 'rails_admin', github: 'sferik/rails_admin'
 
 # gem 'rails_admin_multiple_file_upload'
 # #{if mongoid then "gem 'rails_admin_user_abilities'#, '~> 0.2'" else "" end}
 # gem 'rails_admin_user_abilities', github: "red-rocks/rails_admin_user_abilities"
+
 # gem 'rails_admin_model_settings'#, '~> 0.4'
 # gem 'rails_admin_model_settings', github: "red-rocks/rails_admin_model_settings", branch: 'rails6'
 
-# gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
-gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_settings"
+gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
 
 
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'front'
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: '3.0'
-# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails6'
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/ack/www/redrocks/hancock"
-# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, path: "/home/oleg/redrocks/hancock_cms"
+#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails6'
 
 # gem 'recaptcha', require: 'recaptcha/rails'
 
@@ -87,7 +86,10 @@ gem 'ack_rails_admin_settings', path: "/home/ack/www/rails_admin/rails_admin_set
 gem 'responders', github: 'king601/responders'
 gem 'devise-i18n'
 
-gem 'slim-rails'#, '3.1.1'
+# gem "hancock_devise"
+gem "hancock_devise", git: "https://gitlab.com/redrocks/hancock_devise"
+
+# gem 'slim-rails'#, '3.1.1'
 # gem 'rs_russian'
 gem 'cancancan'#, '~> 1.16'
 #{if mongoid then "gem 'cancancan-mongoid'" end}
@@ -96,7 +98,7 @@ gem 'cancancan'#, '~> 1.16'
 # gem 'unicorn'
 gem 'x-real-ip'
 
-# gem 'font-awesome-sass'
+gem 'font-awesome-sass'
 
 # gem "actionpack-action_caching"
 # gem "redis-store"
@@ -104,7 +106,6 @@ gem 'x-real-ip'
 # # gem "redis-rack-cache"
 # # gem 'mongo_session_store-rails5'
 # gem 'redis-session-store'
-
 
 gem "flutie"
 
@@ -114,15 +115,14 @@ group :development do
   gem 'pry-rails'
 
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
-  gem 'listen'#, '~> 3.0.5'
+  gem 'web-console'#, '>= 3.3.0'
+  gem 'listen'#, '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen'#, '~> 2.0.0'
 
   gem 'ack_favicon_maker_rails'#, '~> 1.0.2'
   # gem 'ack_favicon_maker_rails', github: 'ack43/favicon_maker_rails'
-  # gem 'ack_favicon_maker_rails', path: '/home/ack/www/gems/favicon_maker_rails
 
   # gem 'rails_email_preview'#, '~> 1.0.3'
 
@@ -132,7 +132,7 @@ group :development do
 
   gem "letter_opener"
 
-  gem 'capistrano', '3.10.2'
+  gem 'capistrano', '3.11'
   gem 'capistrano-rvm'
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
@@ -141,18 +141,18 @@ group :development do
   gem 'net-ssh-shell'
 end
 
-group :test do
-  gem 'rspec-rails'
-  gem 'database_cleaner'
-  gem 'email_spec'
-  #{if mongoid then "gem 'mongoid-rspec'" else "" end}
-  gem 'ffaker'
-  gem 'factory_girl_rails'
-end
+# group :test do
+#   gem 'rspec-rails'
+#   gem 'database_cleaner'
+#   gem 'email_spec'
+#   #{if mongoid then "gem 'mongoid-rspec'" else "" end}
+#   gem 'ffaker'
+#   gem 'factory_girl_rails'
+# end
 
 # #{if mongoid then "gem 'mongo_session_store-rails5'" else "gem 'activerecord-session_store'" end}
 
-gem 'slim'
+# gem 'slim'
 gem 'sprockets'
 
 gem 'coffee-rails'#, '~> 4.2'
@@ -176,9 +176,10 @@ end
 # gem 'ack_rails_admin_settings', github: 'red-rocks/rails_admin_settings'
 gem 'devise', github: 'plataformatec/devise', branch: '5-rc'
 
+# gem "jsoneditor-rails"
+gem "jsoneditor-rails", git: "https://github.com/ack43/jsoneditor-rails"
 # gem "rails_admin_jsoneditor"
 gem "rails_admin_jsoneditor", git: "https://github.com/red-rocks/rails_admin_advanced_json_editor"
-# gem "rails_admin_jsoneditor", path: '/home/ack/www/rails_admin/rails_admin_advanced_json_editor'
 ###############################
 
 
@@ -186,7 +187,7 @@ TEXT
 end
 
 RVM_RUBY_VERSION = "2.6.3"
-create_file '.ruby-version', "ruby-#{RVM_RUBY_VERSION}"
+# create_file '.ruby-version', "ruby-#{RVM_RUBY_VERSION}"
 create_file '.ruby-gemset', "#{app_name.underscore}"
 
 run "rvm #{RVM_RUBY_VERSION} do rvm gemset create #{app_name.underscore}"
@@ -207,8 +208,8 @@ ru:
         price: Цена
 TEXT
 end
-remove_file "config/locales/devise.en.yml"
-remove_file "config/locales/en.yml"
+# remove_file "config/locales/devise.en.yml"
+# remove_file "config/locales/en.yml"
 
 create_file 'config/navigation.rb' do <<-TEXT
 # empty file to please simple_navigation, we are not using it
@@ -274,7 +275,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "action_cable/engine"
 require "sprockets/railtie"
-require "rails/test_unit/railtie"
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -314,6 +315,9 @@ module #{app_name.underscore.camelcase}
     config.time_zone = 'Europe/Moscow'
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.paths << Rails.root.join("node_modules")
+
+    # Don't generate system test files.
+    config.generators.system_tests = nil  
   end
 end
 TEXT

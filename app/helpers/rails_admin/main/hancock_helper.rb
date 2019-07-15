@@ -75,8 +75,10 @@ module RailsAdmin::Main
 
     # done
     def hancock_menu_for(parent, abstract_model = nil, object = nil, only_icon = false) # perf matters here (no action view trickery)
-      actions = actions(parent, abstract_model, object).select { |a| a.http_methods.include?(:get) }
-      actions.collect do |action|
+      # actions = actions(parent, abstract_model, object).select { |a| a.http_methods.include?(:get) }
+      _actions = actions(parent, abstract_model, object)
+      _actions = _actions.select { |a| a.http_methods.include?(:get) && a.show_in_menu }
+      _actions.collect do |action|
         wording = wording_for(:menu, action)
         url = rails_admin.url_for(action: action.action_name, 
           controller: 'rails_admin/main', 
@@ -84,11 +86,12 @@ module RailsAdmin::Main
           id: (object.try(:persisted?) && object.try(:id) || nil), 
           # embedded_in: params[:embedded_in]
         )
+        # <span#{only_icon ? " style='display:none'" : ''}>#{wording}</span>
         %(
           <li title="#{wording}" rel="#{'tooltip' if only_icon}" class="icon #{action.key}_#{parent}_link #{'active' if current_action?(action)}">
             <a class="#{action.pjax? ? 'pjax' : ''}" href="#{url}">
               <i class="#{action.link_icon}"></i>
-              <span#{only_icon ? " style='display:none'" : ''}>#{wording}</span>
+              <span#{only_icon ? " style=''" : ''}>#{wording}</span>
             </a>
           </li>
         )

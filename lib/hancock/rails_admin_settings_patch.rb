@@ -18,6 +18,7 @@ module Hancock
       def for_admin?
         false
       end
+      field :description, type: String
 
       def val
         ((upload_kind? and !file.blank?) ? file.url : value)
@@ -36,6 +37,11 @@ module Hancock
         end
       end
 
+      # HARDFIX
+      def cache_keys
+        @cache_keys ||= (cache_keys_str || "").split(/\s+/).map { |k| k.strip }.reject { |k| k.blank? }
+      end
+
       # def self.manager_can_default_actions
       #   # [:index, :show, :read, :edit, :update]
       #   super - [:new, :create]
@@ -47,7 +53,7 @@ module Hancock
       # end
       def self.manager_can_add_actions
         ret = []
-        ret << [:tabbed_edit]
+        # ret << [:tabbed_edit]
         # ret << :model_accesses if defined?(::RailsAdminUserAbilities)
         ret += [:comments, :model_comments] if defined?(::RailsAdminComments)
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
@@ -59,7 +65,7 @@ module Hancock
 
       def self.rails_admin_add_visible_actions
         ret = manager_can_actions.dup
-        ret << [:tabbed_edit]
+        # ret << [:tabbed_edit]
         ret << :model_accesses if defined?(::RailsAdminUserAbilities)
         ret += [:comments, :model_comments] if defined?(::RailsAdminComments)
         ret << :hancock_touch if defined?(::Hancock::Cache::Cacheable)
@@ -73,31 +79,34 @@ module Hancock
           field :label do
             visible false
             # searchable true
-            weight 1
+            weight 10
           end
           field :enabled, :toggle do
-            weight 2
+            weight 20
           end
           field :loadable, :toggle do
-            weight 3
+            weight 30
           end
           field :ns do
             # searchable true
-            weight 4
+            weight 40
           end
           field :key do
             # searchable true
-            weight 5
+            weight 50
           end
           field :name do
-            weight 6
+            weight 60
+          end
+          field :description do
+            weight 70
           end
           field :kind do
             # searchable true
-            weight 7
+            weight 80
           end
           field :raw_data do
-            weight 8
+            weight 90
             # pretty_value do
             #   if bindings[:object].file_kind?
             #     "<a href='#{CGI::escapeHTML(bindings[:object].file.url)}'>#{CGI::escapeHTML(bindings[:object].to_path)}</a>".html_safe.freeze
@@ -113,7 +122,7 @@ module Hancock
             # end
           end
           field :raw do
-            weight 8
+            weight 100
             # searchable true
             # visible false
             # pretty_value do
@@ -127,7 +136,7 @@ module Hancock
             # end
           end
           field :raw_array do
-            weight 9
+            weight 110
             # searchable true
             # visible false
             # pretty_value do
@@ -135,7 +144,7 @@ module Hancock
             # end
           end
           field :raw_hash do
-            weight 10
+            weight 120
             # searchable true
             # visible false
             # pretty_value do
@@ -143,7 +152,7 @@ module Hancock
             # end
           end
           field :cache_keys_str, :text do
-            weight 11
+            weight 130
             searchable true
           end
           if ::Settings.table_exists?
@@ -163,7 +172,7 @@ module Hancock
 
         edit do
           field :enabled, :toggle do
-            weight 1
+            weight 10
             visible do
               if bindings[:object].for_admin?
                 is_current_user_admin
@@ -173,19 +182,19 @@ module Hancock
             end
           end
           field :loadable, :toggle do
-            weight 2
+            weight 20
             visible do
               is_current_user_admin
             end
           end
           field :for_admin, :toggle do
-            weight 3
+            weight 30
             visible do
               is_current_user_admin
             end
           end
           field :ns  do
-            weight 4
+            weight 40
             read_only true
             help false
             visible do
@@ -193,7 +202,7 @@ module Hancock
             end
           end
           field :key  do
-            weight 5
+            weight 50
             read_only true
             help false
             visible do
@@ -201,14 +210,18 @@ module Hancock
             end
           end
           field :label, :string do
-            weight 6
+            weight 60
             read_only do
               !is_current_user_admin
             end
             help false
           end
+          field :description do
+            weight 70
+            read_only true
+          end
           field :kind, :enum do
-            weight 7
+            weight 80
             read_only do
               !is_current_user_admin
             end
@@ -219,7 +232,7 @@ module Hancock
             help false
           end
           field :raw do
-            weight 8
+            weight 90
             partial "setting_value".freeze
             # visible do
             #   !bindings[:object].upload_kind? and !bindings[:object].array_kind? and !bindings[:object].hash_kind?
@@ -237,7 +250,7 @@ module Hancock
             end
           end
           field :raw_array do
-            weight 9
+            weight 100
             partial "setting_value".freeze
             formatted_value do
               (bindings[:object].raw_array || [])
@@ -257,7 +270,7 @@ module Hancock
             end
           end
           field :raw_hash do
-            weight 10
+            weight 110
             partial "setting_value".freeze
             formatted_value do
               (bindings[:object].raw_hash || {})
@@ -278,7 +291,7 @@ module Hancock
           end
           if Settings.file_uploads_supported
             field :file, Settings.file_uploads_engine do
-              weight 11
+              weight 120
               visible do
                 bindings[:object].upload_kind?
               end
@@ -293,7 +306,7 @@ module Hancock
           end
 
           field :cache_keys_str, :text do
-            weight 10
+            weight 130
             visible do
               is_current_user_admin
             end

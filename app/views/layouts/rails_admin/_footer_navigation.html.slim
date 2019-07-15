@@ -5,7 +5,7 @@ ul
     - data_method = "put" if action.http_methods.include?(:put)
     - data_method = "delete" if action.http_methods.include?(:delete)
     - data_method = nil if action.http_methods.include?(:get)
-
+  
     li{class="#{action.action_name} footer-nav-link"}
       / = link_to wording_for(:menu, action), {action: action.action_name, controller: 'rails_admin/main'}, class: (action.pjax? ? "pjax" : ""), title: wording_for(:menu, action), data: data_method ? {method: data_method, confirm: t("admin.actions.#{action.action_name}.confirm")} : nil
       ruby:
@@ -22,15 +22,15 @@ ul
         
       = link_to opts, html_opts
         span
-          = content_tag :i, '', class: action.link_icon
+          = content_tag :i, '', class: action.link_icon, title: action.action_name
       / = link_to wording_for(:menu, action), opts, html_opts
 
   - if main_app_root_path = (main_app.root_path rescue false)
-    li.footer-nav-link = link_to main_app_root_path, title: "На сайт".freeze
+    li.home-link.footer-nav-link = link_to main_app_root_path, title: "На сайт".freeze
       span
         i.fa.fa-home
 
   - if signed_in? and logout_path.present?
-    li.footer-nav-link = link_to logout_path, title: "Выйти".freeze, method: logout_method, confirm: t("admin.logout.confirm")
+    li.logout-link.footer-nav-link = link_to logout_path, title: "Выйти".freeze, method: logout_method, confirm: t("admin.logout.confirm")
       span
         i.fa.fa-power-off

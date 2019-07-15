@@ -21,6 +21,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
 
   spec.add_dependency 'rails', ['>= 6.0.0.beta3', '< 6.1.x']
+  spec.add_dependency 'rails-i18n', '~> 6.0.0.beta1'
+
+  spec.add_dependency 'slim'
+  spec.add_dependency 'slim-rails'
 
   spec.add_dependency 'sprockets'#, '~> 3'
 

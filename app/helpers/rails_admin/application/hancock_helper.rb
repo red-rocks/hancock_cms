@@ -42,5 +42,21 @@ module RailsAdmin::Application
       edit_path(opts)
     end
 
+
+    def hancock_root_navigation
+      actions(:root).select(&:show_in_sidebar).group_by(&:sidebar_label).collect do |label, nodes|
+        li_stack = nodes.map do |node|
+          url = rails_admin.url_for(action: node.action_name, controller: "rails_admin/main")
+          nav_icon = node.link_icon ? %(<i class="#{node.link_icon}"></i>).html_safe : ''
+          content_tag :li do
+            link_to nav_icon + " " + wording_for(:menu, node), url, class: "pjax"
+          end
+        end.join.html_safe
+        label ||= t('admin.misc.root_navigation')
+
+         %(<li class='dropdown-header'>#{capitalize_first_letter label}</li>#{li_stack}) if li_stack.present?
+      end.join.html_safe
+    end
+
   end
 end

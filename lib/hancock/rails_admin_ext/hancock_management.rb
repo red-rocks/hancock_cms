@@ -16,8 +16,7 @@ module RailsAdmin
         end
 
         register_instance_option :template_name do
-          # 'hancock_management'
-          'hancock/management'
+          'rails_admin/main/hancock/management'
         end
 
         register_instance_option :controller do
@@ -90,7 +89,10 @@ module RailsAdmin
                   }
                 end
               }
-              render action: @action.template_name
+              respond_to do |format|
+                format.html { render @action.template_name }
+                format.js   { render @action.template_name, layout: false }
+              end
 
             else
               error = nil

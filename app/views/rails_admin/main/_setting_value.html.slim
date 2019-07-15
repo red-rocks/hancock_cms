@@ -1,16 +1,7 @@
 - _object ||= form.object
--# TODO: may be it works
--# - puts field.bindings.keys.inspect if field.bindings
 - field.bindings ||= {}
 - field.bindings[:object] ||= _object
--# - puts field.bindings.keys.inspect if field.bindings
--# - puts
--# - puts
--# - puts form.class.inspect
--# - puts field.bindings.keys.inspect
--# - puts _object.inspect
--# - puts field.bindings[:object].inspect
--# - puts
+
 - if ['string', 'integer', 'phone', 'email', 'address', 'url', 'domain'].include?(_object.type)
   = form.text_field :raw, :value => field.value, id: form.dom_id(field)
 - if _object.type == 'boolean'
@@ -20,8 +11,8 @@
 - elsif %w(text yaml phones).include?( _object.type )
   = form.text_area :raw, :value => field.value, :rows => 10, :cols => 80, id: form.dom_id(field)
 - elsif _object.type == 'code'
-  :ruby
-    #binding.pry
+  ruby:
+    # binding.pry
     js_data = {
       csspath: asset_path('codemirror.css'),
       jspath: asset_path('codemirror.js'),
@@ -45,7 +36,7 @@
     = form.text_area :raw, :value => field.value, :rows => 10, :cols => 80, id: form.dom_id(field)
 
     = javascript_include_tag "rich/base.js"
-    :javascript
+    javascript:
       if(window.CKEDITOR){
         var instance = window.CKEDITOR.instances['#{form.dom_id(field)}'];
         if(instance) { window.CKEDITOR.remove(instance); }
@@ -58,8 +49,8 @@
 
 
 - elsif _object.type == 'js'
-  :ruby
-    #binding.pry
+  ruby:
+    # binding.pry
     js_data = {
       csspath: asset_path('codemirror.css'),
       jspath: asset_path('codemirror.js'),
@@ -78,8 +69,8 @@
 
 
 - elsif _object.type == 'css'
-  :ruby
-    #binding.pry
+  ruby:
+    # sbinding.pry
     js_data = {
       csspath: asset_path('codemirror.css'),
       jspath: asset_path('codemirror.js'),
@@ -106,7 +97,7 @@
 
   - _template = capture do
     = render partial: 'rails_admin/main/rails_admin_settings/array/element', locals: {form: form, field: field, val: ""}
-  %p
+  p
     = link_to "добавить", "#", class: "rails_admin_settings_array_element_add_link array_element_add_link", data: {template: _template.html_safe}
 
 - elsif _object.type == 'hash'
@@ -114,23 +105,10 @@
     = javascript_include_tag "rails_admin_jsoneditor/rails_admin_jsoneditor", media: 'all'
     = stylesheet_link_tag "rails_admin_jsoneditor/rails_admin_jsoneditor", media: 'all'
 
-    .rails-admin-jsoneditor-field{style: "display: none"}
+    .rails-admin-jsoneditor-field{style="display: none"}
       = form.send field.view_helper, field.method_name, field.html_attributes.merge(value: (field.form_value || {}).to_json)
 
     .rails-admin-jsoneditor.cke_disabled
-  -# = javascript_include_tag 'rails_admin_settings/hash'
-  -# = stylesheet_link_tag 'rails_admin_settings/hash'
-
-  -# - field.formatted_value.each_pair do |name, val|
-  -#   = render partial: 'rails_admin/main/rails_admin_settings/hash/element', locals: {form: form, field: field, name: name, val: val}
-
-  -# - _template = capture do
-  -#   - name, val = "new", ""
-  -#   = render partial: 'rails_admin/main/rails_admin_settings/hash/element', locals: {form: form, field: field, name: name, val: val}
-  -# %p
-  -#   = link_to "добавить", "#", class: "rails_admin_settings_hash_element_add_link", data: {template: _template.html_safe}
-  -#   / = " | "
-  -#   / = link_to "показать дубликаты", "#", class: "rails_admin_settings_hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
 
 
 - elsif _object.type == 'enum'
@@ -140,7 +118,7 @@
 
 - elsif _object.type == 'multiple_enum'
   = javascript_include_tag 'rails_admin_settings/enum'
-  :ruby
+  ruby:
     js_data = {
       xhr: false,
       sortable: false,
@@ -164,7 +142,7 @@
 
 - elsif _object.type == 'multiple_custom_enum'
   = javascript_include_tag 'rails_admin_settings/enum'
-  :ruby
+  ruby:
     js_data = {
       xhr: false,
       sortable: false,

@@ -1,5 +1,6 @@
 ul.nav.navbar-nav.root_links
-  - actions(:root).each do |action|
+  / - actions(:root).each do |action|
+  - actions(:root).select(&:show_in_navigation).each do |action|
     - next if action.action_name.to_s == "dashboard"
     - data_method = "post"    if action.http_methods.include?(:post)
     - data_method = "put"     if action.http_methods.include?(:put)

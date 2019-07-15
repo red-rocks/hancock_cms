@@ -9,7 +9,7 @@ module RailsAdmin
 
 
         register_instance_option :visible do
-          bindings and bindings[:controller]._current_user and bindings[:controller]._current_user.admin?
+          !!(bindings and bindings[:controller]._current_user and bindings[:controller]._current_user.admin?)
         end
 
         register_instance_option :root? do
@@ -21,14 +21,18 @@ module RailsAdmin
         end
 
         register_instance_option :template_name do
-          'hancock/backup'
+          'rails_admin/main/hancock/backup'
         end
 
         register_instance_option :controller do
           Proc.new do
             path = "public/system/snapshots"
             if request.get?
-  
+              respond_to do |format|
+                format.html { render @action.template_name }
+                format.js   { render @action.template_name, layout: false }
+              end
+
             elsif request.post?
               if defined?(BackupJob)
                 if params[:mongodump] == "1"
@@ -56,7 +60,7 @@ module RailsAdmin
                 end
               end
               flash[:notice] = "Бэкап начат. В скором времени появится ссылка на архив."
-              redirect_to backup_path
+              redirect_to hancock_backup_path
   
             elsif request.delete?
               if BackupJob
@@ -79,7 +83,7 @@ module RailsAdmin
                   flash[:error] = "Бэкап не найден."
                 end
               end
-              redirect_to backup_path
+              redirect_to hancock_backup_path
             end
           end
         end

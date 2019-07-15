@@ -1,0 +1,17 @@
+ruby:
+  opts = {
+    builder: (defined?(RailsAdmin::Hancock::FormBuilder) ? RailsAdmin::Hancock::FormBuilder : RailsAdmin::FormBuilder),
+    url: new_path(model_name: @abstract_model.to_param),
+    as: @abstract_model.param_key,
+    html: {
+      multipart: true,
+      class: "form-horizontal denser",
+      data: {
+        title: @page_name
+      }
+    }
+  }
+/ = rails_admin_form_for @object, opts do |form|
+/   = form.generate action: :create
+= hancock_rails_admin_form_for @object, opts do |form|
+  = form.generate action: :create

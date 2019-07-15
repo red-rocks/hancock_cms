@@ -38,133 +38,178 @@ module Hancock
       @actions_list ||= []
       @actions_visibility ||= {}
 
-      action_unvisible_for(:custom_show_in_app, Proc.new { false })
-      action_visible_for(:model_settings, Proc.new { true })
-
+      action_unvisible_for(:custom_show_in_app)
+      action_visible_for(:model_settings, Proc.new {
+        visible do
+          abstract_model = (bindings and bindings[:abstract_model])
+          # !!(abstract_model and abstract_model.model.respond_to?("settings"))
+          !!(abstract_model and abstract_model.model.included_modules.include?(RailsAdminModelSettings::ModelSettingable))
+        end
+      })
+      
       if defined?(RailsAdminNestedSet)
-        action_visible_for(:nested_set, Proc.new { true })
+        action_visible_for(:nested_set)
       end
 
       if defined?(RailsAdminMultipleFileUpload)
-        action_visible_for(:multiple_file_upload, Proc.new { true })
-        action_visible_for(:multiple_file_upload_collection, Proc.new { true })
+        action_visible_for(:multiple_file_upload)
+        action_visible_for(:multiple_file_upload_collection)
       end
 
       if defined?(RailsAdminUserAbilities)
-        action_visible_for(:user_abilities, Proc.new { true })
-        action_visible_for(:model_accesses, Proc.new { true })
+        action_visible_for(:user_abilities)
+        action_visible_for(:model_accesses)
       end
 
       if defined?(RailsAdminComments)
-        action_visible_for(:comments, Proc.new { true })
-        action_visible_for(:model_comments, Proc.new { true })
+        action_visible_for(:comments)
+        action_visible_for(:model_comments)
       end
 
-      action_visible_for(:sort_embedded, Proc.new { true })
+      action_visible_for(:sort_embedded)
 
-      action_visible_for(:hancock_management, Proc.new { |config|
-        bindings = (config and config.bindings)
-        _context = (bindings and (bindings[:controller] || bindings[:view]))
-        _context._current_user and _context._current_user.admin?
+      # action_visible_for(:hancock_management, Proc.new { |config|
+      action_visible_for(:hancock_management, Proc.new {
+        visible do
+          _context = (bindings and (bindings[:controller] || bindings[:view]))
+          !!(_context and _context._current_user and _context._current_user.admin?)
+        end
       })
 
       if Hancock.config.model_settings_support
-        action_visible_for(:object_settings, Proc.new { |config|
-          bindings = (config and config.bindings)
-          abstract_model = (bindings and bindings[:abstract_model])
-          !!(abstract_model and abstract_model.model.relations.has_key?("settings"))
+        action_visible_for(:object_settings, Proc.new {
+          visible do
+            abstract_model = (bindings and bindings[:abstract_model])
+            !!(abstract_model and abstract_model.model.relations.has_key?("settings"))
+          end
         })
       end
       
-      action_visible_for(:hancock_tabbed_edit, Proc.new { true })
+      action_visible_for(:hancock_tabbed_edit)
 
-      action_visible_for(:hancock_backup, Proc.new {  |config|
-        bindings = (config and config.bindings)
-        _context = (bindings and (bindings[:controller] || bindings[:view]))
-        _context._current_user and _context._current_user.admin?
+      # action_visible_for(:hancock_backup, Proc.new { |config|
+      action_visible_for(:hancock_backup, Proc.new {
+        visible do
+          _context = (bindings and (bindings[:controller] || bindings[:view]))
+          !!(_context and _context._current_user and _context._current_user.admin?)
+        end
       })
-      
-      
-
     end
 
+
+
     def add_action(action_name)
-      @actions_list << action_name.to_sym
+      @actions_list << action_name
       @actions_list.uniq
     end
 
     def remove_action(action_name)
-      @actions_list.delete action_name.to_sym
+      @actions_list.delete action_name
       @actions_list.uniq
     end
 
-    def action_visible_for(action_name, model_name)
-      action_name = action_name.to_sym
+    def action_visible_for(action_name, model_name = false)
+      # action_name = action_name
       add_action(action_name) unless @actions_list.include?(action_name)
+      model_name = Proc.new {
+        visible do
+          true
+        end
+      } if model_name.nil?
 
-      if model_name.is_a?(Proc)
-        @actions_visibility[action_name] = model_name
-      else
-        @actions_visibility[action_name] = [] if @actions_visibility[action_name].is_a?(Proc)
-        @actions_visibility[action_name] ||= []
-        @actions_visibility[action_name] << model_name.to_s
+      @actions_visibility[action_name] ||= []
+      if model_name
+        if model_name.is_a?(Proc)
+          @actions_visibility[action_name] = model_name
+        else
+          @actions_visibility[action_name] = [] if @actions_visibility[action_name].is_a?(Proc)
+          @actions_visibility[action_name] ||= []
+          @actions_visibility[action_name] << model_name.to_s
+        end
       end
     end
+    
 
-    def action_unvisible_for(action_name, model_name)
+    def action_unvisible_for(action_name, model_name = false)
       action_name = action_name.to_sym
       add_action(action_name) unless @actions_list.include?(action_name)
+      model_name = Proc.new {
+        visible do
+          true
+        end
+      } if model_name.nil?
+      
+      if model_name
+        if model_name.is_a?(Proc)
+          @actions_visibility[action_name] = [] # if @actions_visibility[action_name].is_a?(Proc)
+        else
+          @actions_visibility[action_name] ||= []
+          @actions_visibility[action_name].delete model_name.to_s
+        end
+      else
+        @actions_visibility[action_name] = []
+      end
 
-      if model_name.is_a?(Proc)
-        @actions_visibility[action_name] = [] if @actions_visibility[action_name].is_a?(Proc)
-      end
-      unless model_name.is_a?(Proc)
-        @actions_visibility[action_name] ||= []
-        @actions_visibility[action_name].delete model_name.to_s
-      end
       if @actions_visibility[action_name].blank?
         @actions_visibility.delete(action_name)
         remove_action(action_name)
       end
     end
 
-    def actions_config(rails_admin_actions)
+
+    def actions_config(ra_context)
 
       @actions_list.each do |action|
-        if rails_admin_actions.respond_to?(action) and !RailsAdmin::Config::Actions.all.map { |a| a.class.name.demodulize.underscore }.include?(action.to_s)
-          rails_admin_actions.send(action) do
-            visible do
-              if !bindings or bindings[:abstract_model].blank?
-                unless (visibility = Hancock.rails_admin_config.actions_visibility[action]).nil?
-                  if visibility.is_a?(Proc)
-                    visibility.call(self)
-                  else
-                    visibility
-                  end
-                else
-                  true
-                end
-              else
-                ret = false
-                if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                  ret = bindings[:abstract_model].model.rails_admin_visible_actions.include?(action.to_sym)
-                else
-                  if visibility = Hancock.rails_admin_config.actions_visibility[action]
-                    if visibility.is_a?(Proc)
-                      ret = visibility.call(self)
-                    else
-                      ret = visibility.include? bindings[:abstract_model].model_name
-                    end
-                  end
-                end # if bindings[:abstract_model].model.respond_to?(:rails_admin_visible_actions)
-                _context = bindings[:controller] || bindings[:view]
-                ret and _context and _context.can?(action, bindings[:abstract_model].model)
-              end # !bindings or bindings[:abstract_model].blank?
-            end # visible do
-          end # rails_admin_actions.send(action) do
-        end # if rails_admin_actions.respond_to?(action)
-      end # @actions_list.each do |action|
+        scope = nil
+        if action.is_a?(Hash)
+          scope = action.keys.first
+          action = action.values.first
+        end
+        if ra_context.respond_to?(action) and !RailsAdmin::Config::Actions.all.map { |a| a.class.name.demodulize.underscore }.include?(action.to_s)
+          if scope
+            rails_admin_scoped_action(ra_context, scope, action)
+          else
+            rails_admin_action(ra_context, action)
+          end
+        end
+      end
 
+    end
+
+
+
+    def rails_admin_scoped_action(ra_context, scope, action)
+      rails_admin_action(ra_context, [scope, action])
+    end
+    def rails_admin_action(ra_context, action)
+      ra_field_opts = Array(action).compact
+      action = ra_field_opts.last
+      visibility = Hancock.rails_admin_config.actions_visibility[action]
+
+      if visibility.is_a?(Proc)
+        # ra_field_opts << visibility 
+        ra_context.send(*ra_field_opts) do
+          # visibility.call(self)
+          instance_eval &visibility
+        end
+
+      else
+        ra_context.send(*ra_field_opts) do
+          ret = false
+          visible do
+            ret = false
+            abstract_model = (bindings and bindings[:abstract_model])
+            ret ||= if abstract_model
+              if abstract_model.model.respond_to?(:rails_admin_visible_actions)
+                abstract_model.model.rails_admin_visible_actions.include?(action.to_sym)
+              end
+            end # ret = if abstract_model
+            _context = (bindings and (bindings[:controller] || bindings[:view]))
+            !!(ret and _context and abstract_model and _context.can?(action, abstract_model.model))
+          end 
+        end
+      end 
+      
     end
 
 

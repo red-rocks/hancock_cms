@@ -19,6 +19,11 @@ require 'codemirror-rails'
 
 require 'uglifier'
 
+require 'rails-i18n'
+
+require 'slim'
+require 'slim-rails'
+
 
 require 'rails_admin'
 require 'hancock/rails_admin_ext/config'

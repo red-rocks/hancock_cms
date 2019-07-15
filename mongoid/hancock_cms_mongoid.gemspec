@@ -36,11 +36,12 @@ Gem::Specification.new do |spec|
 
 
   # spec.add_dependency 'mongo_session_store-rails4' #gem 'mongo_session_store-rails4', github: 'drgcms/mongo_session_store'
-  spec.add_dependency 'mongo_session_store-rails5' #gem 'mongo_session_store-rails5', github: 'ack43/mongo_session_store'
+  # spec.add_dependency 'mongo_session_store-rails5' #gem 'mongo_session_store-rails5', github: 'ack43/mongo_session_store'
+  spec.add_dependency 'mongo_session_store' #gem 'mongo_session_store-rails5', github: 'ack43/mongo_session_store'
 
   # spec.add_dependency "rails_admin_mongoid_localize_field"
 
   spec.add_dependency 'kaminari-mongoid'
 
-  spec.add_dependency 'glebtv_mongoid_userstamp'#, '~> 0.7'
+  # spec.add_dependency 'glebtv_mongoid_userstamp'#, '~> 0.7'
 end

@@ -1,6 +1,6 @@
 # HancockCMS
 
-#### Rails 5 support
+#### Rails 6 support
 
 #### Inspired by [RocketCMS](https://github.com/rs-pro/rocket_cms)
 ### Remaded from [EnjoyCMS](https://github.com/enjoycreative/enjoy_cms)
@@ -15,11 +15,11 @@ Very opinionated and tuned for my needs.
 
 Add this line to your application's Gemfile:
 
-    gem 'hancock_cms_mongoid', '~> 2.1'
+    gem 'hancock_cms_mongoid', '~> 3.0'
 
 or:
 
-    gem 'hancock_cms_activerecord', '~> 2.1'
+    gem 'hancock_cms_activerecord', '~> 3.0'
 
 *Only PostgreSQL is tested or supported for AR(from root repo). Others will probably work, but untested.*
 
@@ -29,7 +29,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install hancock_cms -v 2.1
+    $ gem install hancock_cms -v 3.0
 
 For activerecord, generate migrations and run them
 
@@ -52,13 +52,13 @@ If not, uninstall rails and install again
 
 Then, for mongoid:
 
-    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb --skip-javascript
+    rails new my_app -B -T -O -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails6/template.rb --skip-javascript
     cd my_app
     rails g hancock:cms:setup
 
 for ActiveRecord:
 
-    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/2.1/template.rb --skip-javascript
+    rails new my_app -B -T --database=postgresql -m https://raw.githubusercontent.com/red-rocks/hancock_cms/rails6/template.rb --skip-javascript
     cd my_app
     rails g hancock:cms:setup
 
