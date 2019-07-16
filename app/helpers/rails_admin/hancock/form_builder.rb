@@ -2,7 +2,9 @@ require 'rails_admin/form_builder'
 module RailsAdmin::Hancock
   class FormBuilder < ::RailsAdmin::FormBuilder
 
-    def generate(options = {})
+    def generate_tabbed(options = {})
+      is_tabbed = true
+      
       without_field_error_proc_added_div do
         options.reverse_merge!(
           action: @template.controller.params[:action],
@@ -11,13 +13,12 @@ module RailsAdmin::Hancock
         )
 
         action_name = @template.controller.params[:action]
-        is_tabbed = action_name == "tabbed_edit"
         _params = @template.controller.params.permit!
-        fieldset_name = (_params[:fieldset] || :default).to_sym if is_tabbed
+        fieldset_name = (_params[:fieldset] || :default).to_sym
         all_groups = visible_groups(options[:model_config], generator_action(options[:action], options[:nested_in]))
         current_groups = all_groups.select do |fieldset|
           (is_tabbed and ((fieldset_name.blank? or fieldset_name == fieldset.name.to_sym) or (fieldset.bindings[:object].id.to_s != _params[:id]))) or !is_tabbed
-        end
+        end.uniq
         buttons_locals = {
           hide_add_another: is_tabbed,
           hide_add_edit: is_tabbed
@@ -36,6 +37,30 @@ module RailsAdmin::Hancock
             fieldset_for fieldset, options[:nested_in]
           end.join.html_safe +
           (options[:nested_in] ? '' : @template.render(partial: 'rails_admin/main/submit_buttons', locals: buttons_locals))
+      end
+    end
+
+    def generate(options = {})
+      is_tabbed = (action_name == "tabbed_edit") and !options[:nested_in]
+      return generate_tabbed(options) if is_tabbed
+
+      without_field_error_proc_added_div do
+        options.reverse_merge!(
+          action: @template.controller.params[:action],
+          model_config: @template.instance_variable_get(:@model_config),
+          nested_in: false,
+        )
+
+        action_name = @template.controller.params[:action]
+        _params = @template.controller.params.permit!
+        all_groups = visible_groups(options[:model_config], generator_action(options[:action], options[:nested_in]))
+        current_groups = all_groups.uniq
+        
+        object_infos +
+          current_groups.collect do |fieldset|
+            fieldset_for fieldset, options[:nested_in]
+          end.join.html_safe +
+          (options[:nested_in] ? '' : @template.render(partial: 'rails_admin/main/submit_buttons'))
       end
     end
 

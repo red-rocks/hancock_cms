@@ -28,6 +28,8 @@ require 'slim-rails'
 require 'rails_admin'
 require 'hancock/rails_admin_ext/config'
 
+require 'hancock/rails_admin_ext/patches/helpers_patch'
+
 require 'hancock/rails_admin_ext/patches/lazy_model'
 require 'hancock/rails_admin_ext/patches/navigation_patch'
 require 'hancock/rails_admin_ext/patches/field_patch'

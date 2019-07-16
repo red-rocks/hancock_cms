@@ -1,6 +1,6 @@
 # require 'rails_admin/application_helper'
-module RailsAdmin::Application
-  module HancockHelper
+module RailsAdmin::Hancock
+  module ApplicationHelper
 
     def hancock_navigation(nodes_stack, nodes, level = 0)
       nodes.collect do |node|

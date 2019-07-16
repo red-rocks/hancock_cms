@@ -80,3 +80,10 @@ ru:
       sorted: "Сортированные"
       enabled: "Доступные"
       _all: "Все"
+    
+    # TEMP
+    actions:
+      object_settings:
+          menu:           "Настройки"
+          breadcrumb:     "Настройки"
+          title:          "Настройки"
