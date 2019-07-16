@@ -1,6 +1,14 @@
 ul.nav.navbar-nav.root_links
   / - actions(:root).each do |action|
-  - actions(:root).select(&:show_in_navigation).each do |action|
+  ruby:
+    _actions = if Hancock.rails_admin1?
+      actions(:root)
+    elsif Hancock.rails_admin2?
+      actions(:root).select(&:show_in_navigation)
+    else
+      []
+    end
+  - _actions.each do |action|
     - next if action.action_name.to_s == "dashboard"
     - data_method = "post"    if action.http_methods.include?(:post)
     - data_method = "put"     if action.http_methods.include?(:put)
@@ -15,7 +23,7 @@ ul.nav.navbar-nav.root_links
       
       
   - if main_app_root_path = (main_app.root_path rescue false)
-    li.top-nav-goto-home = link_to main_app_root_path, title: "На главную".freeze
+    li.top-nav-goto-home = link_to main_app_root_path, title: "На главную".freeze, target: :_blank
       span
         i.fa.fa-home
 

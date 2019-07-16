@@ -43,7 +43,8 @@ end
 gem "bourbon"
 
 # Use SCSS for stylesheets
-gem 'sass-rails'#, '~> 5.0'
+# gem 'sass-rails'#, '~> 5.0'
+gem 'sassc-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 # gem 'webpacker', '>= 4.0.0.rc.3'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -63,8 +64,8 @@ gem 'bcrypt'#, '~> 3.1.12'
 # # gem "shrine", "~> 3.0"
 # #{if mongoid then "gem 'shrine-mongoid'" end}
 
-# gem 'rails_admin', '~> 1.4'
-gem 'rails_admin', github: 'sferik/rails_admin'
+gem 'rails_admin', '~> 1.4'
+# gem 'rails_admin', github: 'sferik/rails_admin' # TEMP
 
 # gem 'rails_admin_multiple_file_upload'
 # #{if mongoid then "gem 'rails_admin_user_abilities'#, '~> 0.2'" else "" end}
@@ -85,6 +86,7 @@ gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
 # gem 'responders', '~> 2.0'
 gem 'responders', github: 'king601/responders'
 gem 'devise-i18n'
+gem 'devise', github: 'plataformatec/devise', branch: '5-rc'
 
 # gem "hancock_devise"
 gem "hancock_devise", git: "https://gitlab.com/redrocks/hancock_devise"

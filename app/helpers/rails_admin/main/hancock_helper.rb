@@ -77,7 +77,13 @@ module RailsAdmin::Main
     def hancock_menu_for(parent, abstract_model = nil, object = nil, only_icon = false) # perf matters here (no action view trickery)
       # actions = actions(parent, abstract_model, object).select { |a| a.http_methods.include?(:get) }
       _actions = actions(parent, abstract_model, object)
-      _actions = _actions.select { |a| a.http_methods.include?(:get) && a.show_in_menu }
+      _actions =  if Hancock.rails_admin1?
+        _actions.select { |a| a.http_methods.include?(:get) }
+      elsif Hancock.rails_admin2? or true
+        _actions.select { |a| a.http_methods.include?(:get) && a.show_in_menu }
+      else
+        []
+      end
       _actions.collect do |action|
         wording = wording_for(:menu, action)
         url = rails_admin.url_for(action: action.action_name, 

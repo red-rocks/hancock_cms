@@ -92,6 +92,15 @@ module Hancock
     def rails6?
       true
     end
+    
+
+    def rails_admin1?
+      true
+    end
+
+    def rails_admin2?
+      false
+    end
 
 
     def register_model(model)

@@ -43,8 +43,11 @@ module RailsAdmin::Application
     end
 
 
+    
     def hancock_root_navigation
-      actions(:root).select(&:show_in_sidebar).group_by(&:sidebar_label).collect do |label, nodes|
+      return "".html_safe if Hancock.rails_admin1?
+      _actions = actions(:root).select(&:show_in_sidebar).group_by(&:sidebar_label)
+      _actions.collect do |label, nodes|
         li_stack = nodes.map do |node|
           url = rails_admin.url_for(action: node.action_name, controller: "rails_admin/main")
           nav_icon = node.link_icon ? %(<i class="#{node.link_icon}"></i>).html_safe : ''
@@ -54,7 +57,7 @@ module RailsAdmin::Application
         end.join.html_safe
         label ||= t('admin.misc.root_navigation')
 
-         %(<li class='dropdown-header'>#{capitalize_first_letter label}</li>#{li_stack}) if li_stack.present?
+        %(<li class='dropdown-header'>#{capitalize_first_letter label}</li>#{li_stack}) if li_stack.present?
       end.join.html_safe
     end
 

@@ -40,7 +40,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'geocoder'
 
-  spec.add_dependency 'rails_admin'#, '1.3.0'
+  # spec.add_dependency 'rails_admin', '~> 2.0'
+  spec.add_dependency 'rails_admin', '~> 1.4' # TEMP
   spec.add_dependency 'rails_admin_nested_set'
   spec.add_dependency 'rails_admin_toggleable'#, '< 0.9.0'
 
