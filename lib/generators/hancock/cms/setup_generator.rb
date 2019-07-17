@@ -26,6 +26,228 @@ module Hancock::Cms
 generate "simple_form:install" if ["yes", "y"].include?(ask_with_timeout("generate `simple_form:install`? (y or yes)").downcase.strip)
 
 
+####### MODELS #######
+
+generate "hancock:cms:ability" if ["yes", "y"].include?(ask_with_timeout("generate `hancock:cms:ability`? (y or yes)").downcase.strip)
+
+# gsub_user_rb = begin
+#   (User < Hancock::Model).nil?
+# rescue
+#   true
+# end
+# if gsub_user_rb
+# gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
+# include Hancock::Model
+#   include Hancock::Enableable
+#   include Hancock::RailsAdminPatch
+#   def self.manager_can_default_actions
+#     [:show, :read]
+#   end
+#   def self.manager_cannot_actions
+#     [:new, :create, :delete, :destroy]
+#   end
+
+#   ######################### RailsAdminUserAbilities #########################
+#   # def self.rails_admin_user_defined_visible_actions
+#   #   [:user_abilities]
+#   # end
+#   # has_one :ability, class_name: "RailsAdminUserAbilities::UserAbility", as: :rails_admin_user_abilitable
+#   # scope :for_rails_admin, -> { where(:roles.in => ['admin', 'manager']) } # could be any you want, just need to
+#   ###########################################################################
+
+#   cattr_accessor :current_user
+
+#   # Include default devise modules. Others available are:
+#   # :confirmable,  :lockable, :timeoutable and :omniauthable
+# TEXT
+# end
+
+# if ["yes", "y"].include?(ask_with_timeout("Set Hancock's User model? (y or yes)").downcase.strip)
+# gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
+# if mongoid
+# gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
+# gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
+# gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
+
+# inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
+
+#   field :name,    type: String
+#   field :login,   type: String
+#   field :roles,   type: Array, default: []
+
+#   before_save do
+#     self.roles ||= []
+#     self.roles.reject! { |r| r.blank? }
+#   end
+
+#   AVAILABLE_ROLES = ["admin", "manager", "client"].freeze
+
+#   AVAILABLE_ROLES.each do |r|
+#     class_eval <<-RUBY
+#       def \#{r}?
+#         self.roles and self.roles.include?("\#{r}")
+#       end
+
+#       scope :\#{r.pluralize}, -> { any_in(roles: "\#{r}") }
+#     RUBY
+#   end
+
+#   def self.generate_first_admin_user
+#     if ::User.admins.all.count == 0
+#       _email_pass = 'admin@#{app_name.dasherize.downcase}.ru'
+#       if ::User.new(roles: ["admin"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass).save
+#         puts "#################################################################################"
+#         puts "#################################################################################"
+#         puts "AdminUser with email and password '\#{_email_pass}' was created!"
+#         puts "#################################################################################"
+#         puts "#################################################################################"
+#         return true
+#       else
+#         puts 'Creating AdminUser error'
+#       end
+#     else
+#       puts 'AdminUsers are here already'
+#     end
+#     return false
+#   end
+
+#   def self.generate_first_manager_user
+#     if ::User.managers.all.count == 0
+#       _email_pass = 'manager@#{app_name.dasherize.downcase}.ru'
+#       if ::User.create(roles: ["manager"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass)
+#         puts "ManagerUser with email and password '\#{_email_pass}' was created!"
+#         return true
+#       else
+#         puts 'Creating ManagerUser error'
+#       end
+#     else
+#       puts 'ManagerUsers are here already'
+#     end
+#     return false
+#   end
+
+#   rails_admin do
+#     navigation_icon 'icon-user'
+#     list do
+#       field :email
+#       field :name
+#       field :login
+#       field :roles do
+#         pretty_value do
+#           render_object = (bindings[:controller] || bindings[:view])
+#           render_object.content_tag(:p, bindings[:object].roles.join(", ")) if render_object
+#         end
+#       end
+#     end
+
+#     edit do
+#       group :login do
+#         active false
+#         field :email, :string do
+#           visible do
+#             render_object = (bindings[:controller] || bindings[:view])
+#             render_object and (render_object.current_user.admin? or (render_object.current_user.manager? and render_object.current_user == bindings[:object]))
+#           end
+#         end
+#         field :name, :string
+#         field :login, :string do
+#           visible do
+#             render_object = (bindings[:controller] || bindings[:view])
+#             render_object and render_object.current_user.admin?
+#           end
+#         end
+#       end
+
+#       group :roles do
+#         active false
+#         field :roles, :hancock_enum do
+#           enum do
+#             ::User::AVAILABLE_ROLES
+#           end
+
+#           multiple do
+#             true
+#           end
+
+#           visible do
+#             render_object = (bindings[:controller] || bindings[:view])
+#             render_object and render_object.current_user.admin?
+#           end
+#         end
+#       end
+
+#       group :password do
+#         active false
+#         field :password do
+#           visible do
+#             render_object = (bindings[:controller] || bindings[:view])
+#             render_object and (render_object.current_user.admin? or render_object.current_user == bindings[:object])
+#           end
+#         end
+#         field :password_confirmation do
+#           visible do
+#             render_object = (bindings[:controller] || bindings[:view])
+#             render_object and (render_object.current_user.admin? or render_object.current_user == bindings[:object])
+#           end
+#         end
+#       end
+#     end
+
+#   end
+# TEXT
+# end
+# end
+# end
+# end
+remove_file 'app/models/user.rb'
+create_file 'app/models/user.rb' do <<-TEXT
+class User
+  include Mongoid::Document
+
+  if defined? RailsAdminUserAbilities
+    ######################### RailsAdminUserAbilities #########################
+    def self.rails_admin_user_defined_visible_actions
+      [:user_abilities]
+    end
+    has_one :ability, class_name: "RailsAdminUserAbilities::UserAbility", as: :rails_admin_user_abilitable
+    scope :for_rails_admin, -> { where(:roles.in => ['admin', 'manager']) } # could be any you want, just need to
+    ###########################################################################
+  end
+  
+  include Hancock::Users::Devise if defined?(Devise)
+
+  include Hancock::Users::Roles
+  def self.default_admin_email;    "admin@#{app_name.dasherize.downcase}.ru"; end
+  def self.default_manager_email;  "manager@#{app_name.dasherize.downcase}.ru"; end
+
+
+  rails_admin do
+    navigation_icon 'icon-user'
+    list do
+      field :name
+    end
+
+    edit do
+      group :login do
+        active false
+        field :name, :string
+      end
+    end
+
+  end
+
+
+  attr_accessor :token_2fa # i thunk it will be shared
+  include Hancock::Users::Authy if defined?(Authy)
+
+  include Hancock::Users::GoogleAuthenticator if defined?(GoogleAuthenticatorRails)
+  
+end
+
+TEXT
+end
+
+
 
 ####### DEVISE #######
 
@@ -274,228 +496,6 @@ class ApplicationController < ActionController::Base
 end
 TEXT
 end
-end
-
-
-####### MODELS #######
-
-generate "hancock:cms:ability" if ["yes", "y"].include?(ask_with_timeout("generate `hancock:cms:ability`? (y or yes)").downcase.strip)
-
-# gsub_user_rb = begin
-#   (User < Hancock::Model).nil?
-# rescue
-#   true
-# end
-# if gsub_user_rb
-# gsub_file 'app/models/user.rb', '# :confirmable, :lockable, :timeoutable and :omniauthable' do <<-TEXT
-# include Hancock::Model
-#   include Hancock::Enableable
-#   include Hancock::RailsAdminPatch
-#   def self.manager_can_default_actions
-#     [:show, :read]
-#   end
-#   def self.manager_cannot_actions
-#     [:new, :create, :delete, :destroy]
-#   end
-
-#   ######################### RailsAdminUserAbilities #########################
-#   # def self.rails_admin_user_defined_visible_actions
-#   #   [:user_abilities]
-#   # end
-#   # has_one :ability, class_name: "RailsAdminUserAbilities::UserAbility", as: :rails_admin_user_abilitable
-#   # scope :for_rails_admin, -> { where(:roles.in => ['admin', 'manager']) } # could be any you want, just need to
-#   ###########################################################################
-
-#   cattr_accessor :current_user
-
-#   # Include default devise modules. Others available are:
-#   # :confirmable,  :lockable, :timeoutable and :omniauthable
-# TEXT
-# end
-
-# if ["yes", "y"].include?(ask_with_timeout("Set Hancock's User model? (y or yes)").downcase.strip)
-# gsub_file 'app/models/user.rb', ':registerable,', ' :lockable,'
-# if mongoid
-# gsub_file 'app/models/user.rb', '# field :failed_attempts', 'field :failed_attempts'
-# gsub_file 'app/models/user.rb', '# field :unlock_token', 'field :unlock_token'
-# gsub_file 'app/models/user.rb', '# field :locked_at', 'field :locked_at'
-
-# inject_into_file 'app/models/user.rb', before: /^end/ do <<-TEXT
-
-#   field :name,    type: String
-#   field :login,   type: String
-#   field :roles,   type: Array, default: []
-
-#   before_save do
-#     self.roles ||= []
-#     self.roles.reject! { |r| r.blank? }
-#   end
-
-#   AVAILABLE_ROLES = ["admin", "manager", "client"].freeze
-
-#   AVAILABLE_ROLES.each do |r|
-#     class_eval <<-RUBY
-#       def \#{r}?
-#         self.roles and self.roles.include?("\#{r}")
-#       end
-
-#       scope :\#{r.pluralize}, -> { any_in(roles: "\#{r}") }
-#     RUBY
-#   end
-
-#   def self.generate_first_admin_user
-#     if ::User.admins.all.count == 0
-#       _email_pass = 'admin@#{app_name.dasherize.downcase}.ru'
-#       if ::User.new(roles: ["admin"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass).save
-#         puts "#################################################################################"
-#         puts "#################################################################################"
-#         puts "AdminUser with email and password '\#{_email_pass}' was created!"
-#         puts "#################################################################################"
-#         puts "#################################################################################"
-#         return true
-#       else
-#         puts 'Creating AdminUser error'
-#       end
-#     else
-#       puts 'AdminUsers are here already'
-#     end
-#     return false
-#   end
-
-#   def self.generate_first_manager_user
-#     if ::User.managers.all.count == 0
-#       _email_pass = 'manager@#{app_name.dasherize.downcase}.ru'
-#       if ::User.create(roles: ["manager"], email: _email_pass, password: _email_pass, password_confirmation: _email_pass)
-#         puts "ManagerUser with email and password '\#{_email_pass}' was created!"
-#         return true
-#       else
-#         puts 'Creating ManagerUser error'
-#       end
-#     else
-#       puts 'ManagerUsers are here already'
-#     end
-#     return false
-#   end
-
-#   rails_admin do
-#     navigation_icon 'icon-user'
-#     list do
-#       field :email
-#       field :name
-#       field :login
-#       field :roles do
-#         pretty_value do
-#           render_object = (bindings[:controller] || bindings[:view])
-#           render_object.content_tag(:p, bindings[:object].roles.join(", ")) if render_object
-#         end
-#       end
-#     end
-
-#     edit do
-#       group :login do
-#         active false
-#         field :email, :string do
-#           visible do
-#             render_object = (bindings[:controller] || bindings[:view])
-#             render_object and (render_object.current_user.admin? or (render_object.current_user.manager? and render_object.current_user == bindings[:object]))
-#           end
-#         end
-#         field :name, :string
-#         field :login, :string do
-#           visible do
-#             render_object = (bindings[:controller] || bindings[:view])
-#             render_object and render_object.current_user.admin?
-#           end
-#         end
-#       end
-
-#       group :roles do
-#         active false
-#         field :roles, :hancock_enum do
-#           enum do
-#             ::User::AVAILABLE_ROLES
-#           end
-
-#           multiple do
-#             true
-#           end
-
-#           visible do
-#             render_object = (bindings[:controller] || bindings[:view])
-#             render_object and render_object.current_user.admin?
-#           end
-#         end
-#       end
-
-#       group :password do
-#         active false
-#         field :password do
-#           visible do
-#             render_object = (bindings[:controller] || bindings[:view])
-#             render_object and (render_object.current_user.admin? or render_object.current_user == bindings[:object])
-#           end
-#         end
-#         field :password_confirmation do
-#           visible do
-#             render_object = (bindings[:controller] || bindings[:view])
-#             render_object and (render_object.current_user.admin? or render_object.current_user == bindings[:object])
-#           end
-#         end
-#       end
-#     end
-
-#   end
-# TEXT
-# end
-# end
-# end
-# end
-remove_file 'app/models/user.rb'
-create_file 'app/models/user.rb' do <<-TEXT
-class User
-  include Mongoid::Document
-
-  if defined? RailsAdminUserAbilities
-    ######################### RailsAdminUserAbilities #########################
-    def self.rails_admin_user_defined_visible_actions
-      [:user_abilities]
-    end
-    has_one :ability, class_name: "RailsAdminUserAbilities::UserAbility", as: :rails_admin_user_abilitable
-    scope :for_rails_admin, -> { where(:roles.in => ['admin', 'manager']) } # could be any you want, just need to
-    ###########################################################################
-  end
-  
-  include Hancock::Users::Devise if defined?(Devise)
-
-  include Hancock::Users::Roles
-  def self.default_admin_email;    "admin@#{app_name.dasherize.downcase}.ru"; end
-  def self.default_manager_email;  "manager@#{app_name.dasherize.downcase}.ru"; end
-
-
-  rails_admin do
-    navigation_icon 'icon-user'
-    list do
-      field :name
-    end
-
-    edit do
-      group :login do
-        active false
-        field :name, :string
-      end
-    end
-
-  end
-
-
-  attr_accessor :token_2fa # i thunk it will be shared
-  include Hancock::Users::Authy if defined?(Authy)
-
-  include Hancock::Users::GoogleAuthenticator if defined?(GoogleAuthenticatorRails)
-  
-end
-
-TEXT
 end
 
 
