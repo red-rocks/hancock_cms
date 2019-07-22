@@ -17,7 +17,7 @@ module ManualSlug::Mongoid
 
   module ClassMethods
     def manual_slug(_field, options = {}, callback = true)
-      options.merge!({
+      options.reverse_merge!({
         permanent: true,
         history: true,
         scope: (Hancock.config.mongoid_single_collection ? :_type : nil)
