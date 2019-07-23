@@ -29,9 +29,8 @@ html{lang=I18n.locale}
       = render "layouts/rails_admin/blocks/aside_navigation"
 
     main#root
-      #content
-        .content{data-pjax-container='true'}
-          = render template: 'layouts/rails_admin/pjax'
+      #content{data-pjax-container='true'}
+        = render template: 'layouts/rails_admin/pjax'
 
       = render "layouts/rails_admin/blocks/footer"
 

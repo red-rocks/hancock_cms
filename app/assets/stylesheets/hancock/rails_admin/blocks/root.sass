@@ -35,10 +35,7 @@ body::-webkit-scrollbar-thumb
   top: 0
   left: 0
   +display-flex()
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
+  +flex-flow(column nowrap)
   -webkit-box-flex: 1
   flex: 1 auto
   -ms-flex: 1 0 0px
@@ -48,9 +45,7 @@ body::-webkit-scrollbar-thumb
   +transition(all 0.3s ease)
   header
     +display-flex()
-    -webkit-box-pack: justify
-    -ms-flex-pack: justify
-    justify-content: space-between
+    +justify-content(space-between)
     height: 65px
     +transition(all 0.3s ease)
     background-color: #201f2b
@@ -67,10 +62,7 @@ body::-webkit-scrollbar-thumb
 
 #content
   +display-flex()
-  -webkit-box-orient: vertical
-  -webkit-box-direction: normal
-  -ms-flex-direction: column
-  flex-direction: column
+  +flex-flow(column nowrap)
   -webkit-box-flex: 1
   -ms-flex: 1 0 auto
   flex: 1 0 auto
@@ -96,17 +88,10 @@ a.hover-link
 
 #content
   .sub-header
-    background-color: transparent
-    padding: 20px 25px
     +display-flex()
-    -webkit-box-pack: justify
-    -ms-flex-pack: justify
-    justify-content: space-between
-    -webkit-box-align: stretch
-    -ms-flex-align: stretch
-    align-items: stretch
-    -ms-flex-wrap: wrap
-    flex-wrap: wrap
+    +justify-content(space-between)
+    +align-items(stretch)
+    +flex-wrap(wrap)
     margin: 0
     -webkit-box-flex: 0
     -ms-flex: none
@@ -163,6 +148,8 @@ a.hover-link
         font-weight: 500
         color: #959cb6
         white-space: nowrap
+      li:before
+        content: none
       li:after
         display: inline-block
         vertical-align: middle
@@ -240,3 +227,35 @@ a.hover-link
   color: #fff
   background-color: #5867dd
   border-color: #5867dd
+
+.hancock-container
+  width: 100%
+  margin: 0
+
+@media (min-width: 1025px)
+  .hancock-container
+    padding: 0 25px
+
+.sub-header
+  +display-flex()
+  +align-items(stretch)
+  margin: 10px 0
+
+.sub-header .hancock-container
+  +display-flex()
+  +justify-content(space-between)
+  +align-items(stretch)
+  +flex-wrap(wrap)
+
+.sub-header .sub-header-main
+  +display-flex()
+  +justify-content(flex-start)
+  +align-items(center)
+  +flex-wrap(wrap)
+  min-height: 50px
+  .page-title
+    margin: 0
+    padding: 0 15px 0 0
+    font-size: 14px
+    font-weight: 500
+    color: #434349
