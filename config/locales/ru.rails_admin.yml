@@ -64,6 +64,8 @@ ru:
       created_at: "Дата/Время"
       item: "Элемент"
       message: "Сообщение"
+      last_created: "Дата последней записи"
+      controls: "Действия"
     actions:
       nestable:
         title: "Сортировка %{model_label}"

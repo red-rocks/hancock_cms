@@ -66,6 +66,7 @@ require 'stickykit/rails'
 
 require 'simplebar-rails'
 require 'material_design_icons'
+require 'dotiw'
 
 require 'hancock/model'
 require 'hancock/engine'

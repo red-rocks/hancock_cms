@@ -1,28 +1,29 @@
-table.table.table-condensed.table-striped
-  thead
-    tr
-      th.shrink.created_at= t("admin.table_headers.created_at")
-      th.shrink.user= t("admin.table_headers.username")
-      th.shrink.items= t("admin.table_headers.item")
-      th.changes= t("admin.table_headers.changes")
-  tbody
-    - @history.each do |t|
-      - abstract_model = RailsAdmin.config(t.table).abstract_model rescue nil
-      - if abstract_model
-        tr{data-error-table="#{t.table if abstract_model.blank?}"}
-          td = t.created_at.strftime(' %d/%m/%Y %H:%M')
-          td= t.try :username
-          - if (o = (abstract_model and abstract_model.try(:get, t.item)) rescue nil)
-            - label = o.send(abstract_model.config.object_label_method)
-            - if show_action = action(:show, abstract_model, o)
-              td= link_to(label, url_for(action: show_action.action_name, model_name: abstract_model.to_param, id: o.id), class: 'pjax', title: label)
+#dashboard-history-table
+  table.table.table-condensed.table-striped.hancock-table
+    thead
+      tr
+        th.shrink.created_at= t("admin.table_headers.created_at")
+        th.shrink.user= t("admin.table_headers.username")
+        th.shrink.items= t("admin.table_headers.item")
+        th.changes= t("admin.table_headers.changes")
+    tbody
+      - @history.each do |t|
+        - abstract_model = RailsAdmin.config(t.table).abstract_model rescue nil
+        - if abstract_model
+          tr{data-error-table="#{t.table if abstract_model.blank?}"}
+            td = t.created_at.strftime(' %d/%m/%Y %H:%M')
+            td= t.try :username
+            - if (o = (abstract_model and abstract_model.try(:get, t.item)) rescue nil)
+              - label = o.send(abstract_model.config.object_label_method)
+              - if show_action = action(:show, abstract_model, o)
+                td= link_to(label, url_for(action: show_action.action_name, model_name: abstract_model.to_param, id: o.id), class: 'pjax', title: label)
+              - else
+                td
+                  span{title=label}
+                    = label
             - else
+              - label = ((t.table and Object.const_defined?(t.table)) ? t.table.constantize.model_name.human : t.table)
               td
-                span{title=label}
-                  = label
-          - else
-            - label = ((t.table and Object.const_defined?(t.table)) ? t.table.constantize.model_name.human : t.table)
-            td
-              span{title="#{label} ##{t.item}"}
-                = "#{label} ##{t.item}"
-          td= t.message
+                span{title="#{label} ##{t.item}"}
+                  = "#{label} ##{t.item}"
+            td= t.message
