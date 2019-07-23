@@ -17,6 +17,7 @@ module Hancock
                 if ::Mongoid::Compatibility::Version.mongoid3?
                   relation.class_name == self.metadata.class_name.to_s && relation.name == self.metadata.name
                 else
+                  # TODO error (relation_metadata not exists)
                   relation.class_name == self.relation_metadata.class_name.to_s &&
                   relation.name == self.relation_metadata.name
                 end
