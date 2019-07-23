@@ -1,0 +1,11 @@
+footer#footer
+  p
+    = "2016-#{Time.new.year} © "
+    = link_to "Hancock CMS", "//github.com/red-rocks/hancock_cms", class: "hover-link", title: "Hancock", target: "_blank"
+
+  p
+    = "Version: #{Hancock::VERSION}"
+
+  p
+    = "Разработчик: "
+    = link_to "Redrocks Digital Agency", "//redrocks.pro", class: "hover-link", title: "Redrocks Digital Agency", target: "_blank"

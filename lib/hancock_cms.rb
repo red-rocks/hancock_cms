@@ -64,6 +64,9 @@ require 'kaminari/actionview'
 
 require 'stickykit/rails'
 
+require 'simplebar-rails'
+require 'material_design_icons'
+
 require 'hancock/model'
 require 'hancock/engine'
 require 'hancock/controller'
@@ -154,5 +157,3 @@ end
 
 require 'filename_to_slug'
 require 'manual_slug'
-
-require 'scrollbar-rails'

@@ -15,7 +15,7 @@ module RailsAdmin::Hancock
           # ret << (link_to nav_icon + capitalize_first_letter(node.label_plural), url, class: "pjax#{level_class}", title: capitalize_first_letter(node.label_plural))
           # ret << (link_to "_blank", url, target: :_blank, title: "#{capitalize_first_letter(node.label_plural)} (В новой вкладке)")
           # ret.join.html_safe
-          link_name = nav_icon + capitalize_first_letter(node.label_plural)
+          link_name = nav_icon + %(<span>#{capitalize_first_letter(node.label_plural)}</span>).html_safe
           title = capitalize_first_letter(node.label_plural)
           title = "#{title} (#{node.abstract_model.model_name})" if _current_user and _current_user.admin?
           link_to link_name, url, class: "pjax#{level_class}", title: title

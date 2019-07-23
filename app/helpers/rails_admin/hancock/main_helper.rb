@@ -69,7 +69,7 @@ module RailsAdmin::Hancock
 
         span = "<span>#{capitalize_first_letter label}</span>"
         ul = "<ul>#{li_stack}</ul>"
-        %(<li class='dropdown-header #{label_class}' title='#{capitalize_first_letter label}'>#{span}#{ul}</li>) if li_stack.present?
+        %(<li class='dropdown-header #{label_class}' title='#{capitalize_first_letter label}'>#{span}<i class="mdi mdi-dots-horizontal"></i>#{ul}</li>) if li_stack.present?
       end.join.html_safe
     end
 
