@@ -22,7 +22,12 @@ header#header
   .hancock-container
     .hancock-panel
       .content
-        = yield
+        .head
+          .head-label
+            h2 = @page_name
+          .toolbar
+        .body
+          = yield
 
 .alerts
   - flash && flash.each do |key, value|
