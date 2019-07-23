@@ -12,7 +12,7 @@ header#header
   .sub-header
     .hancock-container
       .sub-header-main
-        h1.page-title = @page_name
+        /h1.page-title = @page_name
         .breadcrumbs
           = breadcrumb
 
@@ -20,7 +20,9 @@ header#header
         = content_for :contextual_tabs
 
   .hancock-container
-    = yield
+    .hancock-panel
+      .content
+        = yield
 
 .alerts
   - flash && flash.each do |key, value|
