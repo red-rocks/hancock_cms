@@ -1,0 +1,16 @@
+.form-inline .input-group
+  +display-flex()
+  +align-items(stretch)
+  input.form-control
+    +inline-flex()
+    box-shadow: none
+    border: 1px solid #e2e5ec
+    border-radius: 0
+    outline: 0
+    font-size: 13px
+    &:focus
+      color: #495057
+      background-color: #fff
+      border-color: #669cf7
+  span.input-group-btn
+    +display-flex()

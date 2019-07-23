@@ -42,7 +42,20 @@ module RailsAdmin::Hancock
       edit_path(opts)
     end
 
-
+    def hancock_bulk_menu(abstract_model = @abstract_model)
+      actions = actions(:bulkable, abstract_model)
+      return '' if actions.empty?
+      content_tag :li, class: 'dropdown' do
+        content_tag(:a, class: 'dropdown-toggle', data: {toggle: 'dropdown'}, href: '#') { t('admin.misc.bulk_menu_title').html_safe + ' ' + '<b class="caret"></b>'.html_safe } +
+          content_tag(:ul, class: 'dropdown-menu', style: 'left:auto; right:0;') do
+            actions.collect do |action|
+              content_tag :li do
+                link_to wording_for(:bulk_link, action, abstract_model), '#', class: 'bulk-link', data: {action: action.action_name}
+              end
+            end.join.html_safe
+          end
+      end.html_safe
+    end
     
     def hancock_root_navigation
       return "".html_safe if Hancock.rails_admin1?

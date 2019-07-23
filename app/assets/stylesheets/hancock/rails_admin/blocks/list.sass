@@ -1,0 +1,24 @@
+ul.nav.nav-tabs#scope_selector
+  margin-bottom: 20px
+  margin-left: -25px
+  margin-right: -25px
+  padding: 0px 25px
+  li
+    +display-flex()
+    +align-items(stretch)
+    margin-right: 15px
+    a
+      +transition(all .3s)
+      border: 0
+      border-bottom: 1px solid transparent
+      padding: 12px 0
+      font-size: 13px
+      +display-flex()
+      +align-items(center)
+      background-color: transparent
+      color: #595d6e
+      font-weight: 500
+  li.active a,
+  li a:hover
+    color: #5867dd
+    border-bottom: 1px solid #5867dd

@@ -1,0 +1,42 @@
+.btn,
+a.btn,
+button.btn
+  +inline-flex()
+  +align-items(center)
+  +justify-content(center)
+  font-weight: 400
+  text-align: center
+  vertical-align: middle
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  color: #fff
+  background-color: #0c5ce1
+  border: 1px solid #0b57d5
+  padding: 5px 13px
+  font-size: 13px
+  line-height: 20px
+  border-radius: 0
+  outline: 0!important
+  align-items: center
+  text-decoration: none
+  &:hover, &:focus
+    color: #fff
+    background-color: #0c61ed
+    border-color: #0c5ce1
+    text-decoration: none
+  i
+    font-size: 18px
+    line-height: 20px
+
+.btn.btn-with-icon
+  i
+    margin-right: 10px
+
+.btn.icon-btn
+  width: 35px
+
+.btn ~ .btn,
+.btn ~ .extra_buttons
+  margin-left: 10px

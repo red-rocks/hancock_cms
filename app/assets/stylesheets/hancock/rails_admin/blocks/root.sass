@@ -4,7 +4,7 @@ html
   overflow-x: hidden
 
 body
-  font-family: "Montserrat", sans-serif
+  font-family: "Montserrat", Helvetica, sans-serif
   font-weight: normal
   font-size: 16px
   line-height: 1.6
@@ -97,17 +97,6 @@ a.hover-link
     -ms-flex: none
     flex: none
   .sub-header-main
-    +display-flex()
-    -webkit-box-pack: start
-    -ms-flex-pack: start
-    justify-content: flex-start
-    -webkit-box-align: center
-    -ms-flex-align: center
-    align-items: center
-    -ms-flex-wrap: wrap
-    flex-wrap: wrap
-    padding: 5px 0
-    line-height: 20px
     h3
       margin: 0
       padding: 0 15px 0 0
@@ -207,6 +196,20 @@ a.hover-link
   background-color: #ffffff
   margin-bottom: 20px
 
+.well
+  background: transparent
+  border: 0px
+  box-shadow: none
+  padding: 0px
+  border-radius: 0
+  +display-flex()
+  +justify-content(space-between)
+  +align-items(stretch)
+  +flex-wrap(wrap)
+  -webkit-box-flex: 0
+  -ms-flex: none
+  flex: none
+
 .pagination
   +display-flex()
   padding-left: 0
@@ -253,9 +256,39 @@ a.hover-link
   +align-items(center)
   +flex-wrap(wrap)
   min-height: 50px
+  padding: 5px 0
+  line-height: 20px
   .page-title
     margin: 0
     padding: 0 15px 0 0
     font-size: 14px
     font-weight: 500
     color: #434349
+
+.sub-header .nav.nav-tabs.filter
+  margin: 0
+  min-height: 50px
+  +display-flex()
+  +justify-content(flex-end)
+  +align-items(center)
+  +flex-wrap(wrap)
+  padding: 5px 0
+  line-height: 20px
+  border-bottom: 0px
+  li > a.dropdown-toggle
+    text-decoration: none
+    background: #e1e3ec
+    color: #959cb6
+    display: inline-block
+    height: 32px
+    line-height: 32px
+    padding: 0 8px
+    border: 0
+    border-radius: 0
+    +transition(all 0.2s ease)
+    font-size: 14px
+    i
+      font-size: 18px
+    &:hover
+      background: #2c77f4
+      color: #fff

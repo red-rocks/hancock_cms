@@ -162,6 +162,7 @@ body.aside-minimized #aside.aside-fixed
     border-top-right-radius: 0
     border-bottom-right-radius: 0
     border-bottom-left-radius: 2px
+    outline: none
     &[placeholder]
       text-overflow: ellipsis
     &::-moz-placeholder
@@ -185,6 +186,9 @@ body.aside-minimized #aside.aside-fixed
     border-bottom-right-radius: 2px
     border-bottom-left-radius: 0px
     font-size: 18px
+    outline: none
+    &:hover, &:focus
+      background-color: lighten(#374850, 10%)
   input:focus
     background-color: #fff
     color: #666
@@ -192,6 +196,9 @@ body.aside-minimized #aside.aside-fixed
       background-color: #fff
       color: #666
       border-left-color: #ffffff
+      &:hover, &:focus
+        background-color: #fafafa
+
 
 #aside .navigation-wrapper
   -webkit-box-flex: 1

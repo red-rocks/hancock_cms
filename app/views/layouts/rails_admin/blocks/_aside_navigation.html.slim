@@ -1,7 +1,7 @@
 .navigation-wrapper
   .navigation-filter
     = text_field_tag 'nav-filter', '', placeholder: 'Filter...', class: 'nav-filter-field', autofocus: (action_name=="dashboard")
-    button.clear-nav-filter
+    button.clear-nav-filter{title="Сбросить"}
       i.mdi.mdi-close
   .aside-menu{data-simplebar}
     ul.nav.nav-pills.nav-stacked
