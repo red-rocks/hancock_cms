@@ -1,0 +1,302 @@
+body.rails_admin .form-horizontal.denser legend
+  margin-bottom: 0px
+
+body.rails_admin .form-horizontal.denser
+  margin-top: -25px
+  .form-actions
+    margin-top: 25px
+
+.form-horizontal .form-group
+  margin-left: 0px
+  margin-right: 0px
+  margin-bottom: 0px
+  +display-flex()
+  +align-items(flex-start)
+  +justify-content(flex-start)
+  +flex-flow(row wrap)
+  padding: 10px 0px 10px 50px
+  width: auto
+  .control-label
+    position: relative
+    width: 100%
+    padding-top: 0px
+    padding-right: 10px
+    padding-left: 10px
+    flex: 0 0 16%
+    max-width: 16%
+    min-width: 160px
+    font-size: 13px
+    font-weight: 400
+    color: #646c9a
+    text-align: left
+    float: none
+  .controls
+    flex: 0 0 50%
+    max-width: 50%
+    position: relative
+    width: 100%
+    padding-right: 10px
+    padding-left: 10px
+
+fieldset
+  width: 100%
+  font-size: 13px
+  margin: 0px -25px
+  legend
+    +display-flex()
+    +align-items(center)
+    +justify-content(flex-start)
+    position: relative
+    border-top: 1px solid #ebedf2
+    border-bottom: 1px solid #ebedf2
+    min-height: 45px
+    padding: 0 25px
+    font-size: 14px
+    font-weight: 500
+    color: #464457
+    +transition(all 0.3s ease)
+    + .form-group
+      margin-top: 25px
+    &:hover
+      background: lighten(#f0f3ff, 2%)
+      color: #2c77f4
+    i
+      font-size: 22px
+      margin-right: 10px
+  .form-group:last-child
+    margin-bottom: 25px
+  .form-group
+    span.help-block
+      color: #74788d
+      margin-top: 3px
+      font-size: 12px
+      margin-bottom: 0px
+
+.form-control
+  display: block
+  width: 100%
+  height: 35px
+  padding: 7px 13px
+  font-size: 13px
+  font-weight: 400
+  line-height: 1.5
+  color: #495057
+  background-color: #fff
+  background-clip: padding-box
+  border: 1px solid #e2e5ec
+  border-radius: 0
+  box-shadow: none
+  +transition(border-color .15s ease-in-out,box-shadow .15s ease-in-out)
+  &:active,
+  &:focus
+    box-shadow: none!important
+  &:focus
+    color: #495057
+    background-color: #fff
+    border-color: #669cf7
+    outline: 0
+
+textarea.form-control
+  width: auto !important
+  resize: vertical
+
+.form-control::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+.form-control::-webkit-scrollbar-track
+  background-color: #e2e5ec
+  +border-radius(0px)
+  width: 10px
+  padding: 1px
+
+.form-control::-webkit-scrollbar-thumb
+  background-color: #5578eb
+  +border-radius(0px)
+
+.input-group
+  +display-flex()
+  +align-items(stretch)
+  float: none !important
+  width: auto
+  .input-group-btn
+    +display-flex()
+    position: relative
+    z-index: 1
+    .btn
+      margin-bottom: 0
+      .ui-button-text
+        font-size: 0
+
+.ui-menu
+  font-size: 13px
+  font-family: Montserrat, Helvetica, sans-serif
+  box-shadow: none
+  font-weight: normal
+  padding: 0px 0px
+  float: none
+  border: 1px solid #669cf7
+  border-top: 1px solid transparent
+  .ui-menu-item
+    a
+      padding: 7px 13px
+    a.ui-state-active
+      font-weight: normal
+      margin: 0px
+      background: #669cf7
+      color: #FFFFFF
+      text-shadow: none
+      border-color: transparent
+      -moz-border-radius: 0
+      -webkit-border-radius: 0
+      border-radius: 0
+      border: 0
+
+.form-group.hancock_html_type
+  .controls
+    +flex-flow(column wrap)
+    flex: 0 0 70%
+    max-width: 70%
+    .medium-editor-element
+      @extend .form-control
+      height: 140px
+      overflow-y: auto
+      p
+        font-size: 13px
+
+    .medium-editor-element::-webkit-scrollbar
+      width: 8px
+      height: 8px
+
+    .medium-editor-element::-webkit-scrollbar-track
+      background-color: #e2e5ec
+      +border-radius(0px)
+      width: 10px
+      padding: 1px
+
+    .medium-editor-element::-webkit-scrollbar-thumb
+      background-color: #5578eb
+      +border-radius(0px)
+
+.form-group.hancock_hash_type
+  .controls
+    flex: 0 0 70%
+    max-width: 70%
+    .hash_element_block
+      +display-flex()
+      +flex-flow(row wrap)
+      +align-items(center)
+      +justify-content(flex-start)
+      margin-bottom: 10px
+      input
+        @extend .form-control
+        width: auto
+      > span
+        margin: auto 5px
+    .hash_element_block:last-child
+      margin-bottom: 0px
+    .hash_element_block.duplicate
+      background-color: transparent
+      input
+        border-color: $red
+      &:after
+        display: block
+        content: "duplicate"
+        text-transform: capitalize
+        color: $red
+        width: 100%
+        margin-top: 3px
+        font-size: 12px
+        margin-bottom: 0px
+  .hash_element_delete_link
+    +inline-flex()
+    +align-items(center)
+    +justify-content(center)
+    text-decoration: none
+    height: 32px
+    width: 32px
+    color: #93a2dd
+    font-size: 18px
+    +transition(color 0.3s ease)
+    span
+      display: none
+    &:hover
+      background: #f0f3ff
+      color: #2c77f4
+
+.form-group.hancock_multiselect_type
+  .controls
+    flex: 0 0 70%
+    max-width: 70%
+    .wrapper
+      padding: 0px
+  .ra-multiselect .ra-multiselect-center
+    +display-flex()
+    +align-items(center)
+    +flex-flow(column wrap)
+    +justify-content(center)
+    height: 120px
+    text-align: center
+    padding: 0px
+  .ra-multiselect .ui-icon
+    background-position: 0px 0px !important
+    background-image: none
+    text-indent: 0px
+    +inline-flex()
+    +align-items(center)
+    +justify-content(center)
+    font-size: 0px
+    text-decoration: none
+    height: 32px
+    width: 32px
+    color: #93a2dd
+    margin: 0px
+    +transition(color 0.3s ease)
+    &:before
+      font-size: 18px
+    &.ra-multiselect-item-add
+      @extend .mdi-arrow-right-bold
+    &.ra-multiselect-item-remove
+      @extend .mdi-arrow-left-bold
+    &:hover
+      color: #2c77f4
+  .ra-multiselect-item-remove-all
+    text-decoration: none
+    +inline-flex()
+    +align-items(center)
+    color: #93a2dd
+    &:hover
+      color: #2c77f4
+    .ui-icon
+      @extend .mdi-arrow-left-bold
+  .ra-multiselect-item-add-all
+    text-decoration: none
+    +inline-flex()
+    +align-items(center)
+    color: #93a2dd
+    &:hover
+      color: #2c77f4
+    .ui-icon
+      @extend .mdi-arrow-right-bold
+  select
+    padding: 0px
+    background: white
+    color: #495057
+  .wrapper select
+    margin-bottom: 0px
+    min-height: 124px
+  option
+    padding: 7px 13px
+    background: white
+    color: #495057
+  option[selected]
+    font-weight: normal
+    margin: 0px
+    background: #669cf7
+    color: #FFFFFF
+    text-shadow: none
+    border-color: transparent
+    -moz-border-radius: 0
+    -webkit-border-radius: 0
+    border-radius: 0
+    border: 0

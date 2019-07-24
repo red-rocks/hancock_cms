@@ -1,0 +1,35 @@
+input.custom_checkbox
+  position: relative
+  opacity: 0
+  height: 18px
+  width: 18px
+  margin: 0
+  padding: 0
+  z-index: 1
+  +display-flex()
+  ~ span
+    +display-flex()
+    position: relative
+    height: 18px
+    width: 18px
+    border: 1px solid #d1d7e2
+    +transition(all .3s ease)
+    margin-top: -18px
+  &:checked ~ span
+    border: 1px solid #2c77f4
+    background: 0 0
+    &:after
+      display: block
+  ~ span:after
+    border: solid #2c77f4
+    content: ''
+    position: absolute
+    display: none
+    top: 50%
+    left: 50%
+    margin-left: -2px
+    margin-top: -6px
+    width: 5px
+    height: 10px
+    border-width: 0 2px 2px 0!important
+    +transform(rotate(45deg))

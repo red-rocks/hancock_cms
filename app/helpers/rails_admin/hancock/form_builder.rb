@@ -77,7 +77,8 @@ module RailsAdmin::Hancock
       _default_fieldset = fieldset.name == :default
       @template.content_tag :fieldset, class: _default_fieldset ? 'default_fieldset' : '' do
         contents = []
-        contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe, style: fieldset.name == :default ? 'display:none' : '') if !is_tabbed or nested_in
+        # contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe, style: fieldset.name == :default ? 'display:none' : '') if !is_tabbed or nested_in
+        contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe) if !is_tabbed or nested_in
         contents << @template.content_tag(:p, fieldset.help) if fieldset.help.present?
         contents << fields.collect { |field| field_wrapper_for(field, nested_in) }.join
         contents.join.html_safe
