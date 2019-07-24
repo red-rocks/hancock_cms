@@ -1,0 +1,134 @@
+@-webkit-keyframes alert-fade-in
+  from
+    +transform(translate(0px, 50px))
+    opacity: 0
+  to
+    +transform(translate(0, 0))
+    opacity: 1
+
+@-moz-keyframes alert-fade-in
+  from
+    +transform(translate(0px, 50px))
+    opacity: 0
+  to
+    +transform(translate(0, 0))
+    opacity: 1
+
+@-o-keyframes alert-fade-in
+  from
+    +transform(translate(0px, 50px))
+    opacity: 0
+  to
+    +transform(translate(0, 0))
+    opacity: 1
+
+@keyframes alert-fade-in
+  from
+    +transform(translate(0px, 50px))
+    opacity: 0
+  to
+    +transform(translate(0, 0))
+    opacity: 1
+
+.alerts
+  position: fixed
+  bottom: 10px
+  right: 10px
+  z-index: 99
+
+.alert
+  +display-flex()
+  +align-items(stretch)
+  border-radius: 3px
+  margin: 0 0 20px 0
+  padding: 13px 26px
+  font-size: 13px
+  +animation(alert-fade-in 1s)
+  +animation-iteration-count(1)
+  +animation-fill-mode(forwards)
+  +transition(all 0.3s ease-in)
+  box-shadow: 0 0 13px 0 rgba(82,63,105,.1)
+
+.alert-info
+  background: #5867dd
+  border: 1px solid #5867dd
+  color: #fff
+  hr
+    border-top-color: #fff
+    opacity: .4
+
+.alert-success
+  background: #1dc9b7
+  border: 1px solid #1dc9b7
+  color: #fff
+  hr
+    border-top-color: #fff
+    opacity: .4
+
+.alert.alert-light
+  background: #fff
+  border: 1px solid #fff
+  color: #282a3c
+  hr
+    border-top-color: #fff
+    opacity: .4
+
+.alert-dark
+  background: #282a3c
+  border: 1px solid #282a3c
+  color: #fff
+  hr
+    border-top-color: #c6c8ca
+    opacity: .4
+
+.alert-danger
+  background: #fd397a
+  border: 1px solid #fd397a
+  color: #fff
+  hr
+    border-top-color: #fd397a
+    opacity: .4
+
+.alert-warning
+  background: #ffb822
+  border: 1px solid #ffb822
+  color: #111
+  hr
+    border-top-color: #ffb822
+    opacity: .4
+
+.alert-secondary
+  color: #75757c
+  background-color: #f9f9fc
+  border-color: #f7f7fb
+  hr
+    border-top-color: #f9f9fc
+    opacity: .4
+
+.alert-primary
+  background: #5867dd
+  border: 1px solid #5867dd
+  color: #fff
+  hr
+    border-top-color: #5867dd
+    opacity: .4
+
+.alert-dismissable, .alert-dismissible
+  padding-right: 26px
+
+.close-alert
+  +display-flex
+  background: transparent
+  border: 0px
+  font-size: 16px
+  +align-items(center)
+  +justify-content(flex-end)
+  margin: 0 0 0 13px
+  padding: 0
+  outline: none
+  i
+    opacity: .8
+    +transition(all 0.3s ease-in)
+  &:hover, &:focus
+    i
+      opacity: 1

@@ -59,9 +59,13 @@ body.rails_admin
     padding-right: 25px
 
 td.menus_field
+  > div
+    +display-flex()
+    +flex-flow(column nowrap)
   .btn
     +border-radius(40px)
     margin-top: 5px
+    margin-left: 0px
 
 td
   a.label-info[href]
