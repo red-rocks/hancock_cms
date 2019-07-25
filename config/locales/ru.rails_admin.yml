@@ -48,6 +48,7 @@ ru:
       log_out: "Выйти"
       ago: "назад"
       navigation_label_class: "navigation-element"
+      count: "Количество"
     flash:
       successful: "%{name} был %{action}"
       error: "Не получилось %{action} %{name}"

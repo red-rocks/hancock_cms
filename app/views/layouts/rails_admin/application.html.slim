@@ -1,13 +1,8 @@
 doctype html
 html{lang=I18n.locale}
+
   head
-    meta{content="IE=edge" http-equiv="X-UA-Compatible"}
-    meta{content="text/html; charset=utf-8" http-equiv="Content-Type"}
-    meta{content="width=device-width, initial-scale=1" name="viewport; charset=utf-8"}
-    meta{content="NONE,NOARCHIVE" name="robots"}
-    = csrf_meta_tag
-    = stylesheet_link_tag "rails_admin/rails_admin.css", media: :all
-    = javascript_include_tag "rails_admin/rails_admin.js"
+    = render "layouts/rails_admin/head"
 
   body.rails_admin
 
@@ -19,20 +14,21 @@ html{lang=I18n.locale}
     #loading.label.label-warning{style='display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}
       = t('admin.loading')
 
-    nav#aside
+    nav#aside.navbar.navbar-default
       header.aside-header
         .logotype
           = link_to dashboard_path, title: "Hancock CMS".freeze do
             = image_tag "hancock/rails_admin/hancock.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
         = button_tag "", class: "aside-toggler", type: "button" do
           span
-      = render "layouts/rails_admin/blocks/aside_navigation"
+
+      = render "layouts/rails_admin/aside_navigation"
 
     main#root
-      #content{data-pjax-container='true'}
+      #content.content{data-pjax-container='true'}
         = render template: 'layouts/rails_admin/pjax'
 
-      = render "layouts/rails_admin/blocks/footer"
+      = render "layouts/rails_admin/footer"
 
 
 

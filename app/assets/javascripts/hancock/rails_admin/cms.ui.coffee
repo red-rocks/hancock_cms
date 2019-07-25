@@ -9,7 +9,7 @@
 
 #= require ./navigation_dropdown
 #= require ./blocks/aside/navigation_filter
-#= require ./navigation_hider
+#= require ./fullscreen
 
 #= require ./multiselect
 #= require ./enum_with_custom

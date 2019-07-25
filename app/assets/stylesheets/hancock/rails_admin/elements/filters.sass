@@ -1,0 +1,23 @@
+#filters_box
+  display: block
+  width: 100%
+  p.filter
+    margin: 5px 0px
+    .label
+      @extend .btn
+      @extend .btn.btn-with-icon
+    .label-info
+      color: #fff
+      background-color: #5867dd
+      border-color: #5867dd
+      &:hover
+        color: #fff
+        background-color: #384ad7
+        border-color: #2e40d4
+    a
+      text-decoration: none
+      color: inherit
+      +inline-flex()
+      +align-items(center)
+      &:hover, &:focus
+        color: inherit
