@@ -3,7 +3,7 @@ module RailsAdmin::Hancock
   class FormBuilder < ::RailsAdmin::FormBuilder
 
     def generate_tabbed(options = {})
-      is_tabbed = true
+      _is_tabbed = true
       
       without_field_error_proc_added_div do
         options.reverse_merge!(
@@ -17,11 +17,14 @@ module RailsAdmin::Hancock
         fieldset_name = (_params[:fieldset] || :default).to_sym
         all_groups = visible_groups(options[:model_config], generator_action(options[:action], options[:nested_in]))
         current_groups = all_groups.select do |fieldset|
-          (is_tabbed and ((fieldset_name.blank? or fieldset_name == fieldset.name.to_sym) or (fieldset.bindings[:object].id.to_s != _params[:id]))) or !is_tabbed
+          (_is_tabbed and (
+            (fieldset_name.blank? or fieldset_name == fieldset.name.to_sym) or 
+            (fieldset.bindings[:object].id.to_s != _params[:id])
+          )) or !_is_tabbed
         end.uniq
         buttons_locals = {
-          hide_add_another: is_tabbed,
-          hide_add_edit: is_tabbed
+          hide_add_another: _is_tabbed,
+          hide_add_edit: _is_tabbed
         }
         object_infos +
           ((!options[:nested_in] and is_tabbed) ? @template.content_tag(:ul, class: 'fieldset-list') do
@@ -32,7 +35,8 @@ module RailsAdmin::Hancock
               @template.content_tag :li, fieldset.label, data: {target: fieldset.name, href: _url}, class: _class
             end.join.html_safe
           end : "") + 
-          ((options[:nested_in] or !is_tabbed) ? '' : @template.render(partial: 'rails_admin/main/submit_buttons', locals: buttons_locals)) +
+          # ((options[:nested_in] or !is_tabbed ) ? '' : @template.render(partial: 'rails_admin/main/submit_buttons', locals: buttons_locals)) +
+          ((options[:nested_in] or !is_tabbed or true) ? '' : @template.render(partial: 'rails_admin/main/submit_buttons', locals: buttons_locals)) +
           current_groups.collect do |fieldset|
             fieldset_for fieldset, options[:nested_in]
           end.join.html_safe +
@@ -41,8 +45,8 @@ module RailsAdmin::Hancock
     end
 
     def generate(options = {})
-      is_tabbed = (action_name == "tabbed_edit") and !options[:nested_in]
-      return generate_tabbed(options) if is_tabbed
+      _is_tabbed = is_tabbed and !options[:nested_in]
+      return generate_tabbed(options) if _is_tabbed
 
       without_field_error_proc_added_div do
         options.reverse_merge!(
@@ -114,6 +118,8 @@ module RailsAdmin::Hancock
 
     def is_tabbed
       return @is_tabbed unless @is_tabbed.nil?
+      puts 'def is_tabbed'
+      puts (action_name == "tabbed_edit" or action_name == "hancock_tabbed_edit")
       @is_tabbed = (action_name == "tabbed_edit" or action_name == "hancock_tabbed_edit")
     end
 
