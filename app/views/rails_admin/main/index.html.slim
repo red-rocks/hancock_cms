@@ -155,7 +155,8 @@ style
             - properties.map{ |property| property.bind(:object, object) }.each do |property|
               - value = property.pretty_value
               td{class="#{property.css_class} #{property.type_css_class}" title="#{strip_tags(value.to_s)}"}
-                - if property.type_css_class == 'string_type'
+                /- if property.css_class == 'raw_data_field' || property.css_class == 'content_field'
+                - if ['raw_data_field', 'content_field'].include?(property.css_class)
                   span{title="#{value}"}
                     = value
                 - else

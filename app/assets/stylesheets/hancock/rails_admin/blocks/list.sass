@@ -3,6 +3,8 @@ ul.nav.nav-tabs#scope_selector
   margin-left: -25px
   margin-right: -25px
   padding: 0px 25px
+  +display-flex()
+  +flex-flow(row wrap)
   + form#bulk_form
     margin-right: -25px
     margin-left: -25px
@@ -11,6 +13,7 @@ ul.nav.nav-tabs#scope_selector
     +display-flex()
     +align-items(stretch)
     margin-right: 15px
+    float: none
     a
       +transition(all .3s)
       border: 0
