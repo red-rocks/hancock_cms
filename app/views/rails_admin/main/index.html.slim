@@ -132,6 +132,7 @@ style
               i.mdi.mdi-dots-horizontal
 
           th.last.shrink
+            =t("admin.table_headers.controls")
 
       tbody
         - @objects.each do |object|
@@ -147,14 +148,23 @@ style
               = check_box_tag "bulk_ids[]", object.id, false
 
             - if @other_left_link ||= other_left && url_for(params.except('set').merge(params[:set].to_i != 1 ? {set: (params[:set].to_i - 1)} : {}))
-              td.other.left= link_to "...", @other_left_link, class: 'pjax'
+              td.other.left
+                = link_to @other_left_link, class: 'pjax' do
+                  i.mdi.mdi-dots-horizontal
 
             - properties.map{ |property| property.bind(:object, object) }.each do |property|
               - value = property.pretty_value
-              td{class="#{property.css_class} #{property.type_css_class}", title=strip_tags(value.to_s)}= value
+              td{class="#{property.css_class} #{property.type_css_class}" title="#{strip_tags(value.to_s)}"}
+                - if property.type_css_class == 'string_type'
+                  span{title="#{value}"}
+                    = value
+                - else
+                  = value
 
             - if @other_right_link = other_right && url_for(params.merge(set: (params[:set].to_i + 1), select: object.id))
-              td.other.right= link_to "...", @other_right_link, class: 'pjax'
+              td.other.right
+                = link_to @other_right_link, class: 'pjax' do
+                  i.mdi.mdi-dots-horizontal
 
             td.last.links
               ul.inline.list-inline
@@ -170,4 +180,4 @@ style
 
 - else
   /.total-count= "#{@objects.size} #{@model_config.pluralize(@objects.size).downcase}"
-  .total-count= "Количество: #{@objects.size}"
+  .total-count= "#{t("admin.misc.count")}: #{@objects.size}"

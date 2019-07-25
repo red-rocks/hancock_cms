@@ -75,8 +75,35 @@ td
     +border-radius(40px)
     margin-top: 5px
 
+th.other
+  text-align: center
+  i
+    height: 32px
+    width: 32px
+    font-size: 18px
+    padding-left: 7px
+
 td.other
   &.right,
   &.left
     a
+      +inline-flex()
+      +align-items(center)
+      +justify-content(center)
+      text-decoration: none
+      height: 32px
+      width: 32px
+      color: #93a2dd
+      font-size: 18px
+      +transition(color 0.3s ease)
+    a:hover
+      background: #f0f3ff
+      color: #2c77f4
 
+td.string_type
+  span
+    display: block
+    overflow: hidden
+    max-height: 150px
+    text-overflow: ellipsis
+    white-space: nowrap
