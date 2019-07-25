@@ -37,6 +37,7 @@ body.rails_admin .form-horizontal.denser
     width: 100%
     padding-right: 10px
     padding-left: 10px
+    float: none
 
 fieldset
   width: 100%
@@ -300,3 +301,18 @@ textarea.form-control
     -webkit-border-radius: 0
     border-radius: 0
     border: 0
+
+.form-control-static
+  padding: 0
+  &:empty
+    display: none
+
+.possible_insertions_list
+  display: table
+  dt
+    display: table-cell
+  dd
+    display: table-cell
+  input[readonly]
+    cursor: text
+    background: $white
