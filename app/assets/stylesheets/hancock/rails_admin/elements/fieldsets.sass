@@ -5,6 +5,14 @@ body.rails_admin .form-horizontal.denser
   margin-top: -25px
   .form-actions
     margin-top: 25px
+  fieldset > .control-group > .controls
+    ul.nav.nav-tabs
+      @extend ul.nav.nav-tabs#scope_selector
+      border: 0px
+      z-index: 1
+      position: relative
+      a
+        border-radius: 0px
 
 .form-horizontal .form-group
   margin-left: 0px
@@ -14,7 +22,7 @@ body.rails_admin .form-horizontal.denser
   +align-items(flex-start)
   +justify-content(flex-start)
   +flex-flow(row wrap)
-  padding: 10px 0px 10px 50px
+  padding: 10px 25px 10px 50px
   width: auto
   .control-label
     position: relative
@@ -31,8 +39,8 @@ body.rails_admin .form-horizontal.denser
     text-align: left
     float: none
   .controls
-    flex: 0 0 50%
-    max-width: 50%
+    flex: 0 0 80%
+    max-width: 80%
     position: relative
     width: 100%
     padding-right: 10px
@@ -40,7 +48,6 @@ body.rails_admin .form-horizontal.denser
     float: none
 
 fieldset
-  width: 100%
   font-size: 13px
   margin: 0px -25px
   legend
@@ -72,9 +79,15 @@ fieldset
       margin-top: 3px
       font-size: 12px
       margin-bottom: 0px
-  > .controls
+  > .control-group > .controls
     .btn-group
       width: 100%
+      .btn.btn-info:not(.toggler)
+        pointer-events: none
+        &.add_nested_fields
+          pointer-events: auto
+          i
+            margin-right: 10px
 
 .form-control
   display: block
@@ -310,3 +323,38 @@ textarea.form-control
   padding: 0
   &:empty
     display: none
+
+body.rails_admin .form-horizontal .tab-content
+  display: block
+  width: 100%
+  fieldset
+    margin: 0px
+
+body.rails_admin .form-horizontal .tab-content .tab-pane
+  color: #495057
+  background-color: #fff
+  background-clip: padding-box
+  border: 1px solid #e2e5ec
+  fieldset
+    padding-top: 0px
+    legend + .form-group
+      margin-top: 25px
+  .form-group
+    margin: 0
+
+body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_fields,
+body.rails_admin .form-horizontal .tab-content .tab-pane > .remove_nested_one_fields
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 1
+  opacity: 1
+  +transform(translate(-50%, -50%))
+  span.btn
+    height: 30px
+    width: 30px
+    border-radius: 50%
+    border: 0px
+    box-shadow: 0 0 13px 0 rgba(0,0,0,.1)
+    +transition(all .3s ease)
+    @extend .btn-danger
