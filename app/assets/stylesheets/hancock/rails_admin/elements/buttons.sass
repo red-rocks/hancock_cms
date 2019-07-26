@@ -147,3 +147,10 @@ input[type='submit']
 .btn ~ .extra_buttons
   margin-left: 10px
 
+.btn-group,
+.btn-group-vertical
+  +display-flex()
+  +align-items(stretch)
+  a
+    +inline-flex()
+    cursor: pointer

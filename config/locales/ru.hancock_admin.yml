@@ -58,3 +58,6 @@ ru:
   user:                         Пользователь
   hancock_gallery_image:        Фото
   hancock_gallery_gallery:      Фотогалерея
+  hancock:
+    seo:
+     sitemap_data_field:        Карта сайта
