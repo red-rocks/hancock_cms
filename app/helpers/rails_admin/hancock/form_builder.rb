@@ -117,8 +117,6 @@ module RailsAdmin::Hancock
 
     def is_tabbed
       return @is_tabbed unless @is_tabbed.nil?
-      puts 'def is_tabbed'
-      puts (action_name == "tabbed_edit" or action_name == "hancock_tabbed_edit")
       @is_tabbed = (action_name == "tabbed_edit" or action_name == "hancock_tabbed_edit")
     end
 
