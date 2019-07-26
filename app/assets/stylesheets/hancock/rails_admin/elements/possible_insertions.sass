@@ -1,0 +1,29 @@
+.form-horizontal .form-group .controls
+  &.hancock_pages_page_possible_insertions
+    flex: 0 0 70%
+    max-width: 70%
+
+dl.possible_insertions_list
+  +display-flex()
+  +flex-flow(row wrap)
+  dt
+    flex: 0 0 60%
+    min-width: 60%
+    +display-flex()
+    +align-items(center)
+    margin: 0px 0px 5px
+    span
+      font-size: 13px
+      font-weight: 400
+      color: #646c9a
+      flex: 0 0 50%
+      min-width: 50%
+    input
+      cursor: text
+  dd
+    +display-flex()
+    +align-items(center)
+    +flex-flow(row wrap)
+    flex: 0 0 30%
+    min-width: 30%
+    padding-left: 10px
