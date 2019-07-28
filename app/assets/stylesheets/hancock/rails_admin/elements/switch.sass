@@ -1,11 +1,12 @@
-.hancock-table .boolean_type
+.hancock-table .boolean_type,
+.rails_admin_nested_set
   a.label-success, a.label-danger
     position: relative
     font-size: 0
     line-height: 30px
     margin: 2px 0
     height: 30px
-    width: 57px
+    width: 54px
     border-radius: 15px
     display: inline-block
     float: left
@@ -47,7 +48,8 @@
       font-family: "Material Design Icons"
       content: '\F12C'
       margin-left: 26px
-    &:hover
+    &:hover, &:focus
+      background: transparent
       &:after
         background-color: lighten(#2c77f4, 10%)
   a.label-danger
@@ -57,6 +59,7 @@
     &:after
       color: #f8f9fb
       background-color: #fff
-    &:hover
+    &:hover, &:focus
+      background: transparent
       &:before
         opacity: 1
