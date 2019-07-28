@@ -17,14 +17,13 @@
       max-height: 120px
       max-width: 100%
       background-image: image_url('hancock/rails_admin/transparent_background.png')
+      ~ .toggle.jcrop_data_value
+        display: none
     img.img-thumbnail
       padding: 0px
       line-height: 1
       background-color: transparent
       border-radius: 0px
-      -webkit-transition: all 0.2s ease-in-out
-      -o-transition: all 0.2s ease-in-out
-      transition: all 0.3s ease-in-out
       display: inline-block
       max-width: 100%
       height: auto
@@ -34,12 +33,15 @@
       margin-bottom: 3px
       max-height: 120px
       background-image: image_url('hancock/rails_admin/transparent_background.png')
+      pointer-events: none
     .toggle
       margin-top: 0px
       margin-bottom: 0px
       top: 0
       left: 0
+      pointer-events: none
     .crop-btn
+      pointer-events: auto
       position: absolute
       top: 0px
       left: 0px
