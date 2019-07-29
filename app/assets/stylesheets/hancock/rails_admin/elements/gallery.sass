@@ -86,3 +86,13 @@
   +border-radius(3px)
   max-height: 90px
   background-image: image_url('hancock/rails_admin/transparent_background.png')
+
+body.rails_admin .form-horizontal .hancock_image_type input.custom_checkbox:empty ~ span
+  display: block
+  width: auto
+  height: auto
+  opacity: 1
+  line-height: inherit
+  border-radius: 0px
+  &:before, &:after
+    content: none

@@ -8,7 +8,11 @@ header#header{data-model= @abstract_model.to_param}
   ul.navigation.navigation-tabs.hancock-navigation-tabs
     = hancock_menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
 
-  /= render partial: 'rails_admin/main/hancock/navs/actions_navigation"
+  ul.actions-top-navigation
+    li.action-nav-link
+      = link_to "#", id: "fullscreen-toggler", title: "Во весь экран" do
+        span
+          i.mdi.mdi-fullscreen
 
 .content
   .sub-header
@@ -33,6 +37,6 @@ header#header{data-model= @abstract_model.to_param}
 .alerts
   - flash && flash.each do |key, value|
     .alert.alert-dismissible{class=flash_alert_class(key)}
-      = value
-      = button_tag class: 'close-alert', type: 'button', data: {dismiss: "alert"} do
+      span = value
+      = button_tag(type: 'button', class: 'close-alert', data:{dismiss: "alert"}) do
         i.mdi.mdi-close

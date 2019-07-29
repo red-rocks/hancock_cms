@@ -8,7 +8,7 @@
     li
       +display-flex()
       +align-items(stretch)
-      padding: 0 1.5rem
+      padding: 0 0
       margin: 0
       +transition(all 0.3s ease)
       a
@@ -20,6 +20,7 @@
         outline: none !important
         +transition(all 0.3s ease)
         color: #c7c5d8
+        padding: 0 1.5rem
     li.active, li:hover
       background-color: #272534
       a
@@ -41,6 +42,14 @@
         padding: 0
         font-size: 12px
         line-height: 1.4em
+
+#header > ul.actions-top-navigation
+  li a
+    i
+      font-size: 24px
+    i:before
+      margin-right: 0
+
 
 .header-bar
   +display-flex()

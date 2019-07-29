@@ -8,6 +8,8 @@
   z-index: 98
   background-color: #282733
   width: 250px
+  margin-bottom: 0
+  border-radius: 0
   +transition(all 0.3s ease)
 
 .navbar-default
@@ -141,12 +143,15 @@ body.aside-minimized #aside.aside-fixed
 
 #aside .navigation-filter
   border-radius: 3px
-  border: 1px solid #374850
-  margin: 10px 10px
+  padding: 10px
   position: relative
+  height: 50px
   +display-flex()
+  +align-items(center)
+  +justify-content(center)
   border-collapse: separate
   input
+    border: 1px solid #374850
     position: relative
     +display-flex()
     -webkit-box-flex: 1
@@ -183,7 +188,7 @@ body.aside-minimized #aside.aside-fixed
     +transition(all 0.3s ease-in)
     border: 0px
     color: #999
-    padding: 0px 8px
+    padding: 3px 10px
     border-top-left-radius: 0px
     border-top-right-radius: 2px
     border-bottom-right-radius: 2px
@@ -202,12 +207,64 @@ body.aside-minimized #aside.aside-fixed
       &:hover, &:focus
         background-color: #fafafa
 
+.aside-footer
+  +display-flex()
+  height: 50px
+  +justify-content(flex-start)
+  +flex-flow(row nowrap)
+  overflow: hidden
+  ul
+    list-style: none
+    width: 100%
+    margin: 0
+    padding: 0
+    +display-flex()
+    +align-items(stretch)
+    +justify-content(space-between)
+    li
+      +display-flex()
+      +align-items(stretch)
+      padding: 0px
+      margin: 0
+      +transition(all 0.3s ease)
+      a
+        +display-flex()
+        text-decoration: none
+        position: relative
+        vertical-align: middle
+        +align-items(stretch)
+        outline: none !important
+        +transition(all 0.3s ease)
+        color: #c7c5d8
+        padding: 10px
+    li
+      a:hover, a:focus
+        background-color: #201f2b
+        color: #ffffff
+    li a
+      i
+        +display-flex()
+        +align-items(center)
+        +justify-content(flex-start)
+        font-size: 16px
+      span
+        +display-flex()
+        +align-items(center)
+        padding: 0
+        font-size: 12px
+        line-height: 1.4em
 
 #aside .navigation-wrapper
   -webkit-box-flex: 1
   -ms-flex: 1 0 auto
   flex: 1 0 auto
-  height: 100%
+  position: relative
+  .navigation-content
+    position: absolute
+    left: 0
+    right: 0
+    top: 50px
+    bottom: 50px
   .aside-menu
     position: relative
     margin: 0
@@ -215,8 +272,9 @@ body.aside-minimized #aside.aside-fixed
     max-height: 100%
     overflow-x: hidden
     border-top: 1px solid #201f2b
+    border-bottom: 1px solid #201f2b
     ul.nav
-      padding: 0px 0 65px
+      padding: 0
       margin: 0
       list-style: none
     li.dropdown-header
