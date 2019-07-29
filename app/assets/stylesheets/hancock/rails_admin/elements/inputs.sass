@@ -1,3 +1,11 @@
+body.rails_admin .form-horizontal input,
+body.rails_admin .form-horizontal textarea,
+body.rails_admin .form-horizontal #file_contents,
+body.rails_admin .form-horizontal textarea,
+body.rails_admin .form-horizontal #file_contents
+  width: 100%
+  max-width: 500px
+
 .form-inline .input-group
   +display-flex()
   +align-items(stretch)
@@ -8,16 +16,13 @@
     border-radius: 0
     outline: 0
     font-size: 13px
+    width: 100%
     &:focus
       color: #495057
       background-color: #fff
       border-color: #669cf7
   span.input-group-btn
     +display-flex()
-
-.form-horizontal .control-group.hancock_image_type .remote_url_method
-  margin-top: 0px
-  width: auto
 
 .form-inline
   select.form-control
@@ -40,3 +45,15 @@ textarea
   @extend input
   height: auto
   min-height: 250px
+
+input[type="file"]:focus,
+textarea[type="file"]:focus,
+[type="file"]#file_contents:focus,
+input[type="radio"]:focus,
+textarea[type="radio"]:focus,
+[type="radio"]#file_contents:focus,
+input[type="checkbox"]:focus,
+textarea[type="checkbox"]:focus,
+[type="checkbox"]#file_contents:focus
+  outline: 0px auto -webkit-focus-ring-color
+  outline-offset: 0px

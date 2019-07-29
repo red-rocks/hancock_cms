@@ -3,12 +3,8 @@
     display: none
   .controls
     input
-      border: 0px
-      padding: 0px
-      margin: 0px
-      height: auto
-      width: auto
-      max-width: 50%
+      overflow: hidden
+      text-overflow: ellipsis
     img.preview
       border: 3px solid #fff
       box-shadow: 0 0 13px 0 rgba(0,0,0,.1)
@@ -44,7 +40,7 @@
       pointer-events: auto
       position: absolute
       top: 0px
-      left: 0px
+      left: 10px
       +transform(translate(-50%, -50%))
       cursor: pointer
       +display-flex()
@@ -56,10 +52,37 @@
       border: 0px
       background-color: #fff
       box-shadow: 0 0 13px 0 rgba(0,0,0,.1)
+      outline: none
       +transition(all .3s ease)
-      &:hover
+      &:hover, &:focus
         background-color: #2c77f4
         color: #ffffff
+
+.remote_url_method
+  max-width: 500px
+  div, input
+    color: #495057
+    background-color: #fff
+    background-clip: padding-box
+    border: 1px solid #e2e5ec
+    border-radius: 0
+    box-shadow: none
+    width: 100%
+    padding: 7px 13px
+    height: 35px
+    font-size: 13px
+    font-weight: 400
+    line-height: 1.5
+    +transition(border-color .15s ease-in-out,box-shadow .15s ease-in-out)
+    &:focus
+      color: #495057
+      background-color: #fff
+      border: 1px solid
+      border-color: #669cf7
+  div:last-child
+    padding: 0px
+    height: auto
+    border: 0px
 
 .form-horizontal .control-group.hancock_image_type
   +display-flex()
