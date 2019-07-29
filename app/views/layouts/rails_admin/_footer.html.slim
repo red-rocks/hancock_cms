@@ -1,7 +1,11 @@
-.cms-info.float-left
-  = link_to "Hancock v.#{Hancock::VERSION}", "https://github.com/red-rocks/hancock_cms", title: "Hancock", target: "_blank"
-  span = " © 2016-#{Time.new.year}"
+footer#footer
+  p
+    = "2016-#{Time.new.year} © "
+    = link_to "Hancock CMS", "//github.com/red-rocks/hancock_cms", class: "hover-link", title: "Hancock", target: "_blank"
 
-.dev-info.float-right
-  = "Created by "
-  span = link_to "Redrocks Studio", "https://redrocks.pro", title: "Redrocks", target: "_blank"
+  p
+    = "Version: #{Hancock::VERSION}"
+
+  p
+    = "Разработчик: "
+    = link_to "Redrocks Digital Agency", "//redrocks.pro", class: "hover-link", title: "Redrocks Digital Agency", target: "_blank"

@@ -48,6 +48,7 @@ ru:
       log_out: "Выйти"
       ago: "назад"
       navigation_label_class: "navigation-element"
+      count: "Количество"
     flash:
       successful: "%{name} был %{action}"
       error: "Не получилось %{action} %{name}"
@@ -64,6 +65,8 @@ ru:
       created_at: "Дата/Время"
       item: "Элемент"
       message: "Сообщение"
+      last_created: "Дата последней записи"
+      controls: "Действия"
     actions:
       nestable:
         title: "Сортировка %{model_label}"
@@ -78,15 +81,15 @@ ru:
         menu: Авторизовать
 
       hancock_management:
-        title: "Управление сервером"
-        menu: "Управление сервером"
+        title:      "Управление сервером"
+        menu:       "Управление сервером"
         breadcrumb: "Управление сервером"
-        link: "Управление сервером"
+        link:       "Управление сервером"
 
       dashboard:
-        title: "Управление сайтом"
-        menu: "Контрольная панель"
-        breadcrumb: "панель"
+        title:      "Контрольная панель"
+        menu:       "Контрольная панель"
+        breadcrumb: "Контрольная панель"
       index:
         title: "Список %{model_label_plural}"
         menu: "Список"

@@ -1,0 +1,65 @@
+.hancock-table .boolean_type,
+.rails_admin_nested_set
+  a.label-success, a.label-danger
+    position: relative
+    font-size: 0
+    line-height: 30px
+    margin: 2px 0
+    height: 30px
+    width: 54px
+    border-radius: 15px
+    display: inline-block
+    float: left
+    text-indent: 0
+    cursor: pointer
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    background-color: transparent
+    +transition(all .2s ease)
+    &:before,
+    &:after
+      position: absolute
+      display: block
+      top: 0
+      bottom: 0
+      left: 0
+      content: ''
+      width: 54px
+      border-radius: 15px
+      +transition(all .2s ease)
+    &:after
+      height: 24px
+      width: 24px
+      line-height: 26px
+      top: 3px
+      bottom: 3px
+      margin-left: 3px
+      font-size: 12px
+      text-align: center
+      vertical-align: middle
+  a.label-success
+    &:before
+      background-color: #e8ebf1
+    &:after
+      background-color: #2c77f4
+      color: #fff
+      font-family: "Material Design Icons"
+      content: '\F12C'
+      margin-left: 26px
+    &:hover, &:focus
+      background: transparent
+      &:after
+        background-color: lighten(#2c77f4, 10%)
+  a.label-danger
+    &:before
+      opacity: 0.85
+      background-color: #e8ebf1
+    &:after
+      color: #f8f9fb
+      background-color: #fff
+    &:hover, &:focus
+      background: transparent
+      &:before
+        opacity: 1

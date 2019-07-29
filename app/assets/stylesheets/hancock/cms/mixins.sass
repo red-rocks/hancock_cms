@@ -29,62 +29,6 @@
   -o-#{$property}: #{$value}
   #{$property}: #{$value}
 
-/// Background Gradient
-/// @param {Color} $startColor [#3C3C3C] - Start Color
-/// @param {Color} $endColor [#999999] - End Color
-
-=background-gradient($startColor: #3C3C3C, $endColor: #999999)
-  background-color: $startColor
-  background-image: -webkit-gradient(linear, left top, left bottom, from($startColor), to($endColor))
-  background-image: -webkit-linear-gradient(top, $startColor, $endColor)
-  background-image: -moz-linear-gradient(top, $startColor, $endColor)
-  background-image: -ms-linear-gradient(top, $startColor, $endColor)
-  background-image: -o-linear-gradient(top, $startColor, $endColor)
-  background-image: linear-gradient(top, $startColor, $endColor)
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}')
-
-/// Background Horizontal
-/// @param {Color} $startColor [#3C3C3C] - Start Color
-/// @param {Color} $endColor [#999999] - End Color
-
-=background-horizontal($startColor: #3C3C3C, $endColor: #999999)
-  background-color: $startColor
-  background-image: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor))
-  background-image: -webkit-linear-gradient(left, $startColor, $endColor)
-  background-image: -moz-linear-gradient(left, $startColor, $endColor)
-  background-image: -ms-linear-gradient(left, $startColor, $endColor)
-  background-image: -o-linear-gradient(left, $startColor, $endColor)
-  background-image: linear-gradient(left, $startColor, $endColor)
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$startColor}', endColorStr='#{$endColor}', gradientType='1')
-
-/// Background Horizontal - inverse direction
-/// @param {Color} $startColor [#999999] - Start Color
-/// @param {Color} $endColor [#3C3C3C] - End Color
-
-=background-horizontal-inverse($startColor: #999999, $endColor: #3C3C3C)
-  background-color: $startColor
-  background-image: -webkit-gradient(linear, right top, left top, from($startColor), to($endColor))
-  background-image: -webkit-linear-gradient(right, $startColor, $endColor)
-  background-image: -moz-linear-gradient(right, $startColor, $endColor)
-  background-image: -ms-linear-gradient(right, $startColor, $endColor)
-  background-image: -o-linear-gradient(right, $startColor, $endColor)
-  background-image: linear-gradient(right, $startColor, $endColor)
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#{$endColor}', endColorStr='#{$startColor}', gradientType='1')
-
-/// Background Radial
-/// @param {Color} $startColor [#3C3C3C] - Start Color
-/// @param {Percentage} $startPos [0%] - Start position
-/// @param {Color} $endColor [#999999] - End Color
-/// @param {Percentage} $endPos [100%] - End position
-
-=background-radial($startColor: #FFFFFF, $startPos: 0%, $endColor: #000000, $endPos: 100%)
-  background: -moz-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop($startPos, $startColor), color-stop($endPos, $endColor))
-  background: -webkit-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
-  background: -o-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
-  background: -ms-radial-gradient(center, ellipse cover, $startColor $startPos, $endColor $endPos)
-  background: radial-gradient(ellipse at center, $startColor $startPos, $endColor $endPos)
-
 /// Background Size
 /// @param {Size} $width [100%] - Width
 /// @param {Size} $width [$width] - Height
@@ -340,7 +284,24 @@
  *
  *-------------------------------------------------------------
 
-/// Cover background
+/// ANIMATION DURATION
+
+=animation-duration($duration...)
+  -o-animation-duration: $duration
+  -moz-animation-duration: $duration
+  -webkit-animation-duration: $duration
+  animation-duration: $duration
+
+/// LINEAR GRADIENT
+
+=gradient($from, $to)
+  background: $from
+  background-image: -moz-linear-gradient($from, $to)
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to))
+  background-image: -webkit-linear-gradient($from, $to)
+  background-image: -o-linear-gradient($from, $to)
+
+/// COVER BACKGROUND
 
 =cover-image()
   background-position: center center
@@ -364,7 +325,7 @@
   left: $left
   right: $right
 
-/// Display flex
+/// DISPLAY FLEX
 
 =display-flex()
   display: -webkit-box
@@ -372,3 +333,131 @@
   display: -ms-flexbox
   display: -webkit-flex
   display: flex
+
+/// INLINE FLEX
+
+=inline-flex()
+  display: -webkit-inline-box
+  display: -moz-inline-box
+  display: -webkit-inline-flex
+  display: -ms-inline-flexbox
+  display: inline-flex
+
+/// FLEX DIRECTION
+
+=flex-direction($value: row)
+  @if $value == row-reverse
+    -webkit-box-direction: reverse
+    -webkit-box-orient: horizontal
+    -moz-box-direction: reverse
+    -moz-box-orient: horizontal
+  @else if $value == column
+    -webkit-box-direction: normal
+    -webkit-box-orient: vertical
+    -moz-box-direction: normal
+    -moz-box-orient: vertical
+  @else if $value == column-reverse
+    -webkit-box-direction: reverse
+    -webkit-box-orient: vertical
+    -moz-box-direction: reverse
+    -moz-box-orient: vertical
+  @else
+    -webkit-box-direction: normal
+    -webkit-box-orient: horizontal
+    -moz-box-direction: normal
+    -moz-box-orient: horizontal
+  -webkit-flex-direction: $value
+  -ms-flex-direction: $value
+  flex-direction: $value
+
+/// FLEX WRAP
+
+=flex-wrap($value: nowrap)
+  -webkit-flex-wrap: $value
+  @if $value == nowrap
+    -ms-flex-wrap: none
+  @else
+    -ms-flex-wrap: $value
+    flex-wrap: $value
+
+/// FLEX JUSTIFY CONTENT
+
+=justify-content($value: flex-start)
+  @if $value == flex-start
+    -webkit-box-pack: start
+    -moz-box-pack: start
+    -ms-flex-pack: start
+  @else if $value == flex-end
+    -webkit-box-pack: end
+    -moz-box-pack: end
+    -ms-flex-pack: end
+  @else if $value == space-between
+    -webkit-box-pack: justify
+    -moz-box-pack: justify
+    -ms-flex-pack: justify
+  @else if $value == space-around
+    -ms-flex-pack: distribute
+  @else
+    -webkit-box-pack: $value
+    -moz-box-pack: $value
+    -ms-flex-pack: $value
+  -webkit-justify-content: $value
+  justify-content: $value
+
+/// FLEX ALIGN CONTENT
+
+=align-content($align)
+  -webkit-align-content: $align
+  -moz-align-content: $align
+  -ms-align-content: $align
+  align-content: $align
+
+/// FLEX ALIGN ITEMS
+
+=align-items($value: stretch)
+  @if $value == flex-start
+    -webkit-box-align: start
+    -moz-box-align: start
+    -ms-flex-align: start
+  @else if $value == flex-end
+    -webkit-box-align: end
+    -moz-box-align: end
+    -ms-flex-align: end
+  @else
+    -webkit-box-align: $value
+    -moz-box-align: $value
+    -ms-flex-align: $value
+  -webkit-align-items: $value
+  align-items: $value
+
+/// FLEX FLOW
+
+=flex-flow($values: (row nowrap))
+  -webkit-flex-flow: $values
+  -ms-flex-flow: $values
+  flex-flow: $values
+
+/// FLEX ORDER
+=flex-order($int: 0)
+  -webkit-box-ordinal-group: $int + 1
+  -moz-box-ordinal-group: $int + 1
+  -webkit-order: $int
+  -ms-flex-order: $int
+  order: $int
+
+/// FLEX GROW
+
+=flex-grow($int: 1)
+  -webkit-box-flex: $int
+  -moz-box-flex: $int
+  -webkit-flex-grow: $int
+  -ms-flex: $int
+  flex-grow: $int
+
+/// FLEX SHRINK
+
+=flex-shrink($int: 0)
+  -webkit-flex-shrink: $int
+  -moz-flex-shrink: $int
+  -ms-flex: $int
+  flex-shrink: $int

@@ -1,0 +1,60 @@
+.modal-open .modal
+  &:before
+    +absolute-block(0,0,0,0)
+    content: ""
+    background: rgba(0,0,0,0.9)
+    z-index: 0
+
+.modal-dialog
+  position: absolute
+  width: auto
+  max-width: 90%
+  margin: 0
+  padding: 0
+  max-height: 100%
+  top: 50%
+  left: 50%
+  .modal-content
+    border-radius: 0px
+    .modal-header
+      +display-flex()
+      +align-items(center)
+      +justify-content(space-between)
+      +flex-flow(row-reverse nowrap)
+      position: relative
+      padding: 0 25px
+      border-bottom: 1px solid #ebedf2
+      min-height: 60px
+      .modal-header-title
+        +display-flex()
+        +align-items(center)
+        +align-content(flex-first)
+        margin: 0
+        padding: 0
+        font-size: 16px
+        font-weight: 500
+        color: #464457
+      .close
+        margin-top: 0px
+        margin: 0px
+        padding: 0px
+        +inline-flex()
+        +align-items(center)
+        float: none
+    .modal-footer
+      @extend .modal-header
+      .btn i
+        margin-right: 7px
+      .btn.cancel-action
+        @extend .btn-danger
+
+#modal .jcrop-holder, #modal .jcrop-subject
+  max-width: 720px !important
+  max-height: 640px !important
+  max-height: 75vh !important
+
+body.rails_admin #modal .form-horizontal.denser
+  margin-top: 0px
+
+.modal.in .modal-dialog
+  +transform(translate3d(-50%, -50%, 0))

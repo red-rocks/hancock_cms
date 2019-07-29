@@ -1,0 +1,287 @@
+html
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+  height: 100%
+  overflow-x: hidden
+
+body
+  font-family: "Montserrat", Helvetica, sans-serif
+  font-weight: normal
+  font-size: 16px
+  line-height: 1.6
+  margin: 0
+  color: #646c9a
+  background-color: #f2f3f8
+  text-align: left
+  min-height: 100%
+
+body::-webkit-scrollbar
+  width: 8px
+  height: 8px
+
+body::-webkit-scrollbar-track
+  background-color: #282733
+  +border-radius(0px)
+  width: 10px
+  padding: 1px
+
+body::-webkit-scrollbar-thumb
+  background-color: rgba(0,0,0,0.5)
+  +border-radius(0px)
+
+#root
+  position: absolute
+  width: 100%
+  min-height: 100%
+  top: 0
+  left: 0
+  +display-flex()
+  +flex-flow(column nowrap)
+  -webkit-box-flex: 1
+  flex: 1 auto
+  -ms-flex: 1 0 0px
+  min-width: 0
+  padding-left: 250px
+  padding-top: 65px
+  background-color: #f2f3f8
+  +transition(all 0.3s ease)
+  header
+    +display-flex()
+    +justify-content(space-between)
+    height: 65px
+    +transition(all 0.3s ease)
+    background-color: #201f2b
+    position: fixed
+    top: 0
+    right: 0
+    left: 250px
+    z-index: 97
+    border-bottom: 0
+    +box-shadow(0px, 0px, 40px, 0px, rgba(82, 63, 105, 0.1))
+    -webkit-box-flex: 0
+    -ms-flex: none
+    flex: none
+
+#content
+  +display-flex()
+  +flex-flow(column nowrap)
+  -webkit-box-flex: 1
+  -ms-flex: 1 0 auto
+  flex: 1 0 auto
+
+a.hover-link
+  text-decoration: none
+  position: relative
+  display: inline-block
+  &:after
+    display: block
+    content: ''
+    position: absolute
+    bottom: 0
+    top: 1rem
+    left: 0
+    width: 0%
+    +transition(width 0.3s ease)
+  &:hover
+    &:after
+      border-bottom: 1px solid #2c77f4
+      opacity: 0.3
+      width: 100%
+
+#content
+  .sub-header
+    +display-flex()
+    +justify-content(space-between)
+    +align-items(stretch)
+    +flex-wrap(wrap)
+    margin: 0
+    -webkit-box-flex: 0
+    -ms-flex: none
+    flex: none
+  .sub-header-main
+    h3
+      margin: 0
+      padding: 0 15px 0 0
+      font-size: 14px
+      font-weight: 500
+      color: #434349
+      line-height: 20px
+    .breadcrumbs
+      +display-flex()
+      -webkit-box-align: center
+      -ms-flex-align: center
+      align-items: center
+      list-style-type: none
+      -ms-flex-wrap: wrap
+      flex-wrap: wrap
+      margin: 0
+      padding: 0
+    ol
+      list-style: none
+      +display-flex()
+      -webkit-box-align: center
+      -ms-flex-align: center
+      align-items: center
+      list-style-type: none
+      -ms-flex-wrap: wrap
+      flex-wrap: wrap
+      padding: 0
+      margin: 0
+      li
+        +display-flex()
+        -webkit-box-align: center
+        -ms-flex-align: center
+        align-items: center
+        list-style-type: none
+        -ms-flex-wrap: wrap
+        flex-wrap: wrap
+        font-size: 14px
+        font-weight: 500
+        color: #959cb6
+        white-space: nowrap
+      li:before
+        content: none
+      li:after
+        display: inline-block
+        vertical-align: middle
+        width: 4px
+        height: 4px
+        +border-radius(50%)
+        content: ""
+        background: #e7e8ef
+        margin: 0px 5px
+      li:last-child:after
+        content: none
+      li:first-child
+        a
+          font-size: 0
+        a:before
+          content: '\f6a0'
+          font-family: 'Material Design Icons'
+          font-size: 14px
+          line-height: 20px
+          display: inline-block
+          vertical-align: middle
+      li > a
+        color: #959cb6
+        text-decoration: none
+        +transition(all 0.3s ease)
+        &:hover
+          color: #2c77f4
+  .sub-header-toolbar
+    +display-flex()
+    -webkit-box-pack: end
+    -ms-flex-pack: end
+    justify-content: flex-end
+    -webkit-box-align: center
+    -ms-flex-align: center
+    align-items: center
+    padding: 0
+
+.wrapper
+  padding: 0px 25px 25px
+  -webkit-box-flex: 1
+  -ms-flex: 1 0 auto
+  flex: 1 0 auto
+
+#list
+  margin-right: -25px
+  margin-left: -25px
+  padding-right: 25px
+  padding-left: 25px
+
+.well
+  background: transparent
+  border: 0px
+  box-shadow: none
+  padding: 0px
+  border-radius: 0
+  +display-flex()
+  +justify-content(space-between)
+  +align-items(stretch)
+  +flex-wrap(wrap)
+  -webkit-box-flex: 0
+  -ms-flex: none
+  flex: none
+
+.pagination
+  +display-flex()
+  padding-left: 0
+  list-style: none
+
+.page-link
+  position: relative
+  display: block
+  padding: 5px
+  margin-left: -1px
+  line-height: 1.25
+  color: #2c77f4
+  background-color: #fff
+  border: 1px solid #ebedf2
+
+.page-item.active .page-link
+  z-index: 1
+  color: #fff
+  background-color: #5867dd
+  border-color: #5867dd
+
+.hancock-container
+  width: 100%
+  margin: 0
+
+@media (min-width: 1025px)
+  .hancock-container
+    padding: 0 25px
+
+.sub-header
+  +display-flex()
+  +align-items(stretch)
+  margin: 10px 0
+
+.sub-header .hancock-container
+  +display-flex()
+  +justify-content(space-between)
+  +align-items(stretch)
+  +flex-wrap(wrap)
+
+.sub-header .sub-header-main
+  +display-flex()
+  +justify-content(flex-start)
+  +align-items(center)
+  +flex-wrap(wrap)
+  min-height: 50px
+  padding: 5px 0
+  line-height: 20px
+  .page-title
+    margin: 0
+    padding: 0 15px 0 0
+    font-size: 14px
+    font-weight: 500
+    color: #434349
+
+.sub-header .nav.nav-tabs.filter
+  margin: 0
+  min-height: 50px
+  +display-flex()
+  +justify-content(flex-end)
+  +align-items(center)
+  +flex-wrap(wrap)
+  padding: 5px 0
+  line-height: 20px
+  border-bottom: 0px
+  li > a.dropdown-toggle
+    text-decoration: none
+    background: #e1e3ec
+    color: #959cb6
+    display: inline-block
+    height: 32px
+    line-height: 32px
+    padding: 0 8px
+    border: 0
+    border-radius: 0
+    +transition(all 0.2s ease)
+    font-size: 14px
+    i
+      font-size: 18px
+    &:hover
+      background: #2c77f4
+      color: #fff

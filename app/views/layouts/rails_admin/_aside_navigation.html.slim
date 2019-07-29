@@ -1,0 +1,17 @@
+.navigation-wrapper
+  .navigation-filter
+    = text_field_tag 'nav-filter', '', placeholder: 'Filter...', class: 'nav-filter-field', autofocus: (action_name=="dashboard")
+    button.clear-nav-filter{title="Сбросить"}
+      i.mdi.mdi-close
+  .navigation-content
+    .aside-menu{data-simplebar}
+      ul.nav.nav-pills.nav-stacked
+        = hancock_main_navigation
+      ul.nav.nav-pills.nav-stacked
+        = static_navigation
+
+      - if Hancock.rails_admin2?
+        ul.nav.nav-pills.nav-stacked.root-navigation= hancock_root_navigation
+
+    footer.aside-footer
+      = render "layouts/rails_admin/actions_navigation"

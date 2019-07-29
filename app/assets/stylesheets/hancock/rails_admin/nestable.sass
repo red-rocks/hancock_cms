@@ -2,7 +2,9 @@
   .dd-item
     margin: 5px 0px
   .dd3-content
-    display: block
+    +display-flex()
+    +align-items(center)
+    +justify-content(space-between)
     min-height: 40px
     padding: 5px 10px 5px 40px
     color: #333
@@ -10,10 +12,12 @@
     font-weight: bold
     border: 1px solid #ccc
     background: #fafafa
-    +border-radius(3px)
+    +border-radius(0px)
     box-sizing: border-box
     -moz-box-sizing: border-box
     line-height: 40px
+    &:before, &:after
+      content: none
     img
       max-width: 100%
       background: transparent image-url("hancock/rails_admin/transparent_background.png") repeat
@@ -25,34 +29,39 @@
       transition: all 0.2s ease-in-out
       display: inline-block
       height: auto
-    a.label
-      width: 36px
-      height: 20px
-      border-radius: 30px
-      transition: background-color 0.3s
-      position: relative
-      display: inline-block
-      vertical-align: middle
-      margin-top: 0px
-      font-size: 0
-      &:after
-        top: 2px
-        bottom: 2px
-        left: 2px
-        width: 16px
-        background-color: #fff
-        +border-radius(50%)
-        +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
-        +transition(transform 0.15s ease-out)
-        +transform(translateX(0px))
-        position: absolute
-        content: ""
-    a.label.label-success
-      background-color: #42a5f5
-      &:after
-        +transform(translateX(15px))
-    a.label.label-danger
-      background-color: #eee
+    a
+      font-size: 13px
+      font-weight: 400
+      color: #646c9a
+      text-decoration: none
+    //a.label
+    //  width: 36px
+    //  height: 20px
+    //  border-radius: 30px
+    //  transition: background-color 0.3s
+    //  position: relative
+    //  display: inline-block
+    //  vertical-align: middle
+    //  margin-top: 0px
+    //  font-size: 0
+    //  &:after
+    //    top: 2px
+    //    bottom: 2px
+    //    left: 2px
+    //    width: 16px
+    //    background-color: #fff
+    //    +border-radius(50%)
+    //    +box-shadow(1px 0 3px rgba(0, 0, 0, 0.1))
+    //    +transition(transform 0.15s ease-out)
+    //    +transform(translateX(0px))
+    //    position: absolute
+    //    content: ""
+    //a.label.label-success
+    //  background-color: #2c77f4
+    //  &:after
+    //    +transform(translateX(15px))
+    //a.label.label-danger
+    //  background-color: #eee
   .dd3-handle
     position: absolute
     margin: 0
@@ -62,16 +71,15 @@
     text-indent: 100px
     white-space: nowrap
     overflow: hidden
-    border: 1px solid darken(#42a5f5, 5%)
-    background: lighten(#42a5f5, 5%)
-    border-top-right-radius: 0
-    border-bottom-right-radius: 0
+    border: 1px solid darken(#2c77f4, 5%)
+    background: lighten(#2c77f4, 5%)
+    +border-radius(0)
     cursor: move
     color: #fafafa
     +transition(all 0.3s ease-in-out)
     &:hover
-      background: darken(#42a5f5, 10%)
-      border: 1px solid darken(#42a5f5, 15%)
+      background: darken(#2c77f4, 10%)
+      border: 1px solid darken(#2c77f4, 15%)
     &:before
       font-family: FontAwesome
       content: "\f047"
@@ -85,29 +93,35 @@
   .rails_admin_sort_embedded
     padding-left: 0px
 
-.controls
-  .nav.nav-tabs
-    li > a
-      display: inline-block
-      text-align: center
+.rails_admin_nested_set .dd3-content .links
+  .actions
+    +display-flex()
+    +flex-flow(row nowrap)
+    li
       white-space: nowrap
-      vertical-align: middle
-      -webkit-user-select: none
-      -moz-user-select: none
-      -ms-user-select: none
-      user-select: none
-      border: 0px solid transparent
-      padding: 8px 14px
-      font-size: 14px
-      line-height: 16px
-      +border-radius(.25rem)
-      +transition(all 0.2s ease-in-out)
-      color: #fff
-      background-color: #42a5f5
-      border-color: #0d89ed
-      &:hover, &:focus
-        background-color: #0d89ed
-        border-color: #0a6dbd
-      &:active
-        background-color: #42a5f5
-        border-color: #0d89ed
+      padding: 0px
+      +display-flex()
+      +align-items(center)
+      a
+        +inline-flex()
+        +align-items(center)
+        +justify-content(center)
+        text-decoration: none
+        height: 32px
+        width: 32px
+        color: #93a2dd
+        font-size: 18px
+        +transition(color 0.3s ease)
+      span
+        display: none
+      a:hover, a:focus
+        background: #f0f3ff
+        color: #2c77f4
+
+#rails_admin_nestable, #rails_admin_sort_embedded_blocks_order
+  .dd3-content .links .actions li a
+    color: #93a2dd
+    font-size: 18px
+  &:hover,
+  &:focus
+    color: #2c77f4

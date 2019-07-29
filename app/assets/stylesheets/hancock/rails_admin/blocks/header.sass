@@ -1,149 +1,141 @@
-#page-header
-  position: fixed
-  margin: 0 auto
-  width: 100%
-  background-color: #fff
-  +transition(padding 0.3s ease-in-out)
-
-#page-header .content-header
-  display: block
-  text-align: left
-  margin: 0 auto
-  padding: 0px
-  height: 50px
-
-@media all and (min-width: 920px)
-  #page-header
-    padding-left: 252px
-
-.toggle-sidebar, .plugin-name-panel, .user-panel
-  display: inline-block
-  vertical-align: top
-
-.toggle-sidebar
-  background: transparent
-  border: 0px solid
-  width: 50px
-  height: 50px
-  text-align: center
-  padding: 15px 5px
-  +transition(all 0.3s ease-in-out)
-  i
-    line-height: 20px
-  &:before, &:after
-    content: ""
-    font-family: 'FontAwesome'
-    display: inline-block
-    vertical-align: top
-    line-height: 20px
-    font-size: 16px
-    margin: 0px 3px
-  &:before
-    content: "\f104"
-    font-size: 16px
-  &:after
-    content: "\f105"
-    font-size: 0px
-  &:hover
-    background: #eee
-
-.plugin-name-panel
-  padding: 15px 10px
-  line-height: 20px
-
-.breadcrumbs
-  position: relative
-  margin-left: 25px
-  .breadcrumb
-    padding: 15px 10px
-    line-height: 20px
+#header
+  > ul
     list-style: none
-    background-color: transparent
-    +border-radius(0px)
-    font-size: 12px
-    margin-bottom: 0px
-
-.user-panel
-  float: right
-  position: relative
-  button#user-dropdown
-    margin-top: 9px
-    margin-right: 9px
-    i
-      margin: 0px 5px
-
-.user-panel.open
-  .fa-angle-down:before
-    content: "\f106"
-
-.current_user
-  display: inline-block
-  vertical-align: top
-  width: 50px
-  height: 50px
-  &:hover
-    .user_icon
-      background: #eee
-
-.user_icon
-  width: 50px
-  height: 50px
-  +transition(all 0.3s)
-  i
-    cursor: default
-    font-size: 26px
-
-.user_info
-  position: absolute
-  z-index: 1000
-  display: none
-  float: left
-  min-width: 10em
-  padding: 8px 0
-  margin: 5px 0 0
-  font-size: 14px
-  color: #575757
-  text-align: left
-  list-style: none
-  background-color: #fff
-  background-clip: padding-box
-  border: 1px solid #eaecee
-  padding-right: 8px
-  padding-left: 8px
-  border-radius: 2px
-  +box-shadow(0 2px 4px rgba(0, 0, 0, 0.025))
-  right: 5px
-  left: auto
-  li
-    font-size: 14px
-    a
-      display: block
-      padding: 3px 20px
-      clear: both
-      font-weight: normal
-      line-height: 1.42857
-      color: #333333
-      white-space: nowrap
-      +transition(all 0.3s ease-in-out)
-      &:before
-        display: inline-block
-        font-family: FontAwesome
-        text-rendering: auto
-        -webkit-font-smoothing: antialiased
-        -moz-osx-font-smoothing: grayscale
-        box-sizing: border-box
-        margin-right: 7px
-      &:hover, &:focus
+    margin: 0
+    padding: 0
+    +display-flex()
+    +align-items(stretch)
+    li
+      +display-flex()
+      +align-items(stretch)
+      padding: 0 0
+      margin: 0
+      +transition(all 0.3s ease)
+      a
+        +display-flex()
         text-decoration: none
-        color: #262626
-        background-color: #f5f5f5
-  .user-logout-action a
-    &:before
-      content: "\f011"
-  .user-edit-action a
-    &:before
-      content: "\f040"
-  .user_email
-    text-transform: lowercase
-    text-align: center
-    margin-bottom: 7px
+        position: relative
+        vertical-align: middle
+        +align-items(stretch)
+        outline: none !important
+        +transition(all 0.3s ease)
+        color: #c7c5d8
+        padding: 0 1.5rem
+    li.active, li:hover
+      background-color: #272534
+      a
+        color: #ffffff
+    li a
+      i
+        +display-flex()
+        +align-items(center)
+        +justify-content(flex-start)
+        font-size: 14px
+        &:before
+          margin-right: 5px
+      span
+        +display-flex()
+        +align-items(center)
+        -webkit-box-flex: 1
+        -ms-flex-positive: 1
+        flex-grow: 1
+        padding: 0
+        font-size: 12px
+        line-height: 1.4em
+
+#header > ul.actions-top-navigation
+  li a
+    i
+      font-size: 24px
+    i:before
+      margin-right: 0
+
+
+.header-bar
+  +display-flex()
+  +align-items(stretch)
+  padding: 0
+  .dropdown-bar
+    +display-flex()
+    +align-items(stretch)
+    margin: 0 0.1rem
+    position: relative
+    button
+      +display-flex()
+      +align-items(stretch)
+      background: transparent
+      border: 0px
+      box-shadow: none
+      +transition(all 0.3s ease-in)
+      picture
+        padding: 0 8px
+        +display-flex()
+        +align-items(center)
+        +justify-content(center)
+        height: 55px
+      i
+        font-size: 32px
+        color: #c7c5d8
+        +transition(all 0.2s ease-in)
+      &:hover
+        background-color: #272534
+        i
+          color: #ffffff
+  .dropdown-bar-container
+    position: absolute
+    top: 65px
+    right: 0
+    z-index: 99
+    +display-flex()
+    +align-items(center)
+    +flex-flow(column nowrap)
+    padding: 0px
+    +transform(rotate3d(1, 0, 0, 90deg))
+    +transform-origin(top center)
+    +transition(all 0.3s ease-in)
+    &.opened
+      +transform(rotate3d(1, 0, 0, 0deg))
+    > *
+      width: 100%
+    ul.user-actions
+      list-style: none
+      +display-flex()
+      +justify-content(space-between)
+      +align-items(stretch)
+      +flex-wrap(wrap)
+      min-width: 280px
+      padding: 0px 15px
+  .user-card
+    +display-flex()
+    +align-items(center)
+    padding: 10px 5px
+    background-color: #f9fafe
+    .user-card-avatar
+      padding: 0
+      margin: 0
+      +display-flex()
+      +justify-content(center)
+      +align-items(center)
+      border-radius: 50%
+      font-size: 14px
+      picture
+        width: 60px
+        height: 60px
+        +display-flex()
+        +justify-content(center)
+        +align-items(center)
+        i
+          font-size: 28px
+      .user-card-name
+        -webkit-box-flex: 1
+        -ms-flex-positive: 1
+        flex-grow: 1
+        color: #6c7293
+        font-size: 1.3rem
+        font-weight: 500
+        padding-left: 1rem
+  .user-actions a
+    font-size: 10px
+    padding: 0px 15px
+    line-height: 28px
+    height: 28px

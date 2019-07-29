@@ -1,26 +1,25 @@
 - if @abstract_models
-  #dashboard-table
-    table.table.table-condensed.table-striped
+  #dashboard-table.table-wide
+    table.table.table-condensed.table-striped.hancock-table
       thead
         tr
-          th.shrink.model-name= t "admin.table_headers.model_name"
-          th.shrink.last-created= t "admin.table_headers.last_created"
-          th.records= t "admin.table_headers.records"
-          th.shrink.controls
+          th.shrink.model-name = t("admin.table_headers.model_name")
+          th.shrink.last-created = t("admin.table_headers.last_created")
+          th.records = t("admin.table_headers.records")
+          th.shrink.controls = t("admin.table_headers.controls")
       tbody
         - @abstract_models.each do |abstract_model|
           - if authorized? :index, abstract_model
             - index_path = index_path(model_name: abstract_model.to_param)
             - row_class = "#{cycle("odd", "even")}#{" link" if index_path} #{abstract_model.param_key}_links"
             tr{class=row_class data-link=index_path}
-              - last_created = @most_recent_created[abstract_model.model.name]
+              - last_created = abstract_model.model.last.try(:created_at)
               - active = last_created.try(:today?)
               td
                 span.show= link_to capitalize_first_letter(abstract_model.config.label_plural), index_path, class: 'pjax'
               td
                 - if last_created
-                  = time_ago_in_words last_created
-                  = t "admin.misc.ago"
+                  = "#{distance_of_time_in_words(last_created, Time.now, true, :highest_measure_only => true, :locale => :en)} ago"
               td
                 - count = @count[abstract_model.model.name]
                 - percent = count > 0 ? (@max <= 1 ? count : ((Math.log(count+1) * 100.0) / Math.log(@max+1)).to_i) : -1
@@ -40,8 +39,4 @@
                     = @count[abstract_model.model.name]
               td.links
                 ul.inline.list-inline= hancock_menu_for :collection, abstract_model, nil, true
-- if @auditing_adapter && authorized?(:history_index)
-  #block-tables.block
-    .content
-      h2= t("admin.actions.history_index.menu")
-      = render partial: 'rails_admin/main/dashboard_history'
+

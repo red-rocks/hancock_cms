@@ -1,25 +1,42 @@
-/ javascript:
-/   $('.nav.nav-pills li.active').removeClass('active');
-/   $('.nav.nav-pills li[data-model="#{@abstract_model.to_param}"]').addClass('active');
+javascript:
+  $('.nav.nav-pills li.active').removeClass('active');
+  $('.nav.nav-pills li[data-model="#{@abstract_model.to_param}"]').addClass('active');
 
 title= "#{@abstract_model.try(:pretty_name) || @page_name} | #{[_get_plugin_name[0] || 'Rails', _get_plugin_name[1] || 'Admin'].join(' ')}"
 
-ul.nav.nav-tabs.hancock-nav-tabs
-  = hancock_menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
+header#header{data-model= @abstract_model.to_param}
+  ul.navigation.navigation-tabs.hancock-navigation-tabs
+    = hancock_menu_for((@abstract_model ? (@object.try(:persisted?) ? :member : :collection) : :root), @abstract_model, @object)
 
-.page-titles
-  h1.page-title.hidden= @page_name
+  ul.actions-top-navigation
+    li.action-nav-link
+      = link_to "#", id: "fullscreen-toggler", title: "Во весь экран" do
+        span
+          i.mdi.mdi-fullscreen
 
-.breadcrumbs
-  = breadcrumb
+.content
+  .sub-header
+    .hancock-container
+      .sub-header-main
+        .breadcrumbs
+          = breadcrumb
 
-ul.nav.nav-tabs.filter
-  = content_for :contextual_tabs
+      ul.nav.nav-tabs.filter
+        = content_for :contextual_tabs
 
-= yield
+  .hancock-container
+    .hancock-panel
+      .content
+        .head
+          .head-label
+            h1.head-label-title = @page_name
+          .toolbar
+        .body
+          = yield
 
 .alerts
   - flash && flash.each do |key, value|
     .alert.alert-dismissible{class=flash_alert_class(key)}
-      button.close{type='button' data-dismiss="alert"} &times;
-      = value
+      span = value
+      = button_tag(type: 'button', class: 'close-alert', data:{dismiss: "alert"}) do
+        i.mdi.mdi-close

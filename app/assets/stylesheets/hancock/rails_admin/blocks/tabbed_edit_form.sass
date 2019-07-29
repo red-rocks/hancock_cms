@@ -1,0 +1,22 @@
+#hancock_tabbed_edit_form
+  margin-left: -25px
+  margin-right: -25px
+  padding-left: 25px
+  padding-right: 25px
+  margin-top: 25px
+  .fieldset-list
+    @extend ul.nav.nav-tabs#scope_selector
+    @extend .nav-tabs
+    li
+      @extend li
+      a
+        @extend a
+        text-decoration: none
+        &:hover, &:focus
+          text-decoration: none
+        &.current
+          color: #5867dd
+          border-bottom: 1px solid #5867dd
+          pointer-events: none
+  fieldset
+    padding-top: 25px

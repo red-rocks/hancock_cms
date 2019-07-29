@@ -1,0 +1,381 @@
+#aside
+  +display-flex()
+  +flex-flow(column nowrap)
+  position: fixed
+  top: 0
+  bottom: 0
+  left: 0
+  z-index: 98
+  background-color: #282733
+  width: 250px
+  margin-bottom: 0
+  border-radius: 0
+  +transition(all 0.3s ease)
+
+.navbar-default
+  border: 0px
+
+body.aside-minimized #aside
+  width: 78px
+  +transition(all 0.3s ease)
+  ~#root
+    padding-left: 78px
+    +transition(all 0.3s ease)
+    header
+      left: 78px
+  .aside-header .logotype img
+    +transform(translateX(-100%))
+    opacity: 0
+    display: none
+  .aside-toggler
+    span:after
+      +transform(scaleX(0.8))
+    span, span:after, span:before
+      background: #ffffff
+  .navigation-wrapper .aside-menu li.dropdown-header > ul
+    li:not(.active) > a > i
+      color: #7c87a6
+    li > a > span
+      display: none
+  .navigation-wrapper .aside-menu li.dropdown-header > span
+    display: none
+    ~ i:before
+      display: inline-block
+  .navigation-filter button.clear-nav-filter
+    display: none
+
+body.aside-minimized #aside.aside-fixed
+  width: 250px
+  +transition(all 0.3s ease)
+  .aside-header .logotype img
+    +transform(translateX(0%))
+    opacity: 1
+    display: block
+  .navigation-wrapper .aside-menu li.dropdown-header > ul
+    li:not(.active) > a > i
+      color: #3a3a5d
+    li > a > span
+      +display-flex()
+    li:not(.active):hover > a > i
+      color: #2c77f4
+  .navigation-wrapper .aside-menu li.dropdown-header > span
+    +display-flex()
+    ~ i:before
+      display: none
+  .navigation-filter button.clear-nav-filter
+    +display-flex()
+
+.aside-toggler
+  display: inline-block
+  position: relative
+  overflow: hidden
+  margin: 0
+  padding: 0
+  font-size: 0
+  text-indent: -9999px
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  -webkit-box-shadow: none
+  box-shadow: none
+  border-radius: none
+  border: none
+  cursor: pointer
+  background: none
+  outline: none !important
+  width: 26px
+  height: 26px
+  +transition(all 0.4s ease)
+  span
+    display: block
+    position: absolute
+    top: 12px
+    height: 2px
+    min-height: 2px
+    width: 100%
+    +transition(all 0.4s ease)
+    background: #484f66
+  span:after,
+  span:before
+    position: absolute
+    display: block
+    left: 0
+    width: 100%
+    height: 2px
+    min-height: 2px
+    content: ""
+    +transition(all 0.4s ease)
+    background: #484f66
+  span:before
+    top: -7px
+  span:after
+    bottom: -7px
+    +transform-origin(left center)
+    +transform(scaleX(1))
+  &:hover
+    span, span:after, span:before
+      background: #ffffff
+
+.aside-header
+  +display-flex()
+  +justify-content(space-between)
+  +align-items(center)
+  +flex-flow(row nowrap)
+  padding: 0 25px
+  height: 65px
+  background-color: #201f2b
+  -webkit-box-flex: 0
+  -ms-flex: none
+  flex: none
+  .logotype, .aside-toggler
+    +display-flex()
+    +justify-content(flex-begin)
+  .logotype a
+    +display-flex()
+  .logotype img
+    width: auto
+    height: 26px
+  .logotype img
+    +transition(opacity 0.3s ease .0s, display .0s ease 0.3s, transform 0.3s ease .0s)
+    opacity: 1
+    display: block
+    +transform(translateX(0%))
+
+#aside .navigation-filter
+  border-radius: 3px
+  padding: 10px
+  position: relative
+  height: 50px
+  +display-flex()
+  +align-items(center)
+  +justify-content(center)
+  border-collapse: separate
+  input
+    border: 1px solid #374850
+    position: relative
+    +display-flex()
+    -webkit-box-flex: 1
+    -ms-flex: 1 1 auto
+    flex: 1 1 auto
+    width: 1%
+    margin-bottom: 0
+    background-color: #374850
+    color: #666
+    box-shadow: none
+    border: 0px
+    padding: 4px 10px
+    font-size: 14px
+    +transition(all 0.3s ease-in)
+    border-top-left-radius: 2px
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    border-bottom-left-radius: 2px
+    outline: none
+    &[placeholder]
+      text-overflow: ellipsis
+    &::-moz-placeholder
+      text-overflow: ellipsis
+    &:-moz-placeholder
+      text-overflow: ellipsis
+    &:-ms-input-placeholder
+      text-overflow: ellipsis
+  button.clear-nav-filter
+    +display-flex()
+    z-index: 2
+    margin-left: -1px
+    box-shadow: none
+    background-color: #374850
+    +transition(all 0.3s ease-in)
+    border: 0px
+    color: #999
+    padding: 3px 10px
+    border-top-left-radius: 0px
+    border-top-right-radius: 2px
+    border-bottom-right-radius: 2px
+    border-bottom-left-radius: 0px
+    font-size: 18px
+    outline: none
+    &:hover, &:focus
+      background-color: lighten(#374850, 10%)
+  input:focus
+    background-color: #fff
+    color: #666
+    ~ button.clear-nav-filter
+      background-color: #fff
+      color: #666
+      border-left-color: #ffffff
+      &:hover, &:focus
+        background-color: #fafafa
+
+.aside-footer
+  +display-flex()
+  height: 50px
+  +justify-content(flex-start)
+  +flex-flow(row nowrap)
+  overflow: hidden
+  ul
+    list-style: none
+    width: 100%
+    margin: 0
+    padding: 0
+    +display-flex()
+    +align-items(stretch)
+    +justify-content(space-between)
+    li
+      +display-flex()
+      +align-items(stretch)
+      padding: 0px
+      margin: 0
+      +transition(all 0.3s ease)
+      a
+        +display-flex()
+        text-decoration: none
+        position: relative
+        vertical-align: middle
+        +align-items(stretch)
+        outline: none !important
+        +transition(all 0.3s ease)
+        color: #c7c5d8
+        padding: 10px
+    li
+      a:hover, a:focus
+        background-color: #201f2b
+        color: #ffffff
+    li a
+      i
+        +display-flex()
+        +align-items(center)
+        +justify-content(flex-start)
+        font-size: 16px
+      span
+        +display-flex()
+        +align-items(center)
+        padding: 0
+        font-size: 12px
+        line-height: 1.4em
+
+#aside .navigation-wrapper
+  -webkit-box-flex: 1
+  -ms-flex: 1 0 auto
+  flex: 1 0 auto
+  position: relative
+  .navigation-content
+    position: absolute
+    left: 0
+    right: 0
+    top: 50px
+    bottom: 50px
+  .aside-menu
+    position: relative
+    margin: 0
+    background-color: #282733
+    max-height: 100%
+    overflow-x: hidden
+    border-top: 1px solid #201f2b
+    border-bottom: 1px solid #201f2b
+    ul.nav
+      padding: 0
+      margin: 0
+      list-style: none
+    li.dropdown-header
+      margin: 10px 0
+      +display-flex()
+      +flex-flow(column wrap)
+      -webkit-box-flex: 1
+      -ms-flex-positive: 1
+      flex-grow: 1
+      float: none
+      padding: 0
+      > span
+        +display-flex()
+        margin: 0
+        padding: 0 27px
+        +align-items(center)
+        font-size: 11px
+        line-height: 25px
+        font-weight: 500
+        text-transform: uppercase
+        letter-spacing: 0.3px
+        color: #4c4e6f
+        white-space: nowrap
+        overflow: hidden
+        max-width: 100%
+        text-overflow: ellipsis
+        ~ i:before
+          display: none
+          padding: 0 31px
+          line-height: 25px
+      > ul
+        position: relative
+        margin: 0
+        list-style: none
+        +display-flex()
+        +flex-flow(column wrap)
+        -webkit-box-flex: 1
+        -ms-flex-positive: 1
+        flex-grow: 1
+        float: none
+        padding: 0
+        li
+          +display-flex()
+          +flex-flow(column wrap)
+          -webkit-box-flex: 1
+          -ms-flex-positive: 1
+          flex-grow: 1
+          float: none
+          padding: 0
+          position: relative
+          margin: 0
+          max-width: 100%
+          overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
+          +transition(background-color 0.3s)
+        li.active > a, li.active:hover > a
+          background-color: #db1430
+          color: #ffffff
+          > i
+            color: #ffffff
+        li.active > a:after
+          content: ""
+          position: absolute
+          right: 0
+          top: 0
+          display: block
+          width: 0
+          height: 0
+          border-style: solid
+          border-width: 22px 10px 22px 0
+          border-color: transparent #f2f3f8 transparent transparent !important
+        li > a
+          padding: 9px 30px
+          height: 44px
+          font-size: 13px
+          font-weight: 500
+          +display-flex()
+          -webkit-box-flex: 1
+          -ms-flex-positive: 1
+          flex-grow: 1
+          +align-items(center)
+          margin: 0
+          text-decoration: none
+          position: relative
+          outline: none
+          color: #9899ac
+          +transition(background-color 0.3s)
+          > *
+            line-height: 26px
+        li:hover > a
+          background-color: #2f2e3c
+          color: #ffffff
+          > i
+            color: #2c77f4
+        li > a > i
+          +display-flex()
+          +align-items(center)
+          -webkit-box-flex: 0
+          -ms-flex: 0 0 30px
+          flex: 0 0 30px
+          font-size: 18px
+          color: #3a3a5d
+          +transition(background-color 0.3s)

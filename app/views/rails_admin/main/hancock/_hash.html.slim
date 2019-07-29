@@ -18,10 +18,11 @@
     - name, val = "new", field.empty_element_value
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
   p
-    = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    = link_to "#", class: "hash_element_add_link btn btn-secondary btn-with-icon", data: {template: _template.html_safe} do
+      i.mdi.mdi-plus
+      span Добавить
     / = " | "
     / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}
-
 
 - when :full
   - (field.value || {}).each_pair do |name, val|
@@ -31,6 +32,8 @@
     - name, val = "new", field.empty_element_value
     = render partial: field.element_partial, locals: {form: form, field: field, name: name, val: val}
   p
-    = link_to "добавить", "#", class: "hash_element_add_link", data: {template: _template.html_safe}
+    = link_to "#", class: "hash_element_add_link btn btn-secondary btn-with-icon", data: {template: _template.html_safe} do
+      i.mdi.mdi-plus
+      span Добавить
     / = " | "
     / = link_to "показать дубликаты", "#", class: "hash_element_duplicate_trigger", data: {text: "скрыть дубликаты"}

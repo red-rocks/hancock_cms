@@ -11,8 +11,8 @@ ru:
     page_url_regex: "Регулярное выражение, по которому определяется является ли этот пункт активным"
     final_in_menu: "В меню сразу отдается конечная ссылка"
     map: 'Карта'
-    # sitemap: 'Карта сайта'
-    # sitemap_data: 'Данные для карты сайта'
+    sitemap: 'Карта сайта'
+    sitemap_data: 'Данные карты сайта'
     edit: Редактировать
     send: Отправить
     format_time: "%d.%m.%Y"
@@ -40,4 +40,3 @@ ru:
     are_you_robot: "Вы робот?"
     incorrect_email_or_password: "Неверный e-mail или пароль"
     enter_site_error: Необходимо авторизоваться
-

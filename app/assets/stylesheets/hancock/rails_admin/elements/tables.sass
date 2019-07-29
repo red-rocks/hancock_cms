@@ -1,0 +1,109 @@
+body.rails_admin
+  table.table.hancock-table
+    width: 100% !important
+    border-collapse: collapse
+    overflow: hidden
+    background-color: #fff
+    font-size: 13px
+    td,
+    th
+      color: #595d6e
+      padding: 9px 10px
+      white-space: normal
+      height: 55px
+      line-height: 1.4em
+    td
+      vertical-align: middle
+    th
+      font-weight: 500
+      border-bottom-width: 1px
+      padding-top: 13px
+      padding-bottom: 13px
+      vertical-align: middle
+      padding-right: 17px
+      &:after
+        top: 50%
+        +transform(translateY(-50%))
+    tr
+      border-bottom: 1px solid #f0f3ff
+    .links ul
+      +display-flex()
+      +flex-flow(row nowrap)
+      li
+        white-space: nowrap
+        padding: 0px
+        a
+          +inline-flex()
+          +align-items(center)
+          +justify-content(center)
+          text-decoration: none
+          height: 32px
+          width: 32px
+          color: #93a2dd
+          font-size: 18px
+          +transition(color 0.3s ease)
+        span
+          display: none
+        a:hover
+          background: #f0f3ff
+          color: #2c77f4
+
+  table.hancock-table > tbody tr > td:first-child,
+  table.hancock-table > tfoot tr > td:first-child,
+  table.hancock-table > thead tr > th:first-child
+    padding-left: 25px
+
+  table.hancock-table > tbody tr > td:last-child,
+  table.hancock-table > tfoot tr > td:last-child,
+  table.hancock-table > thead tr > th:last-child
+    padding-right: 25px
+
+td.menus_field
+  > div
+    +display-flex()
+    +flex-flow(column nowrap)
+  .btn
+    +border-radius(40px)
+    margin-top: 5px
+    margin-left: 0px
+
+td
+  a.label-info[href]
+    @extend .btn
+    @extend .btn-mini
+    @extend .btn-primary
+    +border-radius(40px)
+    margin-top: 5px
+
+th.other
+  text-align: center
+  i
+    height: 32px
+    width: 32px
+    font-size: 18px
+    padding-left: 7px
+
+td.other
+  &.right,
+  &.left
+    a
+      +inline-flex()
+      +align-items(center)
+      +justify-content(center)
+      text-decoration: none
+      height: 32px
+      width: 32px
+      color: #93a2dd
+      font-size: 18px
+      +transition(color 0.3s ease)
+    a:hover
+      background: #f0f3ff
+      color: #2c77f4
+
+td.string_type
+  span
+    display: block
+    overflow: hidden
+    max-height: 150px
+    text-overflow: ellipsis
+    white-space: nowrap

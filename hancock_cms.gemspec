@@ -53,7 +53,10 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'codemirror-rails'
 
-  spec.add_dependency 'scrollbar-rails'
+  spec.add_dependency 'simplebar-rails'
+  spec.add_dependency 'material_design_icons'
+  spec.add_dependency 'dotiw'
+
   spec.add_dependency 'stickykit-rails'
 
   spec.add_dependency 'rails_admin_jsoneditor'

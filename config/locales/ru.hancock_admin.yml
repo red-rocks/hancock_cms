@@ -45,3 +45,19 @@ ru:
 
     logout:
       confirm: "Вы точно хотите покинуть АдминПанель?"
+
+  hancock_seo_seo:              SEO
+  hancock_seo_sitemap_data:     Карта сайта
+  hancock_seo_event:            События
+  hancock_pages_menu:           Меню
+  hancock_pages_page:           Страницы
+  hancock_pages_blockset:       Блоки
+  rails_admin_settings_setting: Настройки
+  hancock_goto_transfer:        Переходы с сайта
+  hancock_feedback_contact_message: Сообщения
+  user:                         Пользователь
+  hancock_gallery_image:        Фото
+  hancock_gallery_gallery:      Фотогалерея
+  hancock:
+    seo:
+     sitemap_data_field:        Карта сайта

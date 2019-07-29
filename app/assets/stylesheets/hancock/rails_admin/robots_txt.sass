@@ -1,83 +1,10 @@
 #rails_admin_robots_txt
+  margin-top: 0px
+  .controls
+    margin-bottom: 25px
+
+#file_contents
+  @extend textarea
   margin-top: 25px
-  input[type="submit"]
-    display: inline-block
-    text-align: center
-    white-space: nowrap
-    vertical-align: middle
-    -webkit-user-select: none
-    -moz-user-select: none
-    -ms-user-select: none
-    user-select: none
-    border: 0px solid transparent
-    padding: 8px 14px
-    font-size: 14px
-    line-height: 16px
-    +border-radius(.25rem)
-    +transition(all 0.2s ease-in-out)
-    color: #fff
-    background-color: #9ccc65
-    border-color: #7eb73d
-    &:hover, &:focus
-      color: #fff
-      background-color: #7eb73d
-      border-color: #649130
-    &:active
-      background-color: #9ccc65
-      border-color: #7eb73d
-  textarea
-    width: 100%
-    max-width: 100%
-    min-width: 100%
-    height: auto
-    min-height: 200px
-    padding: 5px
-  a
-    display: inline-block
-    text-align: center
-    white-space: nowrap
-    vertical-align: middle
-    -webkit-user-select: none
-    -moz-user-select: none
-    -ms-user-select: none
-    user-select: none
-    border: 0px solid transparent
-    padding: 8px 14px
-    font-size: 14px
-    line-height: 16px
-    +border-radius(.25rem)
-    +transition(all 0.2s ease-in-out)
-    color: #fff
-    background-color: #42a5f5
-    border-color: #0d89ed
-    &:hover, &:focus
-      background-color: #0d89ed
-      border-color: #0a6dbd
-    &:active
-      background-color: #42a5f5
-      border-color: #0d89ed
-  #file_contents
-    margin-top: 25px
-    -webkit-rtl-ordering: logical
-    user-select: text
-    flex-direction: column
-    white-space: pre-wrap
-    word-wrap: break-word
-    border-width: 1px
-    border-style: solid
-    border-color: initial
-    border-image: initial
-    padding: 5px
-    min-height: 100px
-    background: #fafafa
-    opacity: 1
-    resize: auto
-    width: 100%
-    max-width: 100%
-    +transition(opacity 0.3s ease-in-out)
-  #file_contents:empty
-    background: transparent
-    border-width: 0px
-    min-height: 0px
-    padding: 0px
-    opacity: 0
+  &:empty
+    display: none

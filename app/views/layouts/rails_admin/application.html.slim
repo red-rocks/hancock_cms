@@ -1,47 +1,34 @@
 doctype html
 html{lang=I18n.locale}
+
   head
-    meta{content="IE=edge" http-equiv="X-UA-Compatible"}
-    meta{content="text/html; charset=utf-8" http-equiv="Content-Type"}
-    meta{content="width=device-width, initial-scale=1" name="viewport; charset=utf-8"}
-    meta{content="NONE,NOARCHIVE" name="robots"}
-    = csrf_meta_tag
-    = stylesheet_link_tag "rails_admin/rails_admin.css", media: :all
-    = javascript_include_tag "rails_admin/rails_admin.js"
+    = render "layouts/rails_admin/head"
 
   body.rails_admin
-    page-container
 
-      #admin-js{data-i18n-options=I18n.t("admin.js").to_json}
-      -# Initialize JS simple i18n
-      - if Hancock.rails_admin1?
-        javascript:
-          RailsAdmin.I18n.init('#{I18n.locale}', document.getElementById("admin-js").dataset.i18nOptions);
-      #loading.label.label-warning{style='display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}
-        = t('admin.loading')
+    #admin-js{data-i18n-options=I18n.t("admin.js").to_json}
+    - if Hancock.rails_admin1?
+      javascript:
+        RailsAdmin.I18n.init('#{I18n.locale}', document.getElementById("admin-js").dataset.i18nOptions);
 
-      nav#sidebar.admin-menubar.admin-menubar-fixed.admin-menubar-dark
-        .sidebar-header
-          = render "layouts/rails_admin/sidebar/sidebar_header"
-        .navigation-filter
-          = render "layouts/rails_admin/sidebar_navigation_filter"
-        .toolbar
-          .toolbar-wrapper.custom_scroll
-            = render "layouts/rails_admin/sidebar_navigation"
-        .admin-menubar-footer
-          = render "layouts/rails_admin/footer_navigation"
+    #loading.label.label-warning{style='display:none; position:fixed; right:20px; bottom:20px; z-index:100000'}
+      = t('admin.loading')
 
-      header#page-header.navbar.navbar-default.navbar-fixed-top
-        .content-header
-          = render "layouts/rails_admin/navigation"
+    nav#aside.navbar.navbar-default
+      header.aside-header
+        .logotype
+          = link_to dashboard_path, title: "Hancock CMS".freeze do
+            = image_tag "hancock/rails_admin/hancock.svg", title: "Hancock CMS".freeze, alt: "Hancock CMS".freeze, class: "hancock-main-logo"
+        = button_tag "", class: "aside-toggler", type: "button" do
+          span
 
-      main#main-container.admin-content
-        .admin-wrapper
-          .content{data-pjax-container=true}= render template: 'layouts/rails_admin/pjax'
+      = render "layouts/rails_admin/aside_navigation"
 
-      footer#page-footer.admin-footer
-        .content-footer
-          = render "layouts/rails_admin/footer"
+    main#root
+      #content.content{data-pjax-container='true'}
+        = render template: 'layouts/rails_admin/pjax'
 
-      -#= render "layouts/rails_admin/preloader"
+      = render "layouts/rails_admin/footer"
+
+
 

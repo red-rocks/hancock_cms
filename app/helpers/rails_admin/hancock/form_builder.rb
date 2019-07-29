@@ -32,7 +32,9 @@ module RailsAdmin::Hancock
               root_fieldset = (fieldset.bindings[:object].id.to_s == _params[:id])
               _class = "#{"pjax" if root_fieldset} #{"current" if current_groups.include?(fieldset)}"
               _url = (root_fieldset ? @template.url_for(_params.merge(fieldset: fieldset.name, return_to: nil)) : nil)
-              @template.content_tag :li, fieldset.label, data: {target: fieldset.name, href: _url}, class: _class
+              @template.content_tag :li do
+                @template.content_tag :a, fieldset.label, href: _url, data: {target: fieldset.name}, class: _class
+              end
             end.join.html_safe
           end : "") + 
           # ((options[:nested_in] or !is_tabbed ) ? '' : @template.render(partial: 'rails_admin/main/submit_buttons', locals: buttons_locals)) +
@@ -81,7 +83,8 @@ module RailsAdmin::Hancock
       _default_fieldset = fieldset.name == :default
       @template.content_tag :fieldset, class: _default_fieldset ? 'default_fieldset' : '' do
         contents = []
-        contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe, style: fieldset.name == :default ? 'display:none' : '') if !is_tabbed or nested_in
+        # contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe, style: fieldset.name == :default ? 'display:none' : '') if !is_tabbed or nested_in
+        contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe) if !is_tabbed or nested_in
         contents << @template.content_tag(:p, fieldset.help) if fieldset.help.present?
         contents << fields.collect { |field| field_wrapper_for(field, nested_in) }.join
         contents.join.html_safe
