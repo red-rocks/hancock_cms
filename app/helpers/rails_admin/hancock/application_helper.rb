@@ -20,7 +20,13 @@ module RailsAdmin::Hancock
           title = "#{title} (#{node.abstract_model.model_name})" if _current_user and _current_user.admin?
           link_to link_name, url, class: "pjax#{level_class}", title: title
         end
+
+        #### TODO ####s
         li + hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
+        # OR 
+        # ul = hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
+        # ul = "<ul>#{ul}</ul>" unless ul.blank?
+        # (li + ul)#.html_safe
       end.join.html_safe
     end
 

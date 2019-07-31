@@ -8,7 +8,8 @@ $(document).on 'click', '.clear-nav-filter', (e)->
 $(document).on 'keydown', '#aside, #aside *', (e)->
   _code = e.which || e.keyCode
   if _code == 13 or _code == 39 or _code == 37
-    _navig = $("#nav-filter").parent().siblings('.aside-menu').find('.nav')
+    # _navig = $("#nav-filter").parent().siblings('.aside-menu').find('.nav')
+    _navig = $("#nav-filter").parent().siblings('.navigation-content').find('.nav')
     return true if _navig.find("li:visible").length == 0 and _code != 13
     if (_selected = _navig.find("li.current_selected")).length == 1
       if !_selected.hasClass("dropdown-header") and (_link = _selected.find('a')).length > 0
@@ -92,13 +93,15 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
       return false
 
     else
-      $(e.currentTarget).parent().siblings('.aside-menu').find(".nav li").removeClass('forced-closed').removeClass('forced-opened')
+      # $(e.currentTarget).parent().siblings('.aside-menu').find(".nav li").removeClass('forced-closed').removeClass('forced-opened')
+      $(e.currentTarget).parent().siblings('.navigation-content').find(".nav li").removeClass('forced-closed').removeClass('forced-opened')
       return true
 
 
 $(document).on 'keyup', '#aside, #aside *', (e)->
   filter = $("#nav-filter").val()
-  navigation_block = $(".navigation-filter").siblings('.aside-menu').find('.nav')
+  # navigation_block = $(".navigation-filter").siblings('.aside-menu').find('.nav')
+  navigation_block = $(".navigation-filter").siblings('.navigation-content').find('.nav')
   nav_first_lvl = navigation_block.find("li.dropdown-header:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('opened').removeClass('opened-filtered')
   nav_sec_lvl = navigation_block.find("li[data-model]:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('visible')
   select_menu_items = (filter, nav_first_lvl, nav_sec_lvl)->
