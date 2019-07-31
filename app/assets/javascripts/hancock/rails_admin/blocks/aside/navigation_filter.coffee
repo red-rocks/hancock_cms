@@ -42,11 +42,12 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
       e.preventDefault()
       if $('#nav-filter').val().length == 0
         _possible_sub_li_selector = "li.visible"
-        _possible_li_selector = "li.dropdown-header"
+        _possible_li_selector = "li.dropdown-header[data-model]"
       else
         _possible_sub_li_selector = "li.visible"
         _possible_li_selector = "li.opened, li.opened-filtered"
-      _navig = $(e.currentTarget).parent().siblings('.toolbar')
+      # _navig = $(e.currentTarget).parent().siblings('.toolbar')
+      _navig = $(e.currentTarget).parent().siblings('.navigation-content')
       _visibled = _navig.find(".nav").find(_possible_li_selector + ", " + _possible_sub_li_selector)
       _current = _visibled.filter(".current_selected")
       _navig.find(".nav li").removeClass("current_selected")
@@ -129,3 +130,11 @@ $(document).on 'keyup', '#aside, #aside *', (e)->
     nav_first_lvl.removeClass('hidden').removeClass('opened')
     nav_sec_lvl.removeClass('hidden').removeClass('visible').filter(".active").closest(".dropdown-header").addClass("opened")
     select_menu_items(window.hancock_cms.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
+
+
+
+$(document).on "rails_admin.dom_ready", ->
+  # _search_field = $('form #filters_box ~ .input-group [type="search"][name="query"]:not(:focus)')
+  _search_field = $('#list form #filters_box ~ .well .input-group [type="search"][name="query"]:not(:focus)')
+  _val = _search_field.val()
+  _search_field.focus().val("").val(_val)

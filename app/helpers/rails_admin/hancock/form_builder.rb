@@ -81,7 +81,11 @@ module RailsAdmin::Hancock
       return if fields.empty?
 
       _default_fieldset = fieldset.name == :default
-      @template.content_tag :fieldset, class: _default_fieldset ? 'default_fieldset' : '' do
+      fieldset_opts = {
+        class: (_default_fieldset ? 'default_fieldset' : "#{fieldset.name}_fieldset"),
+        name: (_default_fieldset ? 'default' : fieldset.name),
+      }
+      @template.content_tag :fieldset, fieldset_opts do
         contents = []
         # contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe, style: fieldset.name == :default ? 'display:none' : '') if !is_tabbed or nested_in
         contents << @template.content_tag(:legend, %(<i class="icon-chevron-#{((fieldset.active? or (!nested_in and is_tabbed)) ? 'down' : 'right')}"></i> #{fieldset.label}).html_safe) if !is_tabbed or nested_in

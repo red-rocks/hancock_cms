@@ -1,4 +1,4 @@
-$(document).on 'click', '.toolbar .nav .dropdown-header', (e)->
+$(document).on 'click', '.navigation-content .nav .dropdown-header', (e)->
   e.preventDefault()
 
   if $("#sidebar.shorted").length > 0
