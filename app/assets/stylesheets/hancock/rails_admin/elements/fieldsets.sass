@@ -7,7 +7,12 @@ body.rails_admin .form-horizontal.denser
     margin-top: 25px
   fieldset > .control-group > .controls
     ul.nav.nav-tabs
-      @extend ul.nav.nav-tabs#scope_selector
+      margin-bottom: 0px
+      margin-left: -25px
+      margin-right: -25px
+      padding: 0px 25px
+      +display-flex()
+      +flex-flow(row wrap)
       border: 0px
       z-index: 1
       position: relative
