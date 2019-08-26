@@ -317,8 +317,9 @@ body.aside-minimized #aside.aside-fixed
         +transition(all 0.3s)
         ~ i:before
           display: none
-          padding: 10px 31px
+          padding: 10px 30px
           line-height: 25px
+          font-size: 18px
         &:after
           content: "\F142"
           font-family: "Material Design Icons"
@@ -431,3 +432,12 @@ body.aside-minimized #aside.aside-fixed
           font-size: 18px
           color: #3a3a5d
           +transition(background-color 0.3s)
+        li > a > i[class=""]
+          &:before
+            display: inline-block
+            font: normal normal normal 24px/1 "Material Design Icons"
+            font-size: inherit
+            text-rendering: auto
+            line-height: inherit
+            -webkit-font-smoothing: antialiased
+            content: "\F374"
