@@ -6,7 +6,7 @@ module RailsAdmin::Hancock
       nodes.collect do |node|
         model_param = node.abstract_model.to_param
         url         = rails_admin.url_for(action: :index, controller: 'rails_admin/main', model_name: model_param)
-        level_class = " nav-level-#{level}" if level > 0
+        level_class = " nav-level-#{level}" if level > 0 and false
         # nav_icon = node.navigation_icon ? %(<i class="#{node.navigation_icon}"></i>).html_safe : ''
         nav_icon = %(<i class="#{node.navigation_icon}"></i>).html_safe
         li = content_tag :li, data: {model: model_param, "name-synonyms": node.name_synonyms} do
@@ -18,15 +18,20 @@ module RailsAdmin::Hancock
           link_name = nav_icon + %(<span>#{capitalize_first_letter(node.label_plural)}</span>).html_safe
           title = capitalize_first_letter(node.label_plural)
           title = "#{title} (#{node.abstract_model.model_name})" if _current_user and _current_user.admin?
-          link_to link_name, url, class: "pjax#{level_class}", title: title
+          li_content = link_to link_name, url, class: "pjax#{level_class}", title: title
+
+          ##### TODO 'OR' ######
+          ul = hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
+          ul = "<ul>#{ul}</ul>".html_safe unless ul.blank?
+          (li_content + ul)
         end
 
-        #### TODO ####s
-        li + hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
-        # OR 
-        # ul = hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
-        # ul = "<ul>#{ul}</ul>" unless ul.blank?
-        # (li + ul)#.html_safe
+        # #### TODO ####
+        # # li + hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1)
+        # # OR 
+        # ul = hancock_navigation(nodes_stack, nodes_stack.select { |n| n.parent.to_s == node.abstract_model.model_name }, level + 1).html_safe
+        # ul = "<ul>#{ul}</ul>".html_safe unless ul.blank?
+        # (li + ul).html_safe
       end.join.html_safe
     end
 
