@@ -9,7 +9,7 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
   _code = e.which || e.keyCode
   if _code == 13 or _code == 39 or _code == 37
     # _navig = $("#nav-filter").parent().siblings('.aside-menu').find('.nav')
-    _navig = $("#nav-filter").parent().siblings('.navigation-content').find('.nav')
+    _navig = $("#nav-filter").parent().siblings('.navigation-content').find('.nav:not(.root-navigation, .actions_navigation)')
     return true if _navig.find("li:visible").length == 0 and _code != 13
     if (_selected = _navig.find("li.current_selected")).length == 1
       if !_selected.hasClass("dropdown-header") and (_link = _selected.find('a')).length > 0
@@ -48,7 +48,7 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
         _possible_li_selector = "li.opened, li.opened-filtered"
       # _navig = $(e.currentTarget).parent().siblings('.toolbar')
       _navig = $(e.currentTarget).parent().siblings('.navigation-content')
-      _visibled = _navig.find(".nav").find(_possible_li_selector + ", " + _possible_sub_li_selector)
+      _visibled = _navig.find(".nav:not(.root-navigation, .actions_navigation)").find(_possible_li_selector + ", " + _possible_sub_li_selector)
       _current = _visibled.filter(".current_selected")
       _navig.find(".nav li").removeClass("current_selected")
       if _code == 38 # up
@@ -102,7 +102,7 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
 $(document).on 'keyup', '#aside, #aside *', (e)->
   filter = $("#nav-filter").val()
   # navigation_block = $(".navigation-filter").siblings('.aside-menu').find('.nav')
-  navigation_block = $(".navigation-filter").siblings('.navigation-content').find('.nav')
+  navigation_block = $(".navigation-filter").siblings('.navigation-content').find('.nav:not(.root-navigation, .actions_navigation)')
   nav_first_lvl = navigation_block.find("li.dropdown-header:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('opened').removeClass('opened-filtered')
   nav_sec_lvl = navigation_block.find("li[data-model]:not(.forced-closed, .forced-opened)").removeClass('hidden').removeClass('visible')
   select_menu_items = (filter, nav_first_lvl, nav_sec_lvl)->
@@ -129,6 +129,7 @@ $(document).on 'keyup', '#aside, #aside *', (e)->
   if navigation_block.find("li:visible").length == 0
     nav_first_lvl.removeClass('hidden').removeClass('opened')
     nav_sec_lvl.removeClass('hidden').removeClass('visible').filter(".active").closest(".dropdown-header").addClass("opened")
+    console.log window.hancock_cms.ru_en_change_string(filter)
     select_menu_items(window.hancock_cms.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
 
 
