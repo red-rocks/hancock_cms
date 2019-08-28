@@ -44,6 +44,12 @@ body.aside-minimized #aside
   .navigation-filter button.clear-nav-filter
     display: none
 
+  .navigation-wrapper .aside-menu li.dropdown-header
+    > span:after
+      opacity: 0
+    > ul li
+      height: auto
+
 body.aside-minimized #aside.aside-fixed
   width: 250px
   +transition(all 0.3s ease)
@@ -189,6 +195,7 @@ body.aside-minimized #aside.aside-fixed
     border: 0px
     color: #999
     padding: 3px 10px
+    height: 35px
     border-top-left-radius: 0px
     border-top-right-radius: 2px
     border-bottom-right-radius: 2px
@@ -269,7 +276,7 @@ body.aside-minimized #aside.aside-fixed
     position: relative
     margin: 0
     background-color: #282733
-    max-height: 100%
+    height: 100%
     overflow-x: hidden
     border-top: 1px solid #201f2b
     border-bottom: 1px solid #201f2b
@@ -278,7 +285,6 @@ body.aside-minimized #aside.aside-fixed
       margin: 0
       list-style: none
     li.dropdown-header
-      margin: 10px 0
       +display-flex()
       +flex-flow(column wrap)
       -webkit-box-flex: 1
@@ -286,11 +292,18 @@ body.aside-minimized #aside.aside-fixed
       flex-grow: 1
       float: none
       padding: 0
+      +transition(background 0.3s)
+      > span
+        cursor: pointer
+        &:hover
+          color: white
+          background-color: #2f2e3c
       > span
         +display-flex()
         margin: 0
-        padding: 0 27px
+        padding: 10px 27px
         +align-items(center)
+        +justify-content(space-between)
         font-size: 11px
         line-height: 25px
         font-weight: 500
@@ -301,10 +314,38 @@ body.aside-minimized #aside.aside-fixed
         overflow: hidden
         max-width: 100%
         text-overflow: ellipsis
+        +transition(all 0.3s)
         ~ i:before
           display: none
-          padding: 0 31px
+          padding: 10px 30px
           line-height: 25px
+          font-size: 18px
+        &:after
+          content: "\F142"
+          font-family: "Material Design Icons"
+          position: relative
+          font-size: 18px
+      &.opened
+        background: rgba(0,0,0,0.1)
+        > span
+          color: white
+        > span:after
+          content: "\F140"
+        > ul li
+          height: auto
+      &.forced-closed > ul li
+        height: 0
+      &.forced-opened > ul li
+        height: auto
+      &.current_selected
+        > span
+          background-color: #2f2e3c
+          color: #ffffff
+      > ul li.current_selected[data-model] a
+        background-color: #2f2e3c
+        color: #ffffff
+        > i
+          color: #2c77f4
       > ul
         position: relative
         margin: 0
@@ -316,6 +357,7 @@ body.aside-minimized #aside.aside-fixed
         flex-grow: 1
         float: none
         padding: 0
+        +transition(all 0.3s)
         li
           +display-flex()
           +flex-flow(column wrap)
@@ -331,6 +373,7 @@ body.aside-minimized #aside.aside-fixed
           white-space: nowrap
           text-overflow: ellipsis
           +transition(background-color 0.3s)
+          height: 0
         li.active > a, li.active:hover > a
           background-color: #db1430
           color: #ffffff
@@ -365,6 +408,16 @@ body.aside-minimized #aside.aside-fixed
           +transition(background-color 0.3s)
           > *
             line-height: 26px
+          &.nav-level-2
+            padding-left: 45px
+          &.nav-level-3
+            padding-left: 60px
+          &.nav-level-4
+            padding-left: 75px
+          &.nav-level-5
+            padding-left: 90px
+          &.nav-level-6
+            padding-left: 105px
         li:hover > a
           background-color: #2f2e3c
           color: #ffffff
@@ -379,3 +432,12 @@ body.aside-minimized #aside.aside-fixed
           font-size: 18px
           color: #3a3a5d
           +transition(background-color 0.3s)
+        li > a > i[class=""]
+          &:before
+            display: inline-block
+            font: normal normal normal 24px/1 "Material Design Icons"
+            font-size: inherit
+            text-rendering: auto
+            line-height: inherit
+            -webkit-font-smoothing: antialiased
+            content: "\F374"

@@ -31,6 +31,10 @@ input[type='submit']
   i
     font-size: 18px
     line-height: 20px
+  &.disabled
+    pointer-events: none
+    background-color: lighten(#0c5ce1, 20%)
+    border-color: lighten(#0c5ce1, 20%)
   &.btn-success
     background-color: #1dc9b7
     border-color: #1dc9b7
@@ -39,6 +43,9 @@ input[type='submit']
       color: #fff
       background-color: #18a899
       border-color: #179c8e
+    &.disabled
+      background-color: lighten(#1dc9b7, 20%)
+      border-color: lighten(#1dc9b7, 20%)
   &.btn-primary
     color: #fff
     background-color: #5867dd
@@ -47,6 +54,9 @@ input[type='submit']
       color: #fff
       background-color: #384ad7
       border-color: #2e40d4
+    &.disabled
+      background-color: lighten(#5867dd, 20%)
+      border-color: lighten(#5867dd, 20%)
   &.btn-secondary
     background-color: transparent
     border: 1px solid #e2e5ec
@@ -55,6 +65,9 @@ input[type='submit']
       color: #fff
       background-color: #2c77f4
       border-color: #2c77f4
+    &.disabled
+      background-color: lighten(#e2e5ec, 10%)
+      border-color: lighten(#e2e5ec, 10%)
   &.btn-info
     background-color: #5578eb
     border-color: #5578eb
@@ -63,6 +76,9 @@ input[type='submit']
       color: #fff
       background-color: #335de7
       border-color: #2754e6
+    &.disabled
+      background-color: lighten(#5578eb, 20%)
+      border-color: lighten(#5578eb, 20%)
   &.btn-warning
     background-color: #ffb822
     border-color: #ffb822
@@ -71,6 +87,9 @@ input[type='submit']
       color: #212529
       background-color: #fbaa00
       border-color: #eea200
+    &.disabled
+      background-color: lighten(#ffb822, 20%)
+      border-color: lighten(#ffb822, 20%)
   &.btn-danger
     background-color: #fd397a
     border-color: #fd397a
@@ -79,6 +98,9 @@ input[type='submit']
       color: #fff
       background-color: #fd1361
       border-color: #fc0758
+    &.disabled
+      background-color: lighten(#fd397a, 20%)
+      border-color: lighten(#fd397a, 20%)
   &.btn-mini
     font-size: 11px
     line-height: 16px

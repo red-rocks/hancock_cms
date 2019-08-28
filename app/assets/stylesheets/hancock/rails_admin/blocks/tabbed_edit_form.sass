@@ -5,7 +5,12 @@
   padding-right: 25px
   margin-top: 25px
   .fieldset-list
-    @extend ul.nav.nav-tabs#scope_selector
+    margin-bottom: 0px
+    margin-left: -25px
+    margin-right: -25px
+    padding: 0px 25px
+    +display-flex()
+    +flex-flow(row wrap)
     @extend .nav-tabs
     li
       @extend li
