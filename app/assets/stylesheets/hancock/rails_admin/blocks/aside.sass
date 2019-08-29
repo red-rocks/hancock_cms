@@ -331,12 +331,23 @@ body.aside-minimized #aside.aside-fixed
           color: white
         > span:after
           content: "\F140"
-        > ul li
-          height: auto
-      &.forced-closed > ul li
-        height: 0
-      &.forced-opened > ul li
-        height: auto
+        > ul
+          +display-flex()
+          // visibility: visible
+          > li
+            height: auto
+      &.forced-closed 
+        > ul
+          display: none
+          // visibility: hidden
+          > li
+            height: 0
+      &.forced-opened 
+        > ul
+          +display-flex()
+          // visibility: visible
+          > li
+            height: auto
       &.current_selected
         > span
           background-color: #2f2e3c
@@ -350,7 +361,9 @@ body.aside-minimized #aside.aside-fixed
         position: relative
         margin: 0
         list-style: none
-        +display-flex()
+        // +display-flex()
+        // visibility: hidden
+        display: none
         +flex-flow(column wrap)
         -webkit-box-flex: 1
         -ms-flex-positive: 1
