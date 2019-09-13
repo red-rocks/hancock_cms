@@ -29,7 +29,7 @@ ruby:
 - css = hancock_settings "custom_css", ns: "#{layout_name}_layout", default: '', kind: :css, label: "Дополнительный CSS"
 - js = hancock_settings "custom_js", ns: "#{layout_name}_layout", default: '', kind: :js, label: "Дополнительный JS"
 css:
-  #{{Sass::Engine.new(css, syntax: :scss, style: :compressed).render}}
+  #{{SassC::Engine.new(css, syntax: :scss, style: :compressed).render}}
 javascript:
   #{{Uglifier.new(harmony: true).compress(js)}}
 
@@ -38,6 +38,6 @@ javascript:
   - css = seo_object.get_setting("custom_css", kind: 'css', default: '', label: "Дополнительный CSS")
   - js = seo_object.get_setting("custom_js", kind: 'js', default: '', label: "Дополнительный JS")
   css:
-    #{{Sass::Engine.new(css, syntax: :scss, style: :compressed).render}}
+    #{{SassC::Engine.new(css, syntax: :scss, style: :compressed).render}}
   javascript:
     #{{Uglifier.new(harmony: true).compress(js)}}

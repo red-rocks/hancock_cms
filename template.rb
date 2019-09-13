@@ -3,7 +3,7 @@ version = rails_spec.version.to_s
 
 mongoid = options[:skip_active_record]
 pg = !!(options[:database] == "postgresql")
-actual_rails_version = "6.0.0.rc1"
+actual_rails_version = "6.0.0"
 notsupported_rails_version = "6.1"
 
 
@@ -26,7 +26,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/\#{repo}.git" }
 git_source(:gitlab) { |repo| "https://gitlab.com/\#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.4'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
@@ -64,7 +64,7 @@ gem 'bcrypt'#, '~> 3.1.12'
 # # gem "shrine", "~> 3.0"
 # #{if mongoid then "gem 'shrine-mongoid'" end}
 
-gem 'rails_admin', '~> 1.4'
+gem 'rails_admin', '~> 2.0'
 # gem 'rails_admin', github: 'sferik/rails_admin' # TEMP
 
 # gem 'rails_admin_multiple_file_upload'
@@ -79,14 +79,17 @@ gem 'ack_rails_admin_settings', github: "red-rocks/rails_admin_settings"
 
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'front'
 # #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: '3.0'
-#{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails6'
+# #{if mongoid then "gem 'hancock_cms_mongoid'" else "gem 'hancock_cms_activerecord'" end}, github: 'red-rocks/hancock_cms', branch: 'rails6'
+gem 'hancock_cms_mongoid', path: "/home/ack/www/redrocks/hancock"
+# gem 'hancock_cms_mongoid', path: "/home/oleg/redrocks/hancock_cms"
+
 
 # gem 'recaptcha', require: 'recaptcha/rails'
 
 # gem 'responders', '~> 2.0'
 gem 'responders', github: 'king601/responders'
 gem 'devise-i18n'
-gem 'devise', github: 'plataformatec/devise', branch: '5-rc'
+gem 'devise'#, github: 'plataformatec/devise', branch: '5-rc'
 
 # gem "hancock_devise"
 gem "hancock_devise", git: "https://gitlab.com/redrocks/hancock_devise"
@@ -175,8 +178,6 @@ end
 
 
 ############ TEMP #############
-# gem 'ack_rails_admin_settings', github: 'red-rocks/rails_admin_settings'
-gem 'devise', github: 'plataformatec/devise', branch: '5-rc'
 
 # gem "jsoneditor-rails"
 gem "jsoneditor-rails", git: "https://github.com/ack43/jsoneditor-rails"
@@ -188,7 +189,7 @@ gem "rails_admin_jsoneditor", git: "https://github.com/red-rocks/rails_admin_adv
 TEXT
 end
 
-RVM_RUBY_VERSION = "2.6.3"
+RVM_RUBY_VERSION = "2.6.4"
 # create_file '.ruby-version', "ruby-#{RVM_RUBY_VERSION}"
 create_file '.ruby-gemset', "#{app_name.underscore}"
 
