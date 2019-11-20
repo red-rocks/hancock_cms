@@ -59,9 +59,15 @@ gem 'bcrypt'#, '~> 3.1.12'
 # # libvips + shrine
 # gem 'ruby-vips'
 # gem 'image_processing'
+
+# gem "hancock_shrine", ">= 0.2.0"
+# # gem "hancock_shrine", github: "red-rocks/hancock_shrine"
+# # gem "hancock_shrine", github: "red-rocks/hancock_shrine", branch: 'dev'
+## OR ##
 # # gem 'shrine'
-# gem "shrine", "~> 2.0"
-# # gem "shrine", "~> 3.0"
+# # gem "shrine", "~> 2.0"
+# # # gem "shrine", "~> 3.0"
+
 # #{if mongoid then "gem 'shrine-mongoid'" end}
 
 gem 'rails_admin', '~> 2.0'
@@ -158,7 +164,7 @@ end
 # #{if mongoid then "gem 'mongo_session_store-rails5'" else "gem 'activerecord-session_store'" end}
 
 # gem 'slim'
-gem 'sprockets'
+gem 'sprockets', '< 4'
 
 gem 'coffee-rails'#, '~> 4.2'
 gem 'uglifier'#, '>= 1.3.0'

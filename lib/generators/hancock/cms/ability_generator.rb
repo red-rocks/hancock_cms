@@ -6,7 +6,7 @@ module Hancock::Cms
     source_root File.expand_path('../templates', __FILE__)
     include Generators::Utils::InstanceMethods
 
-    desc 'Hancock CMS CanCan Ability config generator'
+    desc 'Hancock CMS CanCanCan Ability config generator'
     def install
       template 'ability.erb', 'app/models/ability.rb'
     end

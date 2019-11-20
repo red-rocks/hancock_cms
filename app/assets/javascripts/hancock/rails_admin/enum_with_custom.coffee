@@ -1,4 +1,4 @@
-window.hancock_cms.set_enum_with_custom = () ->
+window.hancock.set_enum_with_custom = () ->
   $('.hancock_enum_with_custom_type .ra-filtering-select-input, .hancock_array_type .ra-filtering-select-input').autocomplete(
     search: (e, ui)->
       if e.currentTarget
@@ -39,4 +39,4 @@ window.hancock_cms.set_enum_with_custom = () ->
 
 
 $(document).on 'rails_admin.dom_ready', ->
-  window.hancock_cms.set_enum_with_custom()
+  window.hancock.set_enum_with_custom()

@@ -127,9 +127,9 @@
 #   if navigation_block.find("li:visible").length == 0
 #     nav_first_lvl.removeClass('hidden').removeClass('opened')
 #     nav_sec_lvl.removeClass('hidden').removeClass('visible').filter(".active").closest(".dropdown-header").addClass("opened")
-#     select_menu_items(window.hancock_cms.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
+#     select_menu_items(window.hancock.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
 
-#   window.hancock_cms.navigation_mscroll()
+#   window.hancock.navigation_mscroll()
 
 
 

@@ -1,5 +1,5 @@
-window.hancock_cms ||= {}
-window.hancock_cms.en_ru_keytable = {
+window.hancock ||= {}
+window.hancock.en_ru_keytable = {
   "q": "й", "Q": "Й",
   "w": "ц", "W": "Ц",
   "e": "у", "E": "У",
@@ -36,7 +36,7 @@ window.hancock_cms.en_ru_keytable = {
   ".": "ю", ">": "Ю",
   # "/": ".", "?": ","
 }
-window.hancock_cms.ru_en_keytable = {
+window.hancock.ru_en_keytable = {
   "й": "q", "Й": "Q",
   "ц": "w", "Ц": "W",
   "у": "e", "У": "E",
@@ -74,7 +74,7 @@ window.hancock_cms.ru_en_keytable = {
   # ".": "/", ",": "?"
 }
 
-window.hancock_cms.ru_en_change_string = (str)->
+window.hancock.ru_en_change_string = (str)->
   new_str = ""
 
   for letter in str
