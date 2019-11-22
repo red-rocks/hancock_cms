@@ -24,7 +24,7 @@
 
 #= require ./plugins
 
-window.hancock_cms ||= {}
+window.hancock ||= {}
 
 
 $(document).on 'click', '#aside .aside-toggler', ()->

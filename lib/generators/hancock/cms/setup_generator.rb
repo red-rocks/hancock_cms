@@ -356,6 +356,9 @@ if defined?(Ckeditor::Asset)
 unless Ckeditor::Asset < Hancock::Model
 inject_into_file 'app/models/ckeditor/asset.rb', before: /^end/ do <<-TEXT
   include Hancock::Model
+
+  include Hancock::Gallery::Shrineable
+  hancock_cms_attached_file :data, is_image: false
 TEXT
 end
 end
@@ -364,42 +367,51 @@ if ["yes", "y"].include?(ask_with_timeout("Set Hancock's config for Ckeditor::Pi
 remove_file 'app/models/ckeditor/picture.rb'
 create_file 'app/models/ckeditor/picture.rb' do <<-TEXT
 class Ckeditor::Picture < Ckeditor::Asset
+  include Hancock::Model
+  
   # has_mongoid_attached_file :data,
   #                           url: '/ckeditor_assets/pictures/:id/:style_:basename.:extension',
   #                           path: ':rails_root/public/ckeditor_assets/pictures/:id/:style_:basename.:extension',
   #                           styles: { content: '800>', thumb: '118x100#' }
 
-  include Hancock::Gallery::Paperclipable
-  hancock_cms_attached_file :data,
-                            url: '/ckeditor_assets/pictures/:id/:style/:basename.:extension',
-                            path: ':rails_root/public/ckeditor_assets/pictures/:id/:style/:basename.:extension'
+
+  # include Hancock::Gallery::Paperclipable
+  # hancock_cms_attached_file :data,
+  #                           url: '/ckeditor_assets/pictures/:id/:style/:basename.:extension',
+  #                           path: ':rails_root/public/ckeditor_assets/pictures/:id/:style/:basename.:extension'
+  # validates_attachment_size :data, less_than: 2.megabytes
+  # validates_attachment_presence :data
+  # validates_attachment_content_type :data, content_type: /\\Aimage/
+
+  include Hancock::Gallery::Shrineable
+  hancock_cms_attached_file :data
+
   def data_styles
-    if data_svg?
+    if data and data.svg?
       {}
     else
       { content: '800>', thumb: '118x100#' }
     end
   end
 
-  validates_attachment_size :data, less_than: 2.megabytes
-  validates_attachment_presence :data
-  validates_attachment_content_type :data, content_type: /\\Aimage/
-
+  
   def url_content
     # url(:content)
-    if data_svg?
+    if data and data.svg?
       url
     else
-      url(:content)
+      # url(:content)
+      data[:content].url
     end
   end
 
   def url_thumb
     # url(:thumb)
-    if data_svg?
+    if data and data.svg?
       url
     else
-      url(:thumb)
+      # url(:thumb)
+      data[:thumb].url
     end
   end
 end
@@ -588,6 +600,13 @@ set :linked_files,  [
   "config/unicorn.god", "config/unicorn.rb",
   "public/robots.txt", "public/sitemap.xml.gz",
   "config/mongoid.yml", "config/master.key
+]
+
+set :skip_upload_files, ["public/sitemap.xml.gz"]
+set :skip_upload_dirs,  ["log",
+                          "tmp/pids", "tmp/cache", "tmp/sc", "tmp/sockets", "tmp/god",
+                          "public/system", "public/uploads", "public/ckeditor_assets", "public/sitemaps", "public/favicons",
+                          "node_modules"
 ]
 TEXT
 end

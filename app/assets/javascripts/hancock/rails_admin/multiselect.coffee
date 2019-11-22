@@ -1,4 +1,4 @@
-window.hancock_cms.multiselect_dblclick = (selector)->
+window.hancohancockck_cms.multiselect_dblclick = (selector)->
   left_selector = []
   right_selector = []
   selector.split(",").forEach (sel)->
@@ -13,4 +13,4 @@ window.hancock_cms.multiselect_dblclick = (selector)->
     $(e.currentTarget).closest('.ra-multiselect').find('.ra-multiselect-center .ra-multiselect-item-remove').click()
 
 
-window.hancock_cms.multiselect_dblclick("select.hancock_multiselect + .ra-multiselect, select.hancock_enum + .ra-multiselect")
+window.hancock.multiselect_dblclick("select.hancock_multiselect + .ra-multiselect, select.hancock_enum + .ra-multiselect")
