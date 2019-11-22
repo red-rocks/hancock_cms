@@ -5,6 +5,9 @@
     background: rgba(0,0,0,0.9)
     z-index: 0
 
+.modal-body
+  padding: 0px 25px
+
 .modal-dialog
   position: absolute
   width: auto
@@ -14,6 +17,8 @@
   max-height: 100%
   top: 50%
   left: 50%
+  min-width: 720px
+  +transition(all 0.2s ease-in-out)
   .modal-content
     border-radius: 0px
     .modal-header
@@ -56,5 +61,11 @@
 body.rails_admin #modal .form-horizontal.denser
   margin-top: 0px
 
+.modal.fade .modal-dialog
+  +transform(translate(-50%, -50%) scale(0))
+  opacity: 0
+
 .modal.in .modal-dialog
-  +transform(translate3d(-50%, -50%, 0))
+  opacity: 1
+  +transform(translate(-50%, -50%) scale(1))
+  +transform-origin(center center)
