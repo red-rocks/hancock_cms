@@ -237,7 +237,7 @@ class User
   end
 
 
-  attr_accessor :token_2fa # i thunk it will be shared
+  attr_accessor :token_2fa # i think it will be shared
   include Hancock::Users::Authy if defined?(Authy)
 
   include Hancock::Users::GoogleAuthenticator if defined?(GoogleAuthenticatorRails)

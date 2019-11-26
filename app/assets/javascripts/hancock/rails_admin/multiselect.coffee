@@ -1,4 +1,4 @@
-window.hancohancockck_cms.multiselect_dblclick = (selector)->
+window.hancock.multiselect_dblclick = (selector)->
   left_selector = []
   right_selector = []
   selector.split(",").forEach (sel)->
