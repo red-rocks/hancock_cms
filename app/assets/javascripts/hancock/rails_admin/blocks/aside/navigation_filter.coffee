@@ -93,7 +93,6 @@ $(document).on 'keydown', '#aside, #aside *', (e)->
       $(e.currentTarget).parent().siblings('.navigation-content').find("#aside-menu .nav li").removeClass('forced-closed').removeClass('forced-opened')
       return true
 
-
 $(document).on 'keyup', '#aside, #aside *', (e)->
   filter = $("#nav-filter").val()
   # navigation_block = $(".navigation-filter").siblings('.aside-menu').find('.nav')
@@ -107,23 +106,29 @@ $(document).on 'keyup', '#aside, #aside *', (e)->
       nav_first_lvl.each ->
         me = $(this)
         span = me.find("> span")
-        if !filter.test(span.html())
-          me.addClass("hidden")
-        else
+        if filter.test(span.html())
           me.addClass("opened").addClass("opened-filtered")
-
+        else
+          me.addClass("hidden")
+      
       nav_sec_lvl.each ->
         me = $(this)
         return me.addClass("visible") if me.closest(".dropdown-header").hasClass('opened-filtered')
-        if !filter.test(me.find('a').text()) and !filter.test(me.data('model')) and !filter.test(me.data('name-synonyms') || "")
+        return me.addClass("visible") if me.parents('.dropdown-header li[data-model]').hasClass('visible')
+        # return me.addClass("visible") if me.parents('.dropdown-header li[data-model]').hasClass('opened')
+        
+        if !filter.test(me.find(' > a').text()) and !filter.test(me.data('model') || "") and !filter.test(me.data('name-synonyms') || "")
           me.addClass("hidden")
         else
-          me.addClass('visible').closest(".dropdown-header").removeClass('hidden').addClass('opened')
+          me.addClass('visible')
+          me.parents('.dropdown-header li[data-model]').removeClass('hidden').addClass('opened')
+          me.closest(".dropdown-header").removeClass('hidden').addClass('opened')
+            
 
   select_menu_items(filter, nav_first_lvl, nav_sec_lvl)
-  if navigation_block.find("li:visible").length == 0
-    nav_first_lvl.removeClass('hidden').removeClass('opened')
-    nav_sec_lvl.removeClass('hidden').removeClass('visible').filter(".active").closest(".dropdown-header").addClass("opened")
+  if navigation_block.find("li.visible").length == 0
+    nav_first_lvl.removeClass('hidden').removeClass('opened').removeClass('visible')
+    nav_sec_lvl.removeClass('hidden').removeClass('opened').removeClass('visible').filter(".active").closest(".dropdown-header").addClass("opened")
     select_menu_items(window.hancock.ru_en_change_string(filter), nav_first_lvl, nav_sec_lvl)
 
 

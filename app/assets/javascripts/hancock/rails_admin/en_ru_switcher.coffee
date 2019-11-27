@@ -78,13 +78,13 @@ window.hancock.ru_en_change_string = (str)->
   new_str = ""
 
   for letter in str
-    letter_change = hancock_cms.ru_en_keytable[letter]
+    letter_change = window.hancock.ru_en_keytable[letter]
     new_str += letter_change || letter
 
   if new_str == str
     new_str = ""
     for letter in str
-      letter_change = hancock_cms.en_ru_keytable[letter]
+      letter_change = window.hancock.en_ru_keytable[letter]
       new_str += letter_change || letter
 
   new_str
