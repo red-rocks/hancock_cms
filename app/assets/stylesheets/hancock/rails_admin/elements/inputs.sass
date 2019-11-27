@@ -12,13 +12,9 @@
       color: #495057
       background-color: #fff
       border-color: #669cf7
+
   span.input-group-btn
     +display-flex()
-
-// TODO
-.form-horizontal .control-group.hancock_image_type .remote_url_method, .form-horizontal .control-group.hancock_shrine_type .remote_url_method
-  margin-top: 0px
-  width: auto
 
 .form-inline
   select.form-control
@@ -41,3 +37,13 @@ textarea
   @extend input
   height: auto
   min-height: 250px
+
+.form-control::-moz-placeholder, input::-moz-placeholder, textarea::-moz-placeholder, #file_contents::-moz-placeholder, .form-group.hancock_html_type .controls .medium-editor-element::-moz-placeholder, .form-group.hancock_hash_type .controls .hash_element_block input::-moz-placeholder, .form-group.hancock_hash_type .controls .hash_element_block textarea::-moz-placeholder
+  color: #e2e5ec
+  opacity: 1
+
+.form-control:-ms-input-placeholder, input:-ms-input-placeholder, textarea:-ms-input-placeholder, #file_contents:-ms-input-placeholder, .form-group.hancock_html_type .controls .medium-editor-element:-ms-input-placeholder, .form-group.hancock_hash_type .controls .hash_element_block input:-ms-input-placeholder, .form-group.hancock_hash_type .controls .hash_element_block textarea:-ms-input-placeholder
+  color: #e2e5ec
+
+.form-control::-webkit-input-placeholder, input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, #file_contents::-webkit-input-placeholder, .form-group.hancock_html_type .controls .medium-editor-element::-webkit-input-placeholder, .form-group.hancock_hash_type .controls .hash_element_block input::-webkit-input-placeholder, .form-group.hancock_hash_type .controls .hash_element_block textarea::-webkit-input-placeholder
+  color: #e2e5ec
