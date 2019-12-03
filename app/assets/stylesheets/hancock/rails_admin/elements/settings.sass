@@ -1,0 +1,171 @@
+.navigate-block.update-settings
+  +inline-flex()
+  +align-items(center)
+  +justify-content(center)
+  font-weight: 400
+  text-align: center
+  vertical-align: middle
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  color: #fff
+  background-color: #0c5ce1
+  border: 1px solid #0b57d5
+  padding: 5px 13px
+  font-size: 13px
+  line-height: 24px
+  border-radius: 0
+  outline: 0!important
+  align-items: center
+  text-decoration: none
+  width: auto
+  margin: 15px 0px
+  a
+    color: white
+    text-transform: capitalize
+    &:hover, &:focus
+      text-decoration: none
+  &:hover, &:focus
+    color: #fff
+    background-color: #0c61ed
+    border-color: #0c5ce1
+    text-decoration: none
+
+.auto-update-block
+  margin: 15px 0px
+  label
+    +display-flex()
+    +flex-direction(row nowrap)
+    +align-items(center)
+    +justify-content(center)
+    font-size: 13px
+    line-height: 24px
+    font-weight: normal
+    cursor: pointer
+    margin-bottom: 0px
+    +transition(all 0.2s ease-in)
+    span
+      margin-top: 0
+    &:hover, &:focus
+      color: #464457
+      input.custom_checkbox:checked + span
+        +transition(all 0.2s ease-in)
+        border: 1px solid #464457
+
+.hancock-panel #rails_admin_model_settings_wrapper #rails_admin_model_settings .setting_block .setting_value
+  border-bottom: 0px
+  margin-left: 0
+  padding-bottom: 0px
+  padding-top: 15px
+  margin-top: 15px
+  border-top: 1px solid #e2e5ec
+
+.controls .setting_block
+  padding: 15px
+  border: 1px solid #e2e5ec
+  font-size: 14px
+  margin-bottom: -1px
+
+.hancock-panel #rails_admin_model_settings_wrapper #rails_admin_model_settings .setting_block
+  +transition(all 0.2s ease-in)
+  .form-horizontal
+    +transition(all 0.2s ease-in)
+  &:hover, &:focus
+    background: #fafafa
+    .form-horizontal
+      background: #fafafa
+  &.new-setting
+    background: #e2e5ec
+    .form-horizontal
+      background: #e2e5ec
+.hancock-panel #rails_admin_model_settings_wrapper #rails_admin_model_settings .controls
+  span.filterable:empty
+    display: none
+
+  span.filterable
+    padding: 5px 0px
+    display: inline-block
+    margin-bottom: 0px
+    font-size: 12px
+
+  .inline-edit
+    +inline-flex()
+    +align-items(center)
+    +justify-content(center)
+    font-weight: 400
+    text-align: center
+    vertical-align: middle
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    padding: 4px 12px
+    font-size: 12px
+    line-height: 24px
+    border-radius: 0
+    outline: 0!important
+    align-items: center
+    text-decoration: none
+    width: auto
+    margin-left: 5px
+    background-color: #1dc9b7
+    border-color: #1dc9b7
+    color: #fff
+    +transition(all 0.2s ease-in)
+    &:hover, &:focus
+      color: #fff
+      background-color: #18a899
+      border-color: #179c8e
+
+  .delete-setting,
+  .update-setting,
+  .toggle-block
+    +inline-flex()
+    +align-items(center)
+    +justify-content(center)
+    font-weight: 400
+    text-align: center
+    vertical-align: middle
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+    padding: 0px
+    font-size: 0px
+    line-height: 0px
+    border-radius: 0
+    outline: 0!important
+    align-items: center
+    text-decoration: none
+    width: auto
+    margin: 0px
+    a
+      +display-flex()
+      +flex-flow(row nowrap)
+      +align-items(center)
+      +justify-content(center)
+      color: #93a2dd
+      text-transform: capitalize
+      height: 32px
+      width: 32px
+      @extend .mdi !optional
+      &:before
+        font-size: 18px
+      &:hover, &:focus
+        text-decoration: none
+        background: #f0f3ff
+        color: #2c77f4
+        outline: none
+
+  .delete-setting a
+    @extend .mdi-delete !optional
+
+  .update-setting a
+    @extend .mdi-refresh !optional
+
+  .toggle-block a
+    @extend .mdi-chevron-right !optional
+
+  .toggle-block.opened a
+    @extend .mdi-chevron-down !optional
