@@ -7,7 +7,7 @@ input.custom_checkbox
   padding: 0
   z-index: 1
   +display-flex()
-  ~ span
+  + span
     +display-flex()
     position: relative
     height: 18px
@@ -20,7 +20,7 @@ input.custom_checkbox
     background: 0 0
     &:after
       display: block
-  ~ span:after
+  + span:after
     border: solid #2c77f4
     content: ''
     position: absolute
@@ -44,7 +44,7 @@ body.rails_admin .form-horizontal input.form-control.custom_checkbox
   z-index: 1
   margin-bottom: -34px
   cursor: pointer
-  &:empty~span
+  &:empty+span
     opacity: 0.85
     line-height: 30px
     margin: 2px 0
@@ -88,9 +88,9 @@ body.rails_admin .form-horizontal input.form-control.custom_checkbox
       margin-top: 0
       +transform(rotate(0deg))
       border: 0px
-  &:hover:empty~span
+  &:hover:empty+span
     opacity: 1
-  &:checked~span
+  &:checked+span
     &:after
       margin-left: 26px
       font-family: Material Design Icons
@@ -103,6 +103,6 @@ body.rails_admin .form-horizontal input.form-control.custom_checkbox
       content: ''
       background-color: #2c77f4
       color: #fff
-  &:checked:hover~span
+  &:checked:hover+span
     &:after
       background-color: lighten(#2c77f4, 10%)

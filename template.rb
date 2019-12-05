@@ -109,7 +109,7 @@ gem 'cancancan'#, '~> 1.16'
 # gem 'unicorn'
 gem 'x-real-ip'
 
-gem 'font-awesome-sass'
+# gem 'font-awesome-sass'
 
 # gem "actionpack-action_caching"
 # gem "redis-store"
