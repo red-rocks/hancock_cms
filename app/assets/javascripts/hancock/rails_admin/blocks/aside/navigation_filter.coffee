@@ -135,7 +135,8 @@ $(document).on 'keyup', '#aside, #aside *', (e)->
 
 $(document).on "rails_admin.dom_ready", ->
   # _search_field = $('form #filters_box ~ .input-group [type="search"][name="query"]:not(:focus)')
-  _search_field = $('#list form #filters_box ~ .well .input-group [type="search"][name="query"]:not(:focus)')
+  # _search_field = $('#list form #filters_box ~ .well .input-group [type="search"][name="query"]:not(:focus)')
+  _search_field = $('#list form .well .input-group [type="search"][name="query"]:not(:focus)')
   _val = _search_field.val()
   _search_field.focus().val("").val(_val)
 

@@ -2,6 +2,7 @@ ruby:
   layout_name           ||= controller.send(:_layout, []) || 'application' rescue 'application'
   stylesheet_name       ||= layout_name
   javascript_name       ||= layout_name
+  setting_ns_name       ||= layout_name == 'layout_name' ? "#{layout_name}_layout" : layout_name # TODO
   assets_cache_key      ||= "layouts/#{layout_name}/assets"
   custom_head_cache_key ||= "layouts/#{layout_name}/custom_head"
   async = false unless defined?(async) #Rails.env.production?
@@ -25,9 +26,9 @@ ruby:
   /[if lt IE 9]
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js", async: async, defer: defer
 
-== hancock_settings "custom_head", ns: "#{layout_name}_layout", default: '', kind: :code, label: "Дополнительный код в head"
-- css = hancock_settings "custom_css", ns: "#{layout_name}_layout", default: '', kind: :css, label: "Дополнительный CSS"
-- js = hancock_settings "custom_js", ns: "#{layout_name}_layout", default: '', kind: :js, label: "Дополнительный JS"
+== hancock_settings "custom_head", ns: setting_ns_name, default: '', kind: :code, label: "Дополнительный код в head"
+- css = hancock_settings "custom_css", ns: setting_ns_name, default: '', kind: :css, label: "Дополнительный CSS"
+- js = hancock_settings "custom_js", ns: setting_ns_name, default: '', kind: :js, label: "Дополнительный JS"
 css:
   #{{SassC::Engine.new(css, syntax: :scss, style: :compressed).render}}
 javascript:

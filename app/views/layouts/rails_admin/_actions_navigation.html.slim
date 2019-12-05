@@ -23,7 +23,7 @@ ul.nav.actions_navigation
         span
           = content_tag :i, '', class: action.link_icon, title: action.action_name
 
-  - if main_app_root_path = (main_app.root_path rescue false)
+  - if main_app_root_path = (main_app.root_url rescue false)
     li.home-link.footer-nav-link = link_to main_app_root_path, title: "На сайт".freeze, target: :_blank
       span
         i.fa.fa-home
