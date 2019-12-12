@@ -37,6 +37,18 @@ textarea
   height: auto
   min-height: 250px
 
+input[type="file"]:focus,
+textarea[type="file"]:focus,
+[type="file"]#file_contents:focus,
+input[type="radio"]:focus,
+textarea[type="radio"]:focus,
+[type="radio"]#file_contents:focus,
+input[type="checkbox"]:focus,
+textarea[type="checkbox"]:focus,
+[type="checkbox"]#file_contents:focus
+  outline: 0px auto -webkit-focus-ring-color
+  outline-offset: 0px
+
 .form-control::-moz-placeholder, input::-moz-placeholder, textarea::-moz-placeholder, #file_contents::-moz-placeholder, .form-group.hancock_html_type .controls .medium-editor-element::-moz-placeholder, .form-group.hancock_hash_type .controls .hash_element_block input::-moz-placeholder, .form-group.hancock_hash_type .controls .hash_element_block textarea::-moz-placeholder
   color: #e2e5ec
   opacity: 1
