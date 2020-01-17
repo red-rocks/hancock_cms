@@ -331,19 +331,19 @@ body.aside-minimized #aside.aside-fixed
           color: white
         > span:after
           content: "\F140"
-        > ul
+        ul
           +display-flex()
           // visibility: visible
           > li
             height: auto
       &.forced-closed 
-        > ul
+        ul
           display: none
           // visibility: hidden
           > li
             height: 0
       &.forced-opened 
-        > ul
+        ul
           +display-flex()
           // visibility: visible
           > li
@@ -352,12 +352,12 @@ body.aside-minimized #aside.aside-fixed
         > span
           background-color: #2f2e3c
           color: #ffffff
-      > ul li.current_selected[data-model] a
+      ul li.current_selected[data-model] a
         background-color: #2f2e3c
         color: #ffffff
         > i
           color: #2c77f4
-      > ul
+      ul
         position: relative
         margin: 0
         list-style: none
@@ -387,7 +387,7 @@ body.aside-minimized #aside.aside-fixed
           text-overflow: ellipsis
           +transition(background-color 0.3s)
           height: 0
-        li.active > a, li.active:hover > a
+        li.active > a, li.active > a:hover
           background-color: #db1430
           color: #ffffff
           > i
@@ -421,17 +421,22 @@ body.aside-minimized #aside.aside-fixed
           +transition(background-color 0.3s)
           > *
             line-height: 26px
-          &.nav-level-2
+        &.nav-level-3
+          li > a
             padding-left: 45px
-          &.nav-level-3
+        &.nav-level-4
+          li > a
             padding-left: 60px
-          &.nav-level-4
+        &.nav-level-5
+          li > a
             padding-left: 75px
-          &.nav-level-5
+        &.nav-level-6
+          li > a
             padding-left: 90px
-          &.nav-level-6
+        &.nav-level-7
+          li > a
             padding-left: 105px
-        li:hover > a
+        li > a:hover
           background-color: #2f2e3c
           color: #ffffff
           > i
