@@ -37,6 +37,11 @@ module Hancock
       end
 
       include Hancock::RailsAdminPatch
+
+      # TODO cache_version fix
+      def cache_version
+        try(:u_at) || try(:updated_at)
+      end
     end
 
 
