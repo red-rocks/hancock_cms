@@ -118,7 +118,8 @@ module Hancock
       ::HistoryTracker.all.map do |h|
         begin
           begin
-            h.delete if h.trackable.nil?
+            # h.delete unless h.trackable.exists?
+            h.delete unless !h.trackable.nil?
           rescue
             h.delete
           end

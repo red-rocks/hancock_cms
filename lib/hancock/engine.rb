@@ -69,8 +69,11 @@ module Hancock
       end
 
       # clear empty history for prevent admin panel crashs
+      ## TODO more threadsafe
       begin
-        ::Hancock.clear_history_from_empty_objects
+        Thread.new do
+          ::Hancock.clear_history_from_empty_objects
+        end
       rescue
       end
 
