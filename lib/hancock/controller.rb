@@ -26,6 +26,9 @@ module Hancock::Controller
   protected
   def seo_object
   end
+  def page_title
+    seo_object&.title
+  end
 
   def hancock_page_title
     _page_title = page_title

@@ -174,7 +174,7 @@ style
 - if @objects.respond_to?(:total_count)
   - total_count = @objects.total_count.to_i
   = paginate(@objects, theme: 'ra-twitter-bootstrap', remote: true)
-  = link_to(t("admin.misc.show_all"), url_for(params.merge(all: true)), class: "show-all btn btn-default pjax") unless total_count > 100 || total_count <= @objects.to_a.size
+  = link_to(t("admin.misc.show_all"), url_for(params.merge(all: true, page: nil)), class: "show-all btn btn-default pjax") unless total_count > 100 || total_count <= @objects.to_a.size
   .total-count= "#{t("admin.misc.count")}: #{total_count}"
 
   /.total-count= "#{total_count} #{@model_config.pluralize(total_count).downcase}"
