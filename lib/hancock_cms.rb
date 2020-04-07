@@ -1,4 +1,5 @@
 unless defined?(Hancock) && Hancock.respond_to?(:orm) && [:active_record, :mongoid].include?(Hancock.orm)
+  puts Hancock.orm.inspect
   puts "please use hancock_cms_mongoid or hancock_cms_activerecord and not hancock directly"
   exit 1
 end
