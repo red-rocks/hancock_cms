@@ -600,7 +600,7 @@ inject_into_file 'config/deploy.rb', after: '# append :linked_files, "config/dat
 set :linked_files,  [
   "config/unicorn.god", "config/unicorn.rb",
   "public/robots.txt", "public/sitemap.xml.gz",
-  "config/mongoid.yml", "config/master.key
+  "config/mongoid.yml", "config/master.key"
 ]
 
 set :skip_upload_files, ["public/sitemap.xml.gz"]

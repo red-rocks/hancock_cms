@@ -116,17 +116,21 @@ module Hancock
     end
 
     def clear_history_from_empty_objects
+      return unless defined?(::HistoryTracker)
       ::HistoryTracker.all.map do |h|
         begin
           begin
             # h.delete unless h.trackable.exists?
-            h.delete unless !h.trackable.nil?
+            h.delete if h.trackable.nil?
           rescue
+            puts 'rescue'
             h.delete
           end
         rescue
         end
-      end if defined?(::HistoryTracker)
+      end
+      # puts 'def clear_history_from_empty_objects after'
+      # puts ::HistoryTracker.all.count
     end
 
     def clear_history!
