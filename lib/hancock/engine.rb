@@ -30,7 +30,7 @@ module Hancock
         if Settings and Settings.table_exists?
           settings_scope = Settings
           ns = settings_scope.ns.name
-          admin_ns = 'admin'
+          admin_ns = (Hancock::Pages.config.localize ? "admin.shared" : "admin")
           admin_settings_scope = Settings.ns(admin_ns)
 
           if Settings.file_uploads_supported
