@@ -83,8 +83,8 @@ class RailsAdmin::Config::Fields::Types::HancockHtml < parent_field
   end
 
   register_instance_option :localized? do
-    @abstract_model.model.public_instance_methods.include?(html_translations_field) and
-      @abstract_model.model.public_instance_methods.include?(clear_translations_field)
+    (@abstract_model&.model&.fields[html_method.to_s]&.options || {})[:localize] &&
+      (@abstract_model&.model&.fields[clear_method.to_s]&.options || {})[:localize]
   end
 
   register_instance_option :allowed_methods do
